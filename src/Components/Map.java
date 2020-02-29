@@ -1,6 +1,11 @@
 package Components;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map.Entry;
+
+import testers.WriteFile;
 
 public class Map {
 	
@@ -67,4 +72,47 @@ public class Map {
 		this.buildingList.remove(b);
 	}
 	
+	
+	/**
+	 * @author jorgecalderon
+	 * Objective - Generate the text file needed for easier configuration in VRML
+	 * Preconditions - This method will only be called after the user designing the map is done
+	 * Postconditions - It will generate a text file containing information regarding the buildings and
+	 * all it's components
+	 * Date - 02/29/2020
+	 * @param - N/A
+	 * @param - N/A
+	 * @return - N/A 
+	 */
+	public void generateTextFile() {
+	
+	 WriteFile data = new WriteFile("ConfigurationFile.txt", true);
+	 HashMap<Integer, String> hmap = new HashMap<Integer, String>();
+	 
+	 for(Building buildings: this.buildingList){
+		 int counter = 1;
+		 hmap.put(counter, "Name:" + buildings.getName() + ", Wall Height:" + 
+				 buildings.getWalls().get(counter).getHeight() 
+				 + ", Image:" + buildings.getPicture().toString() + ", Questions:" + 
+				 buildings.getQuestionPool()
+				 + ", Found:" + buildings.getFound());
+		 counter++;
+		 
+	   }
+	 
+		for(Entry<Integer, String> entry : hmap.entrySet()) {
+			
+			try {
+				data.writeToFile("Building #" + entry.getKey() + ": " + entry.getValue());
+			} catch (IOException e) {
+				System.out.println("Something went wrong!");
+			}	
+			
+		}
+		 
+	}
+	 
 }
+
+	
+
