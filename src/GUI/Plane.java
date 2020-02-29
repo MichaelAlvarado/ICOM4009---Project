@@ -13,21 +13,18 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.sound.sampled.Line;
 import javax.swing.JOptionPane;
 
 /**
  * 
  * @author Michael Alvarado
- * Date - 11/Feb/2020
- * This class is the canvas where the Plane is going to be drawn at
- * This class can display the Cartesian or Polar Plane (use changePlane method to switch between planes)
- * The plane can the scaled to allow the user to see all points (use changeScale method)
- * On the upper right side of the plane it will display the current point coordinates, with changeCoordinates method you could see coordinates in Polar or Cartesian format
- * 
+ * Date - 28/Feb/2020  
  *
  */
 public class Plane extends Canvas{
-
+	ArrayList<Line> lines;
+	Point[] pointPair;
 	int pointWidth, pointHeight; //points of coordinates
 	int xGap, yGap; //this is the distance of line to line
 	int xOrigin, yOrigin; //Pixel position on canvas origin
@@ -42,7 +39,9 @@ public class Plane extends Canvas{
 		pP = Color.RED;
 		pL = new Color(20,198,5); //Green
 		gridIsOn = true;
-		
+		lines = new ArrayList<Line>();
+		pointPair = new Point[2];
+
 		this.addMouseListener(new MouseListener(){
 
 			@Override
@@ -64,14 +63,18 @@ public class Plane extends Canvas{
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				System.out.println("Pressed / "+"x: " + arg0.getX() + "  y:" + (getHeight() -arg0.getY()));
+				pointPair[0] = new Point(arg0.getX(), arg0.getY());
+				repaint();
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				System.out.println("Released / "+"x: " + arg0.getX() + "  y:" + (getHeight() - arg0.getY()));
+				pointPair[1] = new Point(arg0.getX(), arg0.getY());
+				repaint();
 			}
-			
+
 		});
 	}
 
@@ -103,28 +106,22 @@ public class Plane extends Canvas{
 
 		}
 
-		//		//Draw Points
-		//		g.setColor(pP);
-		//		currentPoint = currentLine.get(currentLine.size()-1);
-		//		for(Coordinates p: currentLine) {
-		//			if(p.equals(currentPoint)) {
-		//				g.setColor(cP); //Draw current Point different Color
-		//			}
-		//			g.fillOval((printCoordinatesX(p)-(pointWidth/2)),(printCoordinatesY(p)-(pointHeight/2)), pointWidth, pointHeight);
-		//		}
+	
+		
+		//Draw current Points
+		g.setColor(cP);
+		if(pointPair[0] != null) {
+			g.fillOval((int)(pointPair[0].getX()-(pointWidth/2)), (int)(pointPair[0].getY()-(pointHeight/2)), pointWidth, pointHeight);
+		}
+		if(pointPair[1] != null) {
+			g.fillOval((int)(pointPair[1].getX()-(pointWidth/2)), (int)(pointPair[1].getY()-(pointHeight/2)), pointWidth, pointHeight);
+		}
 
-		//		//Draw lines from point to point
-		//		g.setColor(pL);//Color of Lines
-		//		for(ArrayList<Coordinates> coordinates: lines) {
-		//			if(coordinates.equals(currentLine)) {
-		//				g.setColor(cL); //Color of Current Line
-		//			}
-		//			for(int i = 1; i < coordinates.size(); i++) {
-		//				Coordinates p0 = coordinates.get(i-1);
-		//				Coordinates p1 = coordinates.get(i);
-		//				g.drawLine(printCoordinatesX(p0), printCoordinatesY(p0), printCoordinatesX(p1), printCoordinatesY(p1));
-		//			}
-		//		}
+		//Draw current Line
+		g.setColor(cL);
+		if(pointPair[0] != null && pointPair[1] != null) {
+			g.drawLine((int)pointPair[0].getX(), (int)pointPair[0].getY(), (int)pointPair[1].getX(), (int)pointPair[1].getY());
+		}
 
 		//		//Draw panel with coordinates
 		//		g.setColor(new Color(0,0,0,100));
