@@ -6,13 +6,13 @@ import java.io.PrintWriter;
 
 	/**
 	 * @author jorgecalderon
-	 * Objective 
-	 * Preconditions
-	 * Postconditions 
+	 * Objective - Class to allow writing on text file
+	 * Preconditions - N/A
+	 * Postconditions - Permits to write on text file after creating a WriteFile object
 	 * Date - 02/29/2020
-	 * @param 
-	 * @param 
-	 * @return  
+	 * @param - N/A
+	 * @param - N/A
+	 * @return - N/A 
 	 */
 	
 	public class WriteFile{
