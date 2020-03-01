@@ -1,6 +1,9 @@
 package Components;
+import java.awt.Point;
 import java.awt.image.BufferedImage; 
 import java.lang.String;
+
+import com.sun.prism.paint.Color;
 
 /**
  * 
@@ -12,11 +15,11 @@ import java.lang.String;
 
 public class Wall {
 
-	private double p1;
-	private double p2;
+	private Point p1;
+	private Point p2;
 	private double height;
 	private BufferedImage texture;
-	private String color; 
+	private Color color; 
 	private String wid;
 	
 	// constructor 
@@ -24,16 +27,24 @@ public class Wall {
 		int id = 1;
 		setID(buildingName + "_w" + String.valueOf(id));
 		id++;
-		this.color = "white";
+		this.color = Color.WHITE;
+	}
+	public Wall(String buildingName, Point p1, Point p2) {
+		int id = 1;
+		setID(buildingName + "_w" + String.valueOf(id));
+		id++;
+		this.color = Color.WHITE;
+		this.p1 = p1;
+		this.p2 = p2;
 	}
 	
 	// getters
 	
-	public double getP1() {
+	public Point getP1() {
 		return this.p1;
 	}
 	
-	public double getP2() {
+	public Point getP2() {
 		return this.p2;
 	}
 	
@@ -54,11 +65,11 @@ public class Wall {
 	}
 	// setters
 	
-	public void setP1(double p1) {
+	public void setP1(Point p1) {
 		this.p1 = p1;
 	}
 	
-	public void setP2(double p2) {
+	public void setP2(Point p2) {
 		this.p2 = p2;
 	}
 	
@@ -70,7 +81,7 @@ public class Wall {
 		this.texture = texture;
 	}
 	
-	public void setColor(String color) {
+	public void setColor(Color color) {
 		this.color = color;
 	}
 	

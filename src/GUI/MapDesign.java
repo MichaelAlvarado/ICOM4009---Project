@@ -44,8 +44,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.MaskFormatter;
-
-
 import javax.swing.JDesktopPane;
 import javax.swing.JLayeredPane;
 import javax.swing.JEditorPane;
@@ -75,8 +73,8 @@ public class MapDesign{
 	 */
 	public MapDesign(JFrame display) throws ParseException {
 		this.display = display;
-		this.width = display.getWidth();
-		this.height = display.getHeight();
+		this.width = display.getWidth() - (display.getInsets().left + display.getInsets().right); //this takes the width size inside the app
+		this.height = display.getHeight() - (display.getInsets().top + display.getInsets().bottom); //this takes the height size inside the app
 		int canvasY = 85; //this is the position in Y where the division is between plane and menu
 
 		display.getContentPane().setBackground(Color.WHITE);
@@ -88,23 +86,53 @@ public class MapDesign{
 		panel.setBounds(0, 0, width, canvasY);
 		display.getContentPane().add(panel);
 		panel.setLayout(null);
-	
+
+		JButton help = new JButton("Help");
+		help.setBounds(width-110, 15, 100, 25);
+		panel.add(help);
+
+		JButton setting = new JButton("Setting");
+		setting.setBounds(width-110, canvasY-35, 100, 25);
+		panel.add(setting);
+		
+		JButton addBuilding = new JButton("Add Building");
+		addBuilding.setBounds((panel.getWidth()/2)+5, 15, 125, 25);
+		panel.add(addBuilding);
+
 		this.plane = new Plane();
 		this.plane.setBackground(Color.WHITE);
-		this.plane.setBounds(0, canvasY, width, height-(canvasY*2));
+		this.plane.setLocation(0, canvasY);
+		this.plane.setBounds(0, canvasY, width, height-(canvasY));
 		display.getContentPane().add(this.plane);
 
 
 		/*
 		 * Add Actions to Components
 		 */
-		
+		setting.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				settingPopUp(setting.getX(), setting.getY()+setting.getHeight());
+			}
+
+		});
+
+		help.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				helpScreen();
+			}
+
+		});
 	}
 
-	private void settingScreen(int x, int y) {
+	private void settingPopUp(int x, int y) {
 		PopupMenu setting = new PopupMenu();
 
 		MenuItem clear = new MenuItem("clear current line");
+		MenuItem grid = new MenuItem("Grid");
 		MenuItem cpColor = new MenuItem("change current point Color");
 		MenuItem clColor = new MenuItem("change current line Color");
 		MenuItem ppColor = new MenuItem("change previous point Color");
@@ -113,6 +141,14 @@ public class MapDesign{
 		clear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+
+		grid.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				plane.gridIsOn = !plane.gridIsOn;
+				plane.repaint();
 			}
 		});
 
@@ -144,11 +180,12 @@ public class MapDesign{
 			}
 		});
 
+		setting.add(clear);
+		setting.add(grid);
 		setting.add(cpColor);
 		setting.add(clColor);
 		setting.add(ppColor);
 		setting.add(plColor);
-		setting.add(clear);
 
 		display.add(setting);
 		setting.show(display, x, y);
@@ -167,74 +204,79 @@ public class MapDesign{
 		magenta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-//				if(component.equals("currentPoint"))
-//					plane.currentPointColor(Color.MAGENTA); 
-//				else if(component.equals("currentLine"))
-//					plane.currentLineColor(Color.MAGENTA);
-//				else if(component.equals("previousPoint"))
-//					plane.previousPointColor(Color.MAGENTA);
-//				else if(component.equals("previousLine"))
-//					plane.previousLineColor(Color.MAGENTA);
+				if(component.equals("currentPoint"))
+					plane.cP = (Color.MAGENTA); 
+				else if(component.equals("currentLine"))
+					plane.cL = (Color.MAGENTA);
+				else if(component.equals("previousPoint"))
+					plane.pP = (Color.MAGENTA);
+				else if(component.equals("previousLine"))
+					plane.pL = (Color.MAGENTA);				
+				plane.repaint();
 			}
 		});
 
 		green.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-//				Color green = new Color(20,198,5); //Green
-//				if(component.equals("currentPoint"))
-//					plane.currentPointColor(green); 
-//				else if(component.equals("currentLine"))
-//					plane.currentLineColor(green);
-//				else if(component.equals("previousPoint"))
-//					plane.previousPointColor(green);
-//				else if(component.equals("previousLine"))
-//					plane.previousLineColor(green);
+				Color green = new Color(20,198,5); //Green
+				if(component.equals("currentPoint"))
+					plane.cP = (green); 
+				else if(component.equals("currentLine"))
+					plane.cL = (green);
+				else if(component.equals("previousPoint"))
+					plane.pP = (green);
+				else if(component.equals("previousLine"))
+					plane.pL = (green);
+				plane.repaint();
 			}
 		});
 
 		red.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-//				if(component.equals("currentPoint"))
-//					plane.currentPointColor(Color.RED); 
-//				else if(component.equals("currentLine"))
-//					plane.currentLineColor(Color.RED);
-//				else if(component.equals("previousPoint"))
-//					plane.previousPointColor(Color.RED);
-//				else if(component.equals("previousLine"))
-//					plane.previousLineColor(Color.RED);
+				if(component.equals("currentPoint"))
+					plane.cP = (Color.RED); 
+				else if(component.equals("currentLine"))
+					plane.cL = (Color.RED);
+				else if(component.equals("previousPoint"))
+					plane.pP = (Color.RED);
+				else if(component.equals("previousLine"))
+					plane.pL = (Color.RED);
+				plane.repaint();
 			}
 		});
 
 		blue.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-//				if(component.equals("currentPoint"))
-//					plane.currentPointColor(Color.BLUE); 
-//				else if(component.equals("currentLine"))
-//					plane.currentLineColor(Color.BLUE);
-//				else if(component.equals("previousPoint"))
-//					plane.previousPointColor(Color.BLUE);
-//				else if(component.equals("previousLine"))
-//					plane.previousLineColor(Color.BLUE);
+				if(component.equals("currentPoint"))
+					plane.cP = (Color.BLUE); 
+				else if(component.equals("currentLine"))
+					plane.cL = (Color.BLUE);
+				else if(component.equals("previousPoint"))
+					plane.pP = (Color.BLUE);
+				else if(component.equals("previousLine"))
+					plane.pL = (Color.BLUE);
+				plane.repaint();
 			}
 		});
-		
+
 		orange.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-//				if(component.equals("currentPoint"))
-//					plane.currentPointColor(Color.ORANGE); 
-//				else if(component.equals("currentLine"))
-//					plane.currentLineColor(Color.ORANGE);
-//				else if(component.equals("previousPoint"))
-//					plane.previousPointColor(Color.ORANGE);
-//				else if(component.equals("previousLine"))
-//					plane.previousLineColor(Color.ORANGE);
+				if(component.equals("currentPoint"))
+					plane.cP = (Color.ORANGE); 
+				else if(component.equals("currentLine"))
+					plane.cL = (Color.ORANGE);
+				else if(component.equals("previousPoint"))
+					plane.pP = (Color.ORANGE);
+				else if(component.equals("previousLine"))
+					plane.pL = (Color.ORANGE);
+				plane.repaint();
 			}
 		});
-		
+
 		ColorPopup.add(orange);
 		ColorPopup.add(blue);
 		ColorPopup.add(red);
@@ -249,5 +291,7 @@ public class MapDesign{
 		JOptionPane.showMessageDialog(display, Instructions);
 	}
 
-
+	private void addBuilding() {
+		
+	}
 }

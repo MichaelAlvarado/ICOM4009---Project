@@ -1,5 +1,7 @@
 package GUI;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 /**
  * @author Michael Alvarado
@@ -7,11 +9,16 @@ import javax.swing.JFrame;
  * This class its a initialize JFrame
  */
 public class Display extends JFrame{
-	
+
 	public Display(String title, int width, int height) {
-		setVisible(true);
+		super();
 		setTitle(title);
+	    setPreferredSize(new Dimension(width, height+24));
+	    pack();
+	    setLocationRelativeTo(null);
+		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, width, height);
+		setResizable(false);
+		getContentPane().setSize(width,height);
 	}
 }
