@@ -1,9 +1,8 @@
 package Components;
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.image.BufferedImage; 
 import java.lang.String;
-
-import com.sun.prism.paint.Color;
 
 /**
  * 
