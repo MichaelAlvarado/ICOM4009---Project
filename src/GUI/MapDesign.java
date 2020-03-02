@@ -141,12 +141,12 @@ public class MapDesign{
 	private void settingPopUp(int x, int y) {
 		PopupMenu setting = new PopupMenu();
 
-		MenuItem clear = new MenuItem("clear current line");
+		MenuItem clear = new MenuItem("Clear last line");
 		MenuItem grid = new MenuItem("Grid");
-		MenuItem cpColor = new MenuItem("change current point Color");
-		MenuItem clColor = new MenuItem("change current line Color");
-		MenuItem ppColor = new MenuItem("change previous point Color");
-		MenuItem plColor = new MenuItem("change previous line Color");
+		MenuItem cpColor = new MenuItem("Change current point Color");
+		MenuItem clColor = new MenuItem("Change current line Color");
+		MenuItem ppColor = new MenuItem("Change previous point Color");
+		MenuItem plColor = new MenuItem("Change previous line Color");
 
 		clear.addActionListener(new ActionListener() {
 			@Override

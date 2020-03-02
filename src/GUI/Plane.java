@@ -66,6 +66,8 @@ public class Plane extends Canvas{
 				System.out.println("Released / "+"x: " + arg0.getX() + "  y:" + (getHeight() - arg0.getY()));
 				currentPointPair[1] = new Point(arg0.getX(), arg0.getY());
 				lines.add(new Wall(currentBuilding, currentPointPair[0], currentPointPair[1]));
+				currentPointPair[0] = null;
+				currentPointPair[1] = null;
 				repaint();
 			}
 		});
