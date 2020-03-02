@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.AWTException;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
@@ -8,6 +9,7 @@ import java.awt.Menu;
 import java.awt.MenuItem;
 import java.awt.Point;
 import java.awt.PopupMenu;
+import java.awt.Robot;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -73,6 +75,26 @@ public class Plane extends Canvas{
 			public void mouseDragged(MouseEvent arg0) {
 				currentPointPair[1] = new Point(arg0.getX(), arg0.getY());
 				repaint();
+			}
+
+			@Override
+			public void mouseMoved(MouseEvent arg0) {
+				//This will be use to drag mouse to the near point
+				for(Wall line: lines) {
+					if(line.getP1().distance(new Point(arg0.getX(), arg0.getY())) < 8) {
+						System.out.println("Near Point");
+						try {
+							Robot mouse = new Robot();
+						} catch (AWTException e) {
+							e.printStackTrace();
+						}
+
+					}
+					if(line.getP2().distance(new Point(arg0.getX(), arg0.getY())) < 8) {
+						System.out.println("Near Point");
+						arg0.translatePoint(0, 0);
+					}
+				}
 			}
 		});
 	}

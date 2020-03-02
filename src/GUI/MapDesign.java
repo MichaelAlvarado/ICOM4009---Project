@@ -98,6 +98,10 @@ public class MapDesign{
 		JButton addBuilding = new JButton("Add Building");
 		addBuilding.setBounds((panel.getWidth()/2)+5, 15, 125, 25);
 		panel.add(addBuilding);
+		
+		NewBuildingBox newBuilding = new NewBuildingBox((width/2)-250, 200,500,200);
+		newBuilding.setVisible(false);
+		display.getContentPane().add(newBuilding);
 
 		this.plane = new Plane();
 		this.plane.setBackground(Color.WHITE);
@@ -115,7 +119,6 @@ public class MapDesign{
 			public void actionPerformed(ActionEvent arg0) {
 				settingPopUp(setting.getX(), setting.getY()+setting.getHeight());
 			}
-
 		});
 
 		help.addActionListener(new ActionListener() {
@@ -124,7 +127,14 @@ public class MapDesign{
 			public void actionPerformed(ActionEvent arg0) {
 				helpScreen();
 			}
+		});
+		
+		addBuilding.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				newBuilding.setVisible(true);
+			}
 		});
 	}
 
@@ -292,6 +302,16 @@ public class MapDesign{
 	}
 
 	private void addBuilding() {
+		//add Jpanel to display to choose name, image etc
+		JPanel addBuildingBox = new JPanel();
+		System.out.print("test");
+		addBuildingBox.setLocation(50, 50);
+		addBuildingBox.setBounds(50, 50, 60,60);
+		addBuildingBox.setBackground(Color.BLACK);
+		addBuildingBox.setLayout(null);
+		addBuildingBox.setVisible(true);
+		addBuildingBox.add(new JTextField());
+		display.getContentPane().add(addBuildingBox);
 		
 	}
 }
