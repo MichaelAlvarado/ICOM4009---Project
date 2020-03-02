@@ -123,8 +123,8 @@ public class Plane extends Canvas{
 			g.setFont(new Font("Arial", Font.PLAIN, 14));
 			for(int s = 0; s < gridLineQuantity; s++) {
 				//If is polar plane only draw one number per magnitude
-				g.drawString(String.valueOf(s), (xOrigin + s*xGap), yOrigin); //draw positive X coordinate 
-				g.drawString(String.valueOf(s), xOrigin, (yOrigin - s*yGap)); //draw positive Y coordinate 
+				g.drawString(String.valueOf(s)+" m", (xOrigin + s*xGap), yOrigin); //draw positive X coordinate 
+				g.drawString(String.valueOf(s)+" m", xOrigin, (yOrigin - s*yGap)); //draw positive Y coordinate 
 			}
 		}
 
