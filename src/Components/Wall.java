@@ -84,7 +84,7 @@ public class Wall {
 		this.color = color;
 	}
 	
-	private void setID(String wid) {
+	public void setID(String wid) {
 		this.wid = wid;
 	}
 	

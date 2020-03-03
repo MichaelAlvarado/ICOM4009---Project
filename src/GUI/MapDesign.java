@@ -300,18 +300,5 @@ public class MapDesign{
 		String Instructions = "Help";
 		JOptionPane.showMessageDialog(display, Instructions);
 	}
-
-	private void addBuilding() {
-		//add Jpanel to display to choose name, image etc
-		JPanel addBuildingBox = new JPanel();
-		System.out.print("test");
-		addBuildingBox.setLocation(50, 50);
-		addBuildingBox.setBounds(50, 50, 60,60);
-		addBuildingBox.setBackground(Color.BLACK);
-		addBuildingBox.setLayout(null);
-		addBuildingBox.setVisible(true);
-		addBuildingBox.add(new JTextField());
-		display.getContentPane().add(addBuildingBox);
-		
-	}
+	
 }
