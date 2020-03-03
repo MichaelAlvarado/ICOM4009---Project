@@ -10,27 +10,34 @@ import java.awt.MenuItem;
 import java.awt.Point;
 import java.awt.PopupMenu;
 import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
 
 import javax.sound.sampled.Line;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Components.Building;
+import Components.Map;
 import Components.Wall;
 
 /**
  * 
  * @author Michael Alvarado
  * Date - 28/Feb/2020  
- *
+ * This class is a Canvas UI with the building maps
  */
 public class Plane extends Canvas{
-	ArrayList<Wall> lines;
+	Map map;
+	LinkedList<Wall> lines; //add the wall at the first index (So it can access to last element added faster)
+	LinkedList<Building> buildings;
 	Point[] currentPointPair; //this is the current trace being drawn
 	Point drag; //this is use to interconnect points
 	String currentBuilding;
@@ -47,14 +54,15 @@ public class Plane extends Canvas{
 		pP = Color.RED;
 		pL = new Color(20,198,5); //Green
 		gridIsOn = true;
-		lines = new ArrayList<Wall>();
+		lines = new LinkedList<Wall>();
+		buildings = new LinkedList<Building>();
+		map = new Map(buildings,"map",this.getWidth(), this.getHeight());
 		currentPointPair = new Point[2];
 
 
 		addMouseListener(new MouseAdapter(){
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
 				System.out.println("Pressed / "+"x: " + arg0.getX() + "  y:" + (getHeight() -arg0.getY()));
 				if(drag == null) {
 					currentPointPair[0] = new Point(arg0.getX(), arg0.getY());
@@ -68,9 +76,12 @@ public class Plane extends Canvas{
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
 				System.out.println("Released / "+"x: " + arg0.getX() + "  y:" + (getHeight() - arg0.getY()));
-				lines.add(new Wall(currentBuilding, currentPointPair[0], currentPointPair[1]));
+				//add to line only if there was a mouse displacement
+				if(currentPointPair[0].x != currentPointPair[1].x
+						&& currentPointPair[0].y != currentPointPair[1].y) {
+					lines.addFirst(new Wall(currentBuilding, currentPointPair[0], currentPointPair[1]));
+				}
 				currentPointPair[0] = null;
 				currentPointPair[1] = null;
 				repaint();
@@ -78,6 +89,7 @@ public class Plane extends Canvas{
 		});
 
 		addMouseMotionListener(new MouseMotionAdapter(){
+			//this method put the point on top of another if close enough
 			private Point drag(int x, int y) {
 				for(Wall line: lines) {
 					if(line.getP1().distance(x, y) < pointWidth) {
@@ -109,6 +121,25 @@ public class Plane extends Canvas{
 				//This will be use to drag mouse to the near point
 				drag = drag(arg0.getX(), arg0.getY());
 			}
+		});
+		addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if(arg0.isControlDown() && arg0.getKeyCode() == arg0.VK_Z) {
+					undo();
+				}
+				
+			}
+
+			@Override
+			public void keyReleased(KeyEvent arg0) {				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+			}
+			
 		});
 	}
 
@@ -175,82 +206,26 @@ public class Plane extends Canvas{
 
 
 
-	//	/**
-	//	 * @author Michael Alvarado
-	//	 * Date - 11/Feb/2020
-	//	 * Objective - This method will change the scale of the plane to value parameter
-	//	 * @param value - The scale value which the coordinate will be step
-	//	 */
-	//	public void changeScale(int value) {
-	//		this.scale = value;
-	//		this.repaint();
-	//	}
-	//
-	//	/**
-	//	 * @author Michael Alvarado
-	//	 * Date - 11/Feb/2020
-	//	 * Objective - This method will change the plane between Cartesian and Polar and repaint the canvas to see the changes
-	//	 */
-	//	public void changePlane() {
-	//		this.isCartesianPlane = !this.isCartesianPlane;
-	//		this.repaint();
-	//	}
-	//
-	//	/**
-	//	 * @author Michael Alvarado
-	//	 * Date - 11/Feb/2020
-	//	 * Objective - This method will change the Coordinate format of the current point
-	//	 */
-	//	public void changeCoordinate() {
-	//		this.isCartesianCoordinate = !this.isCartesianCoordinate;
-	//		this.repaint();
-	//	}
-	//
-	//	public void addCartesianCoordinateDisplacement(int x, int y) {
-	//		Coordinates coordinate = new CartesianCoordinates(currentPoint.getX()+x,currentPoint.getY()+y);
-	//		if (coordinate.getX() > 20 || coordinate.getX() < -20 || coordinate.getY() > 20 || coordinate.getY() < -20) {
-	//			JOptionPane.showMessageDialog(this, "Out of bounds displacement! Try again!");
-	//		}
-	//		else {
-	//			currentLine.add(coordinate);
-	//			this.repaint();
-	//		}
-	//	}
-	//
-	//	public void addPolarCoordinateDisplacement(int r, int O) {
-	//		double x = PolarCoordinates.changePolarToX(r, O);
-	//		double y = PolarCoordinates.changePolarToY(r, O);
-	//		Coordinates coordinate = new CartesianCoordinates(currentPoint.getX()+x,currentPoint.getY()+y);
-	//		if (coordinate.getX() > 20 || coordinate.getX() < -20 || coordinate.getY() > 20 || coordinate.getY() < -20) {
-	//			JOptionPane.showMessageDialog(this, "Out of bounds displacement! Try again!");
-	//		}
-	//		else {
-	//			currentLine.add(coordinate);
-	//			this.repaint();
-	//		}
-	//	}
-	//
-	//	/**
-	//	 * @author Michael Alvarado
-	//	 * Date - 13/Feb/2020
-	//	 * Objective - this method erase all the lines and create a new line
-	//	 */
-	//	public void clearAll() {
-	//		lines.clear();
-	//		newLine();
-	//	}
-	//	
-	//	/**
-	//	 * @author Michael Alvarado
-	//	 * Date - 13/Feb/2020
-	//	 * Objective - this method erase the current line,create a new line with point in the origin and repaint canvas
-	//	 */
-	//	public void clear() {
-	//		currentLine.clear();
-	//		currentLine.add(new CartesianCoordinates(0,0));
-	//		this.repaint();
-	//	}
-	//
+		/**
+		 * @author Michael Alvarado
+		 * Date - 13/Feb/2020
+		 * Objective - this method erase all the lines and create a new line
+		 */
+		public void clearAll() {
+			lines.clear();
+			this.repaint();
+		}
+		
+		/**
+		 * @author Michael Alvarado
+		 * Date - 13/Feb/2020
+		 * Objective - this method erase last wall added.
+		 */
+		public void undo() {
+			lines.remove(); //remove the last lines added
+			this.repaint();
+		}
+	
 	//	/**
 	//	 * @author Michael Alvarado
 	//	 * Date - 13/Feb/2020
