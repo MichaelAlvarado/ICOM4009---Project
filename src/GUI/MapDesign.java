@@ -99,7 +99,7 @@ public class MapDesign{
 		addBuilding.setBounds((panel.getWidth()/2)+5, 15, 125, 25);
 		panel.add(addBuilding);
 		
-		NewBuildingBox newBuilding = new NewBuildingBox((width/2)-250, 200,500,200);
+		AddBuildingBox newBuilding = new AddBuildingBox((width/2)-250, 200,500,200);
 		newBuilding.setVisible(false);
 		display.getContentPane().add(newBuilding);
 

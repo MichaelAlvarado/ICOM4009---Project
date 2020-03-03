@@ -57,7 +57,7 @@ public class Plane extends Canvas{
 				// TODO Auto-generated method stub
 				System.out.println("Pressed / "+"x: " + arg0.getX() + "  y:" + (getHeight() -arg0.getY()));
 				if(drag == null) {
-				currentPointPair[0] = new Point(arg0.getX(), arg0.getY());
+					currentPointPair[0] = new Point(arg0.getX(), arg0.getY());
 				}
 				else {
 					currentPointPair[0] = drag;
@@ -70,7 +70,6 @@ public class Plane extends Canvas{
 			public void mouseReleased(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				System.out.println("Released / "+"x: " + arg0.getX() + "  y:" + (getHeight() - arg0.getY()));
-				currentPointPair[1] = new Point(arg0.getX(), arg0.getY());
 				lines.add(new Wall(currentBuilding, currentPointPair[0], currentPointPair[1]));
 				currentPointPair[0] = null;
 				currentPointPair[1] = null;
@@ -79,28 +78,36 @@ public class Plane extends Canvas{
 		});
 
 		addMouseMotionListener(new MouseMotionAdapter(){
+			private Point drag(int x, int y) {
+				for(Wall line: lines) {
+					if(line.getP1().distance(x, y) < pointWidth) {
+						System.out.println("Near Point");
+						return line.getP1();
+					}
+					else if(line.getP2().distance(x, y) < pointWidth) {
+						System.out.println("Near Point");
+						return line.getP2();
+					}
+				}
+				return null;
+			}
+
 			@Override
 			public void mouseDragged(MouseEvent arg0) {
-				currentPointPair[1] = new Point(arg0.getX(), arg0.getY());
+				drag = drag(arg0.getX(), arg0.getY());
+				if(drag == null) {
+					currentPointPair[1] = new Point(arg0.getX(), arg0.getY());
+				}
+				else {
+					currentPointPair[1] = drag;
+				}
 				repaint();
 			}
 
 			@Override
 			public void mouseMoved(MouseEvent arg0) {
 				//This will be use to drag mouse to the near point
-				for(Wall line: lines) {
-					if(line.getP1().distance(arg0.getX(), arg0.getY()) < 15) {
-						System.out.println("Near Point");
-						drag = line.getP1();
-					}
-					else if(line.getP2().distance(arg0.getX(), arg0.getY()) < 15) {
-						System.out.println("Near Point");
-						drag = line.getP2();
-					}
-					else {
-						drag = null;
-					}
-				}
+				drag = drag(arg0.getX(), arg0.getY());
 			}
 		});
 	}

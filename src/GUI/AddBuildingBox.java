@@ -10,9 +10,9 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
-public class NewBuildingBox extends JPanel{
+public class AddBuildingBox extends JPanel{
 
-	public NewBuildingBox(int x, int y, int width, int height) {
+	public AddBuildingBox(int x, int y, int width, int height) {
 		super();
 		setBounds(x, y, width, height);
 		setBorder(new LineBorder(UIManager.getColor("Button.darkShadow"), 3, true));
