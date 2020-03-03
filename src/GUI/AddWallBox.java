@@ -25,9 +25,9 @@ public class AddWallBox extends JPanel{
 		setName("New Wall");
 		this.setBackground(new Color(190,190,190));
 
-		JTextField name = new JTextField("Building");
+		name = new JTextField("Wall");
 
-		JButton enter = new JButton("Enter");
+		enter = new JButton("Enter");
 		enter.addActionListener(new ActionListener() {
 
 			@Override
@@ -43,7 +43,7 @@ public class AddWallBox extends JPanel{
 			}
 		});
 
-		JButton exit = new JButton("Exit");
+		exit = new JButton("Exit");
 		exit.addActionListener(new ActionListener() {
 
 			@Override

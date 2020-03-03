@@ -99,9 +99,17 @@ public class MapDesign{
 		addBuilding.setBounds((panel.getWidth()/2)+5, 15, 125, 25);
 		panel.add(addBuilding);
 		
-		AddBuildingBox newBuilding = new AddBuildingBox((width/2)-250, 200,500,200);
-		newBuilding.setVisible(false);
-		display.getContentPane().add(newBuilding);
+		JButton addWall = new JButton("Add Wall");
+		addWall.setBounds((panel.getWidth()/2)+130, 15, 125, 25);
+		panel.add(addWall);
+		
+		AddBuildingBox addBuildingBox = new AddBuildingBox((width/2)-250, 200,500,200);
+		addBuildingBox.setVisible(false);
+		display.getContentPane().add(addBuildingBox);
+		
+		AddWallBox addWallBox = new AddWallBox((width/2)-250, 200,500,200);
+		addWallBox.setVisible(false);
+		display.getContentPane().add(addWallBox);
 
 		this.plane = new Plane();
 		this.plane.setBackground(Color.WHITE);
@@ -133,7 +141,15 @@ public class MapDesign{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				newBuilding.setVisible(true);
+				addBuildingBox.setVisible(true);
+			}
+		});
+		
+		addWall.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				addWallBox.setVisible(true);
 			}
 		});
 	}
