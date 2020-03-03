@@ -31,7 +31,8 @@ import Components.Wall;
  */
 public class Plane extends Canvas{
 	ArrayList<Wall> lines;
-	Point[] currentPointPair;
+	Point[] currentPointPair; //this is the current trace being drawn
+	Point drag; //this is use to interconnect points
 	String currentBuilding;
 	int pointWidth; //points of coordinates
 	int xGap, yGap; //this is the distance of line to line
@@ -55,7 +56,12 @@ public class Plane extends Canvas{
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				System.out.println("Pressed / "+"x: " + arg0.getX() + "  y:" + (getHeight() -arg0.getY()));
+				if(drag == null) {
 				currentPointPair[0] = new Point(arg0.getX(), arg0.getY());
+				}
+				else {
+					currentPointPair[0] = drag;
+				}
 				currentPointPair[1] = null;
 				repaint();
 			}
@@ -83,18 +89,16 @@ public class Plane extends Canvas{
 			public void mouseMoved(MouseEvent arg0) {
 				//This will be use to drag mouse to the near point
 				for(Wall line: lines) {
-					if(line.getP1().distance(new Point(arg0.getX(), arg0.getY())) < 8) {
+					if(line.getP1().distance(arg0.getX(), arg0.getY()) < 15) {
 						System.out.println("Near Point");
-						try {
-							Robot mouse = new Robot();
-						} catch (AWTException e) {
-							e.printStackTrace();
-						}
-
+						drag = line.getP1();
 					}
-					if(line.getP2().distance(new Point(arg0.getX(), arg0.getY())) < 8) {
+					else if(line.getP2().distance(arg0.getX(), arg0.getY()) < 15) {
 						System.out.println("Near Point");
-						arg0.translatePoint(0, 0);
+						drag = line.getP2();
+					}
+					else {
+						drag = null;
 					}
 				}
 			}
