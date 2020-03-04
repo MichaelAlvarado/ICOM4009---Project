@@ -1,5 +1,6 @@
 package Components;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -8,20 +9,36 @@ import java.util.Map.Entry;
 import testers.WriteFile;
 
 public class Map {
-	
+
 	private LinkedList<Building> buildingList;
 	private String buildingName;
 	private int height;
 	private int width;
+	private BufferedImage picture;
+
 	//piso no se que va aqui
-	
-	
+
+
 	public Map(LinkedList<Building> buildingList, String buildingName, int height, int width) {
 		super();
 		this.buildingList = buildingList;
 		this.buildingName = buildingName;
 		this.height = height;
 		this.width = width;
+		this.picture = null;
+	}
+	public Map() {
+
+	}
+
+
+	public BufferedImage getPicture() {
+		return picture;
+	}
+
+
+	public void setPicture(BufferedImage picture) {
+		this.picture = picture;
 	}
 
 
@@ -63,16 +80,16 @@ public class Map {
 	public void setWidth(int width) {
 		this.width = width;
 	}
-	
+
 	public void addBuilding(Building b) {
 		this.buildingList.add(b);
 	}
-	
+
 	public void removeBuilding(Building b) {
 		this.buildingList.remove(b);
 	}
-	
-	
+
+
 	/**
 	 * @author jorgecalderon
 	 * Objective - Generate the text file needed for easier configuration in VRML
@@ -85,34 +102,34 @@ public class Map {
 	 * @return - N/A 
 	 */
 	public void generateTextFile() {
-	
-	 WriteFile data = new WriteFile("ConfigurationFile.txt", true);
-	 HashMap<Integer, String> hmap = new HashMap<Integer, String>();
-	 
-	 for(Building buildings: this.buildingList){
-		 int counter = 1;
-		 hmap.put(counter, "Name:" + buildings.getName() + ", Wall Height:" + 
-				 buildings.getWalls().get(counter).getHeight() 
-				 + ", Image:" + buildings.getPicture().toString() + ", Questions:" + 
-				 buildings.getQuestionPool()
-				 + ", Found:" + buildings.getFound());
-		 counter++;
-		 
-	   }
-	 
+
+		WriteFile data = new WriteFile("ConfigurationFile.txt", true);
+		HashMap<Integer, String> hmap = new HashMap<Integer, String>();
+
+		for(Building buildings: this.buildingList){
+			int counter = 1;
+			hmap.put(counter, "Name:" + buildings.getName() + ", Wall Height:" + 
+					buildings.getWalls().get(counter).getHeight() 
+					+ ", Image:" + buildings.getPicture().toString() + ", Questions:" + 
+					buildings.getQuestionPool()
+					+ ", Found:" + buildings.getFound());
+			counter++;
+
+		}
+
 		for(Entry<Integer, String> entry : hmap.entrySet()) {
-			
+
 			try {
 				data.writeToFile("Building #" + entry.getKey() + ": " + entry.getValue());
 			} catch (IOException e) {
 				System.out.println("Something went wrong!");
 			}	
-			
+
 		}
-		 
+
 	}
-	 
+
 }
 
-	
+
 

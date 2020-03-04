@@ -7,9 +7,13 @@ import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -19,16 +23,23 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
+import Components.Map;
+
 
 public class AddMapBox extends JPanel{
 
 	JTextField name;
+	static BufferedImage image;
 	JFileChooser browser;
 	JLabel nameLabel, imageLabel;
 	JButton enter, exit, browse;
+	Map map;
+	Plane plane;
 
-	public AddMapBox(int x, int y, int width, int height) {
+	public AddMapBox(int x, int y, int width, int height, Plane plane) {
 		super();
+		map = new Map();
+		this.plane = plane;
 		setLayout(null);
 		setBounds(x, y, width, height);
 		setBorder(new LineBorder(UIManager.getColor("Button.darkShadow"), 3, true));
@@ -43,11 +54,22 @@ public class AddMapBox extends JPanel{
 		imageLabel = new JLabel("Image of map");
 		imageLabel.setBounds(10, 100, 100,25);
 		browser = new JFileChooser();
-		//		try {
-		//			Scanner reader = new Scanner(browser.getSelectedFile());
-		//		} catch (FileNotFoundException e1) {
-		//			e1.printStackTrace();
-		//		}
+		browser.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				File imageFile = browser.getSelectedFile();
+				try {
+					System.out.println("loading file...");
+					image = ImageIO.read(imageFile);
+					System.out.println("load file");
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+
+		});
+
 		browse = new JButton("Browse");
 		browse.setBounds(130, 100, 120, 25);
 		browse.addActionListener(new ActionListener() {
@@ -65,6 +87,11 @@ public class AddMapBox extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(image != null) {
+					map.setPicture(image);
+				}
+				map.setBuildingName(name.getText());
+				AddMapBox.this.plane.setMap(map);
 				setVisible(false);
 			}
 		});

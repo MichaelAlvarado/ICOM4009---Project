@@ -75,6 +75,7 @@ public class MapDesign{
 		this.display = display;
 		this.width = display.getWidth() - (display.getInsets().left + display.getInsets().right); //this takes the width size inside the app
 		this.height = display.getHeight() - (display.getInsets().top + display.getInsets().bottom); //this takes the height size inside the app
+		plane = new Plane();
 		int canvasY = 85; //this is the position in Y where the division is between plane and menu
 
 		display.getContentPane().setBackground(Color.WHITE);
@@ -94,36 +95,35 @@ public class MapDesign{
 		JButton setting = new JButton("Setting");
 		setting.setBounds(width-110, canvasY-35, 100, 25);
 		panel.add(setting);
-		
+
 		JButton addBuilding = new JButton("Add Building");
 		addBuilding.setBounds((panel.getWidth()/2)+5, 15, 125, 25);
 		panel.add(addBuilding);
-		
+
 		JButton addWall = new JButton("Add Wall");
 		addWall.setBounds((panel.getWidth()/2)+130, 15, 125, 25);
 		panel.add(addWall);
-		
+
 		JButton addMap = new JButton("Add Map");
 		addMap.setBounds((panel.getWidth()/2)+130, 50, 125, 25);
 		panel.add(addMap);
-		
+
 		AddBuildingBox addBuildingBox = new AddBuildingBox((width/2)-250, 200,500,200);
 		addBuildingBox.setVisible(false);
 		display.getContentPane().add(addBuildingBox);
-		
+
 		AddWallBox addWallBox = new AddWallBox((width/2)-250, 200,500,200);
 		addWallBox.setVisible(false);
 		display.getContentPane().add(addWallBox);
-		
-		AddMapBox addMapBox = new AddMapBox((width/2)-250, 200,500,200);
+
+		AddMapBox addMapBox = new AddMapBox((width/2)-250, 200,500,200, plane);
 		addMapBox.setVisible(true);
 		display.getContentPane().add(addMapBox);
 
-		this.plane = new Plane();
-		this.plane.setBackground(Color.WHITE);
-		this.plane.setLocation(0, canvasY);
-		this.plane.setBounds(0, canvasY, width, height-(canvasY));
-		display.getContentPane().add(this.plane);
+		plane.setBackground(Color.WHITE);
+		plane.setLocation(0, canvasY);
+		plane.setBounds(0, canvasY, width, height-(canvasY));
+		display.getContentPane().add(plane);
 
 
 		/*
@@ -144,7 +144,7 @@ public class MapDesign{
 				helpScreen();
 			}
 		});
-		
+
 		addBuilding.addActionListener(new ActionListener() {
 
 			@Override
@@ -152,7 +152,7 @@ public class MapDesign{
 				addBuildingBox.setVisible(true);
 			}
 		});
-		
+
 		addWall.addActionListener(new ActionListener() {
 
 			@Override
@@ -324,5 +324,5 @@ public class MapDesign{
 		String Instructions = "Help";
 		JOptionPane.showMessageDialog(display, Instructions);
 	}
-	
+
 }

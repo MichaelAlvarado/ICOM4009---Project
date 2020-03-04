@@ -59,8 +59,7 @@ public class Plane extends Canvas{
 		currentBuilding = new Building("Test");
 		map = new Map(buildings,"map",this.getWidth(), this.getHeight());
 		currentPointPair = new Point[2];
-
-
+	
 		addMouseListener(new Mouse());
 		addMouseMotionListener(new MouseMotion());
 		addKeyListener(new Keyboard());
@@ -75,6 +74,10 @@ public class Plane extends Canvas{
 		xOrigin = 0; //position in canvas of point x origin
 		yOrigin = this.getHeight(); //position in canvas of point y origin
 
+		if(map.getPicture() != null) {
+			g.drawImage(map.getPicture(), 0, 0, getWidth(), getHeight(), null);
+			System.out.println(getWidth() + " , " + getHeight());
+		}
 		//draw Grid Lines
 		if(gridIsOn) {
 			g.setColor(Color.LIGHT_GRAY);
@@ -147,6 +150,10 @@ public class Plane extends Canvas{
 	public void undo() {
 		lines.remove(); //remove the last lines added
 		this.repaint();
+	}
+
+	public void setMap(Map map) {
+		this.map = map;
 	}
 
 	private class Mouse extends MouseAdapter{
@@ -228,7 +235,10 @@ public class Plane extends Canvas{
 		}
 
 		@Override
-		public void keyReleased(KeyEvent arg0) {				
+		public void keyReleased(KeyEvent arg0) {	
+			if(arg0.getKeyCode() == arg0.VK_K) { //Debugging Button
+				System.out.println(map.getBuildingName());
+			}
 		}
 
 		@Override
