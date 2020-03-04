@@ -103,6 +103,10 @@ public class MapDesign{
 		addWall.setBounds((panel.getWidth()/2)+130, 15, 125, 25);
 		panel.add(addWall);
 		
+		JButton addMap = new JButton("Add Map");
+		addMap.setBounds((panel.getWidth()/2)+130, 50, 125, 25);
+		panel.add(addMap);
+		
 		AddBuildingBox addBuildingBox = new AddBuildingBox((width/2)-250, 200,500,200);
 		addBuildingBox.setVisible(false);
 		display.getContentPane().add(addBuildingBox);
@@ -110,6 +114,10 @@ public class MapDesign{
 		AddWallBox addWallBox = new AddWallBox((width/2)-250, 200,500,200);
 		addWallBox.setVisible(false);
 		display.getContentPane().add(addWallBox);
+		
+		AddMapBox addMapBox = new AddMapBox((width/2)-250, 200,500,200);
+		addMapBox.setVisible(true);
+		display.getContentPane().add(addMapBox);
 
 		this.plane = new Plane();
 		this.plane.setBackground(Color.WHITE);

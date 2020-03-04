@@ -38,9 +38,9 @@ public class Plane extends Canvas{
 	Map map;
 	LinkedList<Wall> lines; //add the wall at the first index (So it can access to last element added faster)
 	LinkedList<Building> buildings;
+	Building currentBuilding;
 	Point[] currentPointPair; //this is the current trace being drawn
 	Point drag; //this is use to interconnect points
-	String currentBuilding;
 	int pointWidth; //points of coordinates
 	int xGap, yGap; //this is the distance of line to line
 	int xOrigin, yOrigin; //Pixel position on canvas origin
@@ -56,91 +56,14 @@ public class Plane extends Canvas{
 		gridIsOn = true;
 		lines = new LinkedList<Wall>();
 		buildings = new LinkedList<Building>();
+		currentBuilding = new Building("Test");
 		map = new Map(buildings,"map",this.getWidth(), this.getHeight());
 		currentPointPair = new Point[2];
 
 
-		addMouseListener(new MouseAdapter(){
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				System.out.println("Pressed / "+"x: " + arg0.getX() + "  y:" + (getHeight() -arg0.getY()));
-				if(drag == null) {
-					currentPointPair[0] = new Point(arg0.getX(), arg0.getY());
-				}
-				else {
-					currentPointPair[0] = drag;
-				}
-				currentPointPair[1] = null;
-				repaint();
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				System.out.println("Released / "+"x: " + arg0.getX() + "  y:" + (getHeight() - arg0.getY()));
-				//add to line only if there was a mouse displacement
-				if(currentPointPair[0].x != currentPointPair[1].x
-						&& currentPointPair[0].y != currentPointPair[1].y) {
-					lines.addFirst(new Wall(currentBuilding, currentPointPair[0], currentPointPair[1]));
-				}
-				currentPointPair[0] = null;
-				currentPointPair[1] = null;
-				repaint();
-			}
-		});
-
-		addMouseMotionListener(new MouseMotionAdapter(){
-			//this method put the point on top of another if close enough
-			private Point drag(int x, int y) {
-				for(Wall line: lines) {
-					if(line.getP1().distance(x, y) < pointWidth) {
-						System.out.println("Near Point");
-						return line.getP1();
-					}
-					else if(line.getP2().distance(x, y) < pointWidth) {
-						System.out.println("Near Point");
-						return line.getP2();
-					}
-				}
-				return null;
-			}
-
-			@Override
-			public void mouseDragged(MouseEvent arg0) {
-				drag = drag(arg0.getX(), arg0.getY());
-				if(drag == null) {
-					currentPointPair[1] = new Point(arg0.getX(), arg0.getY());
-				}
-				else {
-					currentPointPair[1] = drag;
-				}
-				repaint();
-			}
-
-			@Override
-			public void mouseMoved(MouseEvent arg0) {
-				//This will be use to drag mouse to the near point
-				drag = drag(arg0.getX(), arg0.getY());
-			}
-		});
-		addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				if(arg0.isControlDown() && arg0.getKeyCode() == arg0.VK_Z) {
-					undo();
-				}
-				
-			}
-
-			@Override
-			public void keyReleased(KeyEvent arg0) {				
-			}
-
-			@Override
-			public void keyTyped(KeyEvent arg0) {
-			}
-			
-		});
+		addMouseListener(new Mouse());
+		addMouseMotionListener(new MouseMotion());
+		addKeyListener(new Keyboard());
 	}
 
 	@Override 
@@ -206,99 +129,133 @@ public class Plane extends Canvas{
 
 
 
-		/**
-		 * @author Michael Alvarado
-		 * Date - 13/Feb/2020
-		 * Objective - this method erase all the lines and create a new line
-		 */
-		public void clearAll() {
-			lines.clear();
-			this.repaint();
-		}
-		
-		/**
-		 * @author Michael Alvarado
-		 * Date - 13/Feb/2020
-		 * Objective - this method erase last wall added.
-		 */
-		public void undo() {
-			lines.remove(); //remove the last lines added
-			this.repaint();
-		}
-	
-	//	/**
-	//	 * @author Michael Alvarado
-	//	 * Date - 13/Feb/2020
-	//	 * Objective - this method create a new list of coordinates(Line), adds point at the origin, adds that line to the list of lines and make this new line the current line. 
-	//	 * It repaints the canvas so that the change can be seen
-	//	 */
-	//	public void newLine() {
-	//		ArrayList<Coordinates> line = new ArrayList<Coordinates>();
-	//		line.add(new CartesianCoordinates(0,0));
-	//		lines.add(line);
-	//		currentLine = line; 
-	//		this.repaint();
-	//	}
-	//	
-	//	
-	//	/**
-	//	 * @author Michael Alvarado
-	//	 * Date - 20/Feb/2020
-	//	 * Objective - this method will change the color of the current point
-	//	 */
-	//	public void currentPointColor(Color cP) {
-	//		this.cP = cP;
-	//		this.repaint();
-	//	}
-	//	
-	//	/**
-	//	 * @author Michael Alvarado
-	//	 * Date - 20/Feb/2020
-	//	 * Objective - this method will change the color of the current line
-	//	 */
-	//	public void currentLineColor(Color cL) {
-	//		this.cL = cL;
-	//		this.repaint();
-	//	}
-	//	
-	//	/**
-	//	 * @author Michael Alvarado
-	//	 * Date - 20/Feb/2020
-	//	 * Objective - this method will change the color of the points previous to the current point
-	//	 */
-	//	public void previousPointColor(Color pP) {
-	//		this.pP = pP;
-	//		this.repaint();
-	//	}
-	//	
-	//	/**
-	//	 * @author Michael Alvarado
-	//	 * Date - 20/Feb/2020
-	//	 * Objective - this method will change the color of the lines previous to the current line
-	//	 */
-	//	public void previousLineColor(Color pL) {
-	//		this.pL = pL;
-	//		this.repaint();
-	//	}
-	//
-	//	/**
-	//	 * @author Michael Alvarado
-	//	 * Date - 13/Feb/2020
-	//	 * @param coor - give the coordinate it want to draw on the plane
-	//	 * @return - The position in x (in pixels) the coordinate should be painted
-	//	 */
-	//	private int printCoordinatesX(Coordinates coor) {
-	//		return ((int)(coor.getX()/this.scale*xGap)+xOrigin);
-	//	}
-	//
-	//	/**
-	//	 * @author Michael Alvarado
-	//	 * Date - 13/Feb/2020
-	//	 * @param coor - give the coordinate it want to draw on the plane
-	//	 * @return - The position in y (in pixels) the coordinate should be painted
-	//	 */
-	//	private int printCoordinatesY(Coordinates coor) {
-	//		return ((int)(-coor.getY()/this.scale*yGap)+yOrigin);
-	//	}
+	/**
+	 * @author Michael Alvarado
+	 * Date - 13/Feb/2020
+	 * Objective - this method erase all the walls created in the currentBuilding
+	 */
+	public void clearAllWalls() {
+		lines.clear();
+		this.repaint();
+	}
 
-}
+	/**
+	 * @author Michael Alvarado
+	 * Date - 13/Feb/2020
+	 * Objective - this method erase last wall added.
+	 */
+	public void undo() {
+		lines.remove(); //remove the last lines added
+		this.repaint();
+	}
+
+	private class Mouse extends MouseAdapter{
+
+		public Mouse() {
+			super();
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			System.out.println("Pressed / "+"x: " + arg0.getX() + "  y:" + (getHeight() -arg0.getY()));
+			if(drag == null) {
+				currentPointPair[0] = new Point(arg0.getX(), arg0.getY());
+			}
+			else {
+				currentPointPair[0] = drag;
+			}
+			currentPointPair[1] = null;
+			repaint();
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			System.out.println("Released / "+"x: " + arg0.getX() + "  y:" + (getHeight() - arg0.getY()));
+			//add to line only if there was a mouse displacement
+			if(currentPointPair[1] != null) {
+				lines.addFirst(new Wall(currentBuilding.getName()+" Wall"+lines.size(), currentPointPair[0], currentPointPair[1]));
+			}
+			currentPointPair[0] = null;
+			currentPointPair[1] = null;
+			repaint();
+		}
+	}
+	private class MouseMotion extends MouseMotionAdapter{
+
+		private Point drag(int x, int y) {
+			for(Wall line: lines) {
+				if(line.getP1().distance(x, y) < pointWidth) {
+					System.out.println("Near Point");
+					return line.getP1();
+				}
+				else if(line.getP2().distance(x, y) < pointWidth) {
+					System.out.println("Near Point");
+					return line.getP2();
+				}
+			}
+			return null;
+		}
+
+		@Override
+		public void mouseDragged(MouseEvent arg0) {
+			drag = drag(arg0.getX(), arg0.getY());
+			if(drag == null) {
+				currentPointPair[1] = new Point(arg0.getX(), arg0.getY());
+			}
+			else {
+				currentPointPair[1] = drag;
+			}
+			repaint();
+		}
+
+		@Override
+		public void mouseMoved(MouseEvent arg0) {
+			//This will be use to drag mouse to the near point
+			drag = drag(arg0.getX(), arg0.getY());
+		}
+
+	}
+
+	private class Keyboard implements KeyListener{
+		public Keyboard() {
+			super();
+		}
+
+		@Override
+		public void keyPressed(KeyEvent arg0) {
+			if(arg0.isControlDown() && arg0.getKeyCode() == arg0.VK_Z) {
+				undo();
+			}
+
+		}
+
+		@Override
+		public void keyReleased(KeyEvent arg0) {				
+		}
+
+		@Override
+		public void keyTyped(KeyEvent arg0) {
+		}
+	}
+
+} //Last 
+
+//	/**
+//	 * @author Michael Alvarado
+//	 * Date - 13/Feb/2020
+//	 * @param coor - give the coordinate it want to draw on the plane
+//	 * @return - The position in x (in pixels) the coordinate should be painted
+//	 */
+//	private int printCoordinatesX(Coordinates coor) {
+//		return ((int)(coor.getX()/this.scale*xGap)+xOrigin);
+//	}
+//
+//	/**
+//	 * @author Michael Alvarado
+//	 * Date - 13/Feb/2020
+//	 * @param coor - give the coordinate it want to draw on the plane
+//	 * @return - The position in y (in pixels) the coordinate should be painted
+//	 */
+//	private int printCoordinatesY(Coordinates coor) {
+//		return ((int)(-coor.getY()/this.scale*yGap)+yOrigin);
+//	}
