@@ -59,7 +59,7 @@ public class AddMapBox extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				File imageFile = browser.getSelectedFile();
-				try {
+				try {						
 					System.out.println("loading file...");
 					image = ImageIO.read(imageFile);
 					System.out.println("load file");
@@ -116,5 +116,6 @@ public class AddMapBox extends JPanel{
 	public void edit() {
 		setVisible(true);
 	}
+
 
 }

@@ -74,10 +74,11 @@ public class Plane extends Canvas{
 		xOrigin = 0; //position in canvas of point x origin
 		yOrigin = this.getHeight(); //position in canvas of point y origin
 
+		//Draw background Image
 		if(map.getPicture() != null) {
 			g.drawImage(map.getPicture(), 0, 0, getWidth(), getHeight(), null);
-			System.out.println(getWidth() + " , " + getHeight());
 		}
+		
 		//draw Grid Lines
 		if(gridIsOn) {
 			g.setColor(Color.LIGHT_GRAY);
@@ -238,6 +239,7 @@ public class Plane extends Canvas{
 		public void keyReleased(KeyEvent arg0) {	
 			if(arg0.getKeyCode() == arg0.VK_K) { //Debugging Button
 				System.out.println(map.getBuildingName());
+				System.out.println(getWidth() + " , " + getHeight());
 			}
 		}
 
