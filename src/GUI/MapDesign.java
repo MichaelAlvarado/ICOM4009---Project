@@ -44,6 +44,10 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.MaskFormatter;
+
+import Components.Building;
+import Components.Wall;
+
 import javax.swing.JDesktopPane;
 import javax.swing.JLayeredPane;
 import javax.swing.JEditorPane;
@@ -108,6 +112,14 @@ public class MapDesign{
 		addMap.setBounds((panel.getWidth()/2)+130, 50, 125, 25);
 		panel.add(addMap);
 
+		JButton wallList = new JButton("Current Walls");
+		wallList.setBounds(5,15,150,25);
+		panel.add(wallList);
+		
+		JButton buildingList = new JButton("Building List");
+		buildingList.setBounds(155,15,150,25);
+		panel.add(buildingList);
+
 		AddBuildingBox addBuildingBox = new AddBuildingBox((width/2)-250, 200,500,200, plane);
 		addBuildingBox.setVisible(false);
 		display.getContentPane().add(addBuildingBox);
@@ -133,7 +145,7 @@ public class MapDesign{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				settingPopUp(setting.getX(), setting.getY()+setting.getHeight());
+				settingPopUp(setting.getX(), setting.getY()+setting.getHeight()*2);
 			}
 		});
 
@@ -145,6 +157,20 @@ public class MapDesign{
 			}
 		});
 
+		wallList.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				wallsListPopUp(wallList.getX(),wallList.getY()+wallList.getHeight()*2);
+			}
+		});
+
+		buildingList.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				buildingListPopUp(wallList.getX(),wallList.getY()+wallList.getHeight()*2);
+			}
+		});
+		
 		addBuilding.addActionListener(new ActionListener() {
 
 			@Override
@@ -168,21 +194,50 @@ public class MapDesign{
 				addMapBox.setVisible(true);
 			}
 		});
+
+	}//Last from Constructor
+
+	private void wallsListPopUp(int x, int y) {
+		PopupMenu wallsPopUp = new PopupMenu();
+		for(Wall wall: plane.walls) {
+			MenuItem wallOption = new MenuItem(wall.getID());
+			wallsPopUp.add(wallOption);
+		}
+		display.add(wallsPopUp);
+		wallsPopUp.show(display, x, y);
 	}
 
+	private void buildingListPopUp(int x, int y) {
+		PopupMenu buildingsPopUp = new PopupMenu();
+		for(Building building: plane.buildings) {
+			MenuItem buildingOption = new MenuItem(building.getName());
+			buildingsPopUp.add(buildingOption);
+		}
+		display.add(buildingsPopUp);
+		buildingsPopUp.show(display, x, y);
+	}
 	private void settingPopUp(int x, int y) {
 		PopupMenu setting = new PopupMenu();
 
-		MenuItem clear = new MenuItem("Clear last line");
+		MenuItem undo = new MenuItem("Undo wall");
+		MenuItem clear = new MenuItem("Clear All walls");
 		MenuItem grid = new MenuItem("Grid");
 		MenuItem cpColor = new MenuItem("Change current point Color");
 		MenuItem clColor = new MenuItem("Change current line Color");
 		MenuItem ppColor = new MenuItem("Change previous point Color");
 		MenuItem plColor = new MenuItem("Change previous line Color");
 
+		undo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				plane.undo();
+			}
+		});
+
 		clear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				plane.clearAllWalls();
 			}
 		});
 
@@ -222,6 +277,7 @@ public class MapDesign{
 			}
 		});
 
+		setting.add(undo);
 		setting.add(clear);
 		setting.add(grid);
 		setting.add(cpColor);

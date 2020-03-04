@@ -36,7 +36,7 @@ import Components.Wall;
  */
 public class Plane extends Canvas{
 	Map map;
-	LinkedList<Wall> lines; //add the wall at the first index (So it can access to last element added faster)
+	LinkedList<Wall> walls; //add the wall at the first index (So it can access to last element added faster)
 	LinkedList<Building> buildings;
 	Building currentBuilding;
 	private Point[] currentPointPair; //this is the current trace being drawn
@@ -54,7 +54,7 @@ public class Plane extends Canvas{
 		pP = Color.RED;
 		pL = new Color(20,198,5); //Green
 		gridIsOn = true;
-		lines = new LinkedList<Wall>();
+		walls = new LinkedList<Wall>();
 		buildings = new LinkedList<Building>();
 		currentBuilding = new Building("Test");
 		map = new Map(buildings,"map",this.getWidth(), this.getHeight());
@@ -98,7 +98,7 @@ public class Plane extends Canvas{
 		}
 
 		//Draw lines from point to point
-		for(Wall line: lines) {
+		for(Wall line: walls) {
 			g.setColor(pP);//Color of Points
 			g.fillOval((int)(line.getP1().getX()-(pointWidth/2)), (int)(line.getP1().getY()-(pointWidth/2)), pointWidth, pointWidth);
 			g.fillOval((int)(line.getP2().getX()-(pointWidth/2)), (int)(line.getP2().getY()-(pointWidth/2)), pointWidth, pointWidth);
@@ -135,28 +135,36 @@ public class Plane extends Canvas{
 
 	/**
 	 * @author Michael Alvarado
-	 * Date - 13/Feb/2020
+	 * Date - 03/March/2020
 	 * Objective - this method erase all the walls created in the currentBuilding
 	 */
 	public void clearAllWalls() {
-		lines.clear();
-		this.repaint();
+		if(!walls.isEmpty()) {
+			walls.clear();
+			this.repaint();
+		}
 	}
 
 	/**
 	 * @author Michael Alvarado
-	 * Date - 13/Feb/2020
+	 * Date - 03/March/2020
 	 * Objective - this method erase last wall added.
 	 */
 	public void undo() {
-		lines.remove(); //remove the last lines added
-		this.repaint();
+		if(!walls.isEmpty()) {
+			walls.remove(); //remove the last lines added
+			this.repaint();
+		}
 	}
 
 	public void setMap(Map map) {
 		this.map = map;
 	}
-
+	/**
+	 * @author Michael Alvarado
+	 *	this class is made for the mouse to be able to make points and line to create walls
+	 *	Date - 03/March/2020
+	 */
 	private class Mouse extends MouseAdapter{
 
 		public Mouse() {
@@ -181,17 +189,23 @@ public class Plane extends Canvas{
 			System.out.println("Released / "+"x: " + arg0.getX() + "  y:" + (getHeight() - arg0.getY()));
 			//add to line only if there was a mouse displacement
 			if(currentPointPair[1] != null) {
-				lines.addFirst(new Wall(currentBuilding.getName()+" Wall"+lines.size(), currentPointPair[0], currentPointPair[1]));
+				walls.addFirst(new Wall(currentBuilding.getName()+" Wall"+walls.size(), currentPointPair[0], currentPointPair[1]));
 			}
 			currentPointPair[0] = null;
 			currentPointPair[1] = null;
 			repaint();
 		}
 	}
+
+	/** 
+	 * @author Michael J. Alvarado
+	 *	Date - 03/March/2020
+	 *	This class was made to make the drag functionality so its easier to interconnect points
+	 */
 	private class MouseMotion extends MouseMotionAdapter{
 
 		private Point drag(int x, int y) {
-			for(Wall line: lines) {
+			for(Wall line: walls) {
 				if(line.getP1().distance(x, y) < pointWidth) {
 					return line.getP1();
 				}
@@ -222,6 +236,11 @@ public class Plane extends Canvas{
 
 	}
 
+	/**
+	 * @author Michael J. Alvarado	 
+	 *	Date - 03/March/2020
+	 * This class was made so the user can do key shortcuts and for debugging
+	 */
 	private class Keyboard implements KeyListener{
 		public Keyboard() {
 			super();
