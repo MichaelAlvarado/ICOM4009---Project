@@ -19,8 +19,11 @@ To be done:
 		Add Tools
 		Add all info for walls, building, questions etc
 		Develop the AddBoxes
-		
-	
+	AddMapBox:
+		-browser needs to load the image 
+		-ask for the size of the map
+	Plane:
+		-make a scaler for the map so that it 
 Notes:
 	***
 

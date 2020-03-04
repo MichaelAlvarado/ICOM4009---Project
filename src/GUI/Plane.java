@@ -185,11 +185,9 @@ public class Plane extends Canvas{
 		private Point drag(int x, int y) {
 			for(Wall line: lines) {
 				if(line.getP1().distance(x, y) < pointWidth) {
-					System.out.println("Near Point");
 					return line.getP1();
 				}
 				else if(line.getP2().distance(x, y) < pointWidth) {
-					System.out.println("Near Point");
 					return line.getP2();
 				}
 			}
