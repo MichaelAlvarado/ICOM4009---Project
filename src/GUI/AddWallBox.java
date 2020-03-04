@@ -17,9 +17,11 @@ public class AddWallBox extends JPanel{
 	Wall wall;
 	JTextField name;
 	JButton enter, exit;
+	Plane plane;
 
-	public AddWallBox(int x, int y, int width, int height) {
+	public AddWallBox(int x, int y, int width, int height, Plane plane) {
 		super();
+		this.plane = plane;
 		setBounds(x, y, width, height);
 		setBorder(new LineBorder(UIManager.getColor("Button.darkShadow"), 3, true));
 		setName("New Wall");

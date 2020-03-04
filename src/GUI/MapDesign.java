@@ -108,11 +108,11 @@ public class MapDesign{
 		addMap.setBounds((panel.getWidth()/2)+130, 50, 125, 25);
 		panel.add(addMap);
 
-		AddBuildingBox addBuildingBox = new AddBuildingBox((width/2)-250, 200,500,200);
+		AddBuildingBox addBuildingBox = new AddBuildingBox((width/2)-250, 200,500,200, plane);
 		addBuildingBox.setVisible(false);
 		display.getContentPane().add(addBuildingBox);
 
-		AddWallBox addWallBox = new AddWallBox((width/2)-250, 200,500,200);
+		AddWallBox addWallBox = new AddWallBox((width/2)-250, 200,500,200, plane);
 		addWallBox.setVisible(false);
 		display.getContentPane().add(addWallBox);
 
@@ -158,6 +158,14 @@ public class MapDesign{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				addWallBox.setVisible(true);
+			}
+		});
+
+		addMap.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				addMapBox.setVisible(true);
 			}
 		});
 	}

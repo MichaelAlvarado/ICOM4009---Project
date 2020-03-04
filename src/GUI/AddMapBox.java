@@ -93,6 +93,7 @@ public class AddMapBox extends JPanel{
 				map.setBuildingName(name.getText());
 				AddMapBox.this.plane.setMap(map);
 				setVisible(false);
+				AddMapBox.this.plane.repaint();
 			}
 		});
 

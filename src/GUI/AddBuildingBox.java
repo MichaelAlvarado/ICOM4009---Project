@@ -13,20 +13,22 @@ import javax.swing.border.LineBorder;
 import Components.Building;
 
 public class AddBuildingBox extends JPanel{
-	
+
 	Building building;
 	JTextField name;
 	JButton enter, exit;
-	
-	public AddBuildingBox(int x, int y, int width, int height) {
+	Plane plane;
+
+	public AddBuildingBox(int x, int y, int width, int height, Plane plane) {
 		super();
+		this.plane = plane;
 		setBounds(x, y, width, height);
 		setBorder(new LineBorder(UIManager.getColor("Button.darkShadow"), 3, true));
 		setName("New Building");
 		this.setBackground(new Color(190,190,190));
-		
+
 		JTextField name = new JTextField("Building");
-		
+
 		JButton enter = new JButton("Enter");
 		enter.addActionListener(new ActionListener() {
 
@@ -42,7 +44,7 @@ public class AddBuildingBox extends JPanel{
 				setVisible(false);
 			}
 		});
-		
+
 		JButton exit = new JButton("Exit");
 		exit.addActionListener(new ActionListener() {
 
@@ -52,7 +54,7 @@ public class AddBuildingBox extends JPanel{
 				building = null;
 			}
 		});
-		
+
 		add(name);
 		add(enter);
 		add(exit);
