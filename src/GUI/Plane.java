@@ -39,11 +39,11 @@ public class Plane extends Canvas{
 	LinkedList<Wall> lines; //add the wall at the first index (So it can access to last element added faster)
 	LinkedList<Building> buildings;
 	Building currentBuilding;
-	Point[] currentPointPair; //this is the current trace being drawn
-	Point drag; //this is use to interconnect points
-	int pointWidth; //points of coordinates
-	int xGap, yGap; //this is the distance of line to line
-	int xOrigin, yOrigin; //Pixel position on canvas origin
+	private Point[] currentPointPair; //this is the current trace being drawn
+	private Point drag; //this is use to interconnect points
+	private int pointWidth; //points of coordinates
+	private int xGap, yGap; //this is the distance of line to line
+	private int xOrigin, yOrigin; //Pixel position on canvas origin
 	Color cP, cL, pP, pL; //Color for c=current p=previous P=Point L=Line
 	boolean gridIsOn; //draw the grid line in plane
 
@@ -59,7 +59,7 @@ public class Plane extends Canvas{
 		currentBuilding = new Building("Test");
 		map = new Map(buildings,"map",this.getWidth(), this.getHeight());
 		currentPointPair = new Point[2];
-	
+
 		addMouseListener(new Mouse());
 		addMouseMotionListener(new MouseMotion());
 		addKeyListener(new Keyboard());
@@ -78,7 +78,7 @@ public class Plane extends Canvas{
 		if(map.getPicture() != null) {
 			g.drawImage(map.getPicture(), 0, 0, getWidth(), getHeight(), null);
 		}
-		
+
 		//draw Grid Lines
 		if(gridIsOn) {
 			g.setColor(Color.LIGHT_GRAY);
