@@ -49,6 +49,9 @@ public class AddQuestionsBox extends JPanel{
 		add(enter);
 		add(exit);
 	}
+	
+	
+	
 	public void edit(Building building) {
 		//This is a method to fill the box the the information of a Wall so you can edit it
 		this.building = building;

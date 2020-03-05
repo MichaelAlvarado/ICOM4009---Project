@@ -22,16 +22,13 @@ public class Wall {
 	private String wid;
 	
 	// constructor 
-	public Wall(String buildingName) {
-		int id = 1;
-		setID(buildingName + "_w" + String.valueOf(id));
-		id++;
+	// el segundo parametro debe ser el largo de la lista de las paredes por edificio para que tengan un formato indexado
+	public Wall(String buildingName, int wallId) {
+		setID(buildingName + "_w" + String.valueOf(wallId));
 		this.color = Color.WHITE;
 	}
-	public Wall(String buildingName, Point p1, Point p2) {
-		int id = 1;
-		setID(buildingName + "_w" + String.valueOf(id));
-		id++;
+	public Wall(String buildingName, int wallId, Point p1, Point p2) {
+		setID(buildingName + "_w" + String.valueOf(wallId));
 		this.color = Color.WHITE;
 		this.p1 = p1;
 		this.p2 = p2;
