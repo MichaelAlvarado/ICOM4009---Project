@@ -112,9 +112,13 @@ public class MapDesign{
 		addWall.setBounds((panel.getWidth()/2)+130, 15, 125, 25);
 		panel.add(addWall);
 
-		JButton addMap = new JButton("Edit Map");
-		addMap.setBounds((panel.getWidth()/2)+130, 50, 125, 25);
-		panel.add(addMap);
+		JButton editMap = new JButton("Edit Map");
+		editMap.setBounds((panel.getWidth()/2)+130, 50, 125, 25);
+		panel.add(editMap);
+		
+		JButton addQuestion = new JButton("Add Question");
+		addQuestion.setBounds((panel.getWidth()/2)+5, 50, 125, 25);
+		panel.add(addQuestion);	
 
 		JButton wallList = new JButton("Current Walls");
 		wallList.setBounds(5,15,150,25);
@@ -131,6 +135,10 @@ public class MapDesign{
 		AddWallBox addWallBox = new AddWallBox((width/2)-250, 200,500,200, plane);
 		addWallBox.setVisible(false);
 		display.getContentPane().add(addWallBox);
+		
+		AddQuestionsBox addQuestionBox = new AddQuestionsBox((width/2)-250, 200,500,500, plane);
+		addQuestionBox.setVisible(false);
+		display.getContentPane().add(addQuestionBox);
 
 		AddMapBox addMapBox = new AddMapBox((width/2)-250, 200,500,200, plane);
 		addMapBox.setVisible(true);
@@ -192,11 +200,20 @@ public class MapDesign{
 			}
 		});
 
-		addMap.addActionListener(new ActionListener() {
+		editMap.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				addMapBox.edit();
+				plane.disable();
+			}
+		});
+		
+		addQuestion.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				addQuestionBox.setVisible(true);
 				plane.disable();
 			}
 		});

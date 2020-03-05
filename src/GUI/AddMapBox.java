@@ -34,13 +34,13 @@ import Components.Map;
  */
 public class AddMapBox extends JPanel{
 
-	JTextField name, imageURL, mapWidth, mapHeight;
-	static BufferedImage image;
-	JFileChooser browser;
-	JLabel nameLabel, imageLabel, mapSize;
-	JButton enter, exit, browseButton;
-	Map map;
-	Plane plane;
+	private JTextField name, imageURL, mapWidth, mapHeight;
+	private static BufferedImage image;
+	private JFileChooser browser;
+	private JLabel nameLabel, imageLabel, mapSize;
+	private JButton enter, exit, browseButton;
+	private Map map;
+	private Plane plane;
 
 	public AddMapBox(int x, int y, int width, int height, Plane plane) {
 		super();
@@ -116,8 +116,7 @@ public class AddMapBox extends JPanel{
 		//Exit button
 		exit = new JButton("Exit");
 		exit.setVisible(false);
-		exit.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
-		exit.setBackground(Color.RED);
+		exit.setBorder(BorderFactory.createEtchedBorder(Color.RED, Color.BLACK));
 		exit.setBounds(width-55, 5, 50, 30);
 		exit.addActionListener(new ActionListener() {
 			@Override
