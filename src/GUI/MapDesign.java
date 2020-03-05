@@ -78,7 +78,7 @@ public class MapDesign{
 	public MapDesign(JFrame display) throws ParseException {
 		this.display = display;
 		this.width = display.getContentPane().getWidth();
-		this.height = display.getContentPane().getHeight()-10;
+		this.height = display.getContentPane().getHeight()-15;
 		int canvasY = 85; //this is the position in Y where the division is between plane and menu
 
 		display.getContentPane().setBackground(Color.WHITE);

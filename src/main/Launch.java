@@ -13,7 +13,7 @@ public class Launch {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Display frame = new Display("Project",800,600);
+					Display frame = new Display("Project",1000,800);
 					MapDesign designMap = new MapDesign (frame);
 				} catch (Exception e) {
 					e.printStackTrace();
