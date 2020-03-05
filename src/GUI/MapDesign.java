@@ -112,7 +112,7 @@ public class MapDesign{
 		addWall.setBounds((panel.getWidth()/2)+130, 15, 125, 25);
 		panel.add(addWall);
 
-		JButton addMap = new JButton("Add Map");
+		JButton addMap = new JButton("Edit Map");
 		addMap.setBounds((panel.getWidth()/2)+130, 50, 125, 25);
 		panel.add(addMap);
 
@@ -179,6 +179,7 @@ public class MapDesign{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				addBuildingBox.setVisible(true);
+				plane.disable();
 			}
 		});
 
@@ -187,6 +188,7 @@ public class MapDesign{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				addWallBox.setVisible(true);
+				plane.disable();
 			}
 		});
 
@@ -194,7 +196,7 @@ public class MapDesign{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				addMapBox.setVisible(true);
+				addMapBox.edit();
 				plane.disable();
 			}
 		});

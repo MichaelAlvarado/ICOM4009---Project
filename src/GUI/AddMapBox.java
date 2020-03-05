@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -96,7 +97,7 @@ public class AddMapBox extends JPanel{
 
 		//Enter button
 		enter = new JButton("Enter");
-		enter.setBounds(width/2-100, height-60, 100, 50);
+		enter.setBounds(width/2-50, height-60, 100, 50);
 		enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -114,7 +115,10 @@ public class AddMapBox extends JPanel{
 		
 		//Exit button
 		exit = new JButton("Exit");
-		exit.setBounds(width/2, height-60, 100, 50);
+		exit.setVisible(false);
+		exit.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+		exit.setBackground(Color.RED);
+		exit.setBounds(width-55, 5, 50, 30);
 		exit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -141,6 +145,7 @@ public class AddMapBox extends JPanel{
 	 * this method let you edit the map and load the info of the map to this JPanel
 	 */
 	public void edit() {
+		exit.setVisible(true);
 		setVisible(true);
 	}
 

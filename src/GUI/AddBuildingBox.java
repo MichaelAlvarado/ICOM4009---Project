@@ -42,6 +42,7 @@ public class AddBuildingBox extends JPanel{
 					//Create new building
 				}
 				setVisible(false);
+				plane.enable();
 			}
 		});
 
@@ -52,6 +53,8 @@ public class AddBuildingBox extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				building = null;
+				plane.enable();
+
 			}
 		});
 
