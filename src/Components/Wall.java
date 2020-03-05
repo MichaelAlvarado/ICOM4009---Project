@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.image.BufferedImage; 
 import java.lang.String;
+import java.util.List;
+import java.util.LinkedList;
 
 /**
  * 
@@ -22,13 +24,13 @@ public class Wall {
 	private String wid;
 	
 	// constructor 
-	// el segundo parametro debe ser el largo de la lista de las paredes por edificio para que tengan un formato indexado
-	public Wall(String buildingName, int wallId) {
-		setID(buildingName + "_w" + String.valueOf(wallId));
-		this.color = Color.WHITE;
-	}
-	public Wall(String buildingName, int wallId, Point p1, Point p2) {
-		setID(buildingName + "_w" + String.valueOf(wallId));
+	
+	public Wall(String buildingName, LinkedList<Wall> walls, Point p1, Point p2) {
+		if (walls == null)
+			setID(buildingName + "_w" + String.valueOf(1));
+		else {
+			setID(buildingName + "_w" + String.valueOf(walls.size()));
+		}
 		this.color = Color.WHITE;
 		this.p1 = p1;
 		this.p2 = p2;
