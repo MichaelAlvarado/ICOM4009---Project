@@ -98,6 +98,7 @@ public class AddMapBox extends JPanel{
 				map.setBuildingName(name.getText());
 				AddMapBox.this.plane.setMap(map);
 				setVisible(false);
+				plane.enable();
 				AddMapBox.this.plane.repaint();
 			}
 		});
@@ -109,6 +110,7 @@ public class AddMapBox extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
+				plane.enable();
 			}
 		});
 

@@ -78,7 +78,7 @@ public class MapDesign{
 	public MapDesign(JFrame display) throws ParseException {
 		this.display = display;
 		this.width = display.getContentPane().getWidth();
-		this.height = display.getContentPane().getHeight();
+		this.height = display.getContentPane().getHeight()-10;
 		int canvasY = 85; //this is the position in Y where the division is between plane and menu
 
 		display.getContentPane().setBackground(Color.WHITE);
@@ -134,6 +134,7 @@ public class MapDesign{
 
 		AddMapBox addMapBox = new AddMapBox((width/2)-250, 200,500,200, plane);
 		addMapBox.setVisible(true);
+		plane.disable();
 		display.getContentPane().add(addMapBox);
 
 		display.getContentPane().add(plane);//add at the end so its on the bottom
@@ -161,7 +162,8 @@ public class MapDesign{
 		wallList.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				wallsListPopUp(wallList.getX(),wallList.getY()+wallList.getHeight()*2, addWallBox);
+				PopupMenu wallsPopUp = wallsListPopUp(addWallBox);
+				wallsPopUp.show(display, wallList.getX(),wallList.getY()+wallList.getHeight()*2);
 			}
 		});
 
@@ -193,12 +195,13 @@ public class MapDesign{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				addMapBox.setVisible(true);
+				plane.disable();
 			}
 		});
 
 	}//Last from Constructor
 
-	private void wallsListPopUp(int x, int y, AddWallBox addWallBox) {
+	private PopupMenu wallsListPopUp(AddWallBox addWallBox) {
 		PopupMenu wallsPopUp = new PopupMenu();
 		for(Wall wall: plane.walls) {
 			MenuItem wallOption = new MenuItem(wall.getID());
@@ -214,7 +217,7 @@ public class MapDesign{
 			wallsPopUp.add(wallOption);
 		}
 		display.add(wallsPopUp);
-		wallsPopUp.show(display, x, y);
+		return wallsPopUp;
 	}
 
 	private void buildingListPopUp(int x, int y, AddBuildingBox addBuildingBox) {

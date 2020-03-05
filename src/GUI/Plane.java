@@ -23,6 +23,7 @@ import java.util.Random;
 import javax.sound.sampled.Line;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 
 import Components.Building;
 import Components.Map;
@@ -32,9 +33,11 @@ import Components.Wall;
  * 
  * @author Michael Alvarado
  * Date - 28/Feb/2020  
- * This class is a Canvas UI with the building maps
+ * This class is a Canvas UI with the building maps. 
+ * It stores the map info in this class until you save it which generates a txt file
  */
 public class Plane extends Canvas{
+
 	Map map;
 	LinkedList<Wall> walls; //add the wall at the first index (So it can access to last element added faster)
 	LinkedList<Building> buildings;
@@ -49,6 +52,8 @@ public class Plane extends Canvas{
 	private Mouse mouse; //use to create walls with mouse
 	private MouseMotion mouseMotion; //use to drag points
 	private Keyboard keyboard; //use for shortcuts
+	private int x, y; //This is where is the map searching
+	private int scaleX, scaleY; //This is to scale the map
 
 	public Plane() {
 		pointWidth = 10;
@@ -65,7 +70,7 @@ public class Plane extends Canvas{
 
 		mouse = new Mouse();
 		mouseMotion = new MouseMotion();
-		keyboard = new Keyboard();
+		keyboard = new Keyboard();		
 		addMouseListener(mouse);
 		addMouseMotionListener(mouseMotion);
 		addKeyListener(keyboard);
@@ -98,8 +103,8 @@ public class Plane extends Canvas{
 			g.setFont(new Font("Arial", Font.PLAIN, 14));
 			for(int s = 0; s < gridLineQuantity; s++) {
 				//If is polar plane only draw one number per magnitude
-				g.drawString(String.valueOf(s)+" m", (xOrigin + s*xGap), yOrigin); //draw positive X coordinate 
-				g.drawString(String.valueOf(s)+" m", xOrigin, (yOrigin - s*yGap)); //draw positive Y coordinate 
+				g.drawString(String.valueOf(s*xGap)+" m", (xOrigin + s*xGap), yOrigin); //draw positive X coordinate 
+				g.drawString(String.valueOf(s*yGap)+" m", xOrigin, (yOrigin - s*yGap)); //draw positive Y coordinate 
 			}
 		}
 
@@ -162,7 +167,7 @@ public class Plane extends Canvas{
 			this.repaint();
 		}
 	}
-	
+
 	/**
 	 * @author Michael J. Alvarado
 	 * Date - 04/March/2020
@@ -172,7 +177,7 @@ public class Plane extends Canvas{
 		mouse.disable();
 		mouseMotion.disable();
 	}
-	
+
 	/**
 	 * @author Michael J. Alvarado
 	 * Date - 04/March/2020
@@ -198,15 +203,15 @@ public class Plane extends Canvas{
 			super();
 			enable = true;
 		}
-		
+
 		public void enable() {
 			enable = true;
 		}
-		
+
 		public void disable() {
 			enable = false;
 		}
-		
+
 		@Override
 		public void mousePressed(MouseEvent arg0) {
 			if(enable) {
@@ -268,6 +273,7 @@ public class Plane extends Canvas{
 
 		@Override
 		public void mouseDragged(MouseEvent arg0) {
+			//This is use to put the dragging point on near Point
 			if(enable) {
 				drag = drag(arg0.getX(), arg0.getY());
 				if(drag == null) {
@@ -282,7 +288,7 @@ public class Plane extends Canvas{
 
 		@Override
 		public void mouseMoved(MouseEvent arg0) {
-			//This will be use to drag mouse to the near point
+			//This is use to place initial point on a near Point
 			if(enable) {
 				drag = drag(arg0.getX(), arg0.getY());
 			}
