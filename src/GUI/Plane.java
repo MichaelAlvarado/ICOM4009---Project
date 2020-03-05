@@ -29,6 +29,7 @@ import javax.swing.JScrollBar;
 
 import Components.Building;
 import Components.Map;
+import Components.Question;
 import Components.Wall;
 
 /**
@@ -211,6 +212,10 @@ public class Plane extends Canvas{
 		walls.addFirst(wall);
 		this.repaint();
 	}
+	
+	public void addBuilding(Building building) {
+		buildings.add(building);
+	}
 
 	public void setMap(Map map) {
 		this.map = map;
@@ -345,6 +350,16 @@ public class Plane extends Canvas{
 			if(arg0.getKeyCode() == arg0.VK_K) { //Debugging Button
 				System.out.println(map.getBuildingName());
 				System.out.println(getWidth() + " , " + getHeight());
+			}
+			//Print question on currentBuilding
+			if(arg0.getKeyCode() == arg0.VK_Q) {
+				for(Question question: currentBuilding.getQuestionPool()) {
+				System.out.println("Question: " + question.getQuestion());
+				System.out.println("Correct: " + question.getAnswer_1());
+				System.out.println("Incorrect: " + question.getAnswer_2());
+				System.out.println("Incorrect: " + question.getAnswer_3());
+				System.out.println("Incorrect: " + question.getAnswer_4());
+				}
 			}
 		}
 

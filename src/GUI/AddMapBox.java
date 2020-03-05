@@ -40,12 +40,10 @@ public class AddMapBox extends JPanel{
 	private JLabel nameLabel, imageLabel, mapSize;
 	private JButton enter, exit, browseButton;
 	private Map map;
-	private Plane plane;
 
 	public AddMapBox(int x, int y, int width, int height, Plane plane) {
 		super();
 		map = new Map();
-		this.plane = plane;
 		setLayout(null);
 		setBounds(x, y, width, height);
 		setBorder(new LineBorder(UIManager.getColor("Button.darkShadow"), 3, true));
@@ -106,10 +104,10 @@ public class AddMapBox extends JPanel{
 					map.setPicture(image);
 				}
 				map.setBuildingName(name.getText());
-				AddMapBox.this.plane.setMap(map);
+				plane.setMap(map);
 				setVisible(false);
 				plane.enable(); 
-				AddMapBox.this.plane.repaint();
+				plane.repaint();
 			}
 		});
 		
