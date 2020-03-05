@@ -27,9 +27,9 @@ public class AddBuildingBox extends JPanel{
 		setName("New Building");
 		this.setBackground(new Color(190,190,190));
 
-		JTextField name = new JTextField("Building");
+		name = new JTextField("Building");
 
-		JButton enter = new JButton("Enter");
+		enter = new JButton("Enter");
 		enter.addActionListener(new ActionListener() {
 
 			@Override
@@ -46,7 +46,7 @@ public class AddBuildingBox extends JPanel{
 			}
 		});
 
-		JButton exit = new JButton("Exit");
+		exit = new JButton("Exit");
 		exit.addActionListener(new ActionListener() {
 
 			@Override

@@ -66,9 +66,11 @@ public class Plane extends Canvas{
 		gridIsOn = true;
 		walls = new LinkedList<Wall>();
 		buildings = new LinkedList<Building>();
-		currentBuilding = new Building("Test");
+		currentBuilding = new Building("Test"); //Testing
+		buildings.add(currentBuilding); //Testing
 		map = new Map(buildings,"map",this.getWidth(), this.getHeight());
 		currentPointPair = new Point[2];
+		wallsPopUp = new PopupMenu();
 
 		mouse = new Mouse();
 		mouseMotion = new MouseMotion();
@@ -189,7 +191,6 @@ public class Plane extends Canvas{
 	}
 
 	public PopupMenu wallsListPopUp(AddWallBox addWallBox) {
-		wallsPopUp = new PopupMenu();
 		for(Wall wall: walls) {
 			MenuItem wallOption = new MenuItem(wall.getID());
 			wallOption.addActionListener(new ActionListener() {
@@ -220,7 +221,9 @@ public class Plane extends Canvas{
 	 *	Date - 03/March/2020
 	 */
 	private class Mouse extends MouseAdapter{
+		
 		private boolean enable;
+		
 		public Mouse() {
 			super();
 			enable = true;
@@ -253,14 +256,13 @@ public class Plane extends Canvas{
 		public void mouseReleased(MouseEvent arg0) {
 			if(enable) {
 				System.out.println("Released / "+"x: " + arg0.getX() + "  y:" + (getHeight() - arg0.getY()));
-				if(currentPointPair[1] != null) {
+				if(currentPointPair[1] != null && currentPointPair[0] != null) {
 					//add to wall only if there was a mouse displacement
 					walls.addFirst(new Wall(currentBuilding.getName(), currentBuilding.getWalls(), currentPointPair[0], currentPointPair[1]));
 				}
 				currentPointPair[0] = null;
 				currentPointPair[1] = null;
 				repaint();
-
 			}
 		}
 	}
@@ -282,7 +284,7 @@ public class Plane extends Canvas{
 		public void disable() {
 			enable = false;
 		}
-		private Point drag(int x, int y) {
+		private Point dragToPoint(int x, int y) {
 			for(Wall line: walls) {
 				if(line.getP1().distance(x, y) < pointWidth) {
 					return line.getP1();
@@ -298,7 +300,7 @@ public class Plane extends Canvas{
 		public void mouseDragged(MouseEvent arg0) {
 			//This is use to put the dragging point on near Point
 			if(enable) {
-				drag = drag(arg0.getX(), arg0.getY());
+				drag = dragToPoint(arg0.getX(), arg0.getY());
 				if(drag == null) {
 					currentPointPair[1] = new Point(arg0.getX(), arg0.getY());
 				}
@@ -313,7 +315,7 @@ public class Plane extends Canvas{
 		public void mouseMoved(MouseEvent arg0) {
 			//This is use to place initial point on a near Point
 			if(enable) {
-				drag = drag(arg0.getX(), arg0.getY());
+				drag = dragToPoint(arg0.getX(), arg0.getY());
 			}
 		}
 

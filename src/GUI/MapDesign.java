@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
 
@@ -170,15 +171,14 @@ public class MapDesign{
 		wallList.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				PopupMenu wallsPopUp = plane.wallsListPopUp(addWallBox);
-				wallsPopUp.show(plane, 0, 0);
+				wallsListPopUp(wallList.getX(), wallList.getY()+wallList.getHeight()*2, addWallBox);
 			}
 		});
 
 		buildingList.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				buildingListPopUp(wallList.getX(),wallList.getY()+wallList.getHeight()*2, addBuildingBox);
+				buildingListPopUp(buildingList.getX(),buildingList.getY()+buildingList.getHeight()*2, addBuildingBox);
 			}
 		});
 
@@ -220,8 +220,9 @@ public class MapDesign{
 
 	}//Last from Constructor
 
-	private PopupMenu wallsListPopUp(AddWallBox addWallBox) {
-		PopupMenu wallsPopUp = new PopupMenu();
+	private void wallsListPopUp(int x, int y, AddWallBox addWallBox) {
+		PopupMenu wallsPopUp = new PopupMenu("Walls on: " + plane.currentBuilding.getName());
+		wallsPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
 		for(Wall wall: plane.walls) {
 			MenuItem wallOption = new MenuItem(wall.getID());
 			wallOption.addActionListener(new ActionListener() {
@@ -234,12 +235,14 @@ public class MapDesign{
 			});
 			wallsPopUp.add(wallOption);
 		}
-		plane.add(wallsPopUp);
-		return wallsPopUp;
+		display.add(wallsPopUp);
+		wallsPopUp.show(display, x, y);
+
 	}
 
 	private void buildingListPopUp(int x, int y, AddBuildingBox addBuildingBox) {
-		PopupMenu buildingsPopUp = new PopupMenu();
+		PopupMenu buildingsPopUp = new PopupMenu("Buildings on: " +  plane.map.getBuildingName());
+		buildingsPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
 		for(Building building: plane.buildings) {
 			MenuItem buildingOption = new MenuItem(building.getName());
 			buildingOption.addActionListener(new ActionListener() {
