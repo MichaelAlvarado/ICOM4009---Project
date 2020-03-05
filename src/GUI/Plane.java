@@ -253,12 +253,14 @@ public class Plane extends Canvas{
 		public void mouseReleased(MouseEvent arg0) {
 			if(enable) {
 				System.out.println("Released / "+"x: " + arg0.getX() + "  y:" + (getHeight() - arg0.getY()));
-				//add to line only if there was a mouse displacement
 				if(currentPointPair[1] != null) {
-					addWall(new Wall(currentBuilding.getName(), currentBuilding.getWalls(), currentPointPair[0], currentPointPair[1]));
+					//add to wall only if there was a mouse displacement
+					walls.addFirst(new Wall(currentBuilding.getName(), currentBuilding.getWalls(), currentPointPair[0], currentPointPair[1]));
 				}
 				currentPointPair[0] = null;
 				currentPointPair[1] = null;
+				repaint();
+
 			}
 		}
 	}
