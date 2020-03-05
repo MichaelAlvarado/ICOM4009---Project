@@ -25,7 +25,12 @@ import javax.swing.border.LineBorder;
 
 import Components.Map;
 
-
+/**
+ * 
+ * @author Michael J. Alvarado
+ * Date - 03/March/2020
+ *	This class let the user set a name, size and image to the map its going to create
+ */
 public class AddMapBox extends JPanel{
 
 	JTextField name, imageURL, mapWidth, mapHeight;
@@ -45,12 +50,14 @@ public class AddMapBox extends JPanel{
 		setBorder(new LineBorder(UIManager.getColor("Button.darkShadow"), 3, true));
 		setName("New Map");
 		this.setBackground(new Color(190,190,190));
-
+		
+		//Choose a name (default is Map)
 		nameLabel = new JLabel("Name of map");
 		nameLabel.setBounds(10, 40, 100,25);
 		name = new JTextField("Map");
 		name.setBounds(nameLabel.getX()+nameLabel.getWidth(), nameLabel.getY(), (width/2), 25);
-
+		
+		//Lets you browse for an image
 		imageLabel = new JLabel("Image of map");
 		imageLabel.setBounds(10, 70, 100,25);
 		imageURL = new JTextField();
@@ -78,7 +85,8 @@ public class AddMapBox extends JPanel{
 				browser.showOpenDialog(AddMapBox.this);
 			}
 		});
-
+		
+		//Set the map size (default is the Plane Size)
 		mapSize = new JLabel("Map Size");
 		mapSize.setBounds(10, 100, 100, 25);
 		mapWidth = new JTextField(String.valueOf(plane.getWidth()));
@@ -86,27 +94,28 @@ public class AddMapBox extends JPanel{
 		mapHeight = new JTextField(String.valueOf(plane.getHeight()));
 		mapHeight.setBounds(mapWidth.getX()+mapWidth.getWidth(), mapWidth.getY(), 50, 25);
 
+		//Enter button
 		enter = new JButton("Enter");
 		enter.setBounds(width/2-100, height-60, 100, 50);
 		enter.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//Creates the Map
 				if(image != null) {
 					map.setPicture(image);
 				}
 				map.setBuildingName(name.getText());
 				AddMapBox.this.plane.setMap(map);
 				setVisible(false);
-				plane.enable();
+				plane.enable(); 
 				AddMapBox.this.plane.repaint();
 			}
 		});
-
+		
+		//Exit button
 		exit = new JButton("Exit");
 		exit.setBounds(width/2, height-60, 100, 50);
 		exit.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -114,6 +123,7 @@ public class AddMapBox extends JPanel{
 			}
 		});
 
+		//add all component to this JPanel 
 		add(name);
 		add(nameLabel);
 		add(imageLabel);
@@ -125,6 +135,11 @@ public class AddMapBox extends JPanel{
 		add(exit);
 		add(browseButton);
 	}
+	/**
+	 * @author Michael J. Alvarado
+	 * Date - 03/March/2020
+	 * this method let you edit the map and load the info of the map to this JPanel
+	 */
 	public void edit() {
 		setVisible(true);
 	}
