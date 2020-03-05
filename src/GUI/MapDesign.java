@@ -162,8 +162,8 @@ public class MapDesign{
 		wallList.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				PopupMenu wallsPopUp = wallsListPopUp(addWallBox);
-				wallsPopUp.show(display, wallList.getX(),wallList.getY()+wallList.getHeight()*2);
+				PopupMenu wallsPopUp = plane.wallsListPopUp(addWallBox);
+				wallsPopUp.show(plane, 0, 0);
 			}
 		});
 
@@ -206,7 +206,6 @@ public class MapDesign{
 		for(Wall wall: plane.walls) {
 			MenuItem wallOption = new MenuItem(wall.getID());
 			wallOption.addActionListener(new ActionListener() {
-
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					addWallBox.edit(wall);
@@ -216,7 +215,7 @@ public class MapDesign{
 			});
 			wallsPopUp.add(wallOption);
 		}
-		display.add(wallsPopUp);
+		plane.add(wallsPopUp);
 		return wallsPopUp;
 	}
 

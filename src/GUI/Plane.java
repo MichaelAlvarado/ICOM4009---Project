@@ -10,6 +10,8 @@ import java.awt.MenuItem;
 import java.awt.Point;
 import java.awt.PopupMenu;
 import java.awt.Robot;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -52,9 +54,9 @@ public class Plane extends Canvas{
 	private Mouse mouse; //use to create walls with mouse
 	private MouseMotion mouseMotion; //use to drag points
 	private Keyboard keyboard; //use for shortcuts
+	private PopupMenu wallsPopUp;
 	private int x, y; //This is where is the map searching
 	private int scaleX, scaleY; //This is to scale the map
-
 	public Plane() {
 		pointWidth = 10;
 		cP = Color.BLUE;
@@ -140,9 +142,7 @@ public class Plane extends Canvas{
 		//		g.setColor(cP);
 		//		g.drawString("( " + currentPoint.getX() + " , " + currentPoint.getY() + " )", this.getWidth()-200, 20);
 
-	}
-
-
+	} //Paint end
 
 	/**
 	 * @author Michael Alvarado
@@ -186,6 +186,28 @@ public class Plane extends Canvas{
 	public void enable() {
 		mouse.enable();
 		mouseMotion.enable();
+	}
+
+	public PopupMenu wallsListPopUp(AddWallBox addWallBox) {
+		wallsPopUp = new PopupMenu();
+		for(Wall wall: walls) {
+			MenuItem wallOption = new MenuItem(wall.getID());
+			wallOption.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					addWallBox.edit(wall);
+					addWallBox.setVisible(true);
+				}
+			});
+			wallsPopUp.add(wallOption);
+		}
+		add(wallsPopUp);
+		return wallsPopUp;
+	}
+	
+	public void addWall(Wall wall) {
+		walls.addFirst(wall);
+		this.repaint();
 	}
 
 	public void setMap(Map map) {
@@ -233,11 +255,10 @@ public class Plane extends Canvas{
 				System.out.println("Released / "+"x: " + arg0.getX() + "  y:" + (getHeight() - arg0.getY()));
 				//add to line only if there was a mouse displacement
 				if(currentPointPair[1] != null) {
-					walls.addFirst(new Wall(currentBuilding.getName(), walls.size(), currentPointPair[0], currentPointPair[1]));
+					addWall(new Wall(currentBuilding.getName(), walls.size(), currentPointPair[0], currentPointPair[1]));
 				}
 				currentPointPair[0] = null;
 				currentPointPair[1] = null;
-				repaint();
 			}
 		}
 	}
