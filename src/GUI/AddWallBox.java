@@ -59,12 +59,12 @@ public class AddWallBox extends JPanel{
 		add(enter);
 		add(exit);
 	}
-	public void edit(Wall building) {
+	
+	public void edit(Wall wall) {
 		//This is a method to fill the box the the information of a Wall so you can edit it
 		name.setText(wall.getID());
 		this.wall = wall;
 		setVisible(true);
-
 	}
 }
 

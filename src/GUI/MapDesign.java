@@ -25,7 +25,7 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.ParseException;
-
+import java.util.LinkedList;
 import java.awt.Color;
 import javax.swing.ButtonGroup;
 import javax.swing.Box;
@@ -160,7 +160,7 @@ public class MapDesign{
 		wallList.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				wallsListPopUp(wallList.getX(),wallList.getY()+wallList.getHeight()*2);
+				wallsListPopUp(wallList.getX(),wallList.getY()+wallList.getHeight()*2, addWallBox);
 			}
 		});
 
@@ -197,10 +197,19 @@ public class MapDesign{
 
 	}//Last from Constructor
 
-	private void wallsListPopUp(int x, int y) {
+	private void wallsListPopUp(int x, int y, AddWallBox addWallBox) {
 		PopupMenu wallsPopUp = new PopupMenu();
 		for(Wall wall: plane.walls) {
 			MenuItem wallOption = new MenuItem(wall.getID());
+			wallOption.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					addWallBox.edit(wall);
+					addWallBox.setVisible(true);
+				}
+				
+			});
 			wallsPopUp.add(wallOption);
 		}
 		display.add(wallsPopUp);
@@ -216,6 +225,7 @@ public class MapDesign{
 		display.add(buildingsPopUp);
 		buildingsPopUp.show(display, x, y);
 	}
+	
 	private void settingPopUp(int x, int y) {
 		PopupMenu setting = new PopupMenu();
 
@@ -297,7 +307,6 @@ public class MapDesign{
 		MenuItem red = new MenuItem("Red");
 		MenuItem blue = new MenuItem("Blue");
 		MenuItem orange = new MenuItem("Orange");
-
 
 		magenta.addActionListener(new ActionListener() {
 			@Override

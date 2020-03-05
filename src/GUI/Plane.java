@@ -39,13 +39,16 @@ public class Plane extends Canvas{
 	LinkedList<Wall> walls; //add the wall at the first index (So it can access to last element added faster)
 	LinkedList<Building> buildings;
 	Building currentBuilding;
+	Color cP, cL, pP, pL; //Color for c=current p=previous P=Point L=Line
+	boolean gridIsOn; //draw the grid line in plane
 	private Point[] currentPointPair; //this is the current trace being drawn
 	private Point drag; //this is use to interconnect points
 	private int pointWidth; //points of coordinates
 	private int xGap, yGap; //this is the distance of line to line
 	private int xOrigin, yOrigin; //Pixel position on canvas origin
-	Color cP, cL, pP, pL; //Color for c=current p=previous P=Point L=Line
-	boolean gridIsOn; //draw the grid line in plane
+	private Mouse mouse; //use to create walls with mouse
+	private MouseMotion mouseMotion; //use to drag points
+	private Keyboard keyboard; //use for shortcuts
 
 	public Plane() {
 		pointWidth = 10;
@@ -60,9 +63,12 @@ public class Plane extends Canvas{
 		map = new Map(buildings,"map",this.getWidth(), this.getHeight());
 		currentPointPair = new Point[2];
 
-		addMouseListener(new Mouse());
-		addMouseMotionListener(new MouseMotion());
-		addKeyListener(new Keyboard());
+		mouse = new Mouse();
+		mouseMotion = new MouseMotion();
+		keyboard = new Keyboard();
+		addMouseListener(mouse);
+		addMouseMotionListener(mouseMotion);
+		addKeyListener(keyboard);
 	}
 
 	@Override 
@@ -156,54 +162,95 @@ public class Plane extends Canvas{
 			this.repaint();
 		}
 	}
+	
+	/**
+	 * @author Michael J. Alvarado
+	 * Date - 04/March/2020
+	 * This method will disable mouse therefore you cannot draw walls
+	 */
+	public void disable() {
+		mouse.disable();
+		mouseMotion.disable();
+	}
+	
+	/**
+	 * @author Michael J. Alvarado
+	 * Date - 04/March/2020
+	 * This method will enable mouse therefore you can draw walls
+	 */
+	public void enable() {
+		mouse.enable();
+		mouseMotion.enable();
+	}
 
 	public void setMap(Map map) {
 		this.map = map;
 	}
+
 	/**
 	 * @author Michael Alvarado
 	 *	this class is made for the mouse to be able to make points and line to create walls
 	 *	Date - 03/March/2020
 	 */
 	private class Mouse extends MouseAdapter{
-
+		private boolean enable;
 		public Mouse() {
 			super();
+			enable = true;
 		}
-
+		public void enable() {
+			enable = true;
+		}
+		public void disable() {
+			enable = false;
+		}
 		@Override
 		public void mousePressed(MouseEvent arg0) {
-			System.out.println("Pressed / "+"x: " + arg0.getX() + "  y:" + (getHeight() -arg0.getY()));
-			if(drag == null) {
-				currentPointPair[0] = new Point(arg0.getX(), arg0.getY());
+			if(enable) {
+				System.out.println("Pressed / "+"x: " + arg0.getX() + "  y:" + (getHeight() -arg0.getY()));
+				if(drag == null) {
+					currentPointPair[0] = new Point(arg0.getX(), arg0.getY());
+				}
+				else {
+					currentPointPair[0] = drag;
+				}
+				currentPointPair[1] = null;
+				repaint();
 			}
-			else {
-				currentPointPair[0] = drag;
-			}
-			currentPointPair[1] = null;
-			repaint();
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
-			System.out.println("Released / "+"x: " + arg0.getX() + "  y:" + (getHeight() - arg0.getY()));
-			//add to line only if there was a mouse displacement
-			if(currentPointPair[1] != null) {
-				walls.addFirst(new Wall(currentBuilding.getName()+" Wall"+walls.size(), currentPointPair[0], currentPointPair[1]));
+			if(enable) {
+				System.out.println("Released / "+"x: " + arg0.getX() + "  y:" + (getHeight() - arg0.getY()));
+				//add to line only if there was a mouse displacement
+				if(currentPointPair[1] != null) {
+					walls.addFirst(new Wall(currentBuilding.getName()+" Wall"+walls.size(), currentPointPair[0], currentPointPair[1]));
+				}
+				currentPointPair[0] = null;
+				currentPointPair[1] = null;
+				repaint();
 			}
-			currentPointPair[0] = null;
-			currentPointPair[1] = null;
-			repaint();
 		}
 	}
 
 	/** 
 	 * @author Michael J. Alvarado
 	 *	Date - 03/March/2020
-	 *	This class was made to make the drag functionality so its easier to interconnect points
+	 *	This class was made to make the drag functionality so its easier to interconnect points and to paint line while moving
 	 */
 	private class MouseMotion extends MouseMotionAdapter{
-
+		private boolean enable;
+		public MouseMotion(){
+			super();
+			enable = true;
+		}
+		public void enable() {
+			enable = true;
+		}
+		public void disable() {
+			enable = false;
+		}
 		private Point drag(int x, int y) {
 			for(Wall line: walls) {
 				if(line.getP1().distance(x, y) < pointWidth) {
@@ -218,20 +265,24 @@ public class Plane extends Canvas{
 
 		@Override
 		public void mouseDragged(MouseEvent arg0) {
-			drag = drag(arg0.getX(), arg0.getY());
-			if(drag == null) {
-				currentPointPair[1] = new Point(arg0.getX(), arg0.getY());
+			if(enable) {
+				drag = drag(arg0.getX(), arg0.getY());
+				if(drag == null) {
+					currentPointPair[1] = new Point(arg0.getX(), arg0.getY());
+				}
+				else {
+					currentPointPair[1] = drag;
+				}
+				repaint();
 			}
-			else {
-				currentPointPair[1] = drag;
-			}
-			repaint();
 		}
 
 		@Override
 		public void mouseMoved(MouseEvent arg0) {
 			//This will be use to drag mouse to the near point
-			drag = drag(arg0.getX(), arg0.getY());
+			if(enable) {
+				drag = drag(arg0.getX(), arg0.getY());
+			}
 		}
 
 	}
