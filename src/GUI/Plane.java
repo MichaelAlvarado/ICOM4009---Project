@@ -198,12 +198,15 @@ public class Plane extends Canvas{
 			super();
 			enable = true;
 		}
+		
 		public void enable() {
 			enable = true;
 		}
+		
 		public void disable() {
 			enable = false;
 		}
+		
 		@Override
 		public void mousePressed(MouseEvent arg0) {
 			if(enable) {

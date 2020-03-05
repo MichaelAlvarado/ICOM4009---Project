@@ -77,13 +77,17 @@ public class MapDesign{
 	 */
 	public MapDesign(JFrame display) throws ParseException {
 		this.display = display;
-		this.width = display.getWidth() - (display.getInsets().left + display.getInsets().right); //this takes the width size inside the app
-		this.height = display.getHeight() - (display.getInsets().top + display.getInsets().bottom); //this takes the height size inside the app
-		plane = new Plane();
+		this.width = display.getContentPane().getWidth();
+		this.height = display.getContentPane().getHeight();
 		int canvasY = 85; //this is the position in Y where the division is between plane and menu
 
 		display.getContentPane().setBackground(Color.WHITE);
 		display.getContentPane().setLayout(null);
+
+		plane = new Plane();
+		plane.setBackground(Color.WHITE);
+		plane.setLocation(0, canvasY);
+		plane.setBounds(0, canvasY, width, height-(canvasY));
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(190,190,190));
@@ -115,7 +119,7 @@ public class MapDesign{
 		JButton wallList = new JButton("Current Walls");
 		wallList.setBounds(5,15,150,25);
 		panel.add(wallList);
-		
+
 		JButton buildingList = new JButton("Building List");
 		buildingList.setBounds(155,15,150,25);
 		panel.add(buildingList);
@@ -132,10 +136,7 @@ public class MapDesign{
 		addMapBox.setVisible(true);
 		display.getContentPane().add(addMapBox);
 
-		plane.setBackground(Color.WHITE);
-		plane.setLocation(0, canvasY);
-		plane.setBounds(0, canvasY, width, height-(canvasY));
-		display.getContentPane().add(plane);
+		display.getContentPane().add(plane);//add at the end so its on the bottom
 
 
 		/*
@@ -170,7 +171,7 @@ public class MapDesign{
 				buildingListPopUp(wallList.getX(),wallList.getY()+wallList.getHeight()*2, addBuildingBox);
 			}
 		});
-		
+
 		addBuilding.addActionListener(new ActionListener() {
 
 			@Override
@@ -208,7 +209,7 @@ public class MapDesign{
 					addWallBox.edit(wall);
 					addWallBox.setVisible(true);
 				}
-				
+
 			});
 			wallsPopUp.add(wallOption);
 		}
@@ -227,14 +228,14 @@ public class MapDesign{
 					addBuildingBox.edit(building);
 					addBuildingBox.setVisible(true);
 				}
-				
+
 			});
 			buildingsPopUp.add(buildingOption);
 		}
 		display.add(buildingsPopUp);
 		buildingsPopUp.show(display, x, y);
 	}
-	
+
 	private void settingPopUp(int x, int y) {
 		PopupMenu setting = new PopupMenu();
 
