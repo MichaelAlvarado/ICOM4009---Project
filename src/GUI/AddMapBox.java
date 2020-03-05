@@ -33,18 +33,20 @@ import Components.Map;
  *	This class let the user set a name, size and image to the map its going to create
  */
 public class AddMapBox extends JPanel{
-
+	
+	private Plane plane;
 	private JTextField name, imageURL, mapWidth, mapHeight;
 	private static BufferedImage image;
-	private JFileChooser browser;
+	private JFileChooser browserImage, browserMap;
 	private JLabel nameLabel, imageLabel, mapSize;
-	private JButton enter, exit, browseButton;
+	private JButton enter, exit, browseButton, load;
 	private Map map;
 
 	public AddMapBox(int x, int y, int width, int height, Plane plane) {
 		super();
+		this.plane = plane;
 		map = new Map();
-		setLayout(null);
+		setLayout(null); //This make it possible to set position to components
 		setBounds(x, y, width, height);
 		setBorder(new LineBorder(UIManager.getColor("Button.darkShadow"), 3, true));
 		setName("New Map");
@@ -61,13 +63,13 @@ public class AddMapBox extends JPanel{
 		imageLabel.setBounds(10, 70, 100,25);
 		imageURL = new JTextField();
 		imageURL.setBounds(imageLabel.getX()+imageLabel.getWidth(), imageLabel.getY(), (width/2), 25);
-		browser = new JFileChooser();
+		browserImage = new JFileChooser();
 		browseButton = new JButton("Browse");
 		browseButton.setBounds((imageURL.getX()+imageURL.getWidth()), imageURL.getY(), 100, 20);
-		browser.addActionListener(new ActionListener() {
+		browserImage.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				File imageFile = browser.getSelectedFile();
+				File imageFile = browserImage.getSelectedFile();
 				try {						
 					System.out.println("loading file...");
 					image = ImageIO.read(imageFile);
@@ -81,7 +83,7 @@ public class AddMapBox extends JPanel{
 		browseButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				browser.showOpenDialog(AddMapBox.this);
+				browserImage.showOpenDialog(AddMapBox.this);
 			}
 		});
 		
@@ -105,8 +107,7 @@ public class AddMapBox extends JPanel{
 				}
 				map.setBuildingName(name.getText());
 				plane.setMap(map);
-				setVisible(false);
-				plane.enable(); 
+				exit(); 
 				plane.repaint();
 			}
 		});
@@ -119,8 +120,27 @@ public class AddMapBox extends JPanel{
 		exit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				plane.enable();
+				exit();
+			}
+		});
+		
+		//LOAD existing map
+		browserMap = new JFileChooser();
+		browserMap.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//This should create a Map from the chosen txt file and place it on Place
+				exit();
+			}
+			
+		});
+		load = new JButton("Open Map");
+		load.setBounds(width-160, height-50, 120, 30);
+		load.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				browserMap.showOpenDialog(AddMapBox.this);
 			}
 		});
 
@@ -135,6 +155,7 @@ public class AddMapBox extends JPanel{
 		add(enter);
 		add(exit);
 		add(browseButton);
+		add(load);
 	}
 	/**
 	 * @author Michael J. Alvarado
@@ -144,6 +165,11 @@ public class AddMapBox extends JPanel{
 	public void edit() {
 		exit.setVisible(true);
 		setVisible(true);
+	}
+	
+	private void exit() {
+		plane.enable();
+		setVisible(false);
 	}
 
 

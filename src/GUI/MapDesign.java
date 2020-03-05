@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -217,7 +218,7 @@ public class MapDesign{
 				plane.disable();
 			}
 		});
-
+		
 	}//Last from Constructor
 
 	private void wallsListPopUp(int x, int y, AddWallBox addWallBox) {
