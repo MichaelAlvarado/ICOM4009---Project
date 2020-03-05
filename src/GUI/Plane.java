@@ -206,7 +206,8 @@ public class Plane extends Canvas{
 		return wallsPopUp;
 	}
 	
-	public void addWall(Wall wall) {
+	public void addWall(Point p1, Point p2) {
+		Wall wall = new Wall(currentBuilding.getName()+"_w" + String.valueOf(walls.size()), p1, p2);
 		walls.addFirst(wall);
 		this.repaint();
 	}
@@ -258,7 +259,7 @@ public class Plane extends Canvas{
 				System.out.println("Released / "+"x: " + arg0.getX() + "  y:" + (getHeight() - arg0.getY()));
 				if(currentPointPair[1] != null && currentPointPair[0] != null) {
 					//add to wall only if there was a mouse displacement
-					walls.addFirst(new Wall(currentBuilding.getName(), currentBuilding.getWalls(), currentPointPair[0], currentPointPair[1]));
+					addWall(currentPointPair[0], currentPointPair[1]);
 				}
 				currentPointPair[0] = null;
 				currentPointPair[1] = null;

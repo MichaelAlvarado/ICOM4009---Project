@@ -24,7 +24,12 @@ public class Wall {
 	private String wid;
 	
 	// constructor 
-	
+	public Wall(String name, Point p1, Point p2) {
+		wid = name;
+		this.p1 = p1;
+		this.p2 = p2;
+		this.color = Color.WHITE;
+	}
 	public Wall(String buildingName, LinkedList<Wall> walls, Point p1, Point p2) {
 		if (walls == null)
 			setID(buildingName + "_w" + String.valueOf(1));

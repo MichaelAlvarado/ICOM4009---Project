@@ -99,7 +99,7 @@ public class AddWallBox extends JPanel{
 				if(wall != null) {
 					wall.setTexture(texture); 
 				}
-				AddWallBox.this.plane.addWall(wall);
+				AddWallBox.this.plane.addWall(p1,p2);
 				setVisible(false);
 				plane.enable();
 				AddWallBox.this.plane.repaint();
