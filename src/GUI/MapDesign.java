@@ -167,7 +167,7 @@ public class MapDesign{
 		buildingList.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				buildingListPopUp(wallList.getX(),wallList.getY()+wallList.getHeight()*2);
+				buildingListPopUp(wallList.getX(),wallList.getY()+wallList.getHeight()*2, addBuildingBox);
 			}
 		});
 		
@@ -216,10 +216,19 @@ public class MapDesign{
 		wallsPopUp.show(display, x, y);
 	}
 
-	private void buildingListPopUp(int x, int y) {
+	private void buildingListPopUp(int x, int y, AddBuildingBox addBuildingBox) {
 		PopupMenu buildingsPopUp = new PopupMenu();
 		for(Building building: plane.buildings) {
 			MenuItem buildingOption = new MenuItem(building.getName());
+			buildingOption.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					addBuildingBox.edit(building);
+					addBuildingBox.setVisible(true);
+				}
+				
+			});
 			buildingsPopUp.add(buildingOption);
 		}
 		display.add(buildingsPopUp);
