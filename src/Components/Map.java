@@ -162,7 +162,7 @@ public class Map {
 		Wall w2 = new Wall("w2", new Point(545, 136), new Point(607, 128));
 		ws.add(w1);
 		ws.add(w2);
-		buildings.add(new Building("b1", image, qs, ws2, true));
+		buildings.add(new Building("b1", image, qs, ws, true));
 		
 		Wall w3 = new Wall("w3", new Point(601, 92), new Point(435, 619));
 		Wall w4 = new Wall("w4", new Point(493, 89), new Point(450, 744));
