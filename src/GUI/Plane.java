@@ -38,13 +38,14 @@ import Components.Wall;
  * Date - 28/Feb/2020  
  * This class is a Canvas UI with the building maps. 
  * It stores the map info in this class until you save it which generates a txt file
+ * 
  */
 public class Plane extends Canvas{
 
 	Map map;
 	LinkedList<Wall> walls; //add the wall at the first index (So it can access to last element added faster)
-	LinkedList<Building> buildings;
-	Building currentBuilding;
+	LinkedList<Building> buildings;//the List of buildings in map
+	Building currentBuilding; //the building currently being edit
 	Color cP, cL, pP, pL; //Color for c=current p=previous P=Point L=Line
 	boolean gridIsOn; //draw the grid line in plane
 	private Point[] currentPointPair; //this is the current trace being drawn
@@ -55,7 +56,6 @@ public class Plane extends Canvas{
 	private Mouse mouse; //use to create walls with mouse
 	private MouseMotion mouseMotion; //use to drag points
 	private Keyboard keyboard; //use for shortcuts
-	private PopupMenu wallsPopUp;
 	private int x, y; //This is where is the map searching
 	private int scaleX, scaleY; //This is to scale the map
 	public Plane() {
@@ -71,7 +71,6 @@ public class Plane extends Canvas{
 		buildings.add(currentBuilding); //Testing
 		map = new Map(buildings,"map",this.getWidth(), this.getHeight());
 		currentPointPair = new Point[2];
-		wallsPopUp = new PopupMenu();
 
 		mouse = new Mouse();
 		mouseMotion = new MouseMotion();
@@ -189,22 +188,6 @@ public class Plane extends Canvas{
 	public void enable() {
 		mouse.enable();
 		mouseMotion.enable();
-	}
-
-	public PopupMenu wallsListPopUp(AddWallBox addWallBox) {
-		for(Wall wall: walls) {
-			MenuItem wallOption = new MenuItem(wall.getID());
-			wallOption.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					addWallBox.edit(wall);
-					addWallBox.setVisible(true);
-				}
-			});
-			wallsPopUp.add(wallOption);
-		}
-		add(wallsPopUp);
-		return wallsPopUp;
 	}
 	
 	public void addWall(Point p1, Point p2) {

@@ -262,7 +262,7 @@ public class MapDesign{
 	}
 
 	private void settingPopUp(int x, int y) {
-		PopupMenu setting = new PopupMenu();
+		PopupMenu setting = new PopupMenu("Settings");
 
 		MenuItem undo = new MenuItem("Undo wall");
 		MenuItem clear = new MenuItem("Clear All walls");
