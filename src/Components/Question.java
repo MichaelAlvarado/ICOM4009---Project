@@ -46,6 +46,10 @@ public class Question {
 	public String getQuestion() {
 		return question;
 	}
+	
+	public String getAnswers() {
+		return this.answer_1 + ", " + this.answer_2 + ", " + this.answer_3 + ", " + this.answer_4;
+	}
 
 	public String getAnswer_1() {
 		return answer_1;

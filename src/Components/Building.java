@@ -21,6 +21,7 @@ public class Building {
 	private LinkedList<Question> questionPool;
 	private boolean found;
 	
+	
 	// constructor
 	public Building(String buildingName) {
 		this.buildingName = buildingName;
@@ -28,6 +29,36 @@ public class Building {
 		questionPool = new LinkedList<Question>();
 	}
 	
+	//Constructor used for testing text file generator
+	public Building(String name, BufferedImage pic, LinkedList<Question> qs, LinkedList<Wall> ws, boolean fd) {
+		this.buildingName = name;
+		this.picture = pic;
+		this.questionPool = qs;
+		this.walls = ws;
+		this.found = fd;
+		
+	}
+	
+	public String getQuestions() {
+		String result = "";
+		int counter = 1;
+		for (Question q: this.questionPool) {
+			result += counter + ") " +  q.getQuestion() + ", Answers: " + q.getAnswers() + ", ";
+			counter++;
+		}
+		return result;
+	}
+	
+	public String getWallInfo() {
+		String result = "";
+		for (Wall w: this.walls) {
+			result += "ID: " + w.getID() + ", Height: " + w.getHeight() + ", First Point: " + w.getP1().x
+			+ ", " + w.getP1().y + ", Second Point: " + w.getP2().x + ", " + w.getP2().y + ", Wall Image: " 
+			+ w.getTexture() + ", ";
+		}
+		
+		return result;
+	}
 	// getters 
 	public LinkedList<Wall> getWalls(){
 		return this.walls;
