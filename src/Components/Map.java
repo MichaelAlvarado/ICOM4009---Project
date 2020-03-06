@@ -93,7 +93,7 @@ public class Map {
 		this.buildingList.remove(b);
 	}
 
-	
+
 	public LinkedList<Building> getList(){
 		return this.buildingList;
 	}
@@ -111,44 +111,46 @@ public class Map {
 	 */
 	public static void generateTextFile(LinkedList<Building> buildingList) {
 
-		WriteFile data = new WriteFile("ConfigurationFile.txt", true);
+		WriteFile data = new WriteFile("ConfigurationFile.txt", false);
 		HashMap<Integer, String> hmap = new HashMap<Integer, String>();
 		int counter = 1;
-		
+
 		for(Building buildings: buildingList){
-			hmap.put(counter, "Name: " + buildings.getName() + ", Building Image: null"
+			String coded = "Building #" + counter + ":\n";
+			coded +=  "Name: " + buildings.getName() + ", Building Image: null"
 					+ ", Walls: " + 
 					buildings.getWallInfo() 
-					  + ", Questions: " + 
+					+ ", Questions: " + 
 					buildings.getQuestions()
-					+ " Found: " + buildings.getFound());
+					+ " Found: " + buildings.getFound();
+			hmap.put(counter, coded);
 			counter++;
-
 		}
-
+		String file = "";
 		for(Entry<Integer, String> entry : hmap.entrySet()) {
-
-			try {
-				data.writeToFile("Building #" + entry.getKey() + ":\n" + entry.getValue());
-			} catch (IOException e) {
-				System.out.println("Something went wrong!");
-			}	
-
+			file += entry.getValue()+"\n";	
 		}
+		try {
+			data.writeToFile(file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 
 	}
-	
+
 	public static  void main(String[] args) throws IOException {
 		BufferedImage image = new BufferedImage(5,5, BufferedImage.TYPE_INT_RGB);
 		File file = new File("myimage.png");
-        ImageIO.write(image, "png", file);
-		
+		ImageIO.write(image, "png", file);
+
 		LinkedList<Building> buildings = new LinkedList<Building>();
 		LinkedList<Question> qs = new LinkedList<Question>();
 		LinkedList<Question> qs2 = new LinkedList<Question>();
 		LinkedList<Wall> ws = new LinkedList<Wall>();
 		LinkedList<Wall> ws2 = new LinkedList<Wall>();
-		
+
 		Question q1 = new Question("Who are you?", "Me" , "You" , "We" , "Us");
 		Question q2 = new Question("Who are you?", "Me" , "You" , "We" , "Us");
 		Question q3 = new Question("How are you?", "Colgao", "Bien", "Mal", "Super");
@@ -157,19 +159,19 @@ public class Map {
 		qs.add(q2);
 		qs2.add(q3);
 		qs2.add(q4);
-		
+
 		Wall w1 = new Wall("w1", new Point(619, 435), new Point(744, 450));
 		Wall w2 = new Wall("w2", new Point(545, 136), new Point(607, 128));
 		ws.add(w1);
 		ws.add(w2);
 		buildings.add(new Building("b1", image, qs, ws, true));
-		
+
 		Wall w3 = new Wall("w3", new Point(601, 92), new Point(435, 619));
 		Wall w4 = new Wall("w4", new Point(493, 89), new Point(450, 744));
 		ws2.add(w3);
 		ws2.add(w4);
 		buildings.add(new Building("b2", null, qs2, ws2, true));
-		
+
 		generateTextFile(buildings);
 	}
 
