@@ -134,7 +134,7 @@ public class MapDesign{
 		addBuildingBox.setVisible(false);
 		display.getContentPane().add(addBuildingBox);
 
-		AddWallBox addWallBox = new AddWallBox((width/2)-250, 200,500,200, plane);
+		AddWallBox addWallBox = new AddWallBox((width/2)-250, 200,500,300, plane);
 		addWallBox.setVisible(false);
 		display.getContentPane().add(addWallBox);
 		
