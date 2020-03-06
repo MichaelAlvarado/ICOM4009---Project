@@ -157,8 +157,8 @@ public class AddWallBox extends JPanel{
 				if(wall != null) {
 					wall.setTexture(texture); 
 				}
-				p1.setLocation(Integer.parseInt(formattedTextP1X.getValue().toString().substring(1,3)) , height - Integer.parseInt(formattedTextP1Y.getValue().toString().substring(1,3)));
-				p2.setLocation(Integer.parseInt(formattedTextP2X.getValue().toString().substring(1,3)) , height - Integer.parseInt(formattedTextP2Y.getValue().toString().substring(1,3)));
+				p1.setLocation(Integer.parseInt(formattedTextP1X.getValue().toString().substring(1,4)) , plane.getHeight() - Integer.parseInt(formattedTextP1Y.getValue().toString().substring(1,4)));
+				p2.setLocation(Integer.parseInt(formattedTextP2X.getValue().toString().substring(1,4)) , plane.getHeight() - Integer.parseInt(formattedTextP2Y.getValue().toString().substring(1,4)));
 				AddWallBox.this.plane.addWall(p1,p2);
 				setVisible(false);
 				plane.enable();
