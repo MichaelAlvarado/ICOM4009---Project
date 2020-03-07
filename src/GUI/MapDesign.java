@@ -196,8 +196,7 @@ public class MapDesign{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				addWallBox.setVisible(true);
-				plane.disable();
+				addWallBox.addNewWall();
 			}
 		});
 
@@ -335,7 +334,7 @@ public class MapDesign{
 	}
 
 	private void colorPopup(int x, int y, String component) {
-		PopupMenu ColorPopup = new PopupMenu();
+		PopupMenu ColorPopup = new PopupMenu("Choose color");
 
 		MenuItem magenta = new MenuItem("Magenta");
 		MenuItem green = new MenuItem("Green");
