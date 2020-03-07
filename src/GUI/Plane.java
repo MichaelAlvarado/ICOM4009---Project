@@ -138,14 +138,17 @@ public class Plane extends JPanel{
 			g.drawLine((int)currentPointPair[0].getX(), (int)currentPointPair[0].getY(), (int)currentPointPair[1].getX(), (int)currentPointPair[1].getY());
 		}
 
+		//Draw Current Coordinates
 		if(currentPointPair[0] != null) {
 			//Draw panel with coordinates
 			g.setColor(new Color(0,0,0,100));
-			g.fillRect(this.getWidth()-200, 0, 200, 30);
+			g.fillRect(this.getWidth()-300, 0, 300, 30);
 			//Draw coordinates point on panel
 			g.setFont(new Font("Arial", Font.PLAIN, 20));
 			g.setColor(cP);
-			g.drawString("( " + currentPointPair[0].getX() + " , " + currentPointPair[0].getY() + " )", this.getWidth()-200, 20);
+			g.drawString("( " + currentPointPair[0].getX() + " , " + currentPointPair[0].getY() + " )", this.getWidth()-300, 20);
+			g.drawString("( " + currentPointPair[1].getX() + " , " + currentPointPair[1].getY() + " )", this.getWidth()-150, 20);
+
 		}
 
 	} //Paint end
