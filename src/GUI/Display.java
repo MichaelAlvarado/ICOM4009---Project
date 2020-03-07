@@ -1,7 +1,11 @@
 package GUI;
 
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 /**
  * @author Michael Alvarado
@@ -10,7 +14,7 @@ import javax.swing.JFrame;
  */
 public class Display extends JFrame{
 
-	public Display(String title, int width, int height) {
+	public Display(String title, int width, int height) throws IOException {
 		super();
 		setTitle(title);
 	    setPreferredSize(new Dimension(width, height+24));
@@ -20,5 +24,6 @@ public class Display extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		getContentPane().setSize(width,height);
+		getContentPane().getGraphics().drawImage(ImageIO.read(new File("res/loadingscreen.png")), 0, 0, width, height,null); //loading screen 
 	}
 }
