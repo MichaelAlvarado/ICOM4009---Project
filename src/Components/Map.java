@@ -15,7 +15,7 @@ import testers.WriteFile;
 public class Map {
 
 	private LinkedList<Building> buildingList;
-	private String buildingName;
+	private String mapName;
 	private int height;
 	private int width;
 	private BufferedImage picture;
@@ -26,7 +26,7 @@ public class Map {
 	public Map(LinkedList<Building> buildingList, String buildingName, int height, int width) {
 		super();
 		this.buildingList = buildingList;
-		this.buildingName = buildingName;
+		this.mapName = buildingName;
 		this.height = height;
 		this.width = width;
 		this.picture = null;
@@ -57,12 +57,12 @@ public class Map {
 
 
 	public String getBuildingName() {
-		return buildingName;
+		return mapName;
 	}
 
 
 	public void setBuildingName(String buildingName) {
-		this.buildingName = buildingName;
+		this.mapName = buildingName;
 	}
 
 
