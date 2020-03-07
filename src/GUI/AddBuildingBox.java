@@ -48,9 +48,9 @@ public class AddBuildingBox extends JPanel{
 
 		//name = new JTextField("Building");
 		buildingName = new JLabel("Building name: "); 
-		buildingName.setBounds(200, 40, 300, 25);
+		buildingName.setBounds(10, 40, 100, 25);
 		name = new JTextField();
-		name.setBounds(buildingName.getX()+ buildingName.getWidth(), buildingName.getY(), (width/2), 25);
+		name.setBounds(buildingName.getX()+buildingName.getWidth(), buildingName.getY(), (width/2), 25);
 		picLabel = new JLabel("Building Texture");
 		picLabel.setBounds(10, 70, 100, 25);
 		picURL = new JTextField();

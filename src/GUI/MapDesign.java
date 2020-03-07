@@ -130,7 +130,7 @@ public class MapDesign{
 		buildingList.setBounds(155,15,150,25);
 		panel.add(buildingList);
 
-		AddBuildingBox addBuildingBox = new AddBuildingBox((width/2)-250, 200,500,300, plane);
+		AddBuildingBox addBuildingBox = new AddBuildingBox((width/2)-250, 200,500,200, plane);
 		addBuildingBox.setVisible(false);
 		display.getContentPane().add(addBuildingBox);
 
