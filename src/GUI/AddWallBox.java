@@ -215,10 +215,10 @@ public class AddWallBox extends JPanel{
 		setVisible(false);
 		//make sure the info don't stay in the box
 		wall = null; 
-		this.formattedTextP1X.setText("___");
-		this.formattedTextP1Y.setText("___");
-		this.formattedTextP2X.setText("___");
-		this.formattedTextP2Y.setText("___");
+		this.formattedTextP1X.setText("000");
+		this.formattedTextP1Y.setText("000");
+		this.formattedTextP2X.setText("000");
+		this.formattedTextP2Y.setText("000");
 		plane.enable();
 		plane.repaint();
 	}
