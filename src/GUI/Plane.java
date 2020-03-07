@@ -68,7 +68,7 @@ public class Plane extends JPanel{
 		gridIsOn = true;
 		walls = new LinkedList<Wall>();
 		buildings = new LinkedList<Building>();
-		currentBuilding = new Building("Test"); //Testing
+		currentBuilding = new Building("building"); //Testing
 		buildings.add(currentBuilding); //Testing
 		map = new Map(buildings,"map",this.getWidth(), this.getHeight());
 		currentPointPair = new Point[2];
