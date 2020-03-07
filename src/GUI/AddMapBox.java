@@ -135,7 +135,7 @@ public class AddMapBox extends JPanel{
 			}
 			
 		});
-		load = new JButton("Open Map");
+		load = new JButton("Open Existing Map");
 		load.setBounds(width-160, height-50, 120, 30);
 		load.addActionListener(new ActionListener() {
 			@Override
