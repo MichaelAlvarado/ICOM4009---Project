@@ -121,9 +121,13 @@ public class AddQuestionsBox extends JPanel{
 	public void edit(Building building) {
 		//This is a method to fill the box the the information of a Wall so you can edit it
 		this.building = building;
+		plane.disable();
 		setVisible(true);
 	}
-	
+	public void addQuestion() {
+		setVisible(true);
+		plane.disable();
+	}
 	private void exit() { 
 		plane.enable();
 		setVisible(false);

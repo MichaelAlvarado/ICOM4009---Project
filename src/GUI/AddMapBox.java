@@ -164,6 +164,7 @@ public class AddMapBox extends JPanel{
 	 */
 	public void edit() {
 		exit.setVisible(true);
+		plane.disable();
 		setVisible(true);
 	}
 	

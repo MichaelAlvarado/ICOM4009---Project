@@ -18,6 +18,7 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import Components.Building;
 import Components.Wall;
@@ -144,22 +145,25 @@ public class AddWallBox extends JPanel{
 		formattedTextP2Y.setBounds(wallHeightLabel.getX()+wallHeightLabel.getWidth()+40, 160, 40, 25);
 
 
-
 		// enter button
 		enter = new JButton("Enter");
 		enter.setBounds(width/2-100, height-60, 100, 50);
 		enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int x1 = Integer.parseInt(formattedTextP1X.getValue().toString().substring(1,4));
-				int y1 = plane.getHeight() - Integer.parseInt(formattedTextP1Y.getValue().toString().substring(1,4));
-				int x2 = Integer.parseInt(formattedTextP2X.getValue().toString().substring(1,4));
-				int y2 = plane.getHeight() - Integer.parseInt(formattedTextP2Y.getValue().toString().substring(1,4));
+				if(isValidTextField()) {
+					int x1 = Integer.parseInt(formattedTextP1X.getValue().toString().substring(1,4));
+					int y1 = plane.getHeight() - Integer.parseInt(formattedTextP1Y.getValue().toString().substring(1,4));
+					int x2 = Integer.parseInt(formattedTextP2X.getValue().toString().substring(1,4));
+					int y2 = plane.getHeight() - Integer.parseInt(formattedTextP2Y.getValue().toString().substring(1,4));
 
-				wall.setTexture(texture); 
-				wall.getP1().setLocation(x1,y1);
-				wall.getP2().setLocation(x2,y2);
-
+					wall.setTexture(texture); 
+					wall.getP1().setLocation(x1,y1);
+					wall.getP2().setLocation(x2,y2);
+				}
+				else {
+					JOptionPane.showMessageDialog(plane, "Invalid Coordinates");
+				}
 				if(newWall) {
 					plane.addWall(wall);
 				}
@@ -231,6 +235,13 @@ public class AddWallBox extends JPanel{
 			this.formattedTextP2X.setText(String.valueOf(wall.getP2().x));
 			this.formattedTextP2Y.setText(String.valueOf(wall.getP2().y));
 		}
+	}
+
+	private boolean isValidTextField() {
+		return formattedTextP1X.getValue() != null &&
+				formattedTextP1Y.getValue() != null &&
+				formattedTextP2X.getValue() != null &&
+				formattedTextP2Y.getValue() != null;
 	}
 
 }

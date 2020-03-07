@@ -26,15 +26,15 @@ import Components.Wall;
 
 public class AddBuildingBox extends JPanel{
 
-	Building building;
-	Wall wall;
-	Plane plane;
-	JTextField name, picURL, wallHeight;
-	JButton enter, exit, browseButton;
-	JLabel buildingName, picLabel, wallHeightLabel, p1Label, p2Label, p3Label, p4Label;
-	JFileChooser browser;
+	private Building building;
+	private Plane plane;
+	private JTextField name, picURL, wallHeight;
+	private JButton enter, exit, browseButton;
+	private JLabel buildingName, picLabel, wallHeightLabel, p1Label, p2Label, p3Label, p4Label;
+	private JFileChooser browser;
 	static BufferedImage picture;
-	
+	private boolean newBuilding;
+
 
 	public AddBuildingBox(int x, int y, int width, int height, Plane plane) {
 		super();
@@ -72,33 +72,32 @@ public class AddBuildingBox extends JPanel{
 				}
 			}
 		});
-		
+
 		browseButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				browser.showOpenDialog(AddBuildingBox.this);
 			}
 		});
-		
-		
+
+
 		wallHeightLabel = new JLabel("Building height");
 		wallHeightLabel.setBounds(10, 100, 100, 25);
 		wallHeight = new JTextField();
 		wallHeight.setBounds(wallHeightLabel.getX()+wallHeightLabel.getWidth(), wallHeightLabel.getY(), (width/2), 25);
-		
-		
+
+
 		enter = new JButton("Enter");
 		enter.setBounds(width/2-100, height-60, 100, 50);
 		enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					building.setName(name.getName());
-					if(picture != null) {
-						building.setPicture(picture);
-					} 
-					setVisible(false);
-					building = null;
-					plane.enable();
+				building.setName(name.getName());
+				//building.setBuildingHeight();
+				if(picture != null) {
+					building.setPicture(picture);
+				} 
+				exit();
 			}
 		});
 
@@ -107,9 +106,7 @@ public class AddBuildingBox extends JPanel{
 		exit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				building = null;
-				plane.enable();
+				exit();
 			}
 		});
 
@@ -126,10 +123,29 @@ public class AddBuildingBox extends JPanel{
 	}
 	public void edit(Building building) {
 		//This is a method to fill the box the the information of a Wall so you can edit it
-		//name.setText(building.getName());
+		name.setText(building.getName());
 		this.building = building;
 		setVisible(true);
+		newBuilding = false;
+	}
 
+	public void addBuilding() {
+		this.building = new Building("");
+		setVisible(true);
+		plane.disable();
+		newBuilding = true;
+
+	}
+
+	private void exit() {
+		//Empty the textFields
+		name.setText("");
+		picURL.setText(""); 
+		wallHeight.setText("");
+
+		setVisible(false);
+		building = null;
+		plane.enable();
 	}
 }
 /*

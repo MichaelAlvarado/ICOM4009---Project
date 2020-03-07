@@ -149,7 +149,6 @@ public class MapDesign{
 
 		display.getContentPane().add(plane);//add at the end so its on the bottom
 
-
 		/*
 		 * Add Actions to Components
 		 */
@@ -187,8 +186,10 @@ public class MapDesign{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				addBuildingBox.setVisible(true);
-				plane.disable();
+				addBuildingBox.addBuilding();
+				addMapBox.setVisible(false);
+				addWallBox.setVisible(false);
+				addQuestionBox.setVisible(false);
 			}
 		});
 
@@ -197,6 +198,9 @@ public class MapDesign{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				addWallBox.addNewWall();
+				addMapBox.setVisible(false);
+				addBuildingBox.setVisible(false);
+				addQuestionBox.setVisible(false);
 			}
 		});
 
@@ -205,7 +209,10 @@ public class MapDesign{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				addMapBox.edit();
-				plane.disable();
+				addWallBox.setVisible(false);
+				addBuildingBox.setVisible(false);
+				addQuestionBox.setVisible(false);
+
 			}
 		});
 		
@@ -213,8 +220,10 @@ public class MapDesign{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				addQuestionBox.setVisible(true);
-				plane.disable();
+				addQuestionBox.addQuestion();
+				addWallBox.setVisible(false);
+				addBuildingBox.setVisible(false);
+				addMapBox.setVisible(false);
 			}
 		});
 		

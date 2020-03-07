@@ -55,10 +55,10 @@ public class Plane extends JPanel{
 	private int xOrigin, yOrigin; //Pixel position on canvas origin
 	private Mouse mouse; //use to create walls with mouse
 	private MouseMotion mouseMotion; //use to drag points
-	private Keyboard keyboard; //use for shortcuts
+	Keyboard keyboard; //use for shortcuts
 	private int x, y; //This is where is the map searching
 	private int scaleX, scaleY; //This is to scale the map
-	
+
 	public Plane() {
 		pointWidth = 10;
 		cP = Color.BLUE;
@@ -75,7 +75,8 @@ public class Plane extends JPanel{
 
 		mouse = new Mouse();
 		mouseMotion = new MouseMotion();
-		keyboard = new Keyboard();		
+		keyboard = new Keyboard();
+		
 		addMouseListener(mouse);
 		addMouseMotionListener(mouseMotion);
 		addKeyListener(keyboard);
@@ -89,7 +90,7 @@ public class Plane extends JPanel{
 		yGap = this.getHeight()/gridLineQuantity; //height of rectangles
 		xOrigin = 0; //position in canvas of point x origin
 		yOrigin = this.getHeight(); //position in canvas of point y origin
-		
+
 		//Draw background Image
 		if(map.getPicture() != null) {
 			g.drawImage(map.getPicture(), 0, 0, getWidth(), getHeight(), null);
@@ -112,7 +113,7 @@ public class Plane extends JPanel{
 				g.drawString(String.valueOf(s*yGap)+" m", xOrigin, (yOrigin - s*yGap)); //draw positive Y coordinate 
 			}
 		}
-	
+
 		//Draw lines from point to point
 		for(Wall line: walls) {
 			g.setColor(pP);//Color of Points
@@ -146,7 +147,7 @@ public class Plane extends JPanel{
 			g.setColor(cP);
 			g.drawString("( " + currentPointPair[0].getX() + " , " + currentPointPair[0].getY() + " )", this.getWidth()-200, 20);
 		}
-	
+
 	} //Paint end
 
 	/**
@@ -207,6 +208,7 @@ public class Plane extends JPanel{
 
 	public void addBuilding(Building building) {
 		buildings.add(building);
+		this.repaint();
 	}
 
 	public void setMap(Map map) {
@@ -337,7 +339,11 @@ public class Plane extends JPanel{
 
 		@Override
 		public void keyPressed(KeyEvent arg0) {
-			if(arg0.isControlDown() && arg0.getKeyCode() == arg0.VK_Z) {
+			if(arg0.isControlDown()) {
+				System.out.println("Testing Control");
+			}
+			if(arg0.getKeyCode() == arg0.VK_Z) {
+				System.out.println("Testing");
 				undo();
 			}
 

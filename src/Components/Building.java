@@ -20,6 +20,7 @@ public class Building {
 	private BufferedImage picture;
 	private LinkedList<Question> questionPool;
 	private boolean found;
+	private int buildingHeight; //this is default height of walls
 	
 	
 	// constructor
@@ -110,5 +111,13 @@ public class Building {
 	 */
 	public void addQuestion(Question q) {
 		this.questionPool.add(q);
+	}
+
+	public int getBuildingHeight() {
+		return buildingHeight;
+	}
+
+	public void setBuildingHeight(int buildingHeight) {
+		this.buildingHeight = buildingHeight;
 	}
 }
