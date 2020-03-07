@@ -67,7 +67,7 @@ public class Building {
 		return this.buildingName;
 	}
 	public BufferedImage getPicture() {
-		return this.getPicture();
+		return this.picture;
 	}
 	public LinkedList<Question> getQuestionPool(){
 		return this.questionPool;
