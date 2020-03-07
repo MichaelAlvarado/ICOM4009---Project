@@ -40,7 +40,7 @@ import Components.Wall;
  * It stores the map info in this class until you save it which generates a txt file
  * 
  */
-public class Plane extends Canvas{
+public class Plane extends JPanel{
 
 	Map map;
 	LinkedList<Wall> walls; //add the wall at the first index (So it can access to last element added faster)
