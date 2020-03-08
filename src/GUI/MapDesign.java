@@ -94,40 +94,40 @@ public class MapDesign{
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(190,190,190));
 		panel.setBorder(new LineBorder(UIManager.getColor("Button.darkShadow"), 3, true));
-		panel.setBounds(0, 0, width, canvasY);
+		panel.setBounds(0, 0, width-6, canvasY);
 		display.getContentPane().add(panel);
 		panel.setLayout(null);
 
 		JButton help = new JButton("Help");
-		help.setBounds(width-110, 15, 100, 25);
+		help.setBounds(width-170, 15, 150, 25);
 		panel.add(help);
 
 		JButton setting = new JButton("Setting");
-		setting.setBounds(width-110, canvasY-35, 100, 25);
+		setting.setBounds(width-170, canvasY-35, 150, 25);
 		panel.add(setting);
 
-		JButton addBuilding = new JButton("Add Building");
-		addBuilding.setBounds((panel.getWidth()/2)+5, 15, 125, 25);
-		panel.add(addBuilding);
-
 		JButton addWall = new JButton("Add Wall");
-		addWall.setBounds((panel.getWidth()/2)+130, 15, 125, 25);
+		addWall.setBounds((panel.getWidth()/2)+5, 15, 150, 25);
 		panel.add(addWall);
-
-		JButton editMap = new JButton("Edit Map");
-		editMap.setBounds((panel.getWidth()/2)+130, 50, 125, 25);
-		panel.add(editMap);
 		
 		JButton addQuestion = new JButton("Add Question");
-		addQuestion.setBounds((panel.getWidth()/2)+5, 50, 125, 25);
+		addQuestion.setBounds((panel.getWidth()/2)+5, 50, 150, 25);
 		panel.add(addQuestion);	
 
+		JButton editMap = new JButton("Edit Map");
+		editMap.setBounds(165, 15, 150, 25);
+		panel.add(editMap);
+		
+		JButton addBuilding = new JButton("Add Building");
+		addBuilding.setBounds(10, 15, 150, 25);
+		panel.add(addBuilding);
+		
 		JButton wallList = new JButton("Current Walls");
-		wallList.setBounds(5,15,150,25);
+		wallList.setBounds(10,50,150,25);
 		panel.add(wallList);
 
 		JButton buildingList = new JButton("Building List");
-		buildingList.setBounds(155,15,150,25);
+		buildingList.setBounds(165,50,150,25);
 		panel.add(buildingList);
 
 		AddBuildingBox addBuildingBox = new AddBuildingBox((width/2)-250, 200,500,200, plane);

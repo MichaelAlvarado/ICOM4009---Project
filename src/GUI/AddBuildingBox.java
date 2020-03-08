@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -94,6 +95,7 @@ public class AddBuildingBox extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				building.setName(name.getText());
+				try {
 				building.setBuildingHeight(Integer.valueOf(wallHeight.getText()));
 				if(picture != null) {
 					building.setPicture(picture);
@@ -102,6 +104,10 @@ public class AddBuildingBox extends JPanel{
 					plane.addBuilding(building);
 				}
 				exit();
+				}catch(NumberFormatException n){
+					JOptionPane.showMessageDialog(plane, "Invalid Building Height.\nIt must be an Integer");
+				}
+		
 			}
 		});
 
