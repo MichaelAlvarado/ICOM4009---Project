@@ -146,7 +146,7 @@ public class MapDesign{
 		addMapBox.setVisible(true);
 		plane.disable();
 		display.getContentPane().add(addMapBox);
-
+		
 		display.getContentPane().add(plane);//add at the end so its on the bottom
 
 		/*
