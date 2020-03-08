@@ -40,7 +40,7 @@ import Components.Wall;
  * It stores the map info in this class until you save it which generates a txt file
  * 
  */
-public class Plane extends JPanel{
+public class Plane extends Canvas{
 
 	Map map;
 	Building currentBuilding; //the building currently being edit
@@ -77,6 +77,7 @@ public class Plane extends JPanel{
 		addMouseListener(mouse);
 		addMouseMotionListener(mouseMotion);
 		addKeyListener(keyboard);
+		this.setFocusable(true);
 	}
 
 	@Override 
@@ -114,9 +115,9 @@ public class Plane extends JPanel{
 		//Draw lines from point to point
 		for(Building building: map.getBuildingList()) {
 			for(Wall line: building.getWalls()) {
-//				g.setColor(pP);//Color of Points
-//				g.fillOval((int)(line.getP1().getX()-(pointWidth/2)), (int)(line.getP1().getY()-(pointWidth/2)), pointWidth, pointWidth);
-//				g.fillOval((int)(line.getP2().getX()-(pointWidth/2)), (int)(line.getP2().getY()-(pointWidth/2)), pointWidth, pointWidth);
+				//				g.setColor(pP);//Color of Points
+				//				g.fillOval((int)(line.getP1().getX()-(pointWidth/2)), (int)(line.getP1().getY()-(pointWidth/2)), pointWidth, pointWidth);
+				//				g.fillOval((int)(line.getP2().getX()-(pointWidth/2)), (int)(line.getP2().getY()-(pointWidth/2)), pointWidth, pointWidth);
 				g.setColor(pL);//Color of Lines
 				g.drawLine((int)line.getP1().getX(), (int)line.getP1().getY(), (int)line.getP2().getX(), (int)line.getP2().getY());
 			}
@@ -132,7 +133,7 @@ public class Plane extends JPanel{
 				g.drawLine((int)line.getP1().getX(), (int)line.getP1().getY(), (int)line.getP2().getX(), (int)line.getP2().getY());
 			}
 		}
-		
+
 		//Draw current Points
 		g.setColor(cP);
 		if(currentPointPair[0] != null) {
@@ -353,15 +354,11 @@ public class Plane extends JPanel{
 	 */
 	private class Keyboard implements KeyListener{
 		public Keyboard() {
-			super();
 		}
 
 		@Override
 		public void keyPressed(KeyEvent arg0) {
-			if(arg0.isControlDown()) {
-				System.out.println("Testing Control");
-			}
-			if(arg0.getKeyCode() == arg0.VK_Z) {
+			if(arg0.isControlDown() && arg0.getKeyCode() == arg0.VK_Z) {
 				System.out.println("Testing");
 				undo();
 			}
@@ -383,6 +380,10 @@ public class Plane extends JPanel{
 					System.out.println("Incorrect: " + question.getAnswer_3());
 					System.out.println("Incorrect: " + question.getAnswer_4());
 				}
+			}
+			//add a building
+			if(arg0.getKeyCode() == arg0.VK_N) {
+				addBuilding(new Building("Test"));
 			}
 		}
 
