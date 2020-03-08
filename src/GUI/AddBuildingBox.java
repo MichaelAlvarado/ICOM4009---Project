@@ -51,8 +51,9 @@ public class AddBuildingBox extends JPanel{
 		buildingName.setBounds(10, 40, 100, 25);
 		name = new JTextField();
 		name.setBounds(buildingName.getX()+buildingName.getWidth(), buildingName.getY(), (width/2), 25);
+		
 		picLabel = new JLabel("Building Texture");
-		picLabel.setBounds(10, 70, 100, 25);
+		picLabel.setBounds(10, 100, 100, 25);
 		picURL = new JTextField();
 		picURL.setBounds(picLabel.getX()+picLabel.getWidth(), picLabel.getY(), (width/2), 25);
 		browser = new JFileChooser();
@@ -82,7 +83,7 @@ public class AddBuildingBox extends JPanel{
 
 
 		wallHeightLabel = new JLabel("Building height");
-		wallHeightLabel.setBounds(10, 100, 100, 25);
+		wallHeightLabel.setBounds(10, 70, 100, 25);
 		wallHeight = new JTextField();
 		wallHeight.setBounds(wallHeightLabel.getX()+wallHeightLabel.getWidth(), wallHeightLabel.getY(), (width/2), 25);
 
@@ -92,11 +93,14 @@ public class AddBuildingBox extends JPanel{
 		enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				building.setName(name.getName());
-				//building.setBuildingHeight();
+				building.setName(name.getText());
+				building.setBuildingHeight(Integer.valueOf(wallHeight.getText()));
 				if(picture != null) {
 					building.setPicture(picture);
 				} 
+				if(newBuilding) {
+					plane.addBuilding(building);
+				}
 				exit();
 			}
 		});
@@ -123,14 +127,14 @@ public class AddBuildingBox extends JPanel{
 	}
 	public void edit(Building building) {
 		//This is a method to fill the box the the information of a Wall so you can edit it
-		name.setText(building.getName());
 		this.building = building;
+		autofill(building);
 		setVisible(true);
 		newBuilding = false;
 	}
 
 	public void addBuilding() {
-		this.building = new Building("");
+		building = new Building("");
 		setVisible(true);
 		plane.disable();
 		newBuilding = true;
@@ -146,6 +150,11 @@ public class AddBuildingBox extends JPanel{
 		setVisible(false);
 		building = null;
 		plane.enable();
+	}
+	
+	private void autofill(Building building) {
+		name.setText(building.getName());
+		wallHeight.setText(String.valueOf(building.getBuildingHeight()));
 	}
 }
 /*

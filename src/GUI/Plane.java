@@ -139,7 +139,7 @@ public class Plane extends JPanel{
 		}
 
 		//Draw Current Coordinates
-		if(currentPointPair[0] != null) {
+		if(currentPointPair[0] != null && currentPointPair[1] != null) {
 			//Draw panel with coordinates
 			g.setColor(new Color(0,0,0,100));
 			g.fillRect(this.getWidth()-300, 0, 300, 30);
