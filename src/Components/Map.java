@@ -31,9 +31,9 @@ public class Map {
 		super();
 		this.buildingList = buildingList;
 		Map.mapName = mapName;
-		this.height = height;
-		this.width = width;
-		this.picture = null;
+		Map.height = height;
+		Map.width = width;
+		Map.picture = null;
 	}
 	public Map() {
 		buildingList = new LinkedList<Building>();
@@ -76,7 +76,7 @@ public class Map {
 
 
 	public void setHeight(int height) {
-		this.height = height;
+		Map.height = height;
 	}
 
 
@@ -86,7 +86,7 @@ public class Map {
 
 
 	public void setWidth(int width) {
-		this.width = width;
+		Map.width = width;
 	}
 
 	public void addBuilding(Building b) {
@@ -119,6 +119,7 @@ public class Map {
 		HashMap<Integer, String> hmap = new HashMap<Integer, String>();
 		int counter = 1;
 		
+		//Iterate through list of buildings to store info on hashmap
 		for(Building buildings: buildingList){
 			hmap.put(counter, "Name: " + buildings.getName() + 
 					", Building Image: (" + buildings.getPicture() + ")"
@@ -128,7 +129,7 @@ public class Map {
 			counter++;
 
 		}
-
+		//Write the map information first, no iteration needed for this.
 		try {
 			data.writeToFile("Mapa: " + Map.getMapName() + 
 							 " Size: (" + Map.getHeight() + ", " + Map.getWidth() + ") " +
@@ -136,7 +137,7 @@ public class Map {
 		} catch (IOException e1) {
 			System.out.println("Something went wrong!");
 		}
-		
+		//Write Buildings and its components info after, requires iteration through the hashmap
 		for(Entry<Integer, String> entry : hmap.entrySet()) {
 
 			try {
