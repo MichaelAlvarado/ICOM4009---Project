@@ -249,7 +249,7 @@ public class MapDesign{
 	}
 
 	private void buildingListPopUp(int x, int y, AddBuildingBox addBuildingBox) {
-		PopupMenu buildingsPopUp = new PopupMenu("Buildings on: " +  plane.map.getBuildingName());
+		PopupMenu buildingsPopUp = new PopupMenu("Buildings on: " +  plane.map.getMapName());
 		buildingsPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
 		for(Building building: plane.map.getBuildingList()) {
 			MenuItem buildingOption = new MenuItem(building.getName());

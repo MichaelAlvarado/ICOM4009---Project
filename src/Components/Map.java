@@ -15,7 +15,7 @@ import testers.WriteFile;
 public class Map {
 
 	private LinkedList<Building> buildingList;
-	private String mapName;
+	private static String mapName;
 	private int height;
 	private int width;
 	private BufferedImage picture;
@@ -23,10 +23,10 @@ public class Map {
 	//piso no se que va aqui
 
 
-	public Map(LinkedList<Building> buildingList, String buildingName, int height, int width) {
+	public Map(LinkedList<Building> buildingList, String mapName, int height, int width) {
 		super();
 		this.buildingList = buildingList;
-		this.mapName = buildingName;
+		Map.mapName = mapName;
 		this.height = height;
 		this.width = width;
 		this.picture = null;
@@ -56,13 +56,13 @@ public class Map {
 	}
 
 
-	public String getBuildingName() {
+	public String getMapName() {
 		return mapName;
 	}
 
 
-	public void setBuildingName(String buildingName) {
-		this.mapName = buildingName;
+	public void setMapName(String buildingName) {
+		Map.mapName = buildingName;
 	}
 
 
@@ -111,7 +111,7 @@ public class Map {
 	 */
 	public static void generateTextFile(LinkedList<Building> buildingList) {
 
-		WriteFile data = new WriteFile("ConfigurationFile.txt", true);
+		WriteFile data = new WriteFile(mapName +"ConfigurationFile.txt", true);
 		HashMap<Integer, String> hmap = new HashMap<Integer, String>();
 		int counter = 1;
 		

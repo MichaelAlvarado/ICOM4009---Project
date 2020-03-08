@@ -112,7 +112,7 @@ public class AddMapBox extends JPanel{
 				}catch(NumberFormatException n) {
 					JOptionPane.showMessageDialog(plane, "Invalid map size.\nIt should be Integers");
 				}
-				map.setBuildingName(name.getText());
+				map.setMapName(name.getText());
 				plane.setMap(map);
 				exit(); 
 				plane.repaint();
