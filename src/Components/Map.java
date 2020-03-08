@@ -32,7 +32,7 @@ public class Map {
 		this.picture = null;
 	}
 	public Map() {
-
+		buildingList = new LinkedList<Building>();
 	}
 
 

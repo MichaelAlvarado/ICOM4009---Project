@@ -226,13 +226,12 @@ public class MapDesign{
 				addMapBox.setVisible(false);
 			}
 		});
-		
 	}//Last from Constructor
 
 	private void wallsListPopUp(int x, int y, AddWallBox addWallBox) {
 		PopupMenu wallsPopUp = new PopupMenu("Walls on: " + plane.currentBuilding.getName());
 		wallsPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-		for(Wall wall: plane.walls) {
+		for(Wall wall: plane.currentBuilding.getWalls()) {
 			MenuItem wallOption = new MenuItem(wall.getID());
 			wallOption.addActionListener(new ActionListener() {
 				@Override
@@ -252,7 +251,7 @@ public class MapDesign{
 	private void buildingListPopUp(int x, int y, AddBuildingBox addBuildingBox) {
 		PopupMenu buildingsPopUp = new PopupMenu("Buildings on: " +  plane.map.getBuildingName());
 		buildingsPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-		for(Building building: plane.buildings) {
+		for(Building building: plane.map.getBuildingList()) {
 			MenuItem buildingOption = new MenuItem(building.getName());
 			buildingOption.addActionListener(new ActionListener() {
 
@@ -440,5 +439,12 @@ public class MapDesign{
 		String Instructions = "Help";
 		JOptionPane.showMessageDialog(display, Instructions);
 	}
+	
+	private void setEnableButtons(JButton[] buttons, boolean enable) {
+		for(int i = 0; i < buttons.length; i++) {
+			buttons[i].setVisible(enable);
+		}
+	}
+	
 
 }
