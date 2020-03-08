@@ -117,7 +117,7 @@ public class Map {
 		
 		for(Building buildings: buildingList){
 			hmap.put(counter, "Name: " + buildings.getName() + 
-					", Building Image: " + buildings.getPicture()
+					", Building Image: (" + buildings.getPicture() + ")"
 					+ ", Walls: " + buildings.getWallInfo() 
 					  + ", Questions: " + buildings.getQuestions()
 					+ " Found: " + buildings.getFound());

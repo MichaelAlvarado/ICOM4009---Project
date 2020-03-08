@@ -54,8 +54,8 @@ public class Building {
 		String result = "";
 		for (Wall w: this.walls) {
 			result += "ID: " + w.getID() + ", Height: " + w.getHeight() + ", First Point: " + w.getP1().x
-			+ ", " + w.getP1().y + ", Second Point: " + w.getP2().x + ", " + w.getP2().y + ", Wall Image: " 
-			+ w.getTexture() + ", ";
+			+ ", " + w.getP1().y + ", Second Point: " + w.getP2().x + ", " + w.getP2().y +
+			", Wall Image: (" + w.getTexture() + "), ";
 		}
 		
 		return result;
