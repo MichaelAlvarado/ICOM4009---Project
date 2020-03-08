@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -104,6 +105,12 @@ public class AddMapBox extends JPanel{
 				//Creates the Map
 				if(image != null) {
 					map.setPicture(image);
+				}
+				try {
+				map.setWidth(Integer.valueOf(mapWidth.getText()));
+				map.setHeight(Integer.valueOf(mapHeight.getText()));
+				}catch(NumberFormatException n) {
+					JOptionPane.showMessageDialog(plane, "Invalid map size.\nIt should be Integers");
 				}
 				map.setBuildingName(name.getText());
 				plane.setMap(map);

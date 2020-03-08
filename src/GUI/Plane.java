@@ -56,8 +56,7 @@ public class Plane extends JPanel{
 	private Mouse mouse; //use to create walls with mouse
 	private MouseMotion mouseMotion; //use to drag points
 	Keyboard keyboard; //use for shortcuts
-	private int x, y; //This is where is the map searching
-	private int scaleX, scaleY; //This is to scale the map
+	private double scaleX, scaleY; //This is to scale the map
 
 	public Plane() {
 		pointWidth = 10;
@@ -83,6 +82,8 @@ public class Plane extends JPanel{
 	@Override 
 	public void paint(Graphics g) {
 		super.paint(g);
+		scaleX = (double)(map.getWidth())/(double)(getWidth());
+		scaleY = (double)(map.getHeight())/(double)(getHeight());
 		int gridLineQuantity = 16;
 		xGap = this.getWidth()/gridLineQuantity; //wide of rectangles
 		yGap = this.getHeight()/gridLineQuantity; //height of rectangles
@@ -107,8 +108,8 @@ public class Plane extends JPanel{
 			g.setFont(new Font("Arial", Font.PLAIN, 14));
 			for(int s = 0; s < gridLineQuantity; s++) {
 				//If is polar plane only draw one number per magnitude
-				g.drawString(String.valueOf(s*xGap)+" m", (xOrigin + s*xGap), yOrigin); //draw positive X coordinate 
-				g.drawString(String.valueOf(s*yGap)+" m", xOrigin, (yOrigin - s*yGap)); //draw positive Y coordinate 
+				g.drawString(String.valueOf(Math.round(s*xGap*scaleX))+" m", (xOrigin + s*xGap), yOrigin); //draw positive X coordinate 
+				g.drawString(String.valueOf(Math.round(s*yGap*scaleY))+" m", xOrigin, (yOrigin - s*yGap)); //draw positive Y coordinate 
 			}
 		}
 
@@ -119,7 +120,7 @@ public class Plane extends JPanel{
 				//				g.fillOval((int)(line.getP1().getX()-(pointWidth/2)), (int)(line.getP1().getY()-(pointWidth/2)), pointWidth, pointWidth);
 				//				g.fillOval((int)(line.getP2().getX()-(pointWidth/2)), (int)(line.getP2().getY()-(pointWidth/2)), pointWidth, pointWidth);
 				g.setColor(pL);//Color of Lines
-				g.drawLine((int)line.getP1().getX(), (int)line.getP1().getY(), (int)line.getP2().getX(), (int)line.getP2().getY());
+				g.drawLine((int)(line.getP1().getX()*scaleX), (int)(line.getP1().getY()*scaleY), (int)(line.getP2().getX()*scaleX), (int)(line.getP2().getY()*scaleY));
 			}
 		}
 
@@ -127,10 +128,10 @@ public class Plane extends JPanel{
 		if(currentBuilding != null) {
 			for(Wall line: currentBuilding.getWalls()) {
 				g.setColor(cP);//Color of Points
-				g.fillOval((int)(line.getP1().getX()-(pointWidth/2)), (int)(line.getP1().getY()-(pointWidth/2)), pointWidth, pointWidth);
-				g.fillOval((int)(line.getP2().getX()-(pointWidth/2)), (int)(line.getP2().getY()-(pointWidth/2)), pointWidth, pointWidth);
+				g.fillOval((int)Math.round((line.getP1().getX()*scaleX-(pointWidth/2))), (int)Math.round((line.getP1().getY()*scaleY-(pointWidth/2))), pointWidth, pointWidth);
+				g.fillOval((int)Math.round((line.getP2().getX()*scaleX-(pointWidth/2))), (int)Math.round((line.getP2().getY()*scaleY-(pointWidth/2))), pointWidth, pointWidth);
 				g.setColor(cL);//Color of Lines
-				g.drawLine((int)line.getP1().getX(), (int)line.getP1().getY(), (int)line.getP2().getX(), (int)line.getP2().getY());
+				g.drawLine((int)(line.getP1().getX()*scaleX), (int)(line.getP1().getY()*scaleY), (int)(line.getP2().getX()*scaleX), (int)(line.getP2().getY()*scaleY));
 			}
 		}
 
@@ -157,8 +158,8 @@ public class Plane extends JPanel{
 			//Draw coordinates point on panel
 			g.setFont(new Font("Arial", Font.PLAIN, 20));
 			g.setColor(cP);
-			g.drawString("( " + currentPointPair[0].getX() + " , " + currentPointPair[0].getY() + " )", this.getWidth()-300, 20);
-			g.drawString("( " + currentPointPair[1].getX() + " , " + currentPointPair[1].getY() + " )", this.getWidth()-150, 20);
+			g.drawString("( " + Math.round(currentPointPair[0].getX()*scaleX) + " , " + Math.round(currentPointPair[0].getY()*scaleY) + " )", this.getWidth()-300, 20);
+			g.drawString("( " + Math.round(currentPointPair[1].getX()*scaleX) + " , " + Math.round(currentPointPair[1].getY()*scaleY) + " )", this.getWidth()-150, 20);
 
 		}
 
@@ -263,8 +264,6 @@ public class Plane extends JPanel{
 
 		@Override
 		public void mousePressed(MouseEvent arg0) {
-			setFocusable(true);
-			requestFocus(); 
 			if(enable && currentBuilding != null) {
 				System.out.println("Pressed / "+"x: " + arg0.getX() + "  y:" + (getHeight()-arg0.getY()));
 				if(drag == null) {
@@ -285,7 +284,8 @@ public class Plane extends JPanel{
 					System.out.println("Released / "+"x: " + arg0.getX() + "  y:" + (getHeight() - arg0.getY()));
 					if(currentPointPair[1] != null && currentPointPair[0] != null) {
 						//add to wall only if there was a mouse displacement
-						//currentPointPair[1].setLocation(currentPointPair[1].x, getHeight()- currentPointPair[1].y); //remember the origin in the plane is bottom left
+						currentPointPair[0].setLocation(currentPointPair[0].x/scaleX, currentPointPair[0].y/scaleY); //remember the origin in the plane is bottom left
+						currentPointPair[1].setLocation(currentPointPair[1].x/scaleX, currentPointPair[1].y/scaleY); //remember the origin in the plane is bottom left
 						addWall(currentPointPair[0], currentPointPair[1]);
 					}
 					currentPointPair[0] = null;
@@ -317,7 +317,7 @@ public class Plane extends JPanel{
 		public void disable() {
 			enable = false;
 		}
-		private Point dragToPoint(int x, int y) {
+		private Point dragToPoint(double x, double y) {
 			for(Wall line: currentBuilding.getWalls()) {
 				if(line.getP1().distance(x, y) < pointWidth) {
 					return line.getP1();
@@ -347,8 +347,10 @@ public class Plane extends JPanel{
 		@Override
 		public void mouseMoved(MouseEvent arg0) {
 			//This is use to place initial point on a near Point
+			setFocusable(true);
+			requestFocus(); 
 			if(enable && currentBuilding != null) {
-				drag = dragToPoint(arg0.getX(), arg0.getY());
+				drag = dragToPoint(arg0.getX()*scaleX, arg0.getY()*scaleY);
 			}
 		}
 
@@ -392,6 +394,10 @@ public class Plane extends JPanel{
 			if(arg0.getKeyCode() == arg0.VK_N) {
 				addBuilding(new Building("Test"));
 				System.out.println("Test Building Created");
+			}
+			//scale factors
+			if(arg0.getKeyCode() == arg0.VK_F) {
+				System.out.println("scaleX: "+scaleX+" , "+"scaleY: "+scaleY);
 			}
 		}
 
