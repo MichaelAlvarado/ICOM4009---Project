@@ -76,6 +76,7 @@ public class AddMapBox extends JPanel{
 					image = ImageIO.read(imageFile);
 					System.out.println("load file");
 					imageURL.setText(imageFile.getPath());
+					map.setPicture(image);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
