@@ -30,16 +30,25 @@ public class Building {
 		questionPool = new LinkedList<Question>();
 	}
 	
-	//Constructor used for testing text file generator
-	public Building(String name, BufferedImage pic, LinkedList<Question> qs, LinkedList<Wall> ws, boolean fd) {
-		this.buildingName = name;
-		this.picture = pic;
-		this.questionPool = qs;
-		this.walls = ws;
-		this.found = fd;
-		
-	}
+//	Constructor used for testing text file generator
+//	public Building(String name, BufferedImage pic, LinkedList<Question> qs, LinkedList<Wall> ws, boolean fd) {
+//		this.buildingName = name;
+//		this.picture = pic;
+//		this.questionPool = qs;
+//		this.walls = ws;
+//		this.found = fd;
+//		
+//	}
 	
+	
+	/**
+	 * @author jorgecalderon
+	 * Objective - Generate a string containing the questions with their answers
+	 * Date - 03/08/2020
+	 * @param - N/A
+	 * @param - N/A
+	 * @return - N/A 
+	 */
 	public String getQuestions() {
 		String result = "";
 		int counter = 1;
@@ -50,6 +59,14 @@ public class Building {
 		return result;
 	}
 	
+	/**
+	 * @author jorgecalderon
+	 * Objective - Generate a string containing the questions with their answers
+	 * Date - 03/08/2020
+	 * @param - N/A
+	 * @param - N/A
+	 * @return - N/A 
+	 */
 	public String getWallInfo() {
 		String result = "";
 		for (Wall w: this.walls) {

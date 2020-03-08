@@ -12,6 +12,12 @@ import javax.imageio.ImageIO;
 
 import testers.WriteFile;
 
+
+/**
+ * @author jorgecalderon
+ * This class describes the Map instances with all its attributes and methods
+ *Date - 02/29/2020
+ */
 public class Map {
 
 	private LinkedList<Building> buildingList;
@@ -19,8 +25,6 @@ public class Map {
 	private static int height;
 	private static int width;
 	private static BufferedImage picture;
-
-	//piso no se que va aqui
 
 
 	public Map(LinkedList<Building> buildingList, String mapName, int height, int width) {
