@@ -379,6 +379,7 @@ public class Plane extends JPanel{
 			if(arg0.getKeyCode() == arg0.VK_K) { //Debugging Button
 				System.out.println(map.getMapName());
 				System.out.println(getWidth() + " , " + getHeight());
+				Map.generateTextFile(map.getBuildingList());
 			}
 			//Print question on currentBuilding
 			if(arg0.getKeyCode() == arg0.VK_Q) {
