@@ -350,7 +350,7 @@ public class Plane extends JPanel{
 			setFocusable(true);
 			requestFocus(); 
 			if(enable && currentBuilding != null) {
-				drag = dragToPoint(arg0.getX()*scaleX, arg0.getY()*scaleY);
+				drag = dragToPoint(arg0.getX(), arg0.getY());
 			}
 		}
 

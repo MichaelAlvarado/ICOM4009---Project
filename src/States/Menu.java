@@ -49,11 +49,11 @@ public class Menu{
 		panel.setBounds(0, 0, width, height);
 		
 		JButton createMap = new JButton("Create new Map");
-		createMap.setBounds(width/2-100, height/2, 200, 25);
+		createMap.setBounds(width/2-100, height/2, 200, 50);
 		panel.add(createMap);
 		
 		JButton playGame = new JButton("Play Game");
-		playGame.setBounds(width/2-100, height/2 + 30, 200, 25);
+		playGame.setBounds(width/2-100, height/2 + 60, 200, 50);
 		panel.add(playGame);
 		
 		display.add(panel);
