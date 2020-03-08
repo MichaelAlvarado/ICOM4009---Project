@@ -227,8 +227,13 @@ public class Plane extends JPanel{
 
 	public void addBuilding(Building building) {
 		map.addBuilding(building);
+		setCurrentBuilding(building);
+	}
+	
+	public void setCurrentBuilding(Building building) {
 		currentBuilding = building;
 		this.repaint();
+
 	}
 
 	public void setMap(Map map) {

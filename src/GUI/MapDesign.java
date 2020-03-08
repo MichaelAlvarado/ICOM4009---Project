@@ -130,7 +130,7 @@ public class MapDesign{
 		buildingList.setBounds(165,50,150,25);
 		panel.add(buildingList);
 
-		AddBuildingBox addBuildingBox = new AddBuildingBox((width/2)-250, 200,500,200, plane);
+		AddBuildingBox addBuildingBox = new AddBuildingBox((width/2)-250, 200,500,200, plane, addBuilding);
 		addBuildingBox.setVisible(false);
 		display.getContentPane().add(addBuildingBox);
 
@@ -186,10 +186,17 @@ public class MapDesign{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				addBuildingBox.addBuilding();
 				addMapBox.setVisible(false);
 				addWallBox.setVisible(false);
 				addQuestionBox.setVisible(false);
+				
+				if(addBuilding.getText().equals("Add Building")) {
+				addBuildingBox.addBuilding();
+				}
+				else {
+					plane.setCurrentBuilding(null);
+					addBuilding.setText("Add Building");
+				}
 			}
 		});
 

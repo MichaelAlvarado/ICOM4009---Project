@@ -35,12 +35,14 @@ public class AddBuildingBox extends JPanel{
 	private JFileChooser browser;
 	static BufferedImage picture;
 	private boolean newBuilding;
+	private JButton activationButton; //this is the button use to active this Window
 
 
-	public AddBuildingBox(int x, int y, int width, int height, Plane plane) {
+	public AddBuildingBox(int x, int y, int width, int height, Plane plane, JButton activationButton) {
 		super();
 		this.setLayout(null);
 		this.plane = plane;
+		this.activationButton = activationButton;
 		//building = new Building(plane.currentBuilding.getName(),plane.currentBuilding.getPicture(), plane.currentBuilding.getQuestionPool(), plane.currentBuilding.getWalls(),plane.currentBuilding.getFound());
 		setBounds(x, y, width, height);
 		setBorder(new LineBorder(UIManager.getColor("Button.darkShadow"), 3, true));
@@ -52,7 +54,7 @@ public class AddBuildingBox extends JPanel{
 		buildingName.setBounds(10, 40, 100, 25);
 		name = new JTextField();
 		name.setBounds(buildingName.getX()+buildingName.getWidth(), buildingName.getY(), (width/2), 25);
-		
+
 		picLabel = new JLabel("Building Texture");
 		picLabel.setBounds(10, 100, 100, 25);
 		picURL = new JTextField();
@@ -97,18 +99,19 @@ public class AddBuildingBox extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				building.setName(name.getText());
 				try {
-				building.setBuildingHeight(Integer.valueOf(wallHeight.getText()));
-				if(picture != null) {
-					building.setPicture(picture);
-				} 
-				if(newBuilding) {
-					plane.addBuilding(building);
-				}
-				exit();
+					building.setBuildingHeight(Integer.valueOf(wallHeight.getText()));
+					if(picture != null) {
+						building.setPicture(picture);
+					} 
+					if(newBuilding) {
+						plane.addBuilding(building);
+						activationButton.setText("Finish Building");
+					}
+					exit();
 				}catch(NumberFormatException n){
 					JOptionPane.showMessageDialog(plane, "Invalid Building Height.\nIt must be an Integer");
 				}
-		
+
 			}
 		});
 
@@ -118,6 +121,9 @@ public class AddBuildingBox extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				exit();
+				if(plane.currentBuilding == null) {
+					activationButton.setText("Add Building");
+				}
 			}
 		});
 
@@ -137,7 +143,9 @@ public class AddBuildingBox extends JPanel{
 		this.building = building;
 		autofill(building);
 		setVisible(true);
+		activationButton.setText("Finish Building");
 		newBuilding = false;
+		plane.setCurrentBuilding(building);
 	}
 
 	public void addBuilding() {
@@ -158,7 +166,7 @@ public class AddBuildingBox extends JPanel{
 		building = null;
 		plane.enable();
 	}
-	
+
 	private void autofill(Building building) {
 		name.setText(building.getName());
 		wallHeight.setText(String.valueOf(building.getBuildingHeight()));
