@@ -63,7 +63,7 @@ public class AddQuestionsBox extends JPanel{
 		fail2.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
 		fail2.setBounds(30, fail2Label.getY()+fail2Label.getHeight(), this.getWidth()-60, 40);
 
-		//Option 3 (incorrect answer)
+		//Option 4 (incorrect answer)
 		JLabel fail3Label = new JLabel("Incorrect Option");
 		fail3Label.setBounds(30, fail2.getY()+fail2.getHeight()+10, this.getWidth()-60, 20);
 		fail3 = new JTextField();
@@ -115,8 +115,6 @@ public class AddQuestionsBox extends JPanel{
 		add(enter);
 		add(exit);
 	}
-
-
 
 	public void edit(Building building) {
 		//This is a method to fill the box the the information of a Wall so you can edit it

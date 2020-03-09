@@ -25,6 +25,15 @@ import javax.swing.text.MaskFormatter;
 import Components.Building;
 import Components.Wall;
 
+
+
+/**
+ * 
+ * @author Anel Martinez Gomez
+ * Date - March 6, 2020
+ *	This class lets the user set building parameters like image, height, and name
+ */
+
 public class AddBuildingBox extends JPanel{
 
 	private Building building;
@@ -55,10 +64,13 @@ public class AddBuildingBox extends JPanel{
 		name = new JTextField();
 		name.setBounds(buildingName.getX()+buildingName.getWidth(), buildingName.getY(), (width/2), 25);
 
+		//Label for the user to know he can set the texture image
 		picLabel = new JLabel("Building Texture");
 		picLabel.setBounds(10, 100, 100, 25);
 		picURL = new JTextField();
 		picURL.setBounds(picLabel.getX()+picLabel.getWidth(), picLabel.getY(), (width/2), 25);
+		
+		//Search for Picture
 		browser = new JFileChooser();
 		browseButton = new  JButton("Browse");
 		browseButton.setBounds((picURL.getX()+picURL.getWidth())+10, picURL.getY(), 100, 20);
@@ -85,13 +97,14 @@ public class AddBuildingBox extends JPanel{
 			}
 		});
 
-
+		//Height Label for the height of building to be set
 		wallHeightLabel = new JLabel("Building height");
 		wallHeightLabel.setBounds(10, 70, 100, 25);
 		wallHeight = new JTextField();
 		wallHeight.setBounds(wallHeightLabel.getX()+wallHeightLabel.getWidth(), wallHeightLabel.getY(), (width/2), 25);
 
 
+		//Enter will be valid if all text boxes are correspondingly valid
 		enter = new JButton("Enter");
 		enter.setBounds(width/2-100, height-60, 100, 50);
 		enter.addActionListener(new ActionListener() {
@@ -115,6 +128,7 @@ public class AddBuildingBox extends JPanel{
 			}
 		});
 
+		//Exit without new updates on building
 		exit = new JButton("Exit");
 		exit.setBounds(width/2, height-60, 100, 50);
 		exit.addActionListener(new ActionListener() {
@@ -127,6 +141,7 @@ public class AddBuildingBox extends JPanel{
 			}
 		});
 
+		//Add to Box PopUp
 		add(name);	
 		add(browseButton);
 		add(wallHeight);
@@ -138,8 +153,9 @@ public class AddBuildingBox extends JPanel{
 		add(exit);
 
 	}
+	
+	//This is a method to fill the box the the information of a Wall so you can edit it
 	public void edit(Building building) {
-		//This is a method to fill the box the the information of a Wall so you can edit it
 		this.building = building;
 		autofill(building);
 		setVisible(true);
@@ -148,6 +164,7 @@ public class AddBuildingBox extends JPanel{
 		plane.setCurrentBuilding(building);
 	}
 
+	
 	public void addBuilding() {
 		building = new Building("");
 		setVisible(true);
@@ -156,8 +173,8 @@ public class AddBuildingBox extends JPanel{
 
 	}
 
+	//Empty the textFields
 	private void exit() {
-		//Empty the textFields
 		name.setText("");
 		picURL.setText(""); 
 		wallHeight.setText("");
