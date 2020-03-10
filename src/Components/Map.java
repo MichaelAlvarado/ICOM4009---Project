@@ -97,7 +97,7 @@ public class Map {
 		this.buildingList.remove(b);
 	}
 
-	
+
 	public LinkedList<Building> getList(){
 		return this.buildingList;
 	}
@@ -115,41 +115,37 @@ public class Map {
 	 */
 	public static void generateTextFile(LinkedList<Building> buildingList) {
 
-		WriteFile data = new WriteFile(mapName +"ConfigurationFile.txt", true);
-		HashMap<Integer, String> hmap = new HashMap<Integer, String>();
+		WriteFile data = new WriteFile(mapName +"ConfigurationFile.txt", false);
 		int counter = 1;
-		
+
+		//Write the map information first, no iteration needed for this.
+		String file = "Map: " + Map.getMapName() + 
+				" Size: (" + Map.getHeight() + ", " + Map.getWidth() + ") " +
+				"Image: (" + Map.getPicture() + ")" + "\n";
+
 		//Iterate through list of buildings to store info on hashmap
 		for(Building buildings: buildingList){
-			hmap.put(counter, "Name: " + buildings.getName() + 
-					", Building Image: (" + buildings.getPicture() + ")"
-					+ ", Walls: " + buildings.getWallInfo() 
-					  + ", Questions: " + buildings.getQuestions()
-					+ " Found: " + buildings.getFound());
+			file += "\nBuilding #" + counter + ":\n" 
+					+ "Name: " + buildings.getName() + "\n" 
+					+ "Building Image: (" + buildings.getPicture() + ")" + "\n"
+					+ "Walls: \n" + buildings.getWallInfo() //this method add printLine already
+					+ "Questions: " + buildings.getQuestions() + "\n"
+					+ " Found: " + buildings.getFound() + "\n";
 			counter++;
 
 		}
-		//Write the map information first, no iteration needed for this.
+		//Write String file to the Configuration File
 		try {
-			data.writeToFile("Mapa: " + Map.getMapName() + 
-							 " Size: (" + Map.getHeight() + ", " + Map.getWidth() + ") " +
-							 "Image: (" + Map.getPicture() + ")");
-		} catch (IOException e1) {
+			data.writeToFile(file);
+		} catch (IOException e) {
 			System.out.println("Something went wrong!");
-		}
-		//Write Buildings and its components info after, requires iteration through the hashmap
-		for(Entry<Integer, String> entry : hmap.entrySet()) {
-
-			try {
-				data.writeToFile("\nBuilding #" + entry.getKey() + ":\n" + entry.getValue());
-			} catch (IOException e) {
-				System.out.println("Something went wrong!");
-			}	
-
-		}
+		}	
 
 	}
-	
+
+}
+
+
 //	public static  void main(String[] args) throws IOException {
 //		BufferedImage image = new BufferedImage(5,5, BufferedImage.TYPE_INT_RGB);
 //		File file = new File("myimage.png");
@@ -185,7 +181,6 @@ public class Map {
 //		generateTextFile(buildings);
 //	}
 
-}
 
 
 
