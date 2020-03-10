@@ -132,7 +132,7 @@ public class Map {
 					+ "Building Image: (" + buildings.getPicture() + ")" + "\n"
 					+ "Walls: \n" + buildings.getWallInfo() //this method add printLine already
 					+ "Questions: " + buildings.getQuestions() + "\n"
-					+ " Found: " + buildings.getFound() + "\n";
+					+ "Found: " + buildings.getFound() + "\n";
 			counter++;
 
 		}
@@ -158,22 +158,54 @@ public class Map {
 		sc = new Scanner(file);
 		//load Map info (name, size image)
 		this.setMapName(sc.nextLine().substring(5));
-		System.out.println(this.getMapName());
-		
+		String size = sc.nextLine();
+		this.setWidth(Integer.valueOf(size.substring(size.indexOf('(')+1, size.indexOf(','))));
+		this.setHeight(Integer.valueOf(size.substring(size.indexOf(',')+2, size.indexOf(')'))));
+
 		Building building;
-		//Read Building info
+		//Load Buildings
 		while (sc.hasNextLine()) {
 			//create a building
 			if(sc.nextLine().contains("Building #")) {
 				//name of Building
 				String name = sc.nextLine();
-				name = name.substring(name.indexOf(':')+2); //+2 to exclude the ": " 
+				name = name.substring(name.indexOf("Name:")+6); //+2 to exclude the ": " 
 				building = new Building(name);
 				System.out.println(building.getName());
 				//Building Image
-				
-				//Building Walls
-				
+				String image = sc.nextLine();
+				sc.nextLine(); //Skips Maps:
+				//Load Walls
+				String wallLine;
+				while((wallLine = sc.nextLine()).contains("ID")) {
+					//name
+					int index = wallLine.indexOf(',');
+					name = wallLine.substring(wallLine.indexOf("ID:")+4, index);
+					//height
+					index = wallLine.indexOf(',',index+1);
+					String height = wallLine.substring(wallLine.indexOf("Height:")+8, index);
+					//PX1
+					index = wallLine.indexOf(',',index+1);
+					String pointX1 = wallLine.substring(wallLine.indexOf("First Point:")+13, index);
+					//PY1
+					String pointY1 = wallLine.substring(index+2, index = wallLine.indexOf(',',index+1));
+					//PX2
+					index = wallLine.indexOf(',',index+1);
+					String pointX2 = wallLine.substring(wallLine.indexOf("Second Point:")+14, index);
+					//PY2
+					String pointY2 = wallLine.substring(index+2, index = wallLine.indexOf(',',index+1));
+					
+					System.out.println(name);
+					System.out.println(height);
+					System.out.println(pointX1);
+					System.out.println(pointY1);
+					System.out.println(pointX2);
+					System.out.println(pointY2);
+					Wall wall = new Wall(name, Double.valueOf(height), 
+							new Point(Integer.valueOf(pointX1), Integer.valueOf(pointY1)),
+							new Point(Integer.valueOf(pointX2), Integer.valueOf(pointY2)));
+					building.addWalls(wall);
+				}
 				this.addBuilding(building);
 			}
 		} 

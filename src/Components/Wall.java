@@ -30,6 +30,15 @@ public class Wall {
 		this.p2 = p2;
 		this.color = Color.WHITE;
 	}
+	
+	public Wall(String name, double height, Point p1, Point p2) {
+		wid = name;
+		this.p1 = p1;
+		this.p2 = p2;
+		this.height = height;
+		this.color = Color.WHITE;
+	}
+	
 	public Wall(String buildingName, LinkedList<Wall> walls, Point p1, Point p2) {
 		if (walls == null)
 			setID(buildingName + "_w" + String.valueOf(1));
