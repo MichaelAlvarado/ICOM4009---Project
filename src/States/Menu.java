@@ -34,15 +34,7 @@ public class Menu{
 		this.display = display;
 		this.width = display.getContentPane().getWidth();
 		this.height = display.getContentPane().getHeight();
-
 		display.setLayout(null);
-		
-		BufferedImage img = ImageIO.read(new File("res/backgroundMenu.jpg")); 
-		Image dimg = img.getScaledInstance(width, height,Image.SCALE_SMOOTH); //scale the image to fit JFrame
-		JLabel picLabel = new JLabel(new ImageIcon(dimg)); //add the image to a picLabel to display on the component
-		picLabel.setLayout(null);
-		picLabel.setBounds(0,0,width,height);
-		display.add(picLabel);
 
 		JPanel panel = new JPanel(); 
 		panel.setLayout(null);
@@ -50,11 +42,20 @@ public class Menu{
 		
 		JButton createMap = new JButton("Create new Map");
 		createMap.setBounds(width/2-100, height/2, 200, 50);
+		createMap.setVisible(true);
 		panel.add(createMap);
 		
 		JButton playGame = new JButton("Play Game");
 		playGame.setBounds(width/2-100, height/2 + 60, 200, 50);
+		playGame.setVisible(true);
 		panel.add(playGame);
+		
+		BufferedImage img = ImageIO.read(new File("res/backgroundMenu.jpg")); 
+		Image dimg = img.getScaledInstance(width, height,Image.SCALE_SMOOTH); //scale the image to fit JFrame
+		JLabel picLabel = new JLabel(new ImageIcon(dimg)); //add the image to a picLabel to display on the component
+		picLabel.setLayout(null);
+		picLabel.setBounds(0,0,width,height);
+		panel.add(picLabel);
 		
 		display.add(panel);
 		/*

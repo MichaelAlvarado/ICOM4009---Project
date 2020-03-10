@@ -24,6 +24,6 @@ public class Display extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		getContentPane().setSize(width,height);
-		getContentPane().getGraphics().drawImage(ImageIO.read(new File("res/loadingscreen.png")), 0, 0, width, height,null); //loading screen 
+		getContentPane().getGraphics().drawImage(ImageIO.read(new File("res/loadingscreen.png")), 0, 0, getContentPane().getWidth(), getContentPane().getHeight(),null); //loading screen 
 	}
 }
