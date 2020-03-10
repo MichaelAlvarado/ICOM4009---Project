@@ -3,10 +3,12 @@ package Components;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map.Entry;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
@@ -140,6 +142,16 @@ public class Map {
 		} catch (IOException e) {
 			System.out.println("Something went wrong!");
 		}	
+	}
+
+	public static void generateMap(File file) throws FileNotFoundException {
+		Scanner sc;
+		sc = new Scanner(file);
+		//Read File
+		while (sc.hasNextLine()) {
+			System.out.println(sc.nextLine()); 
+		} 
+
 
 	}
 
