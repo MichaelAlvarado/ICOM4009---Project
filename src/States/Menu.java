@@ -81,7 +81,7 @@ public class Menu{
 		title.setBounds(width/2, 150, 400, 100);
 		panel.add(title);
 
-		BufferedImage img = ImageIO.read(new File("res/MenuEdited.png")); 
+		BufferedImage img = ImageIO.read(new File("res/MenuSky.png")); 
 		Image dimg = img.getScaledInstance(width, height,Image.SCALE_SMOOTH); //scale the image to fit JFrame
 		JLabel picLabel = new JLabel(new ImageIcon(dimg)); //add the image to a picLabel to display on the component
 		picLabel.setLayout(null);
