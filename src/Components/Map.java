@@ -154,15 +154,16 @@ public class Map {
 	 * @throws FileNotFoundException
 	 */
 	public void generateMap(File file) throws FileNotFoundException {
-		Scanner sc;
-		sc = new Scanner(file);
+		Scanner sc = new Scanner(file);
+		
 		//load Map info (name, size image)
 		this.setMapName(sc.nextLine().substring(5));
 		String size = sc.nextLine();
 		this.setWidth(Integer.valueOf(size.substring(size.indexOf('(')+1, size.indexOf(','))));
 		this.setHeight(Integer.valueOf(size.substring(size.indexOf(',')+2, size.indexOf(')'))));
 
-		Building building;
+		Building building; 
+		
 		//Load Buildings
 		while (sc.hasNextLine()) {
 			//create a building
@@ -173,7 +174,7 @@ public class Map {
 				building = new Building(name);
 				System.out.println(building.getName());
 				//Building Image
-				String image = sc.nextLine();
+				String image = sc.nextLine(); //Ignores for now
 				sc.nextLine(); //Skips Maps:
 				//Load Walls
 				String wallLine;
@@ -209,7 +210,9 @@ public class Map {
 				this.addBuilding(building);
 			}
 		} 
-
+/*
+ * Falta que cargue las preguntas, las imagenes y el found de buildings
+ */
 
 	}
 
