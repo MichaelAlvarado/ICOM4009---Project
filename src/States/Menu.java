@@ -44,19 +44,21 @@ public class Menu{
 		panel.setBounds(0, 0, width, height);
 		
 		JButton createMap = new JButton("Create new Map");
-		createMap.setBounds(width/2-100, height/2, 200, 50);
+		createMap.setFont(new Font("Comic Sans MS", Font.BOLD, 20));	
+		createMap.setBounds(width/2+100, height/2-30, 250, 90);
 		panel.add(createMap);
 		
 		JButton playGame = new JButton("Play Game");
-		playGame.setBounds(width/2-100, height/2 + 60, 200, 50);
+		playGame.setFont(new Font("Comic Sans MS", Font.BOLD, 20));	
+		playGame.setBounds(width/2+100, height/2 + 100, 250, 90);
 		panel.add(playGame);
 		
 		JLabel title = new JLabel(display.getTitle(), SwingConstants.CENTER);
 		title.setFont(new Font("Comic Sans MS", Font.BOLD, 90));	
-		title.setBounds(width/2-300, 150, 600, 100);
+		title.setBounds(width/2, 150, 400, 100);
 		panel.add(title);
 		
-		BufferedImage img = ImageIO.read(new File("res/backgroundMenu.jpg")); 
+		BufferedImage img = ImageIO.read(new File("res/MenuEdited.png")); 
 		Image dimg = img.getScaledInstance(width, height,Image.SCALE_SMOOTH); //scale the image to fit JFrame
 		JLabel picLabel = new JLabel(new ImageIcon(dimg)); //add the image to a picLabel to display on the component
 		picLabel.setLayout(null);
