@@ -130,7 +130,7 @@ public class Map {
 			file += "\nBuilding #" + counter + ":\n" 
 					+ "Name: " + buildings.getName() + "\n" 
 					+ "Building Image: (" + buildings.getPicture() + ")" + "\n"
-					+ "Walls: \n" + buildings.getWallInfo() //this method add printLine already
+					+ buildings.getWallInfo() //this method add printLine already
 					+ "Questions: " + buildings.getQuestions() + "\n"
 					+ "Found: " + buildings.getFound() + "\n";
 			counter++;
@@ -175,7 +175,6 @@ public class Map {
 				System.out.println(building.getName());
 				//Building Image (Not Done)
 				String image = sc.nextLine(); //Ignores for now
-				sc.nextLine(); //Skips Maps:
 				//Load Walls
 				String wallLine;
 				while((wallLine = sc.nextLine()).contains("ID")) {
