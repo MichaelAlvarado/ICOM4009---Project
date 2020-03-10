@@ -122,7 +122,7 @@ public class Map {
 
 		//Write the map information first, no iteration needed for this.
 		String file = "Map: " + Map.getMapName() + "\n"
-				+ "Size: (" + Map.getHeight() + ", " + Map.getWidth() + ") " + "\n"
+				+ "Size: (" + Map.getWidth() + ", " + Map.getHeight() + ") " + "\n"
 				+ "Image: (" + Map.getPicture() + ")" + "\n";
 
 		//Iterate through list of buildings to store info on hashmap
