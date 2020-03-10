@@ -1,8 +1,10 @@
 package States;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -17,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import GUI.MapDesign;
 
@@ -42,13 +45,16 @@ public class Menu{
 		
 		JButton createMap = new JButton("Create new Map");
 		createMap.setBounds(width/2-100, height/2, 200, 50);
-		createMap.setVisible(true);
 		panel.add(createMap);
 		
 		JButton playGame = new JButton("Play Game");
 		playGame.setBounds(width/2-100, height/2 + 60, 200, 50);
-		playGame.setVisible(true);
 		panel.add(playGame);
+		
+		JLabel title = new JLabel(display.getTitle(), SwingConstants.CENTER);
+		title.setFont(new Font("Comic Sans MS", Font.BOLD, 90));	
+		title.setBounds(width/2-300, 150, 600, 100);
+		panel.add(title);
 		
 		BufferedImage img = ImageIO.read(new File("res/backgroundMenu.jpg")); 
 		Image dimg = img.getScaledInstance(width, height,Image.SCALE_SMOOTH); //scale the image to fit JFrame
