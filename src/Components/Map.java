@@ -155,25 +155,25 @@ public class Map {
 	 */
 	public void generateMap(File file) throws FileNotFoundException {
 		Scanner sc = new Scanner(file);
-		
+
 		//load Map info (name, size image)
-		this.setMapName(sc.nextLine().substring(5));
+		this.setMapName(sc.nextLine().substring(5)); 
 		String size = sc.nextLine();
 		this.setWidth(Integer.valueOf(size.substring(size.indexOf('(')+1, size.indexOf(','))));
 		this.setHeight(Integer.valueOf(size.substring(size.indexOf(',')+2, size.indexOf(')'))));
 
 		Building building; 
-		
+
 		//Load Buildings
 		while (sc.hasNextLine()) {
 			//create a building
 			if(sc.nextLine().contains("Building #")) {
 				//name of Building
 				String name = sc.nextLine();
-				name = name.substring(name.indexOf("Name:")+6); //+2 to exclude the ": " 
+				name = name.substring(name.indexOf("Name:")+6); //+6 to exclude "Name: "
 				building = new Building(name);
 				System.out.println(building.getName());
-				//Building Image
+				//Building Image (Not Done)
 				String image = sc.nextLine(); //Ignores for now
 				sc.nextLine(); //Skips Maps:
 				//Load Walls
@@ -195,7 +195,7 @@ public class Map {
 					String pointX2 = wallLine.substring(wallLine.indexOf("Second Point:")+14, index);
 					//PY2
 					String pointY2 = wallLine.substring(index+2, index = wallLine.indexOf(',',index+1));
-					
+
 					System.out.println(name);
 					System.out.println(height);
 					System.out.println(pointX1);
@@ -207,12 +207,17 @@ public class Map {
 							new Point(Integer.valueOf(pointX2), Integer.valueOf(pointY2)));
 					building.addWalls(wall);
 				}
+				//Load Questions (Not Done)
+				
+				//Load Found (Not Done)
+				
+				//Add Building
 				this.addBuilding(building);
 			}
 		} 
-/*
- * Falta que cargue las preguntas, las imagenes y el found de buildings
- */
+		/*
+		 * Falta que cargue las preguntas, las imagenes y el found de buildings
+		 */
 
 	}
 
