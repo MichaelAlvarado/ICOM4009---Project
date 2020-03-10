@@ -18,9 +18,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import GUI.AddWallBox;
 import GUI.MapDesign;
 
 /**
@@ -52,6 +54,11 @@ public class Menu{
 		playGame.setFont(new Font("Comic Sans MS", Font.BOLD, 20));	
 		playGame.setBounds(width/2+100, height/2 + 100, 250, 90);
 		panel.add(playGame);
+		
+		JButton help = new JButton("Help");
+		help.setFont(new Font("Comic Sans MS", Font.BOLD, 20));	
+		help.setBounds(width/2+100, height/2 + 230, 250, 90);
+		panel.add(help);
 		
 		JLabel title = new JLabel(display.getTitle(), SwingConstants.CENTER);
 		title.setFont(new Font("Comic Sans MS", Font.BOLD, 90));	
@@ -91,6 +98,24 @@ public class Menu{
 			public void actionPerformed(ActionEvent e) {
 				// The game engine should start here
 				System.out.println("Game should start");
+			}
+			
+		});
+		
+		help.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String help = "Create Map buttons allows you to create your own map to play.\n"+
+						"Play Game buttons can get you playing with map already made.\n"+
+						"Have fun XD"+
+						"\n\n" +
+						"This app was made by: \n"+
+						"	Michael Alvarado\r\n" + 
+						"	Fabiola Badillo\r\n" + 
+						"	Anel Martinez\r\n" + 
+						"	Jorge Calderon\n\n";
+			JOptionPane.showMessageDialog(display, help);
 			}
 			
 		});
