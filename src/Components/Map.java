@@ -121,9 +121,9 @@ public class Map {
 		int counter = 1;
 
 		//Write the map information first, no iteration needed for this.
-		String file = "Map: " + Map.getMapName() + 
-				" Size: (" + Map.getHeight() + ", " + Map.getWidth() + ") " +
-				"Image: (" + Map.getPicture() + ")" + "\n";
+		String file = "Map: " + Map.getMapName() + "\n"
+				+ "Size: (" + Map.getHeight() + ", " + Map.getWidth() + ") " + "\n"
+				+ "Image: (" + Map.getPicture() + ")" + "\n";
 
 		//Iterate through list of buildings to store info on hashmap
 		for(Building buildings: buildingList){
@@ -144,12 +144,38 @@ public class Map {
 		}	
 	}
 
-	public static void generateMap(File file) throws FileNotFoundException {
+	/**
+	 * @author Michael J. Alvarado
+	 * Objective - load map
+	 * Precondition - a txt file generated from generateTextFile must be giving
+	 * Post - It sets this map to the info in the file
+	 * Date - 10/March/2020
+	 * @param file - txt file with the map info
+	 * @throws FileNotFoundException
+	 */
+	public void generateMap(File file) throws FileNotFoundException {
 		Scanner sc;
 		sc = new Scanner(file);
-		//Read File
+		//load Map info (name, size image)
+		this.setMapName(sc.nextLine().substring(5));
+		System.out.println(this.getMapName());
+		
+		Building building;
+		//Read Building info
 		while (sc.hasNextLine()) {
-			System.out.println(sc.nextLine()); 
+			//create a building
+			if(sc.nextLine().contains("Building #")) {
+				//name of Building
+				String name = sc.nextLine();
+				name = name.substring(name.indexOf(':')+2); //+2 to exclude the ": " 
+				building = new Building(name);
+				System.out.println(building.getName());
+				//Building Image
+				
+				//Building Walls
+				
+				this.addBuilding(building);
+			}
 		} 
 
 
