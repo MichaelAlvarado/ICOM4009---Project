@@ -196,6 +196,7 @@ public class Plane extends JPanel{
 	public void disable() {
 		mouse.disable();
 		mouseMotion.disable();
+		keyboard.disable();
 	}
 
 	/**
@@ -206,6 +207,7 @@ public class Plane extends JPanel{
 	public void enable() {
 		mouse.enable();
 		mouseMotion.enable();
+		keyboard.enable();
 	}
 
 	/**
@@ -241,6 +243,7 @@ public class Plane extends JPanel{
 
 	public void setMap(Map map) {
 		this.map = map;
+
 	}
 	/**
 	 * @author Michael Alvarado
@@ -375,22 +378,30 @@ public class Plane extends JPanel{
 	 * This class was made so the user can do key shortcuts and for debugging
 	 */
 	private class Keyboard implements KeyListener{
+		private boolean enable;
 		public Keyboard() {
+			enable = true;
 		}
-
+		public void enable() {
+			enable = true;
+		}
+		public void disable() {
+			enable = false;
+		}
 		@Override
 		public void keyPressed(KeyEvent arg0) {
 			/*
 			 * Shorcuts
 			 */
-			if(arg0.isControlDown() && arg0.getKeyCode() == arg0.VK_Z) {
-				undo();
+			if(enable) {
+				if(arg0.isControlDown() && arg0.getKeyCode() == arg0.VK_Z) {
+					undo();
+				}
+				if(arg0.isControlDown() && arg0.getKeyCode() == arg0.VK_S) {
+					Map.generateTextFile(map.getBuildingList());
+					System.out.println("Map saved");
+				}
 			}
-			if(arg0.isControlDown() && arg0.getKeyCode() == arg0.VK_S) {
-				Map.generateTextFile(map.getBuildingList());
-				System.out.println("Map saved");
-			}
-
 		}
 
 		@Override
@@ -398,43 +409,44 @@ public class Plane extends JPanel{
 			/*
 			 * debugging Buttons
 			 */
-			//Print Map info and saves it
-			if(arg0.getKeyCode() == arg0.VK_K) { 
-				System.out.println(map.getMapName());
-				System.out.println(getWidth() + " , " + getHeight());
-			}
-			//Print question on currentBuilding
-			if(arg0.getKeyCode() == arg0.VK_Q) {
-				for(Question question: currentBuilding.getQuestionPool()) {
-					System.out.println("Question: " + question.getQuestion());
-					System.out.println("Correct: " + question.getAnswer_1());
-					System.out.println("Incorrect: " + question.getAnswer_2());
-					System.out.println("Incorrect: " + question.getAnswer_3());
-					System.out.println("Incorrect: " + question.getAnswer_4());
+			if(enable) {
+				//Print Map info and saves it
+				if(arg0.getKeyCode() == arg0.VK_K) { 
+					System.out.println(map.getMapName());
+					System.out.println(getWidth() + " , " + getHeight());
+				}
+				//Print question on currentBuilding
+				if(arg0.getKeyCode() == arg0.VK_Q) {
+					for(Question question: currentBuilding.getQuestionPool()) {
+						System.out.println("Question: " + question.getQuestion());
+						System.out.println("Correct: " + question.getAnswer_1());
+						System.out.println("Incorrect: " + question.getAnswer_2());
+						System.out.println("Incorrect: " + question.getAnswer_3());
+						System.out.println("Incorrect: " + question.getAnswer_4());
+					}
+				}
+				//add a Test building
+				if(arg0.getKeyCode() == arg0.VK_N) {
+					addBuilding(new Building("Test"));
+					System.out.println("Test Building Created");
+				}
+				//Print scale factors
+				if(arg0.getKeyCode() == arg0.VK_F) {
+					System.out.println("scaleX: "+scaleX+" , "+"scaleY: "+scaleY);
+				}
+				//Print CurrentBuilding Info
+				if(arg0.getKeyCode() == arg0.VK_B) {
+					if(currentBuilding != null) {
+						System.out.println("Current Building Info:");
+						System.out.println("Name: " + currentBuilding.getName());
+						System.out.println("Building Height: " + currentBuilding.getBuildingHeight());
+						System.out.println("Wall info:\n" + currentBuilding.getWallInfo());
+					}
+					else {
+						System.out.println("No current building");
+					}
 				}
 			}
-			//add a Test building
-			if(arg0.getKeyCode() == arg0.VK_N) {
-				addBuilding(new Building("Test"));
-				System.out.println("Test Building Created");
-			}
-			//Print scale factors
-			if(arg0.getKeyCode() == arg0.VK_F) {
-				System.out.println("scaleX: "+scaleX+" , "+"scaleY: "+scaleY);
-			}
-			//Print CurrentBuilding Info
-			if(arg0.getKeyCode() == arg0.VK_B) {
-				if(currentBuilding != null) {
-					System.out.println("Current Building Info:");
-					System.out.println("Name: " + currentBuilding.getName());
-					System.out.println("Building Height: " + currentBuilding.getBuildingHeight());
-					System.out.println("Wall info:\n" + currentBuilding.getWallInfo());
-				}
-				else {
-					System.out.println("No current building");
-				}
-			}
-
 		}
 
 		@Override
