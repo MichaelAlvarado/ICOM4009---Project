@@ -33,6 +33,7 @@ import Components.Building;
 import Components.Map;
 import Components.Question;
 import Components.Wall;
+import Components.Trees;
 
 /**
  * 
@@ -46,6 +47,7 @@ public class Plane extends JPanel{
 
 	Map map;
 	Building currentBuilding; //the building currently being edit
+	Trees currentTree; //the tree currently being added
 	Color cP, cL, pP, pL; //Color for c=current p=previous P=Point L=Line
 	boolean gridIsOn; //draw the grid line in plane
 	private Point[] currentPointPair; //this is the current trace being drawn
@@ -134,6 +136,10 @@ public class Plane extends JPanel{
 				g.drawLine((int)(line.getP1().getX()*scaleX), (int)(line.getP1().getY()*scaleY), (int)(line.getP2().getX()*scaleX), (int)(line.getP2().getY()*scaleY));
 			}
 		}
+		
+//		if(currentTree != null) {
+//			g.drawImage(currentTree.getTreeImage(), 0, 0, getWidth(), getHeight(), null);       TODO: implement
+//		}
 
 		//Draw current Points
 		g.setColor(cP);

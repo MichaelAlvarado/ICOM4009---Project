@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.awt.image.BufferedImage; 
 import java.lang.String;
+import java.awt.Point;
 
 /**
  * 
@@ -19,11 +20,16 @@ public class Trees {
 	private BufferedImage treeImage;
 	private boolean found; // idk yet if trees are to be found or will be present in the map from the beginning 
 	private int treeHeight; 
+	private Point p1;
+	private Point p2;
+	private String tid;
 	
 	
 	// constructor
-	public Trees(int treeSpecies) {
+	public Trees(int treeSpecies, Point p1, Point p2) {
 		this.treeSpecies = treeSpecies;
+		this.p1 = p1;
+		this.p2 = p2;
 	}
 	
 //	Constructor used for testing text file generator
@@ -74,8 +80,25 @@ public class Trees {
 //		return result;
 //	}
 
+	// TODO: method that identifies each tree individually
 	
 	// getters and setters
+	
+	public Point getP1() {
+		return this.p1;
+	}
+	
+	public Point getP2() {
+		return this.p2;
+	}
+	
+	public void setP1(Point p1) {
+		this.p1 = p1;
+	}
+	
+	public void setP2(Point p2) {
+		this.p2 = p2;
+	}
 	
 	public void setTreeSpecies(int treeSpecies) {
 		this.treeSpecies = treeSpecies;
@@ -100,6 +123,9 @@ public class Trees {
 	}
 	public int getTreeHeight() {
 		return this.treeHeight;
+	}
+	public void setID(String tid) {
+		this.tid = tid;
 	}
 	
 	
