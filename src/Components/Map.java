@@ -23,6 +23,7 @@ import testers.WriteFile;
 public class Map {
 
 	private LinkedList<Building> buildingList;
+	private LinkedList<Trees> trees;
 	private static String mapName;
 	private static int height;
 	private static int width;
