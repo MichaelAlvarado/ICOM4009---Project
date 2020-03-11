@@ -110,6 +110,10 @@ public class MapDesign{
 		addWall.setBounds((panel.getWidth()/2)+5, 15, 150, 25);
 		panel.add(addWall);
 		
+		JButton addTree = new JButton("Add Tree");
+		addTree.setBounds((panel.getWidth()/2)+165, 15, 150, 25);
+		panel.add(addTree);
+		
 		JButton addQuestion = new JButton("Add Question");
 		addQuestion.setBounds((panel.getWidth()/2)+5, 50, 150, 25);
 		panel.add(addQuestion);	
@@ -129,6 +133,10 @@ public class MapDesign{
 		JButton buildingList = new JButton("Building List");
 		buildingList.setBounds(165,50,150,25);
 		panel.add(buildingList);
+		
+		JButton treeList = new JButton("Tree List");
+		treeList.setBounds((panel.getWidth()/2)+165, 50, 150, 25);
+		panel.add(treeList);
 
 		AddBuildingBox addBuildingBox = new AddBuildingBox((width/2)-250, 200,500,200, plane, addBuilding);
 		addBuildingBox.setVisible(false);
@@ -146,6 +154,8 @@ public class MapDesign{
 		addMapBox.setVisible(true);
 		plane.disable();
 		display.getContentPane().add(addMapBox);
+		
+		AddTreeBox addTreeBox = new AddTreeBox((width/2)-250, 200,500,300, plane);
 		
 		display.getContentPane().add(plane);//add at the end so its on the bottom
 

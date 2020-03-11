@@ -46,7 +46,7 @@ public class AddTreeBox extends JPanel{
 	private JButton activationButton; //this is the button use to active this Window
 
 
-	public AddTreeBox(int x, int y, int width, int height, Plane plane, JButton activationButton) {
+	public AddTreeBox(int x, int y, int width, int height, Plane plane) {
 		super();
 		this.setLayout(null);
 		this.plane = plane;
@@ -83,7 +83,7 @@ public class AddTreeBox extends JPanel{
 						tree.setTreeImage(picture);
 					} 
 					if(newTree) {
-					//	plane.addTree(tree); TODO: implement
+						plane.addTree(tree); 
 					}
 					exit();
 				}catch(NumberFormatException n){
@@ -100,9 +100,9 @@ public class AddTreeBox extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				exit();
-//				if(plane.currentTree == null) { 
-//					activationButton.setText("Add Tree");				TODO: implement
-//				}
+				if(plane.currentTree == null) { 
+					activationButton.setText("Add Tree");				
+				}
 			}
 		});
 
@@ -124,7 +124,7 @@ public class AddTreeBox extends JPanel{
 		autofill(tree);
 		setVisible(true);
 		newTree = false;
-		// plane.setCurrentTree(tree); TODO: implement
+		plane.setCurrentTree(tree); 
 	}
 
 	

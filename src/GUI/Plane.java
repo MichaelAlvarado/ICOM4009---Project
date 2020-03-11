@@ -240,11 +240,20 @@ public class Plane extends JPanel{
 		map.addBuilding(building);
 		setCurrentBuilding(building);
 	}
+	
+	public void addTree(Trees tree) {
+		map.addTree(tree);
+		setCurrentTree(tree);
+	}
 
 	public void setCurrentBuilding(Building building) {
 		currentBuilding = building;
 		this.repaint();
-
+	}
+	
+	public void setCurrentTree(Trees tree) {
+		currentTree = tree;
+		this.repaint();
 	}
 
 	public void setMap(Map map) {
