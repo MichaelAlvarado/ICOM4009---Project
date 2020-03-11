@@ -27,8 +27,8 @@ public class Map {
 	private static int height;
 	private static int width;
 	private static BufferedImage picture;
-
-
+	private static String imageURL;
+	
 	public Map(LinkedList<Building> buildingList, String mapName, int height, int width) {
 		super();
 		this.buildingList = buildingList;
@@ -90,6 +90,13 @@ public class Map {
 	public void setWidth(int width) {
 		Map.width = width;
 	}
+	
+	public static String getImageURL() {
+		return imageURL;
+	}
+	public void setImageURL(String imageURL) {
+		Map.imageURL = imageURL;
+	}
 
 	public void addBuilding(Building b) {
 		this.buildingList.add(b);
@@ -98,7 +105,6 @@ public class Map {
 	public void removeBuilding(Building b) {
 		this.buildingList.remove(b);
 	}
-
 
 	public LinkedList<Building> getList(){
 		return this.buildingList;
@@ -123,13 +129,13 @@ public class Map {
 		//Write the map information first, no iteration needed for this.
 		String file = "Map: " + Map.getMapName() + "\n"
 				+ "Size: (" + Map.getWidth() + ", " + Map.getHeight() + ") " + "\n"
-				+ "Image: (" + Map.getPicture() + ")" + "\n";
+				+ "Image: " + Map.getImageURL() + "\n";
 
 		//Iterate through list of buildings to store info on hashmap
 		for(Building buildings: buildingList){
 			file += "\nBuilding #" + counter + ":\n" 
 					+ "Name: " + buildings.getName() + "\n" 
-					+ "Building Image: (" + buildings.getPicture() + ")" + "\n"
+					+ "Building Image: " + buildings.getPicture() + "\n"
 					+ buildings.getWallInfo() //this method add printLine already
 					+ "Questions: " + buildings.getQuestions() + "\n"
 					+ "Found: " + buildings.getFound() + "\n";
@@ -161,7 +167,14 @@ public class Map {
 		String size = sc.nextLine();
 		this.setWidth(Integer.valueOf(size.substring(size.indexOf('(')+1, size.indexOf(','))));
 		this.setHeight(Integer.valueOf(size.substring(size.indexOf(',')+2, size.indexOf(')'))));
-
+		String imageURL = sc.nextLine();
+		this.setImageURL(imageURL.substring(7));
+		System.out.println(this.getImageURL());
+		try {
+			this.setPicture(ImageIO.read(new File(this.getImageURL())));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		Building building; 
 
 		//Load Buildings
