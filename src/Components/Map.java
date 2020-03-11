@@ -30,9 +30,10 @@ public class Map {
 	private static BufferedImage picture;
 	private static String imageURL;
 	
-	public Map(LinkedList<Building> buildingList, String mapName, int height, int width) {
+	public Map(LinkedList<Building> buildingList, LinkedList<Trees> trees, String mapName, int height, int width) {
 		super();
 		this.buildingList = buildingList;
+		this.trees = trees;
 		Map.mapName = mapName;
 		Map.height = height;
 		Map.width = width;
@@ -40,6 +41,7 @@ public class Map {
 	}
 	public Map() {
 		buildingList = new LinkedList<Building>();
+		trees = new LinkedList<Trees>();
 	}
 
 
@@ -62,6 +64,13 @@ public class Map {
 		this.buildingList = buildingList;
 	}
 
+	public LinkedList<Trees> getTrees(){
+		return trees;
+	}
+	
+	public void setTrees(LinkedList<Trees> trees) {
+		this.trees = trees;
+	}
 
 	public static String getMapName() {
 		return mapName;
@@ -106,10 +115,19 @@ public class Map {
 	public void removeBuilding(Building b) {
 		this.buildingList.remove(b);
 	}
-
-	public LinkedList<Building> getList(){
-		return this.buildingList;
+	
+	public void addTree(Trees t) {
+		this.trees.add(t);
 	}
+	
+	public void removeTree(Trees t) {
+		this.trees.remove(t);
+	}
+	
+
+	
+	
+	
 
 	/**
 	 * @author jorgecalderon
