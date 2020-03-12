@@ -64,7 +64,7 @@ import javax.swing.JSlider;
 import java.awt.Button;
 
 /**
- * This was made using Window Builder's plug in in Eclipse IDE
+ * This was made using Window Builder version 1.9.3 plug-in in Eclipse IDE
  */
 
 public class MapDesign{
@@ -163,7 +163,9 @@ public class MapDesign{
 		display.getContentPane().add(addMapBox);
 
 		AddTreeBox addTreeBox = new AddTreeBox((width/2)-250, 200,500,300, plane);
-
+		addTreeBox.setVisible(false);
+		display.getContentPane().add(addTreeBox);
+		
 		display.getContentPane().add(plane);//add at the end so its on the bottom
 
 		/*
@@ -245,6 +247,17 @@ public class MapDesign{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				addQuestionBox.addQuestion();
+				addWallBox.setVisible(false);
+				addBuildingBox.setVisible(false);
+				addMapBox.setVisible(false);
+			}
+		});
+		
+		addTree.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				addTreeBox.addTree();
+				addQuestionBox.setVisible(false);
 				addWallBox.setVisible(false);
 				addBuildingBox.setVisible(false);
 				addMapBox.setVisible(false);
