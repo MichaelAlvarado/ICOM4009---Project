@@ -29,18 +29,7 @@ public class Building {
 		walls = new LinkedList<Wall>();
 		questionPool = new LinkedList<Question>();
 	}
-	
-//	Constructor used for testing text file generator
-//	public Building(String name, BufferedImage pic, LinkedList<Question> qs, LinkedList<Wall> ws, boolean fd) {
-//		this.buildingName = name;
-//		this.picture = pic;
-//		this.questionPool = qs;
-//		this.walls = ws;
-//		this.found = fd;
-//		
-//	}
-	
-	
+		
 	/**
 	 * @author jorgecalderon
 	 * Objective - Generate a string containing the questions with their answers
@@ -59,7 +48,7 @@ public class Building {
 	
 	/**
 	 * @author jorgecalderon
-	 * Objective - Generate a string containing the questions with their answers
+	 * Objective - Generate a string the walls information
 	 * Date - 03/08/2020
 	 * @param - N/A
 	 * @param - N/A
@@ -70,7 +59,7 @@ public class Building {
 		for (Wall w: this.walls) {
 			result += "ID: " + w.getID() + ", Height: " + w.getHeight() + ", First Point: " + w.getP1().x
 			+ ", " + w.getP1().y + ", Second Point: " + w.getP2().x + ", " + w.getP2().y +
-			", Wall Image: (" + w.getTexture() + "), " + "\n";
+			", Wall Image: (" + w.getTexture() + ") " + "\n";
 		}
 		
 		return result;
