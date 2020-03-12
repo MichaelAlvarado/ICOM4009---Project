@@ -67,7 +67,7 @@ public class AddTreeBox extends JPanel{
 		// display tree picture for selected tree type
 		
 		//Height Label for the height of building to be set
-		treeHeight = new JLabel("Tree height" + Integer.toString(this.tree.getTreeHeight()));
+		treeHeight = new JLabel("Tree height");
 		treeHeight.setBounds(10, 70, 100, 25);
 		
 
@@ -113,8 +113,8 @@ public class AddTreeBox extends JPanel{
 		add(treeSpeciesField);
 		add(treeSpecies);
 		add(treeHeight);
-		add(p1Label);
-		add(p2Label); 
+//		add(p1Label);
+//		add(p2Label); 
 
 	}
 	
