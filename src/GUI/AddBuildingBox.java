@@ -83,6 +83,7 @@ public class AddBuildingBox extends JPanel{
 					picture = ImageIO.read(imageFile);
 					System.out.println("load file");
 					picURL.setText(imageFile.getPath());
+					building.setPictureURL(imageFile.getPath());
 					building.setPicture(picture);
 				} catch (IOException e1) {
 					e1.printStackTrace();

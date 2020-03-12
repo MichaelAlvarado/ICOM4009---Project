@@ -18,6 +18,7 @@ public class Building {
 	private LinkedList<Wall> walls; // = new LinkedList<Wall>();
 	private String buildingName; 
 	private BufferedImage picture;
+	private String pictureURL;
 	private LinkedList<Question> questionPool;
 	private boolean found;
 	private int buildingHeight; //this is default height of walls
@@ -123,5 +124,19 @@ public class Building {
 
 	public void setBuildingHeight(int buildingHeight) {
 		this.buildingHeight = buildingHeight;
+	}
+
+	/**
+	 * @return the pictureURL
+	 */
+	public String getPictureURL() {
+		return pictureURL;
+	}
+
+	/**
+	 * @param pictureURL the pictureURL to set
+	 */
+	public void setPictureURL(String pictureURL) {
+		this.pictureURL = pictureURL;
 	}
 }

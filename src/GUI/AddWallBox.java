@@ -73,6 +73,7 @@ public class AddWallBox extends JPanel{
 					texture = ImageIO.read(imageFile);
 					System.out.println("load file");
 					imageURL.setText(imageFile.getPath());
+					wall.setTextureURL(imageFile.getPath());
 					wall.setTexture(texture);
 				} catch (IOException e1) {
 					e1.printStackTrace();

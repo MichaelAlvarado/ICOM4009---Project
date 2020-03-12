@@ -20,6 +20,7 @@ public class Wall {
 	private Point p2;
 	private double height;
 	private BufferedImage texture;
+	private String textureURL;
 	private Color color; 
 	private String wid;
 	
@@ -99,6 +100,20 @@ public class Wall {
 	
 	public void setID(String wid) {
 		this.wid = wid;
+	}
+
+	/**
+	 * @return the textureURL
+	 */
+	public String getTextureURL() {
+		return textureURL;
+	}
+
+	/**
+	 * @param textureURL the textureURL to set
+	 */
+	public void setTextureURL(String textureURL) {
+		this.textureURL = textureURL;
 	}
 	
 	 
