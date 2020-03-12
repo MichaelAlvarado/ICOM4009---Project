@@ -74,7 +74,10 @@ public class MapDesign{
 	private int width, height;
 
 	/**
-	 * Create the frame.
+	 * @author Michael J. Alvarado
+	 * The MapDesign Manage the Buttons and Plane
+	 * @param display is a JFrame that Its initialize in Launch method as GUI.Display instance
+	 * Date - 28/Feb/2020
 	 * @throws ParseException 
 	 */
 	public MapDesign(JFrame display) throws ParseException {
@@ -86,11 +89,13 @@ public class MapDesign{
 		display.getContentPane().setBackground(Color.WHITE);
 		display.getContentPane().setLayout(null);
 
+		//This initialize plane which is what draw points and has the mouse and key listeners
 		plane = new Plane();
 		plane.setBackground(Color.WHITE);
 		plane.setLocation(0, canvasY);
 		plane.setBounds(0, canvasY, width, height-(canvasY));
 
+		//Buttons Panels
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(190,190,190));
 		panel.setBorder(new LineBorder(UIManager.getColor("Button.darkShadow"), 3, true));
@@ -98,6 +103,7 @@ public class MapDesign{
 		display.getContentPane().add(panel);
 		panel.setLayout(null);
 
+		//Buttons
 		JButton help = new JButton("Help");
 		help.setBounds(width-170, 15, 150, 25);
 		panel.add(help);
@@ -109,11 +115,11 @@ public class MapDesign{
 		JButton addWall = new JButton("Add Wall");
 		addWall.setBounds((panel.getWidth()/2)+5, 15, 150, 25);
 		panel.add(addWall);
-		
+
 		JButton addTree = new JButton("Add Tree");
 		addTree.setBounds((panel.getWidth()/2)+165, 15, 150, 25);
 		panel.add(addTree);
-		
+
 		JButton addQuestion = new JButton("Add Question");
 		addQuestion.setBounds((panel.getWidth()/2)+5, 50, 150, 25);
 		panel.add(addQuestion);	
@@ -121,11 +127,11 @@ public class MapDesign{
 		JButton editMap = new JButton("Edit Map");
 		editMap.setBounds(165, 15, 150, 25);
 		panel.add(editMap);
-		
+
 		JButton addBuilding = new JButton("Add Building");
 		addBuilding.setBounds(10, 15, 150, 25);
 		panel.add(addBuilding);
-		
+
 		JButton wallList = new JButton("Current Walls");
 		wallList.setBounds(10,50,150,25);
 		panel.add(wallList);
@@ -133,11 +139,12 @@ public class MapDesign{
 		JButton buildingList = new JButton("Building List");
 		buildingList.setBounds(165,50,150,25);
 		panel.add(buildingList);
-		
+
 		JButton treeList = new JButton("Tree List");
 		treeList.setBounds((panel.getWidth()/2)+165, 50, 150, 25);
 		panel.add(treeList);
 
+		//Boxes which are made to add or edit map,buildings,wall,questions, trees.
 		AddBuildingBox addBuildingBox = new AddBuildingBox((width/2)-250, 200,500,200, plane, addBuilding);
 		addBuildingBox.setVisible(false);
 		display.getContentPane().add(addBuildingBox);
@@ -145,7 +152,7 @@ public class MapDesign{
 		AddWallBox addWallBox = new AddWallBox((width/2)-250, 200,500,300, plane);
 		addWallBox.setVisible(false);
 		display.getContentPane().add(addWallBox);
-		
+
 		AddQuestionsBox addQuestionBox = new AddQuestionsBox((width/2)-250, 200,500,500, plane);
 		addQuestionBox.setVisible(false);
 		display.getContentPane().add(addQuestionBox);
@@ -154,9 +161,9 @@ public class MapDesign{
 		addMapBox.setVisible(true);
 		plane.disable();
 		display.getContentPane().add(addMapBox);
-		
+
 		AddTreeBox addTreeBox = new AddTreeBox((width/2)-250, 200,500,300, plane);
-		
+
 		display.getContentPane().add(plane);//add at the end so its on the bottom
 
 		/*
@@ -166,6 +173,7 @@ public class MapDesign{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				//Opens a PopUp with settings options
 				settingPopUp(setting.getX(), setting.getY()+setting.getHeight()*2);
 			}
 		});
@@ -174,6 +182,7 @@ public class MapDesign{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				//Open a Message of the help Guide
 				helpScreen();
 			}
 		});
@@ -181,6 +190,7 @@ public class MapDesign{
 		wallList.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				//Make a PopUp to edit a specific wall in the currently editing Building
 				wallsListPopUp(wallList.getX(), wallList.getY()+wallList.getHeight()*2, addWallBox);
 			}
 		});
@@ -188,20 +198,20 @@ public class MapDesign{
 		buildingList.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				//Make a PopUp to edit a specific Building
 				buildingListPopUp(buildingList.getX(),buildingList.getY()+buildingList.getHeight()*2, addBuildingBox);
 			}
 		});
 
 		addBuilding.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				addMapBox.setVisible(false);
 				addWallBox.setVisible(false);
 				addQuestionBox.setVisible(false);
-				
+
 				if(addBuilding.getText().equals("Add Building")) {
-				addBuildingBox.addBuilding();
+					addBuildingBox.addBuilding();
 				}
 				else {
 					plane.setCurrentBuilding(null);
@@ -211,7 +221,6 @@ public class MapDesign{
 		});
 
 		addWall.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				addWallBox.addNewWall();
@@ -222,7 +231,6 @@ public class MapDesign{
 		});
 
 		editMap.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				addMapBox.edit();
@@ -232,9 +240,8 @@ public class MapDesign{
 
 			}
 		});
-		
-		addQuestion.addActionListener(new ActionListener() {
 
+		addQuestion.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				addQuestionBox.addQuestion();
@@ -243,8 +250,17 @@ public class MapDesign{
 				addMapBox.setVisible(false);
 			}
 		});
+
 	}//Last from Constructor
 
+	/**
+	 * @author Michael J. Alvarado 
+	 * This method creates a PopUP with the walls in a currently editing Building.
+	 * Date - 04/March/2020
+	 * @param x - Position x in pixels to display PopUP (Origin is from the JFrame)
+	 * @param y - Position y in pixels to display PopUP (Origin is from the JFrame)
+	 * @param addWallBox - This must be given the addWallBox so that it can be displayed when clicked on a specifi Wall from the PopUp
+	 */
 	private void wallsListPopUp(int x, int y, AddWallBox addWallBox) {
 		PopupMenu wallsPopUp = new PopupMenu("Walls on: " + plane.currentBuilding.getName());
 		wallsPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -265,6 +281,14 @@ public class MapDesign{
 
 	}
 
+	/**
+	 * @author Michael J. Alvarado 
+	 * This method creates a PopUP with the Buildings in the map being created.
+	 * Date - 04/March/2020
+	 * @param x - Position x in pixels to display PopUP (Origin is from the JFrame)
+	 * @param y - Position y in pixels to display PopUP (Origin is from the JFrame)
+	 * @param addBuildingBox - This must be given the addBuldingBox so that it can be edit when clicked on a specific Building from the PopUp
+	 */
 	private void buildingListPopUp(int x, int y, AddBuildingBox addBuildingBox) {
 		PopupMenu buildingsPopUp = new PopupMenu("Buildings on: " +  plane.map.getMapName());
 		buildingsPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -284,10 +308,14 @@ public class MapDesign{
 		display.add(buildingsPopUp);
 		buildingsPopUp.show(display, x, y);
 	}
-
+	/**
+	 * @author Michael J. Alvarado
+	 * This method creates the PopUp of the settings and actions when clicked.
+	 * @param x - Position x in pixels to display PopUP (Origin is from the JFrame)
+	 * @param y - Position y in pixels to display PopUP (Origin is from the JFrame) 
+	 */
 	private void settingPopUp(int x, int y) {
 		PopupMenu setting = new PopupMenu("Settings");
-
 		MenuItem undo = new MenuItem("Undo wall");
 		MenuItem clear = new MenuItem("Clear All walls");
 		MenuItem grid = new MenuItem("Grid");
@@ -353,14 +381,21 @@ public class MapDesign{
 		setting.add(clColor);
 		setting.add(ppColor);
 		setting.add(plColor);
-
 		display.add(setting);
 		setting.show(display, x, y);
 	}
-
+	/**
+	 * @author Michael J. Alvarado 
+	 * This method displays a PopUp of given Colors to paint specified traces or Points
+	 * PreCondition - The settingsPopUP produces the component
+	 * (currentPoint, currentLine, previousPoint, previousLine) 
+	 * @param x - Position x in pixels to display PopUP (Origin is from the JFrame)
+	 * @param y - Position y in pixels to display PopUP (Origin is from the JFrame)
+	 * @param component - this is a String giving by the settings PopUP thats tells what Component to Paint
+	 *	 
+	 */
 	private void colorPopup(int x, int y, String component) {
 		PopupMenu ColorPopup = new PopupMenu("Choose color");
-
 		MenuItem magenta = new MenuItem("Magenta");
 		MenuItem green = new MenuItem("Green");
 		MenuItem red = new MenuItem("Red");
@@ -370,15 +405,7 @@ public class MapDesign{
 		magenta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(component.equals("currentPoint"))
-					plane.cP = (Color.MAGENTA); 
-				else if(component.equals("currentLine"))
-					plane.cL = (Color.MAGENTA);
-				else if(component.equals("previousPoint"))
-					plane.pP = (Color.MAGENTA);
-				else if(component.equals("previousLine"))
-					plane.pL = (Color.MAGENTA);				
-				plane.repaint();
+				paintPlaneComponent(Color.MAGENTA, component);
 			}
 		});
 
@@ -386,60 +413,28 @@ public class MapDesign{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Color green = new Color(20,198,5); //Green
-				if(component.equals("currentPoint"))
-					plane.cP = (green); 
-				else if(component.equals("currentLine"))
-					plane.cL = (green);
-				else if(component.equals("previousPoint"))
-					plane.pP = (green);
-				else if(component.equals("previousLine"))
-					plane.pL = (green);
-				plane.repaint();
+				paintPlaneComponent(green, component);
 			}
 		});
 
 		red.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(component.equals("currentPoint"))
-					plane.cP = (Color.RED); 
-				else if(component.equals("currentLine"))
-					plane.cL = (Color.RED);
-				else if(component.equals("previousPoint"))
-					plane.pP = (Color.RED);
-				else if(component.equals("previousLine"))
-					plane.pL = (Color.RED);
-				plane.repaint();
+				paintPlaneComponent(Color.RED, component);
 			}
 		});
 
 		blue.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(component.equals("currentPoint"))
-					plane.cP = (Color.BLUE); 
-				else if(component.equals("currentLine"))
-					plane.cL = (Color.BLUE);
-				else if(component.equals("previousPoint"))
-					plane.pP = (Color.BLUE);
-				else if(component.equals("previousLine"))
-					plane.pL = (Color.BLUE);
-				plane.repaint();
+				paintPlaneComponent(Color.BLUE, component);
 			}
 		});
 
 		orange.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(component.equals("currentPoint"))
-					plane.cP = (Color.ORANGE); 
-				else if(component.equals("currentLine"))
-					plane.cL = (Color.ORANGE);
-				else if(component.equals("previousPoint"))
-					plane.pP = (Color.ORANGE);
-				else if(component.equals("previousLine"))
-					plane.pL = (Color.ORANGE);
-				plane.repaint();
+				paintPlaneComponent(Color.ORANGE, component);
 			}
 		});
 
@@ -451,17 +446,34 @@ public class MapDesign{
 		display.add(ColorPopup);
 		ColorPopup.show(display, x, y);
 	}
-
+	/**
+	 * @author Michael J. Alvarado
+	 * This Methods paints the components  of traces and points specified  on the plane.
+	 * @param color - Color to paint components specified in @param compenent
+	 * @param component - This Strings specified that to paint (giving by the Settings PopUP)
+	 */
+	private void paintPlaneComponent(Color color, String component) {
+		if(component.equals("currentPoint"))
+			plane.cP = (color); 
+		else if(component.equals("currentLine"))
+			plane.cL = (color);
+		else if(component.equals("previousPoint"))
+			plane.pP = (color);
+		else if(component.equals("previousLine"))
+			plane.pL = (color);				
+		plane.repaint();
+	}
+	
 	private void helpScreen() {
 		String Instructions = "Help";
 		JOptionPane.showMessageDialog(display, Instructions);
 	}
-	
-	private void setEnableButtons(JButton[] buttons, boolean enable) {
-		for(int i = 0; i < buttons.length; i++) {
-			buttons[i].setVisible(enable);
-		}
-	}
-	
+
+//	private void setEnableButtons(JButton[] buttons, boolean enable) {
+//		for(int i = 0; i < buttons.length; i++) {
+//			buttons[i].setVisible(enable);
+//		}
+//	}
+
 
 }
