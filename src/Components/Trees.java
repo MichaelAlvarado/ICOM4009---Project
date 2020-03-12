@@ -32,53 +32,25 @@ public class Trees {
 		this.p2 = p2;
 	}
 	
-//	Constructor used for testing text file generator
-//	public Building(String name, BufferedImage pic, LinkedList<Question> qs, LinkedList<Wall> ws, boolean fd) {
-//		this.buildingName = name;
-//		this.picture = pic;
-//		this.questionPool = qs;
-//		this.walls = ws;
-//		this.found = fd;
-//		
-//	}
-	
 	
 //	/**
 //	 * @author jorgecalderon
-//	 * Objective - Generate a string containing the questions with their answers
-//	 * Date - 03/08/2020
+//	 * Objective - Generate a string containing the Trees info
+//	 * Date - 03/11/2020
 //	 * @param - N/A
 //	 * @param - N/A
 //	 * @return - N/A 
 //	 */
-//	public String getQuestions() {
-//		String result = "";
-//		int counter = 1;
-//		for (Question q: this.questionPool) {
-//			result += counter + ") " +  q.getQuestion() + ", Answers: " + q.getAnswers() + ", ";
-//			counter++;
-//		}
-//		return result;
-//	}
-	
-//	/**
-//	 * @author jorgecalderon
-//	 * Objective - Generate a string containing the questions with their answers
-//	 * Date - 03/08/2020
-//	 * @param - N/A
-//	 * @param - N/A
-//	 * @return - N/A 
-//	 */
-//	public String getWallInfo() {
-//		String result = "";
-//		for (Wall w: this.walls) {
-//			result += "ID: " + w.getID() + ", Height: " + w.getHeight() + ", First Point: " + w.getP1().x
-//			+ ", " + w.getP1().y + ", Second Point: " + w.getP2().x + ", " + w.getP2().y +
-//			", Wall Image: (" + w.getTexture() + "), " + "\n";
-//		}
-//		
-//		return result;
-//	}
+	public String getTreeInfo() {
+		String result = "";
+		result += "Trees: \n" 
+				+ "ID: " + this.getID() + "\nSpecies: " + this.getTreeSpecies()
+				+ "\nHeight: " + this.getTreeHeight()
+				+ "\nFirst Point: " + this.getP1() + " Second Point: " + this.getP2()
+				+ "\nImage: "  + this.getTreeImage()
+				+ "\nFound: " + this.isFound();
+		return result;
+	}
 
 	// TODO: method that identifies each tree individually
 	
@@ -112,7 +84,7 @@ public class Trees {
 	public BufferedImage getTreeImage() {
 		return this.treeImage;
 	}
-	public void isFound(boolean found) {
+	public void setFound(boolean found) {
 		this.found = found;
 	}
 	public boolean isFound() {
@@ -126,6 +98,9 @@ public class Trees {
 	}
 	public void setID(String tid) {
 		this.tid = tid;
+	}
+	public String getID() {
+		return this.tid;
 	}
 	
 	

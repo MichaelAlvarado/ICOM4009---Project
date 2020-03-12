@@ -23,7 +23,7 @@ import testers.WriteFile;
 public class Map {
 
 	private LinkedList<Building> buildingList;
-	private LinkedList<Trees> trees;
+	private static LinkedList<Trees> trees;
 	private static String mapName;
 	private static int height;
 	private static int width;
@@ -124,11 +124,6 @@ public class Map {
 		this.trees.remove(t);
 	}
 	
-
-	
-	
-	
-
 	/**
 	 * @author jorgecalderon
 	 * Objective - Generate the text file needed for easier configuration in VRML
@@ -159,6 +154,9 @@ public class Map {
 					+ buildings.getQuestions() 
 					+ "Found: " + buildings.getFound() + "\n";
 			counter++;
+		for(Trees trees: trees) {
+			file += trees.getTreeInfo();
+		}
 
 		}
 		//Write String file to the Configuration File
@@ -180,6 +178,10 @@ public class Map {
 	 */
 	public void generateMap(File file) throws FileNotFoundException {
 		Scanner sc = new Scanner(file);
+		String wallLine;
+		String questionLine;
+		String foundLine = "";
+		String treeLine;
 
 		//load Map info (name, size image)
 		this.setMapName(sc.nextLine().substring(5)); 
@@ -209,7 +211,7 @@ public class Map {
 				String image = sc.nextLine(); //Ignores for now
 				
 				//Load Walls
-				String wallLine = sc.nextLine();
+				wallLine = sc.nextLine();
 				while(wallLine.contains("ID")) {
 					//name
 					int index = wallLine.indexOf(',');
@@ -234,6 +236,7 @@ public class Map {
 //					System.out.println(pointY1);
 //					System.out.println(pointX2);
 //					System.out.println(pointY2);
+					
 					Wall wall = new Wall(name, Double.valueOf(height), 
 							new Point(Integer.valueOf(pointX1), Integer.valueOf(pointY1)),
 							new Point(Integer.valueOf(pointX2), Integer.valueOf(pointY2)));
@@ -242,17 +245,22 @@ public class Map {
 					
 				}
 				//Load Questions (Not Done)
-				String questionLine=wallLine;
+				questionLine=wallLine;
 				String answ1, answ2, answ3, answ4;
 				while(questionLine.contains("Question:")){
 					int index = questionLine.indexOf(',');
+					//Get the question
 					name = questionLine.substring(10,index);
 					index = questionLine.indexOf(',', index + 1);
+					//First Answer
 					answ1 = questionLine.substring((questionLine.indexOf("Answers:") + 9), index);
 					index = questionLine.indexOf(',', index + 1);
+					//Second Answer
 					answ2 = questionLine.substring((questionLine.indexOf("Answers:") + 12), index);
 					index = questionLine.indexOf(',', index + 1);
+					//Third Answer
 					answ3 = questionLine.substring((questionLine.indexOf("Answers:") + 15), index);
+					//Fourth Answer
 					answ4 = questionLine.substring(questionLine.indexOf("Answers:") + 18);
 					
 //					System.out.println(name);
@@ -267,7 +275,7 @@ public class Map {
 				}
 				
 				//Load Found 
-				String foundLine = questionLine;
+				foundLine = questionLine;
 				while(foundLine.contains("Found:")) {
 					name = foundLine.substring(foundLine.indexOf("Found:") + 7);
 					boolean found = Boolean.valueOf(name);
@@ -279,6 +287,13 @@ public class Map {
 				this.addBuilding(building);
 				//System.out.println("Load Done");
 			}
+			treeLine = foundLine;
+			if(treeLine.contains("Trees:")) {
+				//TO-DO once Trees are fully functional
+			}
+			else {
+				treeLine = sc.nextLine();
+			}
 		} 
 		/*
 		 * Falta que cargue las imagenes
@@ -287,42 +302,6 @@ public class Map {
 	}
 
 }
-
-
-//	public static  void main(String[] args) throws IOException {
-//		BufferedImage image = new BufferedImage(5,5, BufferedImage.TYPE_INT_RGB);
-//		File file = new File("myimage.png");
-//        ImageIO.write(image, "png", file);
-//		
-//		LinkedList<Building> buildings = new LinkedList<Building>();
-//		LinkedList<Question> qs = new LinkedList<Question>();
-//		LinkedList<Question> qs2 = new LinkedList<Question>();
-//		LinkedList<Wall> ws = new LinkedList<Wall>();
-//		LinkedList<Wall> ws2 = new LinkedList<Wall>();
-//		
-//		Question q1 = new Question("Who are you?", "Me" , "You" , "We" , "Us");
-//		Question q2 = new Question("Who are you?", "Me" , "You" , "We" , "Us");
-//		Question q3 = new Question("How are you?", "Colgao", "Bien", "Mal", "Super");
-//		Question q4 = new Question("How are you?", "Colgao", "Bien", "Mal", "Super");
-//		qs.add(q1);
-//		qs.add(q2);
-//		qs2.add(q3);
-//		qs2.add(q4);
-//		
-//		Wall w1 = new Wall("w1", new Point(619, 435), new Point(744, 450));
-//		Wall w2 = new Wall("w2", new Point(545, 136), new Point(607, 128));
-//		ws.add(w1);
-//		ws.add(w2);
-//		buildings.add(new Building("b1", image, qs, ws, true));
-//		
-//		Wall w3 = new Wall("w3", new Point(601, 92), new Point(435, 619));
-//		Wall w4 = new Wall("w4", new Point(493, 89), new Point(450, 744));
-//		ws2.add(w3);
-//		ws2.add(w4);
-//		buildings.add(new Building("b2", null, qs2, ws2, true));
-//		
-//		generateTextFile(buildings);
-//	}
 
 
 
