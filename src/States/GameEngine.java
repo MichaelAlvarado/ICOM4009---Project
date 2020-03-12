@@ -37,7 +37,7 @@ public class GameEngine implements Runnable {
 		threadB = false;
 
         canvas = new Canvas();
-        canvas.setBounds(0, 0, display.getWidth(), display.getHeight());
+        canvas.setBounds(0, 0, display.getContentPane().getWidth(), display.getContentPane().getHeight());
         canvas.setFocusable(false);
         canvas.setBackground(Color.black); //Testing
 
@@ -139,8 +139,9 @@ public class GameEngine implements Runnable {
 		
 		//Draw Here!
 		g.setColor(Color.WHITE);
-		g.drawString("Game Engine Prints", 10, 200);
-		
+		g.drawString("Game Engine Prints", 10, 10);
+		g.drawRect(200, 0, 50, 50);
+		g.drawRect(200, canvas.getHeight()-50, 50, 50);
 		//End Drawing!
 		bs.show();
 		g.dispose();
