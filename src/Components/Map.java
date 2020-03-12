@@ -149,7 +149,7 @@ public class Map {
 		for(Building buildings: buildingList){
 			file += "\nBuilding #" + counter + ":\n" 
 					+ "Name: " + buildings.getName() + "\n" 
-					+ "Building Image: " + buildings.getPicture() + "\n"
+					+ "Building Image: " + buildings.getPictureURL() + "\n"
 					+ buildings.getWallInfo() //this method add printLine already
 					+ buildings.getQuestions() 
 					+ "Found: " + buildings.getFound() + "\n";
@@ -198,6 +198,7 @@ public class Map {
 			e.printStackTrace();
 		}
 		Building building; 
+		Trees tree;
 
 		//Load Buildings
 		while (sc.hasNextLine()) {
@@ -207,9 +208,9 @@ public class Map {
 				String name = sc.nextLine();
 				name = name.substring(name.indexOf("Name:")+6); //+6 to exclude "Name: "
 				building = new Building(name);
-				//System.out.println(building.getName());
-				//Building Image (Not Done)
-				String image = sc.nextLine(); //Ignores for now
+				//Building Image 
+				String bImage = sc.nextLine(); //Ignores for now
+				building.setPictureURL(bImage);
 				
 				//Load Walls
 				wallLine = sc.nextLine();
@@ -230,6 +231,8 @@ public class Map {
 					String pointX2 = wallLine.substring(wallLine.indexOf("Second Point:")+14, index);
 					//PY2
 					String pointY2 = wallLine.substring(index+2, index = wallLine.indexOf(',',index+1));
+					//Image
+					String wImage = wallLine.substring(wallLine.indexOf("Wall Image:" ) + 12);
 
 //					System.out.println(name);
 //					System.out.println(height);
@@ -237,15 +240,17 @@ public class Map {
 //					System.out.println(pointY1);
 //					System.out.println(pointX2);
 //					System.out.println(pointY2);
+//					System.out.println(wImage);
 					
 					Wall wall = new Wall(name, Double.valueOf(height), 
 							new Point(Integer.valueOf(pointX1), Integer.valueOf(pointY1)),
 							new Point(Integer.valueOf(pointX2), Integer.valueOf(pointY2)));
+					wall.setTextureURL(wImage);
 					building.addWalls(wall);
 					wallLine=sc.nextLine();
 					
 				}
-				//Load Questions (Not Done)
+				//Load Questions 
 				questionLine=wallLine;
 				String answ1, answ2, answ3, answ4;
 				while(questionLine.contains("Question:")){
@@ -274,14 +279,14 @@ public class Map {
 					building.addQuestion(question);
 					questionLine=sc.nextLine();
 				}
-				
+				 
 				//Load Found 
 				foundLine = questionLine;
 				while(foundLine.contains("Found:")) {
 					name = foundLine.substring(foundLine.indexOf("Found:") + 7);
 					boolean found = Boolean.valueOf(name);
 					building.setFound(found);
-					System.out.println(name);
+					//System.out.println(name);
 					foundLine = sc.nextLine();
 				}
 				//Add Building
