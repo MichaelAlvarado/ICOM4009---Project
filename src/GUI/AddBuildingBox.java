@@ -187,6 +187,7 @@ public class AddBuildingBox extends JPanel{
 
 	private void autofill(Building building) {
 		name.setText(building.getName());
+		picURL.setText(building.getPictureURL());
 		wallHeight.setText(String.valueOf(building.getBuildingHeight()));
 	}
 }

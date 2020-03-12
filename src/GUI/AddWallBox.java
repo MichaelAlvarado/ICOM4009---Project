@@ -236,6 +236,7 @@ public class AddWallBox extends JPanel{
 			this.formattedTextP1Y.setText(String.valueOf(wall.getP1().y));
 			this.formattedTextP2X.setText(String.valueOf(wall.getP2().x));
 			this.formattedTextP2Y.setText(String.valueOf(wall.getP2().y));
+			imageURL.setText(wall.getTextureURL());
 		}
 	}
 
