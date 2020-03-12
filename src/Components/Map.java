@@ -267,7 +267,14 @@ public class Map {
 				}
 				
 				//Load Found 
-				
+				String foundLine = questionLine;
+				while(foundLine.contains("Found:")) {
+					name = foundLine.substring(foundLine.indexOf("Found:") + 7);
+					boolean found = Boolean.valueOf(name);
+					building.setFound(found);
+					System.out.println(name);
+					foundLine = sc.nextLine();
+				}
 				//Add Building
 				this.addBuilding(building);
 				//System.out.println("Load Done");
