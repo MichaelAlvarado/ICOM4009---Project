@@ -145,7 +145,7 @@ public class Map {
 				+ "Size: (" + Map.getWidth() + ", " + Map.getHeight() + ") " + "\n"
 				+ "Image: " + Map.getImageURL() + "\n";
 
-		//Iterate through list of buildings to store info on hashmap
+		//Iterate through list of buildings to store info on file
 		for(Building buildings: buildingList){
 			file += "\nBuilding #" + counter + ":\n" 
 					+ "Name: " + buildings.getName() + "\n" 
@@ -154,6 +154,7 @@ public class Map {
 					+ buildings.getQuestions() 
 					+ "Found: " + buildings.getFound() + "\n";
 			counter++;
+		//Iterate through all the trees in the map
 		for(Trees trees: trees) {
 			file += trees.getTreeInfo();
 		}
