@@ -4,16 +4,13 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
 import GUI.Display;
-
-//import Input.KeyManager;
-//import Input.MouseManager;
-//import Resources.Images;
-//import Resources.MusicHandler;
 
 
 /**
@@ -26,31 +23,27 @@ import GUI.Display;
 
 public class GameEngine implements Runnable {
 	
-	private static JFrame display;
-	private String title; 
+	private JFrame display;
 	private boolean running = false;
 	private Thread thread;
 	public static boolean threadB;
 	private BufferStrategy bs;
 	private Graphics g;
 	private Canvas canvas;
-	
 	private final int fps = 60;
 	
 	public GameEngine(JFrame display) {
 		this.display = display;
-		this.g = display.getGraphics();
-		this.title = display.getTitle();
-		threadB=false;
+		threadB = false;
 
         canvas = new Canvas();
         canvas.setBounds(0, 0, display.getWidth(), display.getHeight());
         canvas.setFocusable(false);
-        canvas.setBackground(Color.black);
+        canvas.setBackground(Color.black); //Testing
 
         display.add(canvas);
         display.pack();
-        
+     
         init();
 	}
 	/**
@@ -61,16 +54,27 @@ public class GameEngine implements Runnable {
 	private void init(){
 
 	}
-
+	
+	/**
+	 * @author Michael J. Alvarado
+	 * Date - 12/March/2020
+	 * This method starts the game engine. 
+	 * If this method is not run the game loop will not start.
+	 */
 	public synchronized void start(){
 		if(running)
 			return;
 		running = true;
-		//this runs the run method in this  class
 		thread = new Thread(this);
-		thread.start();
+		thread.start();		//this runs the run method in this  class
 	}
-
+	
+	/**
+	 * @author Michael J. Alvarado
+	 * Date - 12/March/2020
+	 * This method run the Game loop in fps constant
+	 * Runs render and tick at same fps
+	 */
 	public void run(){
 
 		//initiallizes everything in order to run without breaking
@@ -135,7 +139,7 @@ public class GameEngine implements Runnable {
 		
 		//Draw Here!
 		g.setColor(Color.WHITE);
-		g.drawString("Game Engine Prints", 10, 10);
+		g.drawString("Game Engine Prints", 10, 200);
 		
 		//End Drawing!
 		bs.show();

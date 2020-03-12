@@ -100,11 +100,10 @@ public class Menu{
 				try {
 					System.out.println("Loading MapDesign App...");
 					long start = System.nanoTime();
-					display.getContentPane().getGraphics().drawImage(ImageIO.read(new File("res/loadingscreen.png")), 0, 0, width, height, null); //loading screen 
-					display.getContentPane().removeAll();
+					loadingScreen();
 					MapDesign designMap = new MapDesign (display);
 					System.out.println("Map Design App Loaded in: " + ((System.nanoTime()-start)/1000000000.0) + " seconds");
-				} catch (ParseException | IOException e) {
+				} catch (ParseException e) {
 					e.printStackTrace();
 				}
 			}
@@ -116,9 +115,7 @@ public class Menu{
 			public void actionPerformed(ActionEvent e) {
 				// The game engine should start here
 				selection.setVisible(true);
-				createMap.setEnabled(false);
-				playGame.setEnabled(false);
-				help.setEnabled(false);
+				setButtonsEnable(false);
 			}
 
 		});
@@ -141,6 +138,29 @@ public class Menu{
 
 		});
 
+	}
+	/**
+	 * @author Michael J. Alvarado
+	 * Date - 12/March/2020
+	 * This methods draw the Loading Screen Image and remove all Content in the display
+	 */
+	public void loadingScreen() {
+		try {
+			display.getContentPane().getGraphics().drawImage(ImageIO.read(new File("res/loadingscreen.png")), 0, 0, width, height, null);
+			display.getContentPane().removeAll();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * @author Michael J. Alvarado
+	 * Date - 12/March/2020
+	 * @param arg - true if enable buttons, false if disable button
+	 */
+	public void setButtonsEnable(boolean arg) {
+		createMap.setEnabled(arg);
+		playGame.setEnabled(arg);
+		help.setEnabled(arg);
 	}
 
 	/**
@@ -178,8 +198,9 @@ public class Menu{
 			browser.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					File imageFile = browser.getSelectedFile();
-					mapURL.setText(imageFile.getPath());
+					
+					File mapFile = browser.getSelectedFile();
+					mapURL.setText(mapFile.getPath());
 				}
 			});
 			browseButton.addActionListener(new ActionListener() {
@@ -196,20 +217,13 @@ public class Menu{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					//Start
-					try {
-						System.out.println("Loading GameEngine...");
-						long start = System.nanoTime();
-						display.getContentPane().getGraphics().drawImage(ImageIO.read(new File("res/loadingscreen.png")), 0, 0, width, height, null);
-						display.getContentPane().removeAll();
-						GameEngine gameEngine = new GameEngine(display);
-						gameEngine.start();
-						System.out.println("GameEngine Loaded in: " + ((System.nanoTime()-start)/1000000000.0) + " seconds");
-						exit();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-						JOptionPane.showMessageDialog(display, "The map could not be loaded\n"
-								+ "Make sure file you loading is a txt file produced by a Map Design App");
-					}
+					System.out.println("Loading GameEngine...");
+					long start = System.nanoTime();
+					menu.loadingScreen();
+					GameEngine gameEngine = new GameEngine(display);
+					gameEngine.start();
+					System.out.println("GameEngine Loaded in: " + ((System.nanoTime()-start)/1000000000.0) + " seconds");
+					exit();
 				}
 			});
 
@@ -232,9 +246,7 @@ public class Menu{
 
 		private void exit() {
 			setVisible(false);
-			createMap.setEnabled(true);
-			playGame.setEnabled(true);
-			help.setEnabled(true);
+			menu.setButtonsEnable(true);
 		}
 
 
