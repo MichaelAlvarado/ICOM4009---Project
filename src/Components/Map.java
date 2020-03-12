@@ -156,7 +156,7 @@ public class Map {
 					+ "Name: " + buildings.getName() + "\n" 
 					+ "Building Image: " + buildings.getPicture() + "\n"
 					+ buildings.getWallInfo() //this method add printLine already
-					+ "Questions: " + buildings.getQuestions() + "\n"
+					+ buildings.getQuestions() 
 					+ "Found: " + buildings.getFound() + "\n";
 			counter++;
 
@@ -204,12 +204,13 @@ public class Map {
 				String name = sc.nextLine();
 				name = name.substring(name.indexOf("Name:")+6); //+6 to exclude "Name: "
 				building = new Building(name);
-				System.out.println(building.getName());
+				//System.out.println(building.getName());
 				//Building Image (Not Done)
 				String image = sc.nextLine(); //Ignores for now
+				
 				//Load Walls
-				String wallLine;
-				while((wallLine = sc.nextLine()).contains("ID")) {
+				String wallLine = sc.nextLine();
+				while(wallLine.contains("ID")) {
 					//name
 					int index = wallLine.indexOf(',');
 					name = wallLine.substring(wallLine.indexOf("ID:")+4, index);
@@ -227,27 +228,53 @@ public class Map {
 					//PY2
 					String pointY2 = wallLine.substring(index+2, index = wallLine.indexOf(',',index+1));
 
-					System.out.println(name);
-					System.out.println(height);
-					System.out.println(pointX1);
-					System.out.println(pointY1);
-					System.out.println(pointX2);
-					System.out.println(pointY2);
+//					System.out.println(name);
+//					System.out.println(height);
+//					System.out.println(pointX1);
+//					System.out.println(pointY1);
+//					System.out.println(pointX2);
+//					System.out.println(pointY2);
 					Wall wall = new Wall(name, Double.valueOf(height), 
 							new Point(Integer.valueOf(pointX1), Integer.valueOf(pointY1)),
 							new Point(Integer.valueOf(pointX2), Integer.valueOf(pointY2)));
 					building.addWalls(wall);
+					wallLine=sc.nextLine();
+					
 				}
 				//Load Questions (Not Done)
+				String questionLine=wallLine;
+				String answ1, answ2, answ3, answ4;
+				while(questionLine.contains("Question:")){
+					int index = questionLine.indexOf(',');
+					name = questionLine.substring(10,index);
+					index = questionLine.indexOf(',', index + 1);
+					answ1 = questionLine.substring((questionLine.indexOf("Answers:") + 9), index);
+					index = questionLine.indexOf(',', index + 1);
+					answ2 = questionLine.substring((questionLine.indexOf("Answers:") + 12), index);
+					index = questionLine.indexOf(',', index + 1);
+					answ3 = questionLine.substring((questionLine.indexOf("Answers:") + 15), index);
+					answ4 = questionLine.substring(questionLine.indexOf("Answers:") + 18);
+					
+//					System.out.println(name);
+//					System.out.println(answ1);
+//					System.out.println(answ2);
+//					System.out.println(answ3);
+//					System.out.println(answ4);
+					
+					Question question = new Question(name, answ1, answ2, answ3, answ4);
+					building.addQuestion(question);
+					questionLine=sc.nextLine();
+				}
 				
-				//Load Found (Not Done)
+				//Load Found 
 				
 				//Add Building
 				this.addBuilding(building);
+				//System.out.println("Load Done");
 			}
 		} 
 		/*
-		 * Falta que cargue las preguntas, las imagenes y el found de buildings
+		 * Falta que cargue las imagenes
 		 */
 
 	}

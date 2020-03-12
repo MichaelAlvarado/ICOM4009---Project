@@ -51,10 +51,8 @@ public class Building {
 	 */
 	public String getQuestions() {
 		String result = "";
-		int counter = 1;
 		for (Question q: this.questionPool) {
-			result += counter + ") " +  q.getQuestion() + ", Answers: " + q.getAnswers() + ", ";
-			counter++;
+			result += "Question: " + q.getQuestion() + ", Answers: " + q.getAnswers() + " \n";
 		}
 		return result;
 	}
