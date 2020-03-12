@@ -46,7 +46,7 @@ public class AddTreeBox extends JPanel{
 	private JButton activationButton; //this is the button use to active this Window
 
 
-	public AddTreeBox(int x, int y, int width, int height, Plane plane) {
+	public AddTreeBox(int x, int y, int width, int height, Plane plane, JButton activationButton) {
 		super();
 		this.setLayout(null);
 		this.plane = plane;
@@ -65,11 +65,11 @@ public class AddTreeBox extends JPanel{
 		picLabel = new JLabel("Tree Image");
 		picLabel.setBounds(10, 100, 100, 25);
 		// display tree picture for selected tree type
-		
+
 		//Height Label for the height of building to be set
 		treeHeight = new JLabel("Tree height");
 		treeHeight.setBounds(10, 70, 100, 25);
-		
+
 
 		//Enter will be valid if all text boxes are correspondingly valid
 		enter = new JButton("Enter");
@@ -99,10 +99,10 @@ public class AddTreeBox extends JPanel{
 		exit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				exit();
 				if(plane.currentTree == null) { 
 					activationButton.setText("Add Tree");				
 				}
+				exit();
 			}
 		});
 
@@ -113,11 +113,11 @@ public class AddTreeBox extends JPanel{
 		add(treeSpeciesField);
 		add(treeSpecies);
 		add(treeHeight);
-//		add(p1Label);
-//		add(p2Label); 
+		//		add(p1Label);
+		//		add(p2Label); 
 
 	}
-	
+
 	//This is a method to fill the box the the information of a Wall so you can edit it
 	public void edit(Trees tree) {
 		this.tree = tree;
@@ -127,7 +127,7 @@ public class AddTreeBox extends JPanel{
 		plane.setCurrentTree(tree); 
 	}
 
-	
+
 	public void addTree() {
 		tree = new Trees(1, new Point(), new Point()); // TODO: implement
 		setVisible(true);

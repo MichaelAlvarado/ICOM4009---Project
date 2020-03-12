@@ -24,12 +24,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.text.ParseException;
 import java.util.LinkedList;
 import java.awt.Color;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.border.LineBorder;
 import javax.swing.UIManager;
@@ -40,6 +45,8 @@ import java.awt.Canvas;
 import javax.swing.JFormattedTextField;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.border.TitledBorder;
 import javax.swing.colorchooser.ColorSelectionModel;
 import javax.swing.event.ChangeEvent;
@@ -58,6 +65,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import java.awt.Label;
 import java.awt.MenuItem;
+import java.awt.Point;
 import java.awt.PopupMenu;
 
 import javax.swing.JSlider;
@@ -72,6 +80,7 @@ public class MapDesign{
 	private JFrame display;
 	private Plane plane;
 	private int width, height;
+	protected boolean toolOpened;
 
 	/**
 	 * @author Michael J. Alvarado
@@ -143,6 +152,23 @@ public class MapDesign{
 		JButton treeList = new JButton("Tree List");
 		treeList.setBounds((panel.getWidth()/2)+165, 50, 150, 25);
 		panel.add(treeList);
+		
+		//Round Add Button in Plane
+		BufferedImage buttonIcon = null;
+		try {
+		    buttonIcon = ImageIO.read(new File("res/addButton.png"));
+		}
+		catch(Exception ex) {
+		}
+		// Set the image icon here
+		Image dimg = buttonIcon.getScaledInstance(60, 60,Image.SCALE_SMOOTH); //scale the image
+		JButton tool = new JButton(new ImageIcon(dimg));
+		tool.setBorderPainted(false);
+		tool.setContentAreaFilled(false);
+		tool.setFocusPainted(false);
+		tool.setOpaque(false);
+		tool.setBounds(plane.getWidth()-65, plane.getHeight()/2-60, 60, 60);
+		plane.add(tool);
 
 		//Boxes which are made to add or edit map,buildings,wall,questions, trees.
 		AddBuildingBox addBuildingBox = new AddBuildingBox((width/2)-250, 200,500,200, plane, addBuilding);
@@ -162,7 +188,7 @@ public class MapDesign{
 		plane.disable();
 		display.getContentPane().add(addMapBox);
 
-		AddTreeBox addTreeBox = new AddTreeBox((width/2)-250, 200,500,300, plane);
+		AddTreeBox addTreeBox = new AddTreeBox((width/2)-250, 200,500,300, plane, addTree);
 		addTreeBox.setVisible(false);
 		display.getContentPane().add(addTreeBox);
 		
@@ -261,6 +287,22 @@ public class MapDesign{
 				addWallBox.setVisible(false);
 				addBuildingBox.setVisible(false);
 				addMapBox.setVisible(false);
+			}
+		});
+		
+		tool.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(!toolOpened) {
+				plane.openTool();
+				tool.setLocation(plane.getWidth()-65-200, tool.getLocation().y);
+				toolOpened = true;
+				}
+				else {
+					plane.closeTool();
+					tool.setLocation(plane.getWidth()-65, tool.getLocation().y);
+					toolOpened = false;
+				}
 			}
 		});
 
