@@ -39,7 +39,9 @@ import GUI.Plane;
 /**
  * 
  * @author Michael J. Alvarado
- *	This is class is the Menu state. Its responsible of changing to the DesignMap or to the game
+ * Date - 10/March/2020
+ *	This is class is the Menu state.
+ *  Its responsible of changing to the DesignMap or to the game
  */
 public class Menu{
 
@@ -141,7 +143,12 @@ public class Menu{
 
 	}
 
-
+	/**
+	 * 
+	 * @author Michael J. Alvarado
+	 * Date - 10/March/2020
+	 *
+	 */
 	public class MapSelect extends JPanel{
 
 
@@ -189,7 +196,20 @@ public class Menu{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					//Start
-					exit();
+					try {
+						System.out.println("Loading GameEngine...");
+						long start = System.nanoTime();
+						display.getContentPane().getGraphics().drawImage(ImageIO.read(new File("res/loadingscreen.png")), 0, 0, width, height, null);
+						display.getContentPane().removeAll();
+						GameEngine gameEngine = new GameEngine(display);
+						gameEngine.start();
+						System.out.println("GameEngine Loaded in: " + ((System.nanoTime()-start)/1000000000.0) + " seconds");
+						exit();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+						JOptionPane.showMessageDialog(display, "The map could not be loaded\n"
+								+ "Make sure file you loading is a txt file produced by a Map Design App");
+					}
 				}
 			});
 
