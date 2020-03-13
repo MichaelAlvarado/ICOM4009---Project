@@ -175,7 +175,7 @@ public class Plane extends JPanel{
 		//Draw tool panel
 		if(isOpenTool) {
 			g.setColor(new Color(0,0,0,100));
-			g.fillRect(this.getWidth()-200, 0, 200, getHeight());
+			g.fillRect(this.getWidth()-100, 0, 200, getHeight());
 		}
 	} //Paint end
 
@@ -249,11 +249,23 @@ public class Plane extends JPanel{
 		setCurrentBuilding(building);
 	}
 
+	/**
+	 * 
+	 * @author Michael J. Alvarado
+	 * This methods prints the tool panel in plane
+	 * @date Mar 12, 2020
+	 */
 	public void openTool() {
 		this.isOpenTool = true;
 		this.repaint();
 	}
 	
+	/**
+	 * 
+	 * @author Michael J. Alvarado
+	 * This methods ignore print tool panel 
+	 * @date Mar 12, 2020
+	 */
 	public void closeTool() {
 		this.isOpenTool = false;
 		this.repaint();

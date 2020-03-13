@@ -295,7 +295,7 @@ public class MapDesign{
 			public void actionPerformed(ActionEvent arg0) {
 				if(!toolOpened) {
 				plane.openTool();
-				tool.setLocation(plane.getWidth()-65-200, tool.getLocation().y);
+				tool.setLocation(plane.getWidth()-65-100, tool.getLocation().y);
 				toolOpened = true;
 				}
 				else {
