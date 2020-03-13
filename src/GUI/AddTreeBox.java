@@ -29,7 +29,7 @@ import Components.Wall;
 
 /**
  * 
- * @author Fabiola Badillo Ramos & Anel Martinez
+ * @author Fabiola Badillo Ramos & Anel Martinez Gomez
  * Date - March 11, 2020
  *	This class lets the user set tree type 
  */
