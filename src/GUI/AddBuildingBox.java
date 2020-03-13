@@ -65,7 +65,7 @@ public class AddBuildingBox extends JPanel{
 		name.setBounds(buildingName.getX()+buildingName.getWidth(), buildingName.getY(), (width/2), 25);
 
 		//Label for the user to know he can set the texture image
-		picLabel = new JLabel("Building Texture");
+		picLabel = new JLabel("Building Texture:");
 		picLabel.setBounds(10, 100, 100, 25);
 		picURL = new JTextField();
 		picURL.setBounds(picLabel.getX()+picLabel.getWidth(), picLabel.getY(), (width/2), 25);

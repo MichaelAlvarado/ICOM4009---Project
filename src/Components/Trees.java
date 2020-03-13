@@ -20,6 +20,7 @@ public class Trees {
 	private BufferedImage treeImage;
 	private boolean found; // idk yet if trees are to be found or will be present in the map from the beginning 
 	private int treeHeight; 
+	private String pictureURL;
 	private Point p1;
 	private Point p2;
 	private String tid;
@@ -125,6 +126,16 @@ public class Trees {
 			setTreeHeight(100);
 			// setTreeImage(treeImage3);
 		}
+	}
+
+
+	public String getPictureURL() {
+		return pictureURL;
+	}
+
+
+	public void setPictureURL(String pictureURL) {
+		this.pictureURL = pictureURL;
 	}
 	
 }
