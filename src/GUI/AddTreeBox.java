@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -41,7 +42,8 @@ public class AddTreeBox extends JPanel{
 	private JButton enter, exit, activationButton, browseButton;
 	private JFileChooser browser;
 	private JLabel treeSpecies, treeHeight, p1Label, p2Label, picLabel;
-	private JTextField treeSpeciesField, picBrowser, heightSel;
+	private JList treeSpeciesField;
+	private JTextField picBrowser, heightSel;
 	private JFormattedTextField formattedTextP1X, formattedTextP1Y, formattedTextP2X, formattedTextP2Y;
 	private boolean newTree;
 	static BufferedImage picture;
@@ -60,9 +62,10 @@ public class AddTreeBox extends JPanel{
 		this.setBackground(new Color(190,190,190));
 
 		treeSpecies = new JLabel("Tree species:"); 
-		treeSpecies.setBounds(10, 40, 100, 25);
-		treeSpeciesField = new JTextField();
-		treeSpeciesField.setBounds(treeSpecies.getX()+treeSpecies.getWidth(), treeSpecies.getY(), (width/2), 25);
+		treeSpecies.setBounds(10, 10, 100, 25);
+		String num[]= { "Type 1","Type 2","Type 3"};
+		treeSpeciesField = new JList(num);
+		treeSpeciesField.setBounds(treeSpecies.getX()+treeSpecies.getWidth(), treeSpecies.getY(), (width/2), 55);
 
 		//Label for the user to know he can set the texture image
 		picLabel = new JLabel("Tree Image:");
@@ -168,7 +171,7 @@ public class AddTreeBox extends JPanel{
 		enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				tree.setTreeSpecies(Integer.valueOf(treeSpeciesField.getText()));
+				tree.setTreeSpecies(Integer.valueOf(treeSpeciesField.getSelectedIndex()));
 				try {
 					if(picture != null) {
 						tree.setTreeImage(picture);
