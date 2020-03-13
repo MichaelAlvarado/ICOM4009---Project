@@ -223,7 +223,6 @@ public class AddTreeBox extends JPanel{
 		plane.setCurrentTree(tree); 
 	}
 
-
 	public void addTree() {
 		tree = new Trees(1, new Point(), new Point()); // TODO: implement
 		setVisible(true);
