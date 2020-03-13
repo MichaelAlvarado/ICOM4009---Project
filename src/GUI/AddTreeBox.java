@@ -49,7 +49,7 @@ public class AddTreeBox extends JPanel{
 	//Activation Button: this is the button used to active this Window
 
 
-	public AddTreeBox(int x, int y, int width, int height, Plane plane) {
+	public AddTreeBox(int x, int y, int width, int height, Plane plane, JButton activationButton) {
 		super();
 		this.setLayout(null);
 		this.plane = plane;
@@ -101,6 +101,10 @@ public class AddTreeBox extends JPanel{
 
 		//Height Label for the height of tree to be set if decided not to establish one in specific 
 		treeHeight = new JLabel("Tree height:");
+
+
+		//Height Label for the height of building to be set
+		treeHeight = new JLabel("Tree height");
 		treeHeight.setBounds(10, 70, 100, 25);
 		heightSel = new JTextField();
 		heightSel.setBounds(treeHeight.getX()+treeHeight.getWidth(), treeHeight.getY(), (width/2), 25);
@@ -158,8 +162,6 @@ public class AddTreeBox extends JPanel{
 		formattedTextP2Y.setHorizontalAlignment(SwingConstants.CENTER);
 		formattedTextP2Y.setBounds(treeHeight.getX()+treeHeight.getWidth()+40, 160, 40, 25);
 
-
-
 		//Enter will be valid if all text boxes are correspondingly valid
 		enter = new JButton("Enter");
 		enter.setBounds(width/2-100, height-60, 100, 50);
@@ -188,10 +190,10 @@ public class AddTreeBox extends JPanel{
 		exit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				exit();
 				if(plane.currentTree == null) { 
 					activationButton.setText("Add Tree");				
 				}
+				exit();
 			}
 		});
 
@@ -212,6 +214,9 @@ public class AddTreeBox extends JPanel{
 		add(formattedTextP1Y);
 		add(formattedTextP2X);
 		add(formattedTextP2Y);
+		//		add(p1Label);
+		//		add(p2Label); 
+
 	}
 
 	//This is a method to fill the box the the information of a Wall so you can edit it
@@ -222,6 +227,7 @@ public class AddTreeBox extends JPanel{
 		newTree = false;
 		plane.setCurrentTree(tree); 
 	}
+
 
 	public void addTree() {
 		tree = new Trees(1, new Point(), new Point()); // TODO: implement
