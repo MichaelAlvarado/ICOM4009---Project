@@ -10,6 +10,7 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
+import Components.Map;
 import GUI.Display;
 
 
@@ -22,7 +23,7 @@ import GUI.Display;
  */
 
 public class GameEngine implements Runnable {
-	
+
 	private JFrame display;
 	private boolean running = false;
 	private Thread thread;
@@ -31,20 +32,21 @@ public class GameEngine implements Runnable {
 	private Graphics g;
 	private Canvas canvas;
 	private final int fps = 60;
-	
-	public GameEngine(JFrame display) {
+	private GameState gameState;
+	private Map map;
+
+	public GameEngine(JFrame display, Map map) {
 		this.display = display;
+		this.map = map;
 		threadB = false;
+		canvas = new Canvas();
+		canvas.setBounds(0, 0, display.getContentPane().getWidth(), display.getContentPane().getHeight());
+		canvas.setFocusable(false);
+		canvas.setBackground(Color.black); //Testing
+		display.add(canvas);
+		display.pack();
 
-        canvas = new Canvas();
-        canvas.setBounds(0, 0, display.getContentPane().getWidth(), display.getContentPane().getHeight());
-        canvas.setFocusable(false);
-        canvas.setBackground(Color.black); //Testing
-
-        display.add(canvas);
-        display.pack();
-     
-        init();
+		init();
 	}
 	/**
 	 * @author Michael J. Alvarado
@@ -52,9 +54,9 @@ public class GameEngine implements Runnable {
 	 * This method will load files needed to play and add all the Mouse and Key Listener to play the game
 	 */
 	private void init(){
-
+		gameState = new GameState(map, canvas.getWidth(), canvas.getHeight());
 	}
-	
+
 	/**
 	 * @author Michael J. Alvarado
 	 * Date - 12/March/2020
@@ -68,7 +70,7 @@ public class GameEngine implements Runnable {
 		thread = new Thread(this);
 		thread.start();		//this runs the run method in this  class
 	}
-	
+
 	/**
 	 * @author Michael J. Alvarado
 	 * Date - 12/March/2020
@@ -133,20 +135,23 @@ public class GameEngine implements Runnable {
 			return;
 		}
 		g = bs.getDrawGraphics();
-		
+
 		//Clear Screen
 		g.clearRect(0, 0,  display.getWidth(), display.getHeight());
-		
+
 		//Draw Here!
-		g.setColor(Color.WHITE);
-		g.drawString("Game Engine Prints", 10, 10);
-		g.drawRect(200, 0, 50, 50);
-		g.drawRect(200, canvas.getHeight()-50, 50, 50);
+		if(gameState != null) {
+			gameState.render(g);
+		}
+		//		g.setColor(Color.WHITE);
+		//		g.drawString("Game Engine Prints", 10, 10);
+		//		g.drawRect(200, 0, 50, 50);
+		//		g.drawRect(200, canvas.getHeight()-50, 50, 50);
 		//End Drawing!
 		bs.show();
 		g.dispose();
 	}
-	
+
 	/**
 	 * @author Michael J. Alvarado
 	 * Date - 12/March/2020

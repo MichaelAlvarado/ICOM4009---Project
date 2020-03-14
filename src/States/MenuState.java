@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -30,6 +31,7 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.text.MaskFormatter;
 
+import Components.Map;
 import Components.Wall;
 import GUI.AddWallBox;
 import GUI.Display;
@@ -43,13 +45,13 @@ import GUI.Plane;
  *	This is class is the Menu state.
  *  Its responsible of changing to the DesignMap or to the game
  */
-public class Menu{
+public class MenuState{
 
 	JFrame display;
 	JButton createMap, playGame, help;
 	int width, height;
 
-	public Menu(JFrame display) throws IOException {
+	public MenuState(JFrame display) throws IOException {
 		this.display = display;
 		this.width = display.getContentPane().getWidth();
 		this.height = display.getContentPane().getHeight();
@@ -110,18 +112,15 @@ public class Menu{
 		});
 
 		playGame.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// The game engine should start here
 				selection.setVisible(true);
 				setButtonsEnable(false);
 			}
-
 		});
 
 		help.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String help = "Create Map buttons allows you to create your own map to play.\n"+
@@ -135,7 +134,6 @@ public class Menu{
 						"	Jorge Calderon\n\n";
 				JOptionPane.showMessageDialog(display, help);
 			}
-
 		});
 
 	}
@@ -171,20 +169,21 @@ public class Menu{
 	 */
 	public class MapSelect extends JPanel{
 
-
+		Map map;
 		JTextField mapURL;
 		JFileChooser browser;
 		JButton enter, exit, browseButton, Defaultmap;
 		JLabel mapLabel;
-		Menu menu;
+		MenuState menu;
 
-		public MapSelect(int x, int y, int width, int height, Menu menu) {
+		public MapSelect(int x, int y, int width, int height, MenuState menu) {
 			super();
 			this.menu = menu;
-			this.setLayout(null);
+			map = new Map();
+			setLayout(null);
 			setBounds(x, y, width, height);
 			setBorder(new LineBorder(UIManager.getColor("Button.darkShadow"), 3, true));
-			this.setBackground(new Color(190,190,190));
+			setBackground(new Color(190,190,190));
 
 
 			// browse for a wall texture
@@ -198,9 +197,13 @@ public class Menu{
 			browser.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					
-					File mapFile = browser.getSelectedFile();
-					mapURL.setText(mapFile.getPath());
+					try {
+						map.generateMap(browser.getSelectedFile());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					mapURL.setText(	browser.getSelectedFile().getPath());
+
 				}
 			});
 			browseButton.addActionListener(new ActionListener() {
@@ -217,10 +220,11 @@ public class Menu{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					//Start
+
 					System.out.println("Loading GameEngine...");
 					long start = System.nanoTime();
 					menu.loadingScreen();
-					GameEngine gameEngine = new GameEngine(display);
+					GameEngine gameEngine = new GameEngine(display, map);
 					gameEngine.start();
 					System.out.println("GameEngine Loaded in: " + ((System.nanoTime()-start)/1000000000.0) + " seconds");
 					exit();

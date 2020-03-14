@@ -29,7 +29,7 @@ public class Map {
 	private static int width;
 	private static BufferedImage picture;
 	private static String imageURL;
-	
+
 	public Map(LinkedList<Building> buildingList, LinkedList<Trees> trees, String mapName, int height, int width) {
 		super();
 		this.buildingList = buildingList;
@@ -45,7 +45,7 @@ public class Map {
 	}
 
 
-	public static BufferedImage getPicture() {
+	public BufferedImage getPicture() {
 		return picture;
 	}
 
@@ -67,7 +67,7 @@ public class Map {
 	public LinkedList<Trees> getTrees(){
 		return trees;
 	}
-	
+
 	public void setTrees(LinkedList<Trees> trees) {
 		this.trees = trees;
 	}
@@ -100,12 +100,14 @@ public class Map {
 	public void setWidth(int width) {
 		Map.width = width;
 	}
-	
+
 	public static String getImageURL() {
 		return imageURL;
 	}
-	public void setImageURL(String imageURL) {
+	public void setImageURL(String imageURL) throws IOException {
 		Map.imageURL = imageURL;
+		this.setPicture(ImageIO.read(new File(imageURL)));
+
 	}
 
 	public void addBuilding(Building b) {
@@ -115,15 +117,15 @@ public class Map {
 	public void removeBuilding(Building b) {
 		this.buildingList.remove(b);
 	}
-	
+
 	public void addTree(Trees t) {
 		this.trees.add(t);
 	}
-	
+
 	public void removeTree(Trees t) {
 		this.trees.remove(t);
 	}
-	
+
 	/**
 	 * @author jorgecalderon
 	 * Objective - Generate the text file needed for easier configuration in VRML
@@ -154,10 +156,10 @@ public class Map {
 					+ buildings.getQuestions() 
 					+ "Found: " + buildings.getFound() + "\n";
 			counter++;
-		//Iterate through all the trees in the map
-		for(Trees trees: trees) {
-			file += trees.getTreeInfo();
-		}
+			//Iterate through all the trees in the map
+			for(Trees trees: trees) {
+				file += trees.getTreeInfo();
+			}
 
 		}
 		//Write String file to the Configuration File
@@ -190,10 +192,8 @@ public class Map {
 		this.setWidth(Integer.valueOf(size.substring(size.indexOf('(')+1, size.indexOf(','))));
 		this.setHeight(Integer.valueOf(size.substring(size.indexOf(',')+2, size.indexOf(')'))));
 		String imageURL = sc.nextLine();
-		this.setImageURL(imageURL.substring(7));
-		System.out.println(this.getImageURL());
 		try {
-			this.setPicture(ImageIO.read(new File(this.getImageURL())));
+			this.setImageURL(imageURL.substring(7));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -211,7 +211,7 @@ public class Map {
 				//Building Image 
 				String bImage = sc.nextLine(); //Ignores for now
 				building.setPictureURL(bImage);
-				
+
 				//Load Walls
 				wallLine = sc.nextLine();
 				while(wallLine.contains("ID")) {
@@ -234,21 +234,21 @@ public class Map {
 					//Image
 					String wImage = wallLine.substring(wallLine.indexOf("Wall Image:" ) + 12);
 
-//					System.out.println(name);
-//					System.out.println(height);
-//					System.out.println(pointX1);
-//					System.out.println(pointY1);
-//					System.out.println(pointX2);
-//					System.out.println(pointY2);
-//					System.out.println(wImage);
-					
+					//					System.out.println(name);
+					//					System.out.println(height);
+					//					System.out.println(pointX1);
+					//					System.out.println(pointY1);
+					//					System.out.println(pointX2);
+					//					System.out.println(pointY2);
+					//					System.out.println(wImage);
+
 					Wall wall = new Wall(name, Double.valueOf(height), 
 							new Point(Integer.valueOf(pointX1), Integer.valueOf(pointY1)),
 							new Point(Integer.valueOf(pointX2), Integer.valueOf(pointY2)));
 					wall.setTextureURL(wImage);
 					building.addWalls(wall);
 					wallLine=sc.nextLine();
-					
+
 				}
 				//Load Questions 
 				questionLine=wallLine;
@@ -268,18 +268,18 @@ public class Map {
 					answ3 = questionLine.substring((questionLine.indexOf("Answers:") + 15), index);
 					//Fourth Answer
 					answ4 = questionLine.substring(questionLine.indexOf("Answers:") + 18);
-					
-//					System.out.println(name);
-//					System.out.println(answ1);
-//					System.out.println(answ2);
-//					System.out.println(answ3);
-//					System.out.println(answ4);
-					
+
+					//					System.out.println(name);
+					//					System.out.println(answ1);
+					//					System.out.println(answ2);
+					//					System.out.println(answ3);
+					//					System.out.println(answ4);
+
 					Question question = new Question(name, answ1, answ2, answ3, answ4);
 					building.addQuestion(question);
 					questionLine=sc.nextLine();
 				}
-				 
+
 				//Load Found 
 				foundLine = questionLine;
 				while(foundLine.contains("Found:")) {
@@ -298,7 +298,7 @@ public class Map {
 				//TO-DO once Trees are fully functional
 			}
 			else {
-				treeLine = sc.nextLine();
+				//treeLine = sc.nextLine();
 			}
 		} 
 		/*

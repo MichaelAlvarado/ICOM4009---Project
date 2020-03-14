@@ -72,12 +72,8 @@ public class AddMapBox extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				File imageFile = browserImage.getSelectedFile();
 				try {						
-					System.out.println("loading file...");
-					image = ImageIO.read(imageFile);
-					System.out.println("load file");
 					imageURL.setText(imageFile.getPath());
 					map.setImageURL(imageFile.getPath());
-					map.setPicture(image);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -105,9 +101,6 @@ public class AddMapBox extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Creates the Map
-				if(image != null) {
-					map.setPicture(image);
-				}
 				try {
 				map.setWidth(Integer.valueOf(mapWidth.getText()));
 				map.setHeight(Integer.valueOf(mapHeight.getText()));
