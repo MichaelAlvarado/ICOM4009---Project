@@ -156,11 +156,11 @@ public class Map {
 					+ buildings.getQuestions() 
 					+ "Found: " + buildings.getFound() + "\n";
 			counter++;
-			//Iterate through all the trees in the map
-			for(Trees trees: trees) {
-				file += trees.getTreeInfo();
-			}
-
+		}
+		file += "\nTrees:";
+		//Iterate through all the trees in the map
+		for(Trees trees: trees) {
+			file += trees.getTreeInfo();
 		}
 		//Write String file to the Configuration File
 		try {
@@ -198,7 +198,6 @@ public class Map {
 			e.printStackTrace();
 		}
 		Building building; 
-		Trees tree;
 
 		//Load Buildings
 		while (sc.hasNextLine()) {
@@ -209,7 +208,8 @@ public class Map {
 				name = name.substring(name.indexOf("Name:")+6); //+6 to exclude "Name: "
 				building = new Building(name);
 				//Building Image 
-				String bImage = sc.nextLine(); //Ignores for now
+				String bImage = sc.nextLine(); 
+				bImage = bImage.substring(bImage.indexOf("Building Image: ") + 16);
 				building.setPictureURL(bImage);
 
 				//Load Walls
@@ -282,24 +282,77 @@ public class Map {
 
 				//Load Found 
 				foundLine = questionLine;
-				while(foundLine.contains("Found:")) {
-					name = foundLine.substring(foundLine.indexOf("Found:") + 7);
-					boolean found = Boolean.valueOf(name);
-					building.setFound(found);
-					//System.out.println(name);
-					foundLine = sc.nextLine();
-				}
+				name = foundLine.substring(foundLine.indexOf("Found:") + 7);
+				boolean found = Boolean.valueOf(name);
+				building.setFound(found);
+				//System.out.println(name);
+				foundLine = sc.nextLine();
+				
 				//Add Building
 				this.addBuilding(building);
 				//System.out.println("Load Done");
 			}
+			////////////////////////////////////////////////////////////////////////////////////////////
 			treeLine = foundLine;
 			if(treeLine.contains("Trees:")) {
-				//TO-DO once Trees are fully functional
+				treeLine = sc.nextLine();
+				int index = 0;
+				Trees t = new Trees();
+				
+				while(treeLine.contains("ID:")) {
+					index = treeLine.indexOf(',');
+					//ID of Tree
+					String treeID = treeLine.substring(treeLine.indexOf("ID:") + 4, index);
+					System.out.println(treeID);
+					index = treeLine.indexOf(',' + 1);
+					//Species of Tree
+					String treeSpecies = treeLine.substring(treeLine.indexOf("Species:") + 9, index);
+					System.out.println(treeSpecies);
+					index = treeLine.indexOf(',' + 1);
+					//Height of Tree
+					String treeHeight = treeLine.substring(treeLine.indexOf("Height:") + 8, index);
+					System.out.println(treeHeight);
+					t.setID(treeID);
+					t.setTreeSpecies(Integer.valueOf(treeSpecies));
+					t.setTreeHeight(Integer.valueOf(treeHeight));
+				}
+				
+				//// Load coordinates
+				treeLine = sc.nextLine();				
+				
+				while(treeLine.contains("First Point:")) {
+					index = treeLine.indexOf(',');
+					//Coordinates of First Point
+					String p1X = treeLine.substring(treeLine.indexOf("First Point:") + 13, index);
+					String p1Y = treeLine.substring(index + 2, index = treeLine.indexOf(',') + 1);
+					index = treeLine.indexOf(',' + 1);
+					//Coordinates of Second Point
+					String p2X = treeLine.substring(treeLine.indexOf("Second Point:") + 14, index);
+					String p2Y = treeLine.substring(index + 2, index = treeLine.indexOf(',' + 1));
+					System.out.println(p1X + ", " + p1Y);
+					System.out.println(p2X + ", " + p2Y);
+					t.setP1(new Point(Integer.valueOf(p1X), Integer.valueOf(p1Y))); 
+					t.setP2(new Point(Integer.valueOf(p2X), Integer.valueOf(p2Y)));
+				}
+				
+				treeLine = sc.nextLine();
+				//Load Image URL
+				String treeImage = treeLine.substring(treeLine.indexOf("Image:") + 7);
+				System.out.println(treeImage);
+				t.setPictureURL(treeImage);
+				
+				treeLine = sc.nextLine();
+				//Load Found
+				String treeFound = treeLine.substring(treeLine.indexOf("Found:") + 7);
+				System.out.println(treeFound);
+				t.setFound(Boolean.valueOf(treeFound));
+				
+			this.addTree(t);
 			}
 			else {
-				//treeLine = sc.nextLine();
+				treeLine = sc.nextLine();
 			}
+			
 		} 
 		/*
 		 * Falta que cargue las imagenes

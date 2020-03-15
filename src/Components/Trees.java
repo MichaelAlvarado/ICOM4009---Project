@@ -33,6 +33,16 @@ public class Trees {
 		this.p2 = p2;
 	}
 	
+	public Trees(String ID, int treeSpecies, int height) {
+		this.tid = ID;
+		this.treeHeight = height;
+		this.treeSpecies = treeSpecies;
+	}
+	
+	public Trees() {
+		
+	}
+	
 	
 //	/**
 //	 * @author jorgecalderon
@@ -44,12 +54,12 @@ public class Trees {
 //	 */
 	public String getTreeInfo() {
 		String result = "";
-		result += "Trees: \n" 
-				+ "ID: " + this.getID() + "\nSpecies: " + this.getTreeSpecies()
-				+ "\nHeight: " + this.getTreeHeight()
-				+ "\nFirst Point: " + this.getP1() + " Second Point: " + this.getP2()
-				+ "\nImage: "  + this.getTreeImage()
-				+ "\nFound: " + this.isFound();
+		result += "\nID: " + this.getID() + ", Species: " + this.getTreeSpecies()
+				+ ", Height: " + this.getTreeHeight()
+				+ "\nFirst Point: " + this.getP1().x + ", " + this.getP1().y 
+				+ ", Second Point: " + this.getP2().x + ", " + this.getP2().y
+				+ "\nImage: "  + this.getPictureURL()
+				+ "\nFound: " + this.isFound() + "\n";
 		return result;
 	}
 
@@ -91,7 +101,7 @@ public class Trees {
 	public boolean isFound() {
 		return this.found;
 	}
-	private void setTreeHeight(int treeHeight) {
+	public void setTreeHeight(int treeHeight) {
 		this.treeHeight = treeHeight;
 	}
 	public int getTreeHeight() {
