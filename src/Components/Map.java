@@ -293,7 +293,10 @@ public class Map {
 				//System.out.println("Load Done");
 			}
 			////////////////////////////////////////////////////////////////////////////////////////////
-			treeLine = foundLine;
+			//treeLine = foundLine;
+			treeLine = sc.nextLine();
+
+			System.out.println(treeLine);
 			if(treeLine.contains("Trees:")) {
 				treeLine = sc.nextLine();
 				int index = 0;
@@ -350,7 +353,7 @@ public class Map {
 			this.addTree(t);
 			}
 			else {
-				treeLine = sc.nextLine();
+				//treeLine = sc.nextLine();
 			}
 			
 		} 

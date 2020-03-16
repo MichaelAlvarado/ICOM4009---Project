@@ -1,0 +1,31 @@
+Map: Map
+Size: (1000, 639) 
+Image: null
+
+Building #1:
+Name: house
+Building Image: null
+ID: house_w2, Height: 3.0, First Point: 183, 305, Second Point: 336, 359, Wall Image: null
+ID: house_w1, Height: 3.0, First Point: 225, 218, Second Point: 181, 318, Wall Image: null
+ID: house_w0, Height: 3.0, First Point: 242, 226, Second Point: 336, 359, Wall Image: null
+Found: false
+
+Building #2:
+Name: manis
+Building Image: null
+ID: manis_w2, Height: 4.0, First Point: 611, 119, Second Point: 690, 268, Wall Image: null
+ID: manis_w1, Height: 4.0, First Point: 563, 148, Second Point: 611, 119, Wall Image: null
+ID: manis_w0, Height: 4.0, First Point: 563, 148, Second Point: 690, 268, Wall Image: null
+Found: false
+
+Trees:
+ID: null, Species: 2, Height: 0
+First Point: 0, 0, Second Point: 0, 0
+Image: null
+Found: false
+
+ID: null, Species: 1, Height: 0
+First Point: 0, 0, Second Point: 0, 0
+Image: null
+Found: false
+
