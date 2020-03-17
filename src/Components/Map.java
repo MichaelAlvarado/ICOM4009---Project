@@ -185,6 +185,7 @@ public class Map {
 		String questionLine;
 		String foundLine = "";
 		String treeLine;
+		String breakLine = "";
 
 		//load Map info (name, size image)
 		this.setMapName(sc.nextLine().substring(5)); 
@@ -198,11 +199,13 @@ public class Map {
 			e.printStackTrace();
 		}
 		Building building; 
+		breakLine = sc.nextLine();
+		breakLine = sc.nextLine();
 
 		//Load Buildings
 		while (sc.hasNextLine()) {
 			//create a building
-			if(sc.nextLine().contains("Building #")) {
+			if(breakLine.contains("Building #")) {
 				//name of Building
 				String name = sc.nextLine();
 				name = name.substring(name.indexOf("Name:")+6); //+6 to exclude "Name: "
@@ -277,7 +280,7 @@ public class Map {
 
 					Question question = new Question(name, answ1, answ2, answ3, answ4);
 					building.addQuestion(question);
-					questionLine=sc.nextLine();
+					questionLine=sc.nextLine();	
 				}
 
 				//Load Found 
@@ -287,79 +290,75 @@ public class Map {
 				building.setFound(found);
 				//System.out.println(name);
 				foundLine = sc.nextLine();
+				foundLine = breakLine;
+				foundLine = sc.nextLine();
 				
 				//Add Building
 				this.addBuilding(building);
 				//System.out.println("Load Done");
 			}
-			////////////////////////////////////////////////////////////////////////////////////////////
-			//treeLine = foundLine;
-			treeLine = sc.nextLine();
-
-			System.out.println(treeLine);
+			////// Load Trees
+			treeLine = foundLine;
 			if(treeLine.contains("Trees:")) {
 				treeLine = sc.nextLine();
-				int index = 0;
 				Trees t = new Trees();
-				
-				while(treeLine.contains("ID:")) {
+				int index = 0;
+				while(sc.hasNextLine()) {
 					index = treeLine.indexOf(',');
-					//ID of Tree
-					String treeID = treeLine.substring(treeLine.indexOf("ID:") + 4, index);
-					System.out.println(treeID);
-					index = treeLine.indexOf(',' + 1);
-					//Species of Tree
-					String treeSpecies = treeLine.substring(treeLine.indexOf("Species:") + 9, index);
-					System.out.println(treeSpecies);
-					index = treeLine.indexOf(',' + 1);
-					//Height of Tree
-					String treeHeight = treeLine.substring(treeLine.indexOf("Height:") + 8, index);
-					System.out.println(treeHeight);
-					t.setID(treeID);
-					t.setTreeSpecies(Integer.valueOf(treeSpecies));
-					t.setTreeHeight(Integer.valueOf(treeHeight));
+					if(treeLine.contains("ID:")) {
+						//ID of Tree
+						String treeID = treeLine.substring(treeLine.indexOf("ID:") + 4, index);
+						System.out.println(treeID);
+					
+						index = treeLine.indexOf(',', index + 1);
+						//Species of Tree
+						String treeSpecies = treeLine.substring(treeLine.indexOf("Species:") + 9, index);
+						System.out.println(treeSpecies);
+						index = treeLine.indexOf(',', index + 1);
+						//Height of Tree
+						String treeHeight = treeLine.substring(treeLine.indexOf("Height:") + 8);
+						System.out.println(treeHeight);
+						t.setID(treeID);
+						t.setTreeSpecies(Integer.valueOf(treeSpecies));
+						t.setTreeHeight(Integer.valueOf(treeHeight));
+					}
+					
+					treeLine = sc.nextLine();
+					
+					if(treeLine.contains("First Point:")) {
+						index = treeLine.indexOf(',');
+						//Coordinates of First Point
+						String p1X = treeLine.substring(treeLine.indexOf("First Point:") + 13, index);
+						String p1Y = treeLine.substring(index + 2, index = treeLine.indexOf((','), index + 1));
+						index = treeLine.indexOf(',', index + 1);
+						//Coordinates of Second Point
+						String p2X = treeLine.substring(treeLine.indexOf("Second Point:") + 14, index);
+						String p2Y = treeLine.substring(index + 2);
+						System.out.println(p1X + ", " + p1Y);
+						System.out.println(p2X + ", " + p2Y);
+						t.setP1(new Point(Integer.valueOf(p1X), Integer.valueOf(p1Y))); 
+						t.setP2(new Point(Integer.valueOf(p2X), Integer.valueOf(p2Y)));
+					}
+					
+					treeLine = sc.nextLine();
+					
+					if(treeLine.contains("Image:")) {
+						String treeImage = treeLine.substring(treeLine.indexOf("Image:") + 7);
+						System.out.println(treeImage);
+						t.setPictureURL(treeImage);
+					}
+					
+					treeLine = sc.nextLine();
+					
+					if(treeLine.contains("Found:")) {
+						String treeFound = treeLine.substring(treeLine.indexOf("Found:") + 7);
+						System.out.println(treeFound);
+						t.setFound(Boolean.valueOf(treeFound));
+					}
 				}
-				
-				//// Load coordinates
-				treeLine = sc.nextLine();				
-				
-				while(treeLine.contains("First Point:")) {
-					index = treeLine.indexOf(',');
-					//Coordinates of First Point
-					String p1X = treeLine.substring(treeLine.indexOf("First Point:") + 13, index);
-					String p1Y = treeLine.substring(index + 2, index = treeLine.indexOf(',') + 1);
-					index = treeLine.indexOf(',' + 1);
-					//Coordinates of Second Point
-					String p2X = treeLine.substring(treeLine.indexOf("Second Point:") + 14, index);
-					String p2Y = treeLine.substring(index + 2, index = treeLine.indexOf(',' + 1));
-					System.out.println(p1X + ", " + p1Y);
-					System.out.println(p2X + ", " + p2Y);
-					t.setP1(new Point(Integer.valueOf(p1X), Integer.valueOf(p1Y))); 
-					t.setP2(new Point(Integer.valueOf(p2X), Integer.valueOf(p2Y)));
-				}
-				
-				treeLine = sc.nextLine();
-				//Load Image URL
-				String treeImage = treeLine.substring(treeLine.indexOf("Image:") + 7);
-				System.out.println(treeImage);
-				t.setPictureURL(treeImage);
-				
-				treeLine = sc.nextLine();
-				//Load Found
-				String treeFound = treeLine.substring(treeLine.indexOf("Found:") + 7);
-				System.out.println(treeFound);
-				t.setFound(Boolean.valueOf(treeFound));
-				
-			this.addTree(t);
-			}
-			else {
-				//treeLine = sc.nextLine();
 			}
 			
-		} 
-		/*
-		 * Falta que cargue las imagenes
-		 */
+		}
 
 	}
 
