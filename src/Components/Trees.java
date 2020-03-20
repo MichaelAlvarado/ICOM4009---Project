@@ -32,12 +32,6 @@ public class Trees {
 		this.p1 = p1;
 	}
 	
-	public Trees(String ID, int treeSpecies, int height) {
-		this.tid = ID;
-		this.treeHeight = height;
-		this.treeSpecies = treeSpecies;
-	}
-
 	public Trees() {};
 	
 //	/**
