@@ -55,6 +55,7 @@ import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.MaskFormatter;
 
 import Components.Building;
+import Components.Trees;
 import Components.Wall;
 
 import javax.swing.JDesktopPane;
@@ -188,7 +189,7 @@ public class MapDesign{
 		plane.disable();
 		display.getContentPane().add(addMapBox);
 
-		AddTreeBox addTreeBox = new AddTreeBox((width/2)-250, 200,500,300, plane, addTree);
+		AddTreeBox addTreeBox = new AddTreeBox((width/2)-250, 200,500,180, plane, addTree);
 		addTreeBox.setVisible(false);
 		display.getContentPane().add(addTreeBox);
 		
@@ -228,6 +229,13 @@ public class MapDesign{
 			public void actionPerformed(ActionEvent arg0) {
 				//Make a PopUp to edit a specific Building
 				buildingListPopUp(buildingList.getX(),buildingList.getY()+buildingList.getHeight()*2, addBuildingBox);
+			}
+		});
+		
+		treeList.addActionListener(new ActionListener () {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				treeListPopUp(treeList.getX(), treeList.getY()+treeList.getHeight()*2, addTreeBox);
 			}
 		});
 
@@ -364,6 +372,35 @@ public class MapDesign{
 		display.add(buildingsPopUp);
 		buildingsPopUp.show(display, x, y);
 	}
+	
+	/**
+	 * @author Fabiola Badillo
+	 * This method creates a PopUP with the trees in the map being created.
+	 * Date - March 20, 2020
+	 * @param x - Position x in pixels to display PopUP (Origin is from the JFrame)
+	 * @param y - Position y in pixels to display PopUP (Origin is from the JFrame)
+	 * @param addTreeBox - This must be given the addTreeBox so that it can be edit when clicked on a specific Building from the PopUp
+	 */
+	private void treeListPopUp(int x, int y, AddTreeBox addTreeBox) {
+		PopupMenu treesPopUp = new PopupMenu("Trees on: " +  plane.map.getMapName());
+		treesPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
+		for(Trees tree: plane.map.getTrees()) {
+			MenuItem treeOption = new MenuItem("Species "+Integer.toString(tree.getTreeSpecies()));
+			treeOption.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					addTreeBox.edit(tree);
+					addTreeBox.setVisible(true);
+				}
+
+			});
+			treesPopUp.add(treeOption);
+		}
+		display.add(treesPopUp);
+		treesPopUp.show(display, x, y);
+	}
+	
 	/**
 	 * @author Michael J. Alvarado
 	 * This method creates the PopUp of the settings and actions when clicked.

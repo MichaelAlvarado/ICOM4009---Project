@@ -27,10 +27,9 @@ public class Trees {
 	
 	
 	// constructor
-	public Trees(int treeSpecies, Point p1, Point p2) {
+	public Trees(int treeSpecies, Point p1) {
 		this.treeSpecies = treeSpecies;
 		this.p1 = p1;
-		this.p2 = p2;
 	}
 	
 	public Trees(String ID, int treeSpecies, int height) {
@@ -38,11 +37,8 @@ public class Trees {
 		this.treeHeight = height;
 		this.treeSpecies = treeSpecies;
 	}
-	
-	public Trees() {
-		
-	}
-	
+
+	public Trees() {};
 	
 //	/**
 //	 * @author jorgecalderon

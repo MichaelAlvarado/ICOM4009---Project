@@ -15,13 +15,12 @@ import Components.Trees;
 public class ToolBox {
 
 	Trees defaultTrees[];
-	Point p1,p2;
+	Point p1;
 	
 	public ToolBox() {
 		p1 = new Point(0,0);
-		p2 = new Point(0,0);
-		defaultTrees[0] = new Trees(1,p1,p2);
-		defaultTrees[1] = new Trees(2,p1,p2);
-		defaultTrees[2] = new Trees(3,p1,p2);
+		defaultTrees[0] = new Trees(1,p1);
+		defaultTrees[1] = new Trees(2,p1);
+		defaultTrees[2] = new Trees(3,p1);
 	}
 }
