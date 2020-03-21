@@ -27,9 +27,14 @@ public class Trees {
 	
 	
 	// constructor
-	public Trees(int treeSpecies, Point p1) {
+	@SuppressWarnings("static-access")
+	public Trees(Map map, int treeSpecies, Point p1) {
 		this.treeSpecies = treeSpecies;
 		this.p1 = p1;
+//		if (map.getTrees() == null)
+//			this.tid = map.getMapName() + "_t1";
+//		else 
+			this.tid = map.getMapName() + "_t" + map.getTrees().size();
 	}
 	
 	public Trees() {};

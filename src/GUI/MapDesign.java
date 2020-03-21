@@ -385,7 +385,7 @@ public class MapDesign{
 		PopupMenu treesPopUp = new PopupMenu("Trees on: " +  plane.map.getMapName());
 		treesPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
 		for(Trees tree: plane.map.getTrees()) {
-			MenuItem treeOption = new MenuItem("Species "+Integer.toString(tree.getTreeSpecies()));
+			MenuItem treeOption = new MenuItem(tree.getID());
 			treeOption.addActionListener(new ActionListener() {
 
 				@Override

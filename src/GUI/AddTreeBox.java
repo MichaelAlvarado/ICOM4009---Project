@@ -149,7 +149,7 @@ public class AddTreeBox extends JPanel{
 
 
 	public void addTree() {
-		tree = new Trees(1, new Point()); // TODO: implement
+		tree = new Trees(plane.map, 1, new Point()); // TODO: implement
 		setVisible(true);
 		plane.disable();
 		newTree = true;
