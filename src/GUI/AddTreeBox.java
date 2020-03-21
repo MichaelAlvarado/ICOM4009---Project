@@ -105,6 +105,7 @@ public class AddTreeBox extends JPanel{
 					} 
 					if(newTree) {
 						plane.addTree(tree); 
+						tree.setTreeSpecies(treeSpeciesField.getAnchorSelectionIndex()+1);
 					}
 					exit();
 				}catch(NumberFormatException n){
