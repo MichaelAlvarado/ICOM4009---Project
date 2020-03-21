@@ -158,10 +158,13 @@ public class AddTreeBox extends JPanel{
 
 	//Empty the textFields
 	private void exit() {
-		treeSpecies.setText("");
-		setVisible(false);
 		tree = null;
+		this.formattedTextP1X.setText("000");
+		this.formattedTextP1Y.setText("000");
+		treeSpeciesField.clearSelection();
+		setVisible(false);
 		plane.enable();
+		plane.repaint();
 	}
 
 	private void autofill(Trees tree) {
