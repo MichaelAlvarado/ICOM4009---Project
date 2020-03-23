@@ -100,6 +100,8 @@ public class Question {
 		this.correct = correct;
 	}
 
+	//Navigate through the Question Pop Up, select next of previous answer (UP, DOWN) cancel (ESCAPE) or decide answer (ENTER)
+	//This if not implemented with JButtons. 
 	public void tick() {
 		if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_UP)) {
 			//next answer up

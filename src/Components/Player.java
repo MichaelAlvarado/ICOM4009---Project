@@ -50,6 +50,9 @@ public class Player {
 		position.y = y;
 	}
 	
+	
+	//Tick for player must include, movement on each direction (UP, DOWN, LEFT, RIGHT) and the interaction with the Buildings once close.
+	//If decide to interact then make tick for the Questions found in Question yet to be implemented.
 	public void tick() {
 		if(handler.getKeyListener().up || handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_UP)) {
 			this.moveOnY(position.y + 1);
