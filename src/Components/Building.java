@@ -41,8 +41,6 @@ public class Building {
 	
 	// constructor
 	public Building(String buildingName) {
-		this.width = display.getContentPane().getWidth();
-		this.height = display.getContentPane().getHeight();
 		this.buildingName = buildingName;
 		walls = new LinkedList<Wall>();
 		questionPool = new LinkedList<Question>();
@@ -158,7 +156,7 @@ public class Building {
 	}
 	
 	
-	public void tick() {
+/*	public void tick() {
 		if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_X)) {
 			//Temporary place where the player must be
 			if(player.getPosition().x >= walls.getFirst().getP1().x && player.getPosition().x <=walls.getFirst().getP2().y 
@@ -172,6 +170,6 @@ public class Building {
 		}
 	}
 	
-	
+*/	
 	
 }
