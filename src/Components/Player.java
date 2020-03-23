@@ -17,6 +17,7 @@ public class Player {
 	private BufferedImage avatar;
 	private String name;
 	Handler handler;
+	private Building building; 
 	
 	public Player(String name, Point initialPosition) {
 		this.name = name;
@@ -61,6 +62,20 @@ public class Player {
 		if(handler.getKeyListener().down || handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_DOWN)) {
 			this.moveOnY(position.x -1);
 		}
+
+/*		if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_X)) {
+			//Temporary place where the player must be
+			if(position.x >= walls.getFirst().getP1().x && position.x <=walls.getFirst().getP2().y 
+				&& position.y >= walls.getFirst().getP1().y - 100 && position.y <= walls.getFirst().getP2().y + 100) {
+				//Must make Question box appear, however this question box must be with the questions and answers already
+//				AddQuestionsBox addQuestionBox = new AddQuestionsBox((width/2)-250, 200,500,500, plane);
+//				addQuestionBox.setVisible(false);
+//				display.getContentPane().add(addQuestionBox);	
+				}
+				
+			}
+			}
+  */	
 	}
 	
 }

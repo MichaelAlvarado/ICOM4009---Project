@@ -33,7 +33,6 @@ public class Building {
 	private boolean found;
 	private int buildingHeight; //this is default height of walls
 	Handler handler;
-	private JFrame display;
 	private Plane plane;
 	private Player player; 
 	private int width, height;
@@ -156,7 +155,9 @@ public class Building {
 	}
 	
 	
-/*	public void tick() {
+/*
+ 	MAYBE THIS TICK SHOULD ALSO GO ON PLAYER?
+ 	public void tick() {
 		if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_X)) {
 			//Temporary place where the player must be
 			if(player.getPosition().x >= walls.getFirst().getP1().x && player.getPosition().x <=walls.getFirst().getP2().y 
