@@ -1,10 +1,14 @@
 package Components;
+
 import java.util.List;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.awt.image.BufferedImage; 
 import java.lang.String;
 import java.awt.Point;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * 
@@ -31,10 +35,7 @@ public class Trees {
 	public Trees(Map map, int treeSpecies, Point p1) {
 		this.treeSpecies = treeSpecies;
 		this.p1 = p1;
-//		if (map.getTrees() == null)
-//			this.tid = map.getMapName() + "_t1";
-//		else 
-			this.tid = map.getMapName() + "_t" + map.getTrees().size();
+		this.tid = map.getMapName() + "_t" + map.getTrees().size();
 	}
 	
 	public Trees() {};
@@ -115,18 +116,34 @@ public class Trees {
 //	 * @param - N/A
 //	 * @return - N/A 
 //	 */
-	public void defineTree() {
+	public void defineTreeImage() {
+		setTreeImage(null);
 		if (this.treeSpecies == 1) {
 			setTreeHeight(25);
-			// setTreeImage(treeImage1);
+			try {
+				setTreeImage(ImageIO.read(new File("treeImages/species1.jpg")));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else if (this.treeSpecies == 2) {
 			setTreeHeight(50);
-			// setTreeImage(treeImage2);
+			try {
+				setTreeImage(ImageIO.read(new File("treeImages/species2.jpg")));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else {
 			setTreeHeight(100);
-			// setTreeImage(treeImage3);
+			try {
+				setTreeImage(ImageIO.read(new File("treeImages/species3.jpg")));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

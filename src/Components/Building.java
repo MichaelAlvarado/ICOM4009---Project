@@ -2,8 +2,18 @@ package Components;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.ListIterator;
+
+import javax.swing.JFrame;
+
+import GUI.AddQuestionsBox;
+import GUI.Plane;
+import States.Handler;
+
 import java.awt.image.BufferedImage; 
 import java.lang.String;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+
 
 /**
  * 
@@ -22,6 +32,10 @@ public class Building {
 	private LinkedList<Question> questionPool;
 	private boolean found;
 	private int buildingHeight; //this is default height of walls
+	Handler handler;
+	private Plane plane;
+	private Player player; 
+	private int width, height;
 	
 	
 	// constructor
@@ -139,4 +153,24 @@ public class Building {
 	public void setPictureURL(String pictureURL) {
 		this.pictureURL = pictureURL;
 	}
+	
+	
+/*
+ 	MAYBE THIS TICK SHOULD ALSO GO ON PLAYER?
+ 	public void tick() {
+		if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_X)) {
+			//Temporary place where the player must be
+			if(player.getPosition().x >= walls.getFirst().getP1().x && player.getPosition().x <=walls.getFirst().getP2().y 
+					&& player.getPosition().y >= walls.getFirst().getP1().y - 100 && player.getPosition().y <= walls.getFirst().getP2().y + 100) {
+			//Must make Question box appear, however this question box must be with the questions and answers already
+//			AddQuestionsBox addQuestionBox = new AddQuestionsBox((width/2)-250, 200,500,500, plane);
+//			addQuestionBox.setVisible(false);
+//			display.getContentPane().add(addQuestionBox);	
+			}
+			
+		}
+	}
+	
+*/	
+	
 }

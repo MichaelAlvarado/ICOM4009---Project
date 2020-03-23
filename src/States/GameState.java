@@ -4,6 +4,7 @@
 package States;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 
 import Components.Map;
 
@@ -12,20 +13,28 @@ import Components.Map;
  * @date Mar 14, 2020
  */
 public class GameState {
-	
+
 	Map map;
 	int width, height;
-	
-	public GameState(Map map, int width, int height) {
+	Handler handler;
+
+	public GameState(Map map, Handler handler) {
 		this.map = map;
-		this.width = width;
-		this.height = height;
+		this.handler = handler;
+		this.width = handler.getWidth();
+		this.height = handler.getHeight();
 	}
-	
+
 	public void tick() {
 		//map.tick();
+		if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_SPACE)) {
+			System.out.println("working");
+		}
+		if(handler.getKeyListener().up) {
+			System.out.println("Moving Up");
+		}
 	}
-	
+
 	/**
 	 * 
 	 * @author Michael J. Alvarado
@@ -33,7 +42,8 @@ public class GameState {
 	 * @param g - from the Canvas in Game Engine
 	 */
 	public void render(Graphics g) {
-		g.drawImage(map.getPicture(),0,0,width, height,null);
+		if(map.getPicture() != null)
+			g.drawImage(map.getPicture(),0,0,width, height,null);
 		//map.render(g);
 	}
 }
