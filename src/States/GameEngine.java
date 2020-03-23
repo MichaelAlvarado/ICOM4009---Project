@@ -23,17 +23,21 @@ import GUI.Display;
  */
 
 public class GameEngine implements Runnable {
-
+	//Running Game
 	private JFrame display;
 	private boolean running = false;
 	private Thread thread;
+	//Paint Game
 	public static boolean threadB;
 	private BufferStrategy bs;
 	private Graphics g;
 	private Canvas canvas;
 	private final int fps = 60;
+	//State
 	private GameState gameState;
 	private Map map;
+	//Handler will have listeners
+	private Handler handler;
 
 	public GameEngine(JFrame display, Map map) {
 		this.display = display;
@@ -41,7 +45,7 @@ public class GameEngine implements Runnable {
 		threadB = false;
 		canvas = new Canvas();
 		canvas.setBounds(0, 0, display.getContentPane().getWidth(), display.getContentPane().getHeight());
-		canvas.setFocusable(false);
+		canvas.setFocusable(true);
 		canvas.setBackground(Color.black); //Testing
 		display.add(canvas);
 		display.pack();
@@ -54,7 +58,8 @@ public class GameEngine implements Runnable {
 	 * This method will load files needed to play and add all the Mouse and Key Listener to play the game
 	 */
 	private void init(){
-		gameState = new GameState(map, canvas.getWidth(), canvas.getHeight());
+		handler = new Handler(canvas);
+		gameState = new GameState(map, handler);
 	}
 
 	/**
@@ -119,7 +124,10 @@ public class GameEngine implements Runnable {
 	 * This method is will run the game code 
 	 */
 	private void tick(){
-		
+		handler.getKeyListener().tick();
+		if(gameState != null) {
+			gameState.tick();
+		}
 	}
 
 	/**

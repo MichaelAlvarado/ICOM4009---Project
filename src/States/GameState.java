@@ -4,6 +4,7 @@
 package States;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 
 import Components.Map;
 
@@ -15,15 +16,23 @@ public class GameState {
 
 	Map map;
 	int width, height;
+	Handler handler;
 
-	public GameState(Map map, int width, int height) {
+	public GameState(Map map, Handler handler) {
 		this.map = map;
-		this.width = width;
-		this.height = height;
+		this.handler = handler;
+		this.width = handler.getWidth();
+		this.height = handler.getHeight();
 	}
 
 	public void tick() {
 		//map.tick();
+		if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_SPACE)) {
+			System.out.println("working");
+		}
+		if(handler.getKeyListener().up) {
+			System.out.println("Moving Up");
+		}
 	}
 
 	/**
