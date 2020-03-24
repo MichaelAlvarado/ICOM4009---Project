@@ -248,6 +248,32 @@ public class Plane extends JPanel{
 		map.addBuilding(building);
 		setCurrentBuilding(building);
 	}
+	
+	public void setGrid() {
+		gridIsOn = !gridIsOn;
+	}
+	
+	/**
+	 * @author Michael J. Alvarado
+	 * This Methods paints the components  of traces and points specified  on the plane.
+	 * @param color - Color to paint components specified in @param compenent
+	 * @param component - This Strings specified that to paint (giving by the Settings PopUP)
+	 */
+	public void paintPlaneComponent(Color color, String component) {
+		if(component.equals("currentPoint"))
+			cP = (color); 
+		else if(component.equals("currentLine"))
+			cL = (color);
+		else if(component.equals("previousPoint"))
+			pP = (color);
+		else if(component.equals("previousLine"))
+			pL = (color);				
+		repaint();
+	}
+
+	public Map getMap() {
+		return map;
+	}
 
 	/**
 	 * 
@@ -279,6 +305,10 @@ public class Plane extends JPanel{
 	public void setCurrentBuilding(Building building) {
 		currentBuilding = building;
 		this.repaint();
+	}
+	
+	public Building getCurrentBuilding() {
+		return currentBuilding;
 	}
 
 	public void setCurrentTree(Trees tree) {

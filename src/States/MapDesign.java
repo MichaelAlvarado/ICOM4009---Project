@@ -1,4 +1,4 @@
-package GUI;
+package States;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -57,6 +57,12 @@ import javax.swing.text.MaskFormatter;
 import Components.Building;
 import Components.Trees;
 import Components.Wall;
+import GUI.AddBuildingBox;
+import GUI.AddMapBox;
+import GUI.AddQuestionsBox;
+import GUI.AddTreeBox;
+import GUI.AddWallBox;
+import GUI.Plane;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JLayeredPane;
@@ -326,9 +332,9 @@ public class MapDesign{
 	 * @param addWallBox - This must be given the addWallBox so that it can be displayed when clicked on a specifi Wall from the PopUp
 	 */
 	private void wallsListPopUp(int x, int y, AddWallBox addWallBox) {
-		PopupMenu wallsPopUp = new PopupMenu("Walls on: " + plane.currentBuilding.getName());
+		PopupMenu wallsPopUp = new PopupMenu("Walls on: " + plane.getCurrentBuilding().getName());
 		wallsPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-		for(Wall wall: plane.currentBuilding.getWalls()) {
+		for(Wall wall: plane.getCurrentBuilding().getWalls()) {
 			MenuItem wallOption = new MenuItem(wall.getID());
 			wallOption.addActionListener(new ActionListener() {
 				@Override
@@ -354,9 +360,9 @@ public class MapDesign{
 	 * @param addBuildingBox - This must be given the addBuldingBox so that it can be edit when clicked on a specific Building from the PopUp
 	 */
 	private void buildingListPopUp(int x, int y, AddBuildingBox addBuildingBox) {
-		PopupMenu buildingsPopUp = new PopupMenu("Buildings on: " +  plane.map.getMapName());
+		PopupMenu buildingsPopUp = new PopupMenu("Buildings on: " +  plane.getMap().getMapName());
 		buildingsPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-		for(Building building: plane.map.getBuildingList()) {
+		for(Building building: plane.getMap().getBuildingList()) {
 			MenuItem buildingOption = new MenuItem(building.getName());
 			buildingOption.addActionListener(new ActionListener() {
 
@@ -382,9 +388,9 @@ public class MapDesign{
 	 * @param addTreeBox - This must be given the addTreeBox so that it can be edit when clicked on a specific Building from the PopUp
 	 */
 	private void treeListPopUp(int x, int y, AddTreeBox addTreeBox) {
-		PopupMenu treesPopUp = new PopupMenu("Trees on: " +  plane.map.getMapName());
+		PopupMenu treesPopUp = new PopupMenu("Trees on: " +  plane.getMap().getMapName());
 		treesPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-		for(Trees tree: plane.map.getTrees()) {
+		for(Trees tree: plane.getMap().getTrees()) {
 			MenuItem treeOption = new MenuItem(tree.getID());
 			treeOption.addActionListener(new ActionListener() {
 
@@ -434,7 +440,7 @@ public class MapDesign{
 		grid.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				plane.gridIsOn = !plane.gridIsOn;
+				plane.setGrid();
 				plane.repaint();
 			}
 		});
@@ -498,7 +504,7 @@ public class MapDesign{
 		magenta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				paintPlaneComponent(Color.MAGENTA, component);
+				plane.paintPlaneComponent(Color.MAGENTA, component);
 			}
 		});
 
@@ -506,28 +512,28 @@ public class MapDesign{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Color green = new Color(20,198,5); //Green
-				paintPlaneComponent(green, component);
+				plane.paintPlaneComponent(green, component);
 			}
 		});
 
 		red.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				paintPlaneComponent(Color.RED, component);
+				plane.paintPlaneComponent(Color.RED, component);
 			}
 		});
 
 		blue.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				paintPlaneComponent(Color.BLUE, component);
+				plane.paintPlaneComponent(Color.BLUE, component);
 			}
 		});
 
 		orange.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				paintPlaneComponent(Color.ORANGE, component);
+				plane.paintPlaneComponent(Color.ORANGE, component);
 			}
 		});
 
@@ -538,23 +544,6 @@ public class MapDesign{
 		ColorPopup.add(magenta);
 		display.add(ColorPopup);
 		ColorPopup.show(display, x, y);
-	}
-	/**
-	 * @author Michael J. Alvarado
-	 * This Methods paints the components  of traces and points specified  on the plane.
-	 * @param color - Color to paint components specified in @param compenent
-	 * @param component - This Strings specified that to paint (giving by the Settings PopUP)
-	 */
-	private void paintPlaneComponent(Color color, String component) {
-		if(component.equals("currentPoint"))
-			plane.cP = (color); 
-		else if(component.equals("currentLine"))
-			plane.cL = (color);
-		else if(component.equals("previousPoint"))
-			plane.pP = (color);
-		else if(component.equals("previousLine"))
-			plane.pL = (color);				
-		plane.repaint();
 	}
 	
 	private void helpScreen() {

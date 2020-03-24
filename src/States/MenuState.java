@@ -35,8 +35,8 @@ import Components.Map;
 import Components.Wall;
 import GUI.AddWallBox;
 import GUI.Display;
-import GUI.MapDesign;
 import GUI.Plane;
+import main.GameEngine;
 
 /**
  * 

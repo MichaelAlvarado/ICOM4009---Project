@@ -1,4 +1,4 @@
-package States;
+package main;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 
 import Components.Map;
 import GUI.Display;
+import States.GameState;
 
 
 /**

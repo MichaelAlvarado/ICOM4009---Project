@@ -3,7 +3,7 @@ package main;
 import java.awt.EventQueue;
 
 import GUI.Display;
-import GUI.MapDesign;
+import States.MapDesign;
 import States.MenuState;
 
 public class Launch {

@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 import Components.Map;
+import main.Handler;
 
 /**
  * @author Michael J. Alvarado

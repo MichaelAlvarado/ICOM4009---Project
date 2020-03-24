@@ -3,7 +3,7 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-import States.Handler;
+import main.Handler;
 
 /**
  * @author Fabiola Badillo Ramos
