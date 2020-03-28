@@ -50,6 +50,7 @@ public class Plane extends JPanel{
 	Trees currentTree; //the tree currently being added
 	Color cP, cL, pP, pL; //Color for c=current p=previous P=Point L=Line
 	boolean gridIsOn; //draw the grid line in plane
+	boolean buildingImagesIsOn;
 	private Point[] currentPointPair; //this is the current trace being drawn
 	private Point drag; //this is use to interconnect points
 	private int pointWidth; //points of coordinates
@@ -70,6 +71,7 @@ public class Plane extends JPanel{
 		pP = Color.RED;
 		pL = new Color(20,198,5); //Green
 		gridIsOn = true;
+		buildingImagesIsOn = false;
 		//walls = new LinkedList<Wall>();
 		//currentBuilding = new Building("building"); //Testing
 		//buildings.add(currentBuilding); //Testing
@@ -171,6 +173,13 @@ public class Plane extends JPanel{
 			g.drawString("( " + Math.round(currentPointPair[1].getX()*scaleX) + " , " + Math.round(currentPointPair[1].getY()*scaleY) + " )", this.getWidth()-150, 20);
 
 		}
+		if(buildingImagesIsOn) {
+			for(Building building: map.getBuildingList()) {
+				if (building.getPicture()!=null) {
+					g.drawImage(building.getPicture(), 0, (int)building.getWalls().get(0).getP1().getX(), (int)building.getWalls().get(0).getP1().getY(), 60, null);
+				}
+			}
+		}
 
 		//Draw tool panel
 		if(isOpenTool) {
@@ -251,6 +260,14 @@ public class Plane extends JPanel{
 	
 	public void setGrid() {
 		gridIsOn = !gridIsOn;
+	}
+	
+	public boolean isBuildingImagesIsOn() {
+		return buildingImagesIsOn;
+	}
+
+	public void setBuildingImagesIsOn(boolean buildingImagesIsOn) {
+		this.buildingImagesIsOn = buildingImagesIsOn;
 	}
 	
 	/**

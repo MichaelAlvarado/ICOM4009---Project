@@ -418,6 +418,7 @@ public class MapDesign{
 		MenuItem undo = new MenuItem("Undo wall");
 		MenuItem clear = new MenuItem("Clear All walls");
 		MenuItem grid = new MenuItem("Grid");
+		MenuItem buildingImage = new MenuItem("Put Buildings Images");
 		MenuItem cpColor = new MenuItem("Change current point Color");
 		MenuItem clColor = new MenuItem("Change current line Color");
 		MenuItem ppColor = new MenuItem("Change previous point Color");
@@ -472,6 +473,12 @@ public class MapDesign{
 				colorPopup(x,y,"previousLine");
 			}
 		});
+		buildingImage.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				plane.setBuildingImagesIsOn(true);
+			}	
+		});
 
 		setting.add(undo);
 		setting.add(clear);
@@ -480,6 +487,7 @@ public class MapDesign{
 		setting.add(clColor);
 		setting.add(ppColor);
 		setting.add(plColor);
+		setting.add(buildingImage);
 		display.add(setting);
 		setting.show(display, x, y);
 	}
