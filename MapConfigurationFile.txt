@@ -1,0 +1,8 @@
+Map: Map
+Size: (994, 686) 
+Image: C:\Users\Michael\git\ICOM4009---Project\res\maps\map2.png
+
+Trees:
+ID: Map_t0, Species: 2
+Position: 62, 588
+Image: null

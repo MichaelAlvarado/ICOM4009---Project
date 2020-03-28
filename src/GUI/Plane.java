@@ -185,7 +185,6 @@ public class Plane extends JPanel{
 		
 		//Draw Tree Image
 		for(Trees tree: map.getTrees()) {
-			System.out.println(tree.getID() + ": " + tree.getP1().x + "," + tree.getP1().y);
 			g.drawImage(tree.getTreeImage(), tree.getP1().x, tree.getP1().y, tree.getTreeHeight(), tree.getTreeHeight(), null);
 		}
 

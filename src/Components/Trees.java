@@ -121,7 +121,7 @@ public class Trees {
 		if (this.treeSpecies == 1) {
 			setTreeHeight(25);
 			try {
-				setTreeImage(ImageIO.read(new File("src/treeImages/species1.jpg")));
+				setTreeImage(ImageIO.read(new File("res/treeImages/species1.png")));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -130,7 +130,7 @@ public class Trees {
 		else if (this.treeSpecies == 2) {
 			setTreeHeight(50);
 			try {
-				setTreeImage(ImageIO.read(new File("src/treeImages/species2.jpg")));
+				setTreeImage(ImageIO.read(new File("res/treeImages/species2.png")));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -139,7 +139,7 @@ public class Trees {
 		else {
 			setTreeHeight(100);
 			try {
-				setTreeImage(ImageIO.read(new File("src/treeImages/species3.jpg")));
+				setTreeImage(ImageIO.read(new File("res/treeImages/species3.png")));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

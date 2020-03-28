@@ -35,7 +35,7 @@ public class GameState implements State{
 		player = new Player("Player" , new Point(100,100));
 
 		try {
-			player.setAvatar(ImageIO.read(new File("src/animation_Images/Idle (1).png")));
+			player.setAvatar(ImageIO.read(new File("res/animation_Images/Idle (1).png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
