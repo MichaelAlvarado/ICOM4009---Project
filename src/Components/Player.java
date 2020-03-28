@@ -56,7 +56,7 @@ public class Player {
 	//If decide to interact then make tick for the Questions found in Question yet to be implemented.
 	public void tick(Handler handler) {
 		if(handler.getKeyListener().up || handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_UP)) {
-			this.moveOnY(position.y - 1);
+			this.moveOnY(position.y + 1);
 		}
 		if(handler.getKeyListener().left || handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_LEFT)) {
 			this.moveOnX(position.x - 1);
@@ -65,7 +65,7 @@ public class Player {
 			this.moveOnX(position.x + 1);
 		}
 		if(handler.getKeyListener().down || handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_DOWN)) {
-			this.moveOnY(position.y + 1);
+			this.moveOnY(position.y - 1);
 		}
 	}
 		
