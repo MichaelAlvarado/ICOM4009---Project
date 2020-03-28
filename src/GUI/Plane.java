@@ -179,7 +179,7 @@ public class Plane extends JPanel{
 					Rectangle r = building.perimeter();
 					g.drawImage(building.getPicture(), r.x, r.y, r.width, r.height, null);
 					// g.drawImage(building.getPicture(), 0, (int)building.getWalls().get(0).getP1().getX(), (int)building.getWalls().get(0).getP1().getY(), 60, null);
-					
+					System.out.println("Building Painted");
 				}
 			}
 		}
@@ -271,6 +271,7 @@ public class Plane extends JPanel{
 
 	public void setBuildingImagesIsOn(boolean buildingImagesIsOn) {
 		this.buildingImagesIsOn = buildingImagesIsOn;
+		this.repaint();
 	}
 	
 	/**
