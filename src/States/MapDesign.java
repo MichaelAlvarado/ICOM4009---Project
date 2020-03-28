@@ -473,6 +473,7 @@ public class MapDesign{
 				colorPopup(x,y,"previousLine");
 			}
 		});
+		
 		buildingImage.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
