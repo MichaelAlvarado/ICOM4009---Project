@@ -59,7 +59,7 @@ public class AddTreeBox extends JPanel{
 
 		treeSpecies = new JLabel("Tree species:"); 
 		treeSpecies.setBounds(10, 10, 100, 25);
-		String num[]= { "Type 1","Type 2","Type 3"};
+		String num[]= { "Type 1 (Small)","Type 2 (Medium)","Type 3 (Large)"};
 		treeSpeciesField = new JList(num);
 		treeSpeciesField.setBounds(treeSpecies.getX()+treeSpecies.getWidth(), treeSpecies.getY(), (width/2), 55);
 
