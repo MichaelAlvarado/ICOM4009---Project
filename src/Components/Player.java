@@ -1,4 +1,5 @@
 package Components;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -66,7 +67,8 @@ public class Player {
 		if(handler.getKeyListener().down || handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_DOWN)) {
 			this.moveOnY(position.y + 1);
 		}
-
+	}
+		
 		//Temporary place where the player must be
 		//		if(position.x >= walls.getP1().x && position.x <= walls.getP2().x
 		//				&&	position.y >= walls.getP1().y - 100 && position.y <= walls.getP2().y + 100
@@ -78,6 +80,9 @@ public class Player {
 		//				}			
 		//			}
 		//		}
+	public void render(Graphics g) {
+		if(this.getAvatar() != null)
+		g.drawImage(this.getAvatar(),this.getPosition().x, this.getPosition().y, 40, 40,null); //this should be in player 
 	}
 
 }

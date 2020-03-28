@@ -6,11 +6,16 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+
+import java.awt.Graphics;
 import java.awt.Point;
 import GUI.AddQuestionsBox;
+import GUI.Display;
 import GUI.Plane;
+import States.QuestionState;
 import main.Handler;
 import java.awt.Rectangle;
+import java.awt.Window;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +33,9 @@ import java.awt.event.MouseEvent;
  */
 
 public class Building {
-
+	Player player;
+	Question question;
+	Display display;
 	private LinkedList<Wall> walls; // = new LinkedList<Wall>();
 	private String buildingName; 
 	private BufferedImage picture;
@@ -36,17 +43,16 @@ public class Building {
 	private LinkedList<Question> questionPool;
 	private boolean found;
 	private int buildingHeight; //this is default height of walls
-	Handler handler;
 	private int width, height;
-	
-	
+
+
 	// constructor
 	public Building(String buildingName) {
 		this.buildingName = buildingName;
 		walls = new LinkedList<Wall>();
 		questionPool = new LinkedList<Question>();
 	}
-		
+
 	/**
 	 * @author jorgecalderon
 	 * Objective - Generate a string containing the questions with their answers
@@ -62,7 +68,7 @@ public class Building {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * @author jorgecalderon
 	 * Objective - Generate a string the walls information
@@ -75,10 +81,10 @@ public class Building {
 		String result = "";
 		for (Wall w: this.walls) {
 			result += "ID: " + w.getID() + ", Height: " + w.getHeight() + ", First Point: " + w.getP1().x
-			+ ", " + w.getP1().y + ", Second Point: " + w.getP2().x + ", " + w.getP2().y +
-			", Wall Image: " + w.getTextureURL() + "\n";
+					+ ", " + w.getP1().y + ", Second Point: " + w.getP2().x + ", " + w.getP2().y +
+					", Wall Image: " + w.getTextureURL() + "\n";
 		}
-		
+
 		return result;
 	}
 	// getters 
@@ -97,7 +103,7 @@ public class Building {
 	public boolean getFound() {
 		return this.found;
 	}
-	
+
 	// setters
 	public void setWalls(LinkedList<Wall> walls) {
 		this.walls = walls;
@@ -114,7 +120,7 @@ public class Building {
 	public void setFound(boolean found) {
 		this.found = found;
 	}
-	
+
 	/**
 	 * @author Fabiola Badillo
 	 * Date - Feb 29, 2020
@@ -158,7 +164,7 @@ public class Building {
 		this.setPicture(ImageIO.read(new File(pictureURL)));
 
 	}
-	
+
 	/**
 	 * @author Fabiola Badillo
 	 * Objective - helper method for defining the perimeter
@@ -173,7 +179,7 @@ public class Building {
 		}
 		return points;
 	}
-	
+
 	public Rectangle perimeter() {
 		Rectangle r = new Rectangle();
 		double smallX, bigX, smallY, bigY;
@@ -195,23 +201,31 @@ public class Building {
 		r.setBounds((int)smallX, (int)smallY, (int)(bigX-smallX), (int)(bigY-smallY));
 		return r;
 	}
-	
-/*
- 	MAYBE THIS TICK SHOULD ALSO GO ON PLAYER?
- 	public void tick() {
-		if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_X)) {
-			//Temporary place where the player must be
-			if(player.getPosition().x >= walls.getFirst().getP1().x && player.getPosition().x <=walls.getFirst().getP2().y 
-					&& player.getPosition().y >= walls.getFirst().getP1().y - 100 && player.getPosition().y <= walls.getFirst().getP2().y + 100) {
-			//Must make Question box appear, however this question box must be with the questions and answers already
-//			AddQuestionsBox addQuestionBox = new AddQuestionsBox((width/2)-250, 200,500,500, plane);
-//			addQuestionBox.setVisible(false);
-//			display.getContentPane().add(addQuestionBox);	
+
+
+	//	MAYBE THIS TICK SHOULD ALSO GO ON PLAYER?
+	public void tick(Handler handler, Player player) {
+		//Temporary place where the player must be to answer a Question
+		if(player.getPosition().x >= walls.getFirst().getP1().x && player.getPosition().x <=walls.getFirst().getP2().y 
+				&& player.getPosition().y >= walls.getFirst().getP1().y - 100 && player.getPosition().y <= walls.getFirst().getP2().y + 100) {
+			if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_X)) {
+			//	QuestionState questionS = new QuestionState(display);
+				//Must make Question box appear, however this question box must be with the questions and answers already
 			}
-			
 		}
 	}
 	
-*/	
+	public void render(Graphics g) {
+	//por ahora esta get picture, pero no es get picture
+		if(player.getPosition().x >= walls.getFirst().getP1().x && player.getPosition().x <=walls.getFirst().getP2().y 
+				&& player.getPosition().y >= walls.getFirst().getP1().y - 100 && player.getPosition().y <= walls.getFirst().getP2().y + 100) {
+				g.drawImage(this.getPicture(),this.perimeter().x,this.perimeter().y, width, height,null);
+		}
+	//	if(correct_answers == 3) {
+		//Una vez contestado correcto 3 veces
+	//	g.drawImage(this.getPicture(),this.perimeter().x,this.perimeter().y, width, height,null);
+	//	}
+	}
 	
+
 }
