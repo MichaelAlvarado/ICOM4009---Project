@@ -43,7 +43,7 @@ public class AddTreeBox extends JPanel{
 	private JFormattedTextField formattedTextP1X, formattedTextP1Y;
 	private boolean newTree;
 	static BufferedImage picture;
-	
+
 	//Activation Button: this is the button used to active this Window
 
 
@@ -99,20 +99,18 @@ public class AddTreeBox extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				tree.setTreeSpecies(Integer.valueOf(treeSpeciesField.getSelectedIndex()));
-				try {
-					if(picture != null) {
-						tree.setTreeImage(picture);
-					} 
-					if(newTree) {
-						plane.addTree(tree); 
-						tree.setTreeSpecies(treeSpeciesField.getAnchorSelectionIndex()+1);
-					}
-					exit();
-				}catch(NumberFormatException n){
-					// TODO: 
-				}
 
+				if(newTree) {
+					plane.addTree(tree); 
+					tree.setTreeSpecies(treeSpeciesField.getAnchorSelectionIndex()+1);
+					int x = Integer.parseInt(formattedTextP1X.getValue().toString().substring(1,4));
+					int y = Integer.parseInt(formattedTextP1Y.getValue().toString().substring(1,4));
+					tree.setP1(new Point(x,y));
+				}
+				
+				exit();
 			}
+
 		});
 
 		//Exit without new updates on building
@@ -153,7 +151,6 @@ public class AddTreeBox extends JPanel{
 		setVisible(true);
 		plane.disable();
 		newTree = true;
-
 	}
 
 	//Empty the textFields

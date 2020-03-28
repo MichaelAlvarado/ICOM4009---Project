@@ -173,15 +173,20 @@ public class Plane extends JPanel{
 			g.drawString("( " + Math.round(currentPointPair[1].getX()*scaleX) + " , " + Math.round(currentPointPair[1].getY()*scaleY) + " )", this.getWidth()-150, 20);
 
 		}
+		//Draw Building Image
 		if(buildingImagesIsOn) {
 			for(Building building: map.getBuildingList()) {
 				if (building.getPicture()!=null) {
 					Rectangle r = building.perimeter();
 					g.drawImage(building.getPicture(), r.x, r.y, r.width, r.height, null);
-					// g.drawImage(building.getPicture(), 0, (int)building.getWalls().get(0).getP1().getX(), (int)building.getWalls().get(0).getP1().getY(), 60, null);
-					System.out.println("Building Painted");
 				}
 			}
+		}
+		
+		//Draw Tree Image
+		for(Trees tree: map.getTrees()) {
+			System.out.println(tree.getID() + ": " + tree.getP1().x + "," + tree.getP1().y);
+			g.drawImage(tree.getTreeImage(), tree.getP1().x, tree.getP1().y, tree.getTreeHeight(), tree.getTreeHeight(), null);
 		}
 
 		//Draw tool panel

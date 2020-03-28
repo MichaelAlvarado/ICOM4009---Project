@@ -117,7 +117,6 @@ public class Trees {
 //	 * @return - N/A 
 //	 */
 	public void defineTreeImage() {
-		setTreeImage(null);
 		if (this.treeSpecies == 1) {
 			setTreeHeight(25);
 			try {
