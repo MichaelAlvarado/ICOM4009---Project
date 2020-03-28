@@ -80,6 +80,8 @@ public class Player {
 		//				}			
 		//			}
 		//		}
+	
+	//Should let avatar visible
 	public void render(Graphics g) {
 		if(this.getAvatar() != null)
 		g.drawImage(this.getAvatar(),this.getPosition().x, this.getPosition().y, 40, 40,null); //this should be in player 
