@@ -125,7 +125,7 @@ public class GameEngine implements Runnable {
 	 * This method is will run the game code 
 	 */
 	private void tick(){
-		handler.getKeyListener().tick();
+		handler.tick();
 		if(gameState != null) {
 			gameState.tick();
 		}

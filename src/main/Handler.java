@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 
 import GUI.Display;
 import States.GameState;
+import States.QuestionState;
+import States.State;
 
 /**
  * 
@@ -20,6 +22,8 @@ import States.GameState;
 public class Handler {
 	
 	GameState gameState;//this is the gameState where everything is being run at (tick and render)
+	QuestionState questionState;
+	State currentState;
 	KeyManager keyListener;
 	MouseListener mouseListener; 
 	int width, height;
@@ -28,10 +32,15 @@ public class Handler {
 		width = canvas.getWidth();
 		height = canvas.getHeight();
 		keyListener = new KeyManager();
+		canvas.setFocusable(true);
+		canvas.requestFocusInWindow();
 		canvas.addKeyListener(keyListener);
-		
+		currentState = gameState;
 	}
 	
+	public void tick() {
+		keyListener.tick();
+	}
 
 	public int getWidth() {
 		return width;
@@ -86,18 +95,15 @@ public class Handler {
 
 
 		public KeyManager(){
-
 			keys = new boolean[256];
 			justPressed = new boolean[keys.length];
 			cantPress = new boolean[keys.length];
-
 		}
 
 		public void tick(){
 			for(int i =0; i < keys.length;i++){
 				if(cantPress[i] && !keys[i]){
 					cantPress[i]=false;
-
 				}else if(justPressed[i]){
 					cantPress[i]=true;
 					justPressed[i] =false;
