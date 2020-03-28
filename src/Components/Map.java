@@ -213,7 +213,11 @@ public class Map {
 				//Building Image 
 				String bImage = sc.nextLine(); 
 				bImage = bImage.substring(bImage.indexOf("Building Image: ") + 16);
-				building.setPictureURL(bImage);
+				try {
+					building.setPictureURL(bImage);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 
 				//Load Walls
 				wallLine = sc.nextLine();

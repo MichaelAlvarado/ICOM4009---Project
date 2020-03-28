@@ -3,13 +3,17 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import java.awt.Point;
 import GUI.AddQuestionsBox;
 import GUI.Plane;
 import main.Handler;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage; 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.lang.String;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -33,8 +37,6 @@ public class Building {
 	private boolean found;
 	private int buildingHeight; //this is default height of walls
 	Handler handler;
-	private Plane plane;
-	private Player player; 
 	private int width, height;
 	
 	
@@ -149,9 +151,12 @@ public class Building {
 
 	/**
 	 * @param pictureURL the pictureURL to set
+	 * @throws IOException 
 	 */
-	public void setPictureURL(String pictureURL) {
+	public void setPictureURL(String pictureURL) throws IOException {
 		this.pictureURL = pictureURL;
+		this.setPicture(ImageIO.read(new File(pictureURL)));
+
 	}
 	
 	/**
@@ -187,7 +192,7 @@ public class Building {
 			if (points.get(i).getY() > bigY)
 				bigY = points.get(i).getY();
 		}
-		r.setBounds((int)smallX, (int)bigY, (int)(bigX-smallX), (int)(bigY-smallY));
+		r.setBounds((int)smallX, (int)smallY, (int)(bigX-smallX), (int)(bigY-smallY));
 		return r;
 	}
 	
