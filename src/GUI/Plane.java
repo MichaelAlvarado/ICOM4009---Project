@@ -9,6 +9,7 @@ import java.awt.Menu;
 import java.awt.MenuItem;
 import java.awt.Point;
 import java.awt.PopupMenu;
+import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -77,7 +78,6 @@ public class Plane extends JPanel{
 		//buildings.add(currentBuilding); //Testing
 		map = new Map();
 		currentPointPair = new Point[2];
-
 		mouse = new Mouse();
 		mouseMotion = new MouseMotion();
 		keyboard = new Keyboard();
@@ -176,7 +176,10 @@ public class Plane extends JPanel{
 		if(buildingImagesIsOn) {
 			for(Building building: map.getBuildingList()) {
 				if (building.getPicture()!=null) {
-					g.drawImage(building.getPicture(), 0, (int)building.getWalls().get(0).getP1().getX(), (int)building.getWalls().get(0).getP1().getY(), 60, null);
+					Rectangle r = building.perimeter();
+					g.drawImage(building.getPicture(), r.x, r.y, r.width, r.height, null);
+					// g.drawImage(building.getPicture(), 0, (int)building.getWalls().get(0).getP1().getX(), (int)building.getWalls().get(0).getP1().getY(), 60, null);
+					
 				}
 			}
 		}
