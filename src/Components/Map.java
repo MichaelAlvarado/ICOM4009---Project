@@ -304,7 +304,8 @@ public class Map {
 			////// Load Trees
 			treeLine = foundLine;
 			if(treeLine.contains("Trees:")) {
-				treeLine = sc.nextLine();
+				if (sc.hasNext())
+						treeLine = sc.nextLine();
 				int index = 0;
 				while(sc.hasNextLine()) {
 					Trees t = new Trees();

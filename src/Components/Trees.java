@@ -122,6 +122,7 @@ public class Trees {
 			setTreeHeight(25);
 			try {
 				setTreeImage(ImageIO.read(new File("res/treeImages/species1.png")));
+				setPictureURL("res/treeImages/species1.png");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -131,6 +132,7 @@ public class Trees {
 			setTreeHeight(50);
 			try {
 				setTreeImage(ImageIO.read(new File("res/treeImages/species2.png")));
+				setPictureURL("res/treeImages/species2.png");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -140,6 +142,7 @@ public class Trees {
 			setTreeHeight(100);
 			try {
 				setTreeImage(ImageIO.read(new File("res/treeImages/species3.png")));
+				setPictureURL("res/treeImages/species3.png");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
