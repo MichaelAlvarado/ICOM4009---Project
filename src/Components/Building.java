@@ -203,29 +203,31 @@ public class Building {
 	}
 
 
-	//	MAYBE THIS TICK SHOULD ALSO GO ON PLAYER?
 	public void tick(Handler handler, Player player) {
-		//Temporary place where the player must be to answer a Question
-		if(player.getPosition().x >= walls.getFirst().getP1().x && player.getPosition().x <=walls.getFirst().getP2().y 
-				&& player.getPosition().y >= walls.getFirst().getP1().y - 100 && player.getPosition().y <= walls.getFirst().getP2().y + 100) {
-			if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_X)) {
-			//	QuestionState questionS = new QuestionState(display);
-				//Must make Question box appear, however this question box must be with the questions and answers already
+		//Place where the player must be to answer a Question
+		for (Wall w : this.getWalls()) {
+			if(player.getPosition().x >= w.getP1().x && player.getPosition().x <= w.getP2().x 
+					&& player.getPosition().y >= walls.getFirst().getP1().y - 100 && player.getPosition().y <= walls.getFirst().getP2().y + 100) {
+				if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_X)) {
+					//	QuestionState questionS = new QuestionState(display);
+				}
 			}
 		}
 	}
-	
+
 	public void render(Graphics g) {
-	//por ahora esta get picture, pero no es get picture
-		if(player.getPosition().x >= walls.getFirst().getP1().x && player.getPosition().x <=walls.getFirst().getP2().y 
-				&& player.getPosition().y >= walls.getFirst().getP1().y - 100 && player.getPosition().y <= walls.getFirst().getP2().y + 100) {
-				g.drawImage(this.getPicture(),this.perimeter().x,this.perimeter().y, width, height,null);
+		//Once the player is close, make wall visible
+		for (Wall w : this.getWalls()) {
+			if(player.getPosition().x >= w.getP1().x && player.getPosition().x <= w.getP2().x 
+					&& player.getPosition().y >= w.getP1().y - 100 && player.getPosition().y <= w.getP2().y + 100) {
+				g.drawLine(w.getP1().x, w.getP1().y, w.getP2().x, w.getP2().y);
+			}
 		}
-	//	if(correct_answers == 3) {
+		//	if(correct_answers == 3) {
 		//Una vez contestado correcto 3 veces
-	//	g.drawImage(this.getPicture(),this.perimeter().x,this.perimeter().y, width, height,null);
-	//	}
+		//	g.drawImage(this.getPicture(),this.perimeter().x,this.perimeter().y, width, height,null);
+		//	}
 	}
-	
+
 
 }
