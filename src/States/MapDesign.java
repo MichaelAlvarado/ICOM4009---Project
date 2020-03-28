@@ -29,6 +29,7 @@ import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.LinkedList;
 import java.awt.Color;
@@ -143,6 +144,10 @@ public class MapDesign{
 		JButton editMap = new JButton("Edit Map");
 		editMap.setBounds(165, 15, 150, 25);
 		panel.add(editMap);
+		
+		JButton mapDone = new JButton("Map Done");
+		mapDone.setBounds(320, 15, 150, 25);
+		panel.add(mapDone);
 
 		JButton addBuilding = new JButton("Add Building");
 		addBuilding.setBounds(10, 15, 150, 25);
@@ -280,6 +285,18 @@ public class MapDesign{
 				addBuildingBox.setVisible(false);
 				addQuestionBox.setVisible(false);
 
+			}
+		});
+		
+		mapDone.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					MenuState menu = new MenuState(display);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 
