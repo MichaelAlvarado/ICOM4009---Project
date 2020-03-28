@@ -269,8 +269,8 @@ public class Plane extends JPanel{
 		return buildingImagesIsOn;
 	}
 
-	public void setBuildingImagesIsOn(boolean buildingImagesIsOn) {
-		this.buildingImagesIsOn = buildingImagesIsOn;
+	public void setBuildingImages() {
+		this.buildingImagesIsOn = !buildingImagesIsOn;
 		this.repaint();
 	}
 	

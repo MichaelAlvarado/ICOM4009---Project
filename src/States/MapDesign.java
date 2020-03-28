@@ -476,7 +476,7 @@ public class MapDesign{
 		buildingImage.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				plane.setBuildingImagesIsOn(true);
+				plane.setBuildingImages();
 			}	
 		});
 
