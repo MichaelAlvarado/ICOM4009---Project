@@ -105,6 +105,7 @@ public class AddTreeBox extends JPanel{
 					tree.setTreeSpecies(treeSpeciesField.getAnchorSelectionIndex()+1);
 					int x = Integer.parseInt(formattedTextP1X.getValue().toString().substring(1,4));
 					int y = Integer.parseInt(formattedTextP1Y.getValue().toString().substring(1,4));
+					y = plane.getHeight() - y;
 					tree.setP1(new Point(x,y));
 				}
 				
