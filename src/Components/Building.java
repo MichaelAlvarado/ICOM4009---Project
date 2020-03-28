@@ -2,13 +2,13 @@ package Components;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.ListIterator;
-
+import java.util.ArrayList;
 import javax.swing.JFrame;
-
+import java.awt.Point;
 import GUI.AddQuestionsBox;
 import GUI.Plane;
 import main.Handler;
-
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage; 
 import java.lang.String;
 import java.awt.event.KeyEvent;
@@ -154,6 +154,42 @@ public class Building {
 		this.pictureURL = pictureURL;
 	}
 	
+	/**
+	 * @author Fabiola Badillo
+	 * Objective - helper method for defining the perimeter
+	 * Date - March 28, 2020
+	 * @return - list containing all points for the building
+	 */
+	private List<Point> allPoints(){
+		ArrayList<Point> points = new ArrayList<Point>();
+		for (int i = 0; i < this.walls.size(); i++) {
+			points.add(this.walls.get(i).getP1());
+			points.add(this.walls.get(i).getP2());
+		}
+		return points;
+	}
+	
+	public Rectangle perimeter() {
+		Rectangle r = new Rectangle();
+		double smallX, bigX, smallY, bigY;
+		ArrayList<Point> points = (ArrayList<Point>) allPoints();
+		smallX = points.get(0).getX();
+		bigX = points.get(0).getX();
+		smallY = points.get(0).getY();
+		bigY = points.get(0).getY();
+		for (int i = 1; i < points.size(); i++) {
+			if (points.get(i).getX() < smallX)
+				smallX = points.get(i).getX();
+			if (points.get(i).getX() > bigX)
+				bigX = points.get(i).getX();
+			if (points.get(i).getY() < smallY)
+				smallY = points.get(i).getY();
+			if (points.get(i).getY() > bigY)
+				bigY = points.get(i).getY();
+		}
+		r.setBounds((int)smallX, (int)bigY, (int)(bigX-smallX), (int)(bigY-smallY));
+		return r;
+	}
 	
 /*
  	MAYBE THIS TICK SHOULD ALSO GO ON PLAYER?
