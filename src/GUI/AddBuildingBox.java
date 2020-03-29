@@ -111,7 +111,15 @@ public class AddBuildingBox extends JPanel{
 		enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				building.setName(name.getText());
+				for(Building b: plane.getMap().getBuildingList()) {
+					if (b.getName().equals(name.getText())){
+						JOptionPane.showMessageDialog(plane, "Building name already in use. Please choose another.");
+						exit();
+					}
+					else
+						building.setName(name.getText());
+				}
+				
 				try {
 					building.setBuildingHeight(Integer.valueOf(wallHeight.getText()));
 					if(picture != null) {
