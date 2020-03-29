@@ -33,7 +33,6 @@ import java.awt.event.MouseEvent;
  */
 
 public class Building {
-	Player player;
 	Question question;
 	Display display;
 	private LinkedList<Wall> walls; // = new LinkedList<Wall>();
@@ -41,10 +40,11 @@ public class Building {
 	private BufferedImage picture;
 	private String pictureURL;
 	private LinkedList<Question> questionPool;
-	private boolean found;
 	private int buildingHeight; //this is default height of walls
 	private int width, height;
-
+	//GameRelated
+	private boolean playerCloseBy;
+	private boolean found;
 
 	// constructor
 	public Building(String buildingName) {
@@ -206,14 +206,17 @@ public class Building {
 	}
 
 
-	public void tick(Handler handler, Player player) {
+	public void tick(Player player, Handler handler) {
 		//Place where the player must be to answer a Question
+		playerCloseBy=false;
 		for (Wall w : this.getWalls()) {
 			//un acercamiento aproximado a cualquier pared
 			if(player.getPosition().x >= w.getP1().x && player.getPosition().x <= w.getP2().x 
 					&& player.getPosition().y >= walls.getFirst().getP1().y - 100 && player.getPosition().y <= walls.getFirst().getP2().y + 100) {
+				this.playerCloseBy = true;
 				if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_X)) {
-					//	QuestionState questionS = new QuestionState(display);
+					handler.getQuestionState().setBuilding(this);	//this add the building to the Question State so it knows its questions
+					handler.setCurrentState(handler.getQuestionState()); //change the state to Question State
 				}
 			}
 		}
@@ -222,8 +225,7 @@ public class Building {
 	public void render(Graphics g) {
 		//Once the player is close, make wall visible
 		for (Wall w : this.getWalls()) {
-			if(player.getPosition().x >= w.getP1().x && player.getPosition().x <= w.getP2().x 
-					&& player.getPosition().y >= w.getP1().y - 100 && player.getPosition().y <= w.getP2().y + 100) {
+			if(playerCloseBy) {
 				g.drawLine(w.getP1().x, w.getP1().y, w.getP2().x, w.getP2().y);
 			}
 		}
