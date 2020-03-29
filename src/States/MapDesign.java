@@ -292,9 +292,13 @@ public class MapDesign{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					plane.getMap().generateTextFile();
-					loadingScreen();
-					MenuState menu = new MenuState(display);
+					if(!(plane.getMap().getPicture() == null)) {
+						plane.getMap().generateTextFile();
+						loadingScreen();
+						MenuState menu = new MenuState(display);
+					}
+					else
+						JOptionPane.showMessageDialog(plane, "Map must contain an Image");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
