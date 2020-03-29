@@ -127,6 +127,28 @@ public class Map {
 	public void removeTree(Trees t) {
 		this.trees.remove(t);
 	}
+	
+	//Para cada building creado en un mapa tendra su tick y render
+	public void tick(Player player, Handler handler) {
+		for (Building building : buildingList) {
+			building.tick(player, handler);
+		}
+	}
+	
+	public void render(Graphics g, Handler handler) {
+		if(getPicture() != null)
+			g.drawImage(getPicture(),0,0, handler.getWidth(), handler.getHeight(),null);
+		for (Building building : buildingList) {
+			building.render(g);
+			//Testing Purposes
+//			for(Wall w: building.getWalls()) {
+//			double scaleX = handler.getWidth()/width;
+//			double scaleY = handler.getHeight()/height;
+//			g.drawLine((int)(w.getP1().x*scaleX), (int)(w.getP1().y*scaleY), (int)(w.getP2().x*scaleX), (int)(w.getP2().y*scaleY));
+//			}
+		}
+		
+	}
 
 	/**
 	 * @author jorgecalderon
@@ -170,19 +192,6 @@ public class Map {
 		} catch (IOException e) {
 			System.out.println("Something went wrong!");
 		}	
-	}
-	
-	//Para cada building creado en un mapa tendra su tick y render
-	public void tick(Handler handler, Player player) {
-		for (Building building : buildingList) {
-			building.tick(handler, player);
-		}
-	}
-	
-	public void render(Graphics g) {
-		for (Building building : buildingList) {
-			building.render(g);
-		}
 	}
 
 	/**

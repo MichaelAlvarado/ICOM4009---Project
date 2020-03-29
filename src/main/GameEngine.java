@@ -47,9 +47,7 @@ public class GameEngine implements Runnable {
 		canvas = new Canvas();
 		canvas.setBounds(0, 0, display.getContentPane().getWidth(), display.getContentPane().getHeight());
 		canvas.setFocusable(true);
-		canvas.setBackground(Color.black); //Testing
-		display.add(canvas);
-		display.pack();
+		display.getContentPane().add(canvas);
 
 		init();
 	}

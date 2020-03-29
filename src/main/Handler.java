@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 
+import Components.Building;
 import GUI.Display;
 import States.GameState;
 import States.QuestionState;
@@ -61,7 +62,14 @@ public class Handler {
 		this.height = height;
 	}
 
+	public State getCurrentState() {
+		return currentState;
+	}
 
+	public void setCurrentState(State currentState) {
+		this.currentState = currentState;
+	}
+	
 	public GameState getGameState() {
 		return gameState;
 	}
@@ -69,6 +77,15 @@ public class Handler {
 	public void setGameState(GameState gameState) {
 		this.gameState = gameState;
 	}
+	
+	public QuestionState getQuestionState() {
+		return questionState;
+	}
+
+	public void setQuestionState(QuestionState questionState) {
+		this.questionState = questionState;
+	}
+
 
 	public KeyManager getKeyListener() {
 		return keyListener;
