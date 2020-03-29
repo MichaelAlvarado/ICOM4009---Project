@@ -286,16 +286,16 @@ public class Map {
 				questionLine=wallLine;
 				String answ1, answ2, answ3, answ4;
 				while(questionLine.contains("Question:")){
-					int index = questionLine.indexOf(',');
+					int index = questionLine.indexOf("Correct Answer:") - 2;
 					//Get the question
 					name = questionLine.substring(10,index);
-					index = questionLine.indexOf(',', index + 1);
+					index = questionLine.indexOf("Incorrect Answer1:") - 2;
 					//First Answer
 					answ1 = questionLine.substring((questionLine.indexOf("Correct Answer:") + 16), index);
-					index = questionLine.indexOf(',', index + 1);
+					index = questionLine.indexOf("Incorrect Answer2:") - 2;
 					//Second Answer
 					answ2 = questionLine.substring((questionLine.indexOf("Incorrect Answer1:") + 19), index);
-					index = questionLine.indexOf(',', index + 1);
+					index = questionLine.indexOf("Incorrect Answer3:")-2;
 					//Third Answer
 					answ3 = questionLine.substring((questionLine.indexOf("Incorrect Answer2:") + 19), index);
 					//Fourth Answer
