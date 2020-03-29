@@ -261,8 +261,12 @@ public class MapDesign{
 					addBuildingBox.addBuilding();
 				}
 				else {
-					plane.setCurrentBuilding(null);
-					addBuilding.setText("Add Building");
+					if(plane.getCurrentBuilding().getQuestionPool().size() < 4) 
+						JOptionPane.showMessageDialog(plane, "Building must contain at least 4 questions.");
+					else {
+						plane.setCurrentBuilding(null);
+						addBuilding.setText("Add Building");
+					}
 				}
 			}
 		});
