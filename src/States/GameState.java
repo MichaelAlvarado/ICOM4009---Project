@@ -33,13 +33,6 @@ public class GameState implements State{
 		this.width = handler.getWidth();
 		this.height = handler.getHeight();
 		player = new Player("Player" , new Point(100,100));
-
-		try {
-			player.setAvatar(ImageIO.read(new File("res/animation_Images/Idle (1).png")));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
 	}
 
 	public void tick() {
