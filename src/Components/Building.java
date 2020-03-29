@@ -182,6 +182,9 @@ public class Building {
 
 	public Rectangle perimeter() {
 		Rectangle r = new Rectangle();
+		if(this.walls.size() == 0) {
+			return r;
+		}
 		double smallX, bigX, smallY, bigY;
 		ArrayList<Point> points = (ArrayList<Point>) allPoints();
 		smallX = points.get(0).getX();
