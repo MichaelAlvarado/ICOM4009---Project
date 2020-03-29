@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -45,6 +46,7 @@ public class AddBuildingBox extends JPanel{
 	static BufferedImage picture;
 	private boolean newBuilding;
 	private JButton activationButton; //this is the button use to active this Window
+	
 
 
 	public AddBuildingBox(int x, int y, int width, int height, Plane plane, JButton activationButton) {
@@ -111,29 +113,35 @@ public class AddBuildingBox extends JPanel{
 		enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				for(Building b: plane.getMap().getBuildingList()) {
-					if (b.getName().equals(name.getText())){
-						JOptionPane.showMessageDialog(plane, "Building name already in use. Please choose another.");
-						exit();
-					}
-					else
+				if(name.getText().isBlank()) {
+					System.out.println("aqui");
+					JOptionPane.showMessageDialog(plane, "Name of building cannot be blank. "
+							+ "Please enter a valid name for building.");
+				}
+				else {
+					if(nameExistInList(plane.getMap().getBuildingList())) {
+							JOptionPane.showMessageDialog(plane, "Building name already in use. Please choose another.");
+							exit();
+						}
+					else {
 						building.setName(name.getText());
-				}
-				
-				try {
-					building.setBuildingHeight(Integer.valueOf(wallHeight.getText()));
-					if(picture != null) {
-						building.setPicture(picture);
-					} 
-					if(newBuilding) {
-						plane.addBuilding(building);
-						activationButton.setText("Finish Building");
+					
+						
+						try {
+							building.setBuildingHeight(Integer.valueOf(wallHeight.getText()));
+							if(picture != null) {
+								building.setPicture(picture);
+							} 
+							if(newBuilding) {
+								plane.addBuilding(building);
+								activationButton.setText("Finish Building");
+							}
+							exit();
+						}catch(NumberFormatException n){
+							JOptionPane.showMessageDialog(plane, "Invalid Building Height.\nIt must be an Integer");
+						}
 					}
-					exit();
-				}catch(NumberFormatException n){
-					JOptionPane.showMessageDialog(plane, "Invalid Building Height.\nIt must be an Integer");
 				}
-
 			}
 		});
 
@@ -150,6 +158,7 @@ public class AddBuildingBox extends JPanel{
 			}
 		});
 
+		
 		//Add to Box PopUp
 		add(name);	
 		add(browseButton);
@@ -197,6 +206,14 @@ public class AddBuildingBox extends JPanel{
 		name.setText(building.getName());
 		picURL.setText(building.getPictureURL());
 		wallHeight.setText(String.valueOf(building.getBuildingHeight()));
+	}
+	
+	private boolean nameExistInList(LinkedList<Building> buildings) {
+		for(Building b: buildings) {
+			if (newBuilding && b.getName().equals(name.getText()))
+				return true;	
+		}
+		return false;
 	}
 }
 /*
