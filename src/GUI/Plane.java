@@ -73,9 +73,6 @@ public class Plane extends JPanel{
 		pL = new Color(20,198,5); //Green
 		gridIsOn = true;
 		buildingImagesIsOn = false;
-		//walls = new LinkedList<Wall>();
-		//currentBuilding = new Building("building"); //Testing
-		//buildings.add(currentBuilding); //Testing
 		map = new Map();
 		currentPointPair = new Point[2];
 		mouse = new Mouse();

@@ -25,21 +25,22 @@ import testers.WriteFile;
 public class Map {
 
 	private LinkedList<Building> buildingList;
-	private static LinkedList<Trees> trees;
-	private static String mapName;
-	private static int height;
-	private static int width;
-	private static BufferedImage picture;
-	private static String imageURL;
+	private LinkedList<Trees> trees;
+	private String mapName;
+	private int height;
+	private int width;
+	private BufferedImage picture;
+	private String imageURL;
 
 	public Map(LinkedList<Building> buildingList, LinkedList<Trees> trees, String mapName, int height, int width) {
 		super();
 		this.buildingList = buildingList;
 		this.trees = trees;
-		Map.mapName = mapName;
-		Map.height = height;
-		Map.width = width;
-		Map.picture = null;
+		this.mapName = mapName;
+		this.height = height;
+		this.width = width;
+		this.picture = null;
+		this.imageURL = "";
 	}
 	public Map() {
 		buildingList = new LinkedList<Building>();
@@ -74,40 +75,40 @@ public class Map {
 		this.trees = trees;
 	}
 
-	public static String getMapName() {
+	public String getMapName() {
 		return mapName;
 	}
 
 
 	public void setMapName(String buildingName) {
-		Map.mapName = buildingName;
+		this.mapName = buildingName;
 	}
 
 
-	public static int getHeight() {
+	public int getHeight() {
 		return height;
 	}
 
 
 	public void setHeight(int height) {
-		Map.height = height;
+		this.height = height;
 	}
 
 
-	public static int getWidth() {
+	public int getWidth() {
 		return width;
 	}
 
 
 	public void setWidth(int width) {
-		Map.width = width;
+		this.width = width;
 	}
 
-	public static String getImageURL() {
+	public String getImageURL() {
 		return imageURL;
 	}
 	public void setImageURL(String imageURL) throws IOException {
-		Map.imageURL = imageURL;
+		this.imageURL = imageURL;
 		this.setPicture(ImageIO.read(new File(imageURL)));
 
 	}
@@ -167,9 +168,9 @@ public class Map {
 		int counter = 1;
 
 		//Write the map information first, no iteration needed for this.
-		String file = "Map: " + Map.getMapName() + "\n"
-				+ "Size: (" + Map.getWidth() + ", " + Map.getHeight() + ") " + "\n"
-				+ "Image: " + Map.getImageURL() + "\n";
+		String file = "Map: " + this.getMapName() + "\n"
+				+ "Size: (" + this.getWidth() + ", " + this.getHeight() + ") " + "\n"
+				+ "Image: " + this.getImageURL() + "\n";
 
 		//Iterate through list of buildings to store info on file
 		for(Building buildings: buildingList){

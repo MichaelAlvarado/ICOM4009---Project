@@ -52,7 +52,6 @@ public class MenuState{
 	int width, height;
 
 	public MenuState(JFrame display) throws IOException {
-		System.out.println("Loading Menu");
 		this.display = display;
 		this.width = display.getContentPane().getWidth();
 		this.height = display.getContentPane().getHeight();
