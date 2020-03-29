@@ -206,6 +206,7 @@ public class Building {
 	public void tick(Handler handler, Player player) {
 		//Place where the player must be to answer a Question
 		for (Wall w : this.getWalls()) {
+			//un acercamiento aproximado a cualquier pared
 			if(player.getPosition().x >= w.getP1().x && player.getPosition().x <= w.getP2().x 
 					&& player.getPosition().y >= walls.getFirst().getP1().y - 100 && player.getPosition().y <= walls.getFirst().getP2().y + 100) {
 				if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_X)) {

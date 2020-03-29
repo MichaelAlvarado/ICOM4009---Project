@@ -1,5 +1,6 @@
 package Components;
 
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -12,6 +13,7 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
+import main.Handler;
 import testers.WriteFile;
 
 
@@ -168,6 +170,19 @@ public class Map {
 		} catch (IOException e) {
 			System.out.println("Something went wrong!");
 		}	
+	}
+	
+	//Para cada building creado en un mapa tendra su tick y render
+	public void tick(Handler handler, Player player) {
+		for (Building building : buildingList) {
+			building.tick(handler, player);
+		}
+	}
+	
+	public void render(Graphics g) {
+		for (Building building : buildingList) {
+			building.render(g);
+		}
 	}
 
 	/**
