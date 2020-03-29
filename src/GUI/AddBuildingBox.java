@@ -113,7 +113,7 @@ public class AddBuildingBox extends JPanel{
 		enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(name.getText().isBlank()) {
+				if(name.getText().isEmpty()) {
 					System.out.println("aqui");
 					JOptionPane.showMessageDialog(plane, "Name of building cannot be blank. "
 							+ "Please enter a valid name for building.");
