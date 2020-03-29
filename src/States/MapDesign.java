@@ -292,9 +292,10 @@ public class MapDesign{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					plane.getMap().generateTextFile();
+					loadingScreen();
 					MenuState menu = new MenuState(display);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -337,8 +338,17 @@ public class MapDesign{
 				}
 			}
 		});
-
+		display.repaint();
 	}//Last from Constructor
+	
+	public void loadingScreen() {
+		try {
+			display.getContentPane().getGraphics().drawImage(ImageIO.read(new File("res/loadingscreen.png")), 0, 0, width, height, null);
+			display.getContentPane().removeAll();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * @author Michael J. Alvarado 

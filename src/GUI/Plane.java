@@ -499,7 +499,7 @@ public class Plane extends JPanel{
 					undo();
 				}
 				if(arg0.isControlDown() && arg0.getKeyCode() == arg0.VK_S) {
-					Map.generateTextFile(map.getBuildingList());
+					map.generateTextFile();
 					System.out.println("Map saved");
 				}
 			}

@@ -52,10 +52,11 @@ public class MenuState{
 	int width, height;
 
 	public MenuState(JFrame display) throws IOException {
+		System.out.println("Loading Menu");
 		this.display = display;
 		this.width = display.getContentPane().getWidth();
 		this.height = display.getContentPane().getHeight();
-		display.setLayout(null);
+		display.getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel(); 
 		panel.setLayout(null);
@@ -92,7 +93,7 @@ public class MenuState{
 		picLabel.setBounds(0,0,width,height);
 		panel.add(picLabel);
 
-		display.add(panel);
+		display.getContentPane().add(panel);
 		/*
 		 * Actions
 		 */
@@ -103,7 +104,7 @@ public class MenuState{
 					System.out.println("Loading MapDesign App...");
 					long start = System.nanoTime();
 					loadingScreen();
-					MapDesign designMap = new MapDesign (display);
+					MapDesign designMap = new MapDesign(display);
 					System.out.println("Map Design App Loaded in: " + ((System.nanoTime()-start)/1000000000.0) + " seconds");
 				} catch (ParseException e) {
 					e.printStackTrace();
@@ -135,7 +136,7 @@ public class MenuState{
 				JOptionPane.showMessageDialog(display, help);
 			}
 		});
-
+		display.repaint();
 	}
 	/**
 	 * @author Michael J. Alvarado

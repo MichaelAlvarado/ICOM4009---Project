@@ -139,7 +139,7 @@ public class Map {
 	 * @param - N/A
 	 * @return - N/A 
 	 */
-	public static void generateTextFile(LinkedList<Building> buildingList) {
+	public void generateTextFile() {
 
 		WriteFile data = new WriteFile(mapName +"ConfigurationFile.txt", false);
 		int counter = 1;
