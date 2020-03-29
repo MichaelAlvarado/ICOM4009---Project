@@ -291,15 +291,15 @@ public class Map {
 					name = questionLine.substring(10,index);
 					index = questionLine.indexOf(',', index + 1);
 					//First Answer
-					answ1 = questionLine.substring((questionLine.indexOf("Answers:") + 9), index);
+					answ1 = questionLine.substring((questionLine.indexOf("Correct Answer:") + 16), index);
 					index = questionLine.indexOf(',', index + 1);
 					//Second Answer
-					answ2 = questionLine.substring((questionLine.indexOf("Answers:") + 12), index);
+					answ2 = questionLine.substring((questionLine.indexOf("Incorrect Answer1:") + 19), index);
 					index = questionLine.indexOf(',', index + 1);
 					//Third Answer
-					answ3 = questionLine.substring((questionLine.indexOf("Answers:") + 15), index);
+					answ3 = questionLine.substring((questionLine.indexOf("Incorrect Answer2:") + 19), index);
 					//Fourth Answer
-					answ4 = questionLine.substring(questionLine.indexOf("Answers:") + 18);
+					answ4 = questionLine.substring(questionLine.indexOf("Incorrect Answer3: ") + 19);
 
 					//					System.out.println(name);
 					//					System.out.println(answ1);

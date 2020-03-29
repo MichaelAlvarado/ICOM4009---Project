@@ -24,20 +24,10 @@ public class Question {
 	//Creates Question Constructor to use as source for Question Pools for the buildings
 	public Question(String question, String answer_1, String answer_2, String answer_3, String answer_4, boolean theCorrect) {
 		this.question = question;
-		Scanner Q1 = new Scanner(System.in);
-		question = Q1.next();
 		this.answer_1 = answer_1;
-		Scanner A1 = new Scanner(System.in);
-		answer_1 = A1.next();
 		this.answer_2 = answer_2;
-		Scanner A2 = new Scanner(System.in);
-		answer_2 = A2.next();
 		this.answer_3 = answer_3;
-		Scanner A3 = new Scanner(System.in);
-		answer_3 = A3.next();
 		this.answer_4 = answer_4;		
-		Scanner A4 = new Scanner(System.in);
-		answer_4 = A4.next();
 		this.correct = theCorrect;
 	}
 	public Question(String question, String answer_1, String answer_2, String answer_3, String answer_4) {

@@ -64,7 +64,12 @@ public class Building {
 	public String getQuestions() {
 		String result = "";
 		for (Question q: this.questionPool) {
-			result += "Question: " + q.getQuestion() + ", Answers: " + q.getAnswers() + " \n";
+			result += "Question: " + q.getQuestion()
+			+ ", Correct Answer: " + q.getAnswer_1()
+			+", Incorrect Answer1: " + q.getAnswer_2()
+			+", Incorrect Answer2: " + q.getAnswer_3() 
+			+", Incorrect Answer3: " + q.getAnswer_4() 
+			+ " \n";
 		}
 		return result;
 	}
