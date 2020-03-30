@@ -284,24 +284,24 @@ public class Map {
 				while(questionLine.contains("Question:")){
 					int index = questionLine.indexOf("Correct Answer:") - 2;
 					//Get the question
-					name = questionLine.substring(questionLine.indexOf("Question:"),index);
-					index = questionLine.indexOf("Incorrect Answer1:") - 2;
-					//First Answer
+					name = questionLine.substring(questionLine.indexOf("Question:")+10,index);
+					index = questionLine.indexOf("Incorrect Answer1:")-2;
+					//First Answer (Correct Answer)
 					answ1 = questionLine.substring((questionLine.indexOf("Correct Answer:") + 16), index);
 					index = questionLine.indexOf("Incorrect Answer2:") - 2;
 					//Second Answer
 					answ2 = questionLine.substring((questionLine.indexOf("Incorrect Answer1:") + 19), index);
-					index = questionLine.indexOf("Incorrect Answer3:")-2;
+					index = questionLine.indexOf("Incorrect Answer3:") - 2;
 					//Third Answer
 					answ3 = questionLine.substring((questionLine.indexOf("Incorrect Answer2:") + 19), index);
 					//Fourth Answer
 					answ4 = questionLine.substring(questionLine.indexOf("Incorrect Answer3: ") + 19);
 
-					//					System.out.println(name);
-					//					System.out.println(answ1);
-					//					System.out.println(answ2);
-					//					System.out.println(answ3);
-					//					System.out.println(answ4);
+//										System.out.println(name);
+//										System.out.println(answ1);
+//										System.out.println(answ2);
+//										System.out.println(answ3);
+//										System.out.println(answ4);
 
 					Question question = new Question(name, answ1, answ2, answ3, answ4);
 					building.addQuestion(question);
