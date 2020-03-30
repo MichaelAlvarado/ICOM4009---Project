@@ -284,7 +284,7 @@ public class Map {
 				while(questionLine.contains("Question:")){
 					int index = questionLine.indexOf("Correct Answer:") - 2;
 					//Get the question
-					name = questionLine.substring(10,index);
+					name = questionLine.substring(questionLine.indexOf("Question:"),index);
 					index = questionLine.indexOf("Incorrect Answer1:") - 2;
 					//First Answer
 					answ1 = questionLine.substring((questionLine.indexOf("Correct Answer:") + 16), index);
