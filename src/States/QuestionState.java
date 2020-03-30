@@ -1,6 +1,7 @@
 package States;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
@@ -26,12 +27,23 @@ public class QuestionState implements State{
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.BLACK);
+		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
-		int width = 250;
-		int height = 150;
-		g.setColor(new Color(100,100,100,Color.TRANSLUCENT));
-		g.fillRoundRect((handler.getWidth()/2)-width, (handler.getHeight()/2)-height, width, height, 20, 20);
+		int width = 500;
+		int height = 250;
+		g.setColor(new Color(100,100,100));
+		g.fillRoundRect((handler.getWidth()/2)-(width/2), (handler.getHeight()/2)-(height/2), width, height, 20, 20);
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("Arial", Font.PLAIN, 25));
+		g.drawString("Do you want to answer the questions of:", (handler.getWidth()/2)-(width/2), (handler.getHeight()/2)-(height/2)+25);
+		g.drawString(building.getName()+"?", (handler.getWidth()/2)-(width/2), (handler.getHeight()/2)-(height/2)+50);
+		g.setColor(Color.CYAN);
+		g.fillRoundRect((handler.getWidth()/2)-50, (handler.getHeight()/2), 100, 30, 20, 20);
+		g.fillRoundRect((handler.getWidth()/2)-50, (handler.getHeight()/2)+40, 100, 30, 20, 20);
+		g.setColor(Color.BLACK);
+		g.drawString("Yes",(handler.getWidth()/2)-50, (handler.getHeight()/2)+25);
+		g.drawString("No",(handler.getWidth()/2)-50, (handler.getHeight()/2)+65);
+
 	}
 	
 	public void setBuilding(Building building) {

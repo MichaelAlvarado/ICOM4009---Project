@@ -237,7 +237,6 @@ public class Building {
 			for(Wall w: getWalls()) {
 				g.drawLine((int)(w.getP1().getX()*scaleX), (int)(w.getP1().getY()/scaleY), (int)(w.getP2().getX()*scaleX), (int)(w.getP2().getY()/scaleY));
 			}
-
 			Rectangle rec = this.perimeter();
 			g.setColor(Color.BLACK);
 			g.drawString("Press F", rec.x+10, rec.y+(rec.height/2));
