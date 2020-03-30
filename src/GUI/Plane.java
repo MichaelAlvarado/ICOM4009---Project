@@ -34,7 +34,7 @@ import Components.Building;
 import Components.Map;
 import Components.Question;
 import Components.Wall;
-import Components.Trees;
+import Components.Tree;
 
 /**
  * 
@@ -48,7 +48,7 @@ public class Plane extends JPanel{
 
 	Map map;
 	Building currentBuilding; //the building currently being edit
-	Trees currentTree; //the tree currently being added
+	Tree currentTree; //the tree currently being added
 	Color cP, cL, pP, pL; //Color for c=current p=previous P=Point L=Line
 	boolean gridIsOn; //draw the grid line in plane
 	boolean buildingImagesIsOn;
@@ -139,10 +139,6 @@ public class Plane extends JPanel{
 			}
 		}
 
-		//		if(currentTree != null) {
-		//			g.drawImage(currentTree.getTreeImage(), 0, 0, getWidth(), getHeight(), null);       TODO: implement
-		//		}
-
 		//Draw current Points
 		g.setColor(cP);
 		if(currentPointPair[0] != null) {
@@ -170,6 +166,7 @@ public class Plane extends JPanel{
 			g.drawString("( " + Math.round(currentPointPair[1].getX()*scaleX) + " , " + Math.round(currentPointPair[1].getY()*scaleY) + " )", this.getWidth()-150, 20);
 
 		}
+		
 		//Draw Building Image
 		if(buildingImagesIsOn) {
 			for(Building building: map.getBuildingList()) {
@@ -181,8 +178,8 @@ public class Plane extends JPanel{
 		}
 		
 		//Draw Tree Image
-		for(Trees tree: map.getTrees()) {
-			g.drawImage(tree.getTreeImage(), tree.getP1().x, tree.getP1().y, tree.getTreeHeight(), tree.getTreeHeight(), null);
+		for(Tree tree: map.getTrees()) {
+			g.drawImage(tree.getTreeImage(), tree.getP1().x, tree.getP1().y, tree.getWidth(), tree.getHeight(), null);
 		}
 
 		//Draw tool panel
@@ -319,7 +316,7 @@ public class Plane extends JPanel{
 		this.repaint();
 	}
 
-	public void addTree(Trees tree) {
+	public void addTree(Tree tree) {
 		map.addTree(tree);
 		setCurrentTree(tree);
 	}
@@ -333,7 +330,7 @@ public class Plane extends JPanel{
 		return currentBuilding;
 	}
 
-	public void setCurrentTree(Trees tree) {
+	public void setCurrentTree(Tree tree) {
 		currentTree = tree;
 		this.repaint();
 	}

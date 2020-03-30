@@ -56,7 +56,7 @@ import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.MaskFormatter;
 
 import Components.Building;
-import Components.Trees;
+import Components.Tree;
 import Components.Wall;
 import GUI.AddBuildingBox;
 import GUI.AddMapBox;
@@ -425,7 +425,7 @@ public class MapDesign{
 	private void treeListPopUp(int x, int y, AddTreeBox addTreeBox) {
 		PopupMenu treesPopUp = new PopupMenu("Trees on: " +  plane.getMap().getMapName());
 		treesPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-		for(Trees tree: plane.getMap().getTrees()) {
+		for(Tree tree: plane.getMap().getTrees()) {
 			MenuItem treeOption = new MenuItem(tree.getID());
 			treeOption.addActionListener(new ActionListener() {
 

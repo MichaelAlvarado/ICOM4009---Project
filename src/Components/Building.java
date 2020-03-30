@@ -34,6 +34,7 @@ import java.awt.event.MouseEvent;
  */
 
 public class Building {
+
 	Question question;
 	Display display;
 	private LinkedList<Wall> walls; // = new LinkedList<Wall>();
@@ -228,15 +229,19 @@ public class Building {
 		}
 	}
 
-	public void render(Graphics g) {
+	public void render(Graphics g, Handler handler) {
 		//Once the player is close, make wall visible
-		for (Wall w : this.getWalls()) {
-			if(playerCloseBy) {
-				g.drawLine(w.getP1().x, w.getP1().y, w.getP2().x, w.getP2().y);
-				Rectangle rec = this.perimeter();
-				g.setColor(Color.BLACK);
-				g.drawString("Press F", rec.x+10, rec.y+(rec.height/2));
+		if(playerCloseBy) {
+			double scaleX = (double)handler.getMap().getWidth()/(double)handler.getWidth();
+			double scaleY = (double)handler.getMap().getHeight()/(double)handler.getHeight();
+			for(Wall w: getWalls()) {
+				g.drawLine((int)(w.getP1().getX()*scaleX), (int)(w.getP1().getY()/scaleY), (int)(w.getP2().getX()*scaleX), (int)(w.getP2().getY()/scaleY));
 			}
+
+			Rectangle rec = this.perimeter();
+			g.setColor(Color.BLACK);
+			g.drawString("Press F", rec.x+10, rec.y+(rec.height/2));
+
 		}
 		//	if(correct_answers == 3) {
 		//Una vez contestado correcto 3 veces

@@ -23,7 +23,7 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.text.MaskFormatter;
 
-import Components.Trees;
+import Components.Tree;
 import Components.Wall;
 
 /**
@@ -35,7 +35,7 @@ import Components.Wall;
 
 public class AddTreeBox extends JPanel{
 
-	private Trees tree;
+	private Tree tree;
 	private Plane plane;
 	private JButton enter, exit, activationButton;
 	private JLabel treeSpecies, p1Label;
@@ -138,7 +138,7 @@ public class AddTreeBox extends JPanel{
 	}
 
 	//This is a method to fill the box the the information of a Wall so you can edit it
-	public void edit(Trees tree) {
+	public void edit(Tree tree) {
 		this.tree = tree;
 		autofill(tree);
 		setVisible(true);
@@ -148,7 +148,7 @@ public class AddTreeBox extends JPanel{
 
 
 	public void addTree() {
-		tree = new Trees(plane.map, 1, new Point()); // TODO: implement
+		tree = new Tree(plane.map, 1, new Point()); // TODO: implement
 		setVisible(true);
 		plane.disable();
 		newTree = true;
@@ -165,7 +165,7 @@ public class AddTreeBox extends JPanel{
 		plane.repaint();
 	}
 
-	private void autofill(Trees tree) {
+	private void autofill(Tree tree) {
 		treeSpecies.setText(Integer.toString(tree.getTreeSpecies()));
 	}
 }

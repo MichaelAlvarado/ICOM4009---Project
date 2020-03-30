@@ -6,7 +6,7 @@ package GUI;
 
 import java.awt.Point;
 
-import Components.Trees;
+import Components.Tree;
 import Components.Map;
 
 /**
@@ -16,14 +16,14 @@ import Components.Map;
  */
 public class ToolBox {
 
-	Trees defaultTrees[];
+	Tree defaultTrees[];
 	Point p1;
 	Map map;
 	
 	public ToolBox() {
 		p1 = new Point(0,0);
-		defaultTrees[0] = new Trees(map, 1,p1);
-		defaultTrees[1] = new Trees(map, 2,p1);
-		defaultTrees[2] = new Trees(map, 3,p1);
+		defaultTrees[0] = new Tree(map, 1,p1);
+		defaultTrees[1] = new Tree(map, 2,p1);
+		defaultTrees[2] = new Tree(map, 3,p1);
 	}
 }
