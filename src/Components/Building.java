@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import GUI.AddQuestionsBox;
@@ -219,7 +220,7 @@ public class Building {
 			if(player.getPosition().x >= w.getP1().x && player.getPosition().x <= w.getP2().x 
 					&& player.getPosition().y >= walls.getFirst().getP1().y - 100 && player.getPosition().y <= walls.getFirst().getP2().y + 100) {
 				this.playerCloseBy = true;
-				if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_X)) {
+				if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_F)) {
 					handler.getQuestionState().setBuilding(this);	//this add the building to the Question State so it knows its questions
 					handler.setCurrentState(handler.getQuestionState()); //change the state to Question State
 				}
@@ -232,6 +233,9 @@ public class Building {
 		for (Wall w : this.getWalls()) {
 			if(playerCloseBy) {
 				g.drawLine(w.getP1().x, w.getP1().y, w.getP2().x, w.getP2().y);
+				Rectangle rec = this.perimeter();
+				g.setColor(Color.BLACK);
+				g.drawString("Press F", rec.x+10, rec.y+(rec.height/2));
 			}
 		}
 		//	if(correct_answers == 3) {
