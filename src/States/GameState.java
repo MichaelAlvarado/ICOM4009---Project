@@ -27,8 +27,8 @@ public class GameState implements State{
 	int width, height;
 	Handler handler;
 
-	public GameState(Map map, Handler handler) {
-		this.map = map;
+	public GameState(Handler handler) {
+		this.map = handler.getMap();
 		this.handler = handler;
 		this.width = handler.getWidth();
 		this.height = handler.getHeight();

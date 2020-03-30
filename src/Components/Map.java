@@ -25,14 +25,14 @@ import testers.WriteFile;
 public class Map {
 
 	private LinkedList<Building> buildingList;
-	private LinkedList<Trees> trees;
+	private LinkedList<Tree> trees;
 	private String mapName;
 	private int height;
 	private int width;
 	private BufferedImage picture;
 	private String imageURL;
 
-	public Map(LinkedList<Building> buildingList, LinkedList<Trees> trees, String mapName, int height, int width) {
+	public Map(LinkedList<Building> buildingList, LinkedList<Tree> trees, String mapName, int height, int width) {
 		super();
 		this.buildingList = buildingList;
 		this.trees = trees;
@@ -44,7 +44,7 @@ public class Map {
 	}
 	public Map() {
 		buildingList = new LinkedList<Building>();
-		trees = new LinkedList<Trees>();
+		trees = new LinkedList<Tree>();
 	}
 
 
@@ -67,11 +67,11 @@ public class Map {
 		this.buildingList = buildingList;
 	}
 
-	public LinkedList<Trees> getTrees(){
+	public LinkedList<Tree> getTrees(){
 		return trees;
 	}
 
-	public void setTrees(LinkedList<Trees> trees) {
+	public void setTrees(LinkedList<Tree> trees) {
 		this.trees = trees;
 	}
 
@@ -121,11 +121,11 @@ public class Map {
 		this.buildingList.remove(b);
 	}
 
-	public void addTree(Trees t) {
+	public void addTree(Tree t) {
 		this.trees.add(t);
 	}
 
-	public void removeTree(Trees t) {
+	public void removeTree(Tree t) {
 		this.trees.remove(t);
 	}
 	
@@ -140,15 +140,11 @@ public class Map {
 		if(getPicture() != null)
 			g.drawImage(getPicture(),0,0, handler.getWidth(), handler.getHeight(),null);
 		for (Building building : buildingList) {
-			building.render(g);
-			//Testing Purposes
-//			for(Wall w: building.getWalls()) {
-//			double scaleX = handler.getWidth()/width;
-//			double scaleY = handler.getHeight()/height;
-//			g.drawLine((int)(w.getP1().x*scaleX), (int)(w.getP1().y*scaleY), (int)(w.getP2().x*scaleX), (int)(w.getP2().y*scaleY));
-//			}
+			building.render(g, handler);
 		}
-		
+		for(Tree tree: getTrees()) {
+			tree.render(g, handler);
+		}
 	}
 
 	/**
@@ -184,7 +180,7 @@ public class Map {
 		}
 		file += "\nTrees:";
 		//Iterate through all the trees in the map
-		for(Trees trees: trees) {
+		for(Tree trees: trees) {
 			file += trees.getTreeInfo();
 		}
 		//Write String file to the Configuration File
@@ -333,7 +329,7 @@ public class Map {
 						treeLine = sc.nextLine();
 				int index = 0;
 				while(sc.hasNextLine()) {
-					Trees t = new Trees();
+					Tree t = new Tree();
 					index = treeLine.indexOf(',');
 					if(treeLine.contains("ID:")) {
 						//ID of Tree
@@ -362,7 +358,6 @@ public class Map {
 						String p1Y = treeLine.substring(index + 2);
 						System.out.println(p1X + ", " + p1Y);
 						t.setP1(new Point(Integer.valueOf(p1X), Integer.valueOf(p1Y))); 
-
 					}
 					
 					

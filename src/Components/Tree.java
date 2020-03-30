@@ -5,8 +5,12 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.awt.image.BufferedImage; 
 import java.lang.String;
+import java.awt.Graphics;
 import java.awt.Point;
 import javax.imageio.ImageIO;
+
+import main.Handler;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -18,27 +22,26 @@ import java.io.IOException;
  *
  */
 
-public class Trees {
+public class Tree {
 
 	private int treeSpecies; // 1, 2 or 3
 	private BufferedImage treeImage;
 	private boolean found; // idk yet if trees are to be found or will be present in the map from the beginning 
-	private int treeHeight; 
 	private String pictureURL;
 	private Point p1;
-	private Point p2;
+	private int width, height;
 	private String tid;
 	
 	
 	// constructor
 	@SuppressWarnings("static-access")
-	public Trees(Map map, int treeSpecies, Point p1) {
+	public Tree(Map map, int treeSpecies, Point p1) {
 		this.treeSpecies = treeSpecies;
 		this.p1 = p1;
 		this.tid = map.getMapName() + "_t" + map.getTrees().size();
 	}
 	
-	public Trees() {};
+	public Tree() {};
 	
 //	/**
 //	 * @author jorgecalderon
@@ -64,16 +67,8 @@ public class Trees {
 		return this.p1;
 	}
 	
-	public Point getP2() {
-		return this.p2;
-	}
-	
 	public void setP1(Point p1) {
 		this.p1 = p1;
-	}
-	
-	public void setP2(Point p2) {
-		this.p2 = p2;
 	}
 	
 	public void setTreeSpecies(int treeSpecies) {
@@ -95,11 +90,17 @@ public class Trees {
 	public boolean isFound() {
 		return this.found;
 	}
-	public void setTreeHeight(int treeHeight) {
-		this.treeHeight = treeHeight;
+	public void setWidth(int width) {
+		this.width = width;
 	}
-	public int getTreeHeight() {
-		return this.treeHeight;
+	public int getWidth() {
+		return this.width;
+	}
+	public void setHeight(int height) {
+		this.height = height;
+	}
+	public int getHeight() {
+		return this.height;
 	}
 	public void setID(String tid) {
 		this.tid = tid;
@@ -119,7 +120,8 @@ public class Trees {
 //	 */
 	public void defineTreeImage() {
 		if (this.treeSpecies == 1) {
-			setTreeHeight(25);
+			setHeight(25);
+			setWidth(25);
 			try {
 				setTreeImage(ImageIO.read(new File("res/treeImages/species1.png")));
 				setPictureURL("res/treeImages/species1.png");
@@ -129,7 +131,8 @@ public class Trees {
 			}
 		}
 		else if (this.treeSpecies == 2) {
-			setTreeHeight(50);
+			setHeight(50);
+			setWidth(50);
 			try {
 				setTreeImage(ImageIO.read(new File("res/treeImages/species2.png")));
 				setPictureURL("res/treeImages/species2.png");
@@ -139,7 +142,8 @@ public class Trees {
 			}
 		}
 		else {
-			setTreeHeight(100);
+			setHeight(100);
+			setWidth(100);
 			try {
 				setTreeImage(ImageIO.read(new File("res/treeImages/species3.png")));
 				setPictureURL("res/treeImages/species3.png");
@@ -159,5 +163,10 @@ public class Trees {
 	public void setPictureURL(String pictureURL) {
 		this.pictureURL = pictureURL;
 	}
-	
+
+	public void render(Graphics g, Handler handler) {
+		double scaleX = (double)handler.getMap().getWidth()/(double)handler.getWidth();
+		double scaleY = (double)handler.getMap().getHeight()/(double)handler.getHeight();
+		g.drawImage(treeImage, (int)(p1.getX()/scaleX), (int)(p1.getY()/scaleY), width, height, null);
+	}
 }

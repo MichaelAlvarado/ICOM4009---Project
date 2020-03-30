@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 
 import Components.Building;
+import Components.Map;
 import GUI.Display;
 import States.GameState;
 import States.QuestionState;
@@ -22,21 +23,33 @@ import States.State;
  */
 public class Handler {
 	
-	GameState gameState;//this is the gameState where everything is being run at (tick and render)
-	QuestionState questionState;
-	State currentState;
-	KeyManager keyListener;
-	MouseListener mouseListener; 
-	int width, height;
+	private Map map;//Map being Player
+	private GameState gameState;//this is the gameState where everything is being run at (tick and render)
+	private QuestionState questionState;
+	private State currentState;
+	private KeyManager keyListener;
+	private MouseListener mouseListener; 
+	private int width, height;
 	
-	public Handler(Canvas canvas) {
+	public Handler(Canvas canvas, Map map) {
+		this.map = map;
 		width = canvas.getWidth();
 		height = canvas.getHeight();
 		keyListener = new KeyManager();
 		canvas.setFocusable(true);
 		canvas.requestFocusInWindow();
 		canvas.addKeyListener(keyListener);
+		gameState = new GameState(this);
+		questionState = new QuestionState(this);
 		currentState = gameState;
+	}
+	
+	public Map getMap() {
+		return map;
+	}
+
+	public void setMap(Map map) {
+		this.map = map;
 	}
 	
 	public void tick() {
@@ -47,16 +60,13 @@ public class Handler {
 		return width;
 	}
 
-
 	public void setWidth(int width) {
 		this.width = width;
 	}
 
-
 	public int getHeight() {
 		return height;
 	}
-
 
 	public void setHeight(int height) {
 		this.height = height;
@@ -85,7 +95,6 @@ public class Handler {
 	public void setQuestionState(QuestionState questionState) {
 		this.questionState = questionState;
 	}
-
 
 	public KeyManager getKeyListener() {
 		return keyListener;
@@ -129,13 +138,11 @@ public class Handler {
 					justPressed[i]=true;
 				}
 			}
-
 			up = keys[KeyEvent.VK_W] || keys[KeyEvent.VK_UP];
 			down = keys[KeyEvent.VK_S] || keys[KeyEvent.VK_DOWN]; 
 			left = keys[KeyEvent.VK_A] || keys[KeyEvent.VK_LEFT];
 			right = keys[KeyEvent.VK_D] || keys[KeyEvent.VK_RIGHT];
 			runbutt = keys[KeyEvent.VK_SHIFT];
-
 		}
 
 		@Override
@@ -162,6 +169,6 @@ public class Handler {
 				return false;
 			return justPressed[keyCode];
 		}
-
 	}
+	
 }

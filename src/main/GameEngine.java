@@ -34,8 +34,6 @@ public class GameEngine implements Runnable {
 	private Graphics g;
 	private Canvas canvas;
 	private final int fps = 60;
-	//State
-	private GameState gameState;
 	private Map map;
 	//Handler will have listeners
 	private Handler handler;
@@ -57,8 +55,7 @@ public class GameEngine implements Runnable {
 	 * This method will load files needed to play and add all the Mouse and Key Listener to play the game
 	 */
 	private void init(){
-		handler = new Handler(canvas);
-		gameState = new GameState(map, handler);
+		handler = new Handler(canvas, map);
 	}
 
 	/**
@@ -124,8 +121,8 @@ public class GameEngine implements Runnable {
 	 */
 	private void tick(){
 		handler.tick();
-		if(gameState != null) {
-			gameState.tick();
+		if(handler.getCurrentState() != null) {
+			handler.getCurrentState().tick();
 		}
 	}
 
@@ -147,8 +144,8 @@ public class GameEngine implements Runnable {
 		g.clearRect(0, 0,  display.getWidth(), display.getHeight());
 
 		//Draw Here!
-		if(gameState != null) {
-			gameState.render(g);
+		if(handler.getCurrentState() != null) {
+			handler.getCurrentState().render(g);
 		}
 		//		g.setColor(Color.WHITE);
 		//		g.drawString("Game Engine Prints", 10, 10);
