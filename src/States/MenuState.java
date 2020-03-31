@@ -172,7 +172,7 @@ public class MenuState{
 		Map map;
 		JTextField mapURL;
 		JFileChooser browser;
-		JButton enter, exit, browseButton, Defaultmap;
+		JButton enter, exit, browseButton, defaultMap;
 		JLabel mapLabel;
 		MenuState menu;
 
@@ -202,7 +202,7 @@ public class MenuState{
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-					mapURL.setText(	browser.getSelectedFile().getPath());
+					mapURL.setText(browser.getSelectedFile().getPath());
 
 				}
 			});
@@ -241,11 +241,29 @@ public class MenuState{
 					exit();
 				}
 			});
+			
+			//Tutorial Default Map
+			defaultMap = new JButton("Default Map");
+			defaultMap.setBounds(10, 10, 150, 30);
+			defaultMap.addActionListener(new ActionListener(){
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					try {
+						map.generateMap(new File("TutorialMapConfigurationFile.txt"));
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
+					mapURL.setText("TutorialMapConfigurationFile.txt");
+				}
+			});
+			
 			add(enter);
 			add(exit);
 			add(browseButton);
 			add(mapURL);
 			add(mapLabel);
+			add(defaultMap);
 		}
 
 		private void exit() {
