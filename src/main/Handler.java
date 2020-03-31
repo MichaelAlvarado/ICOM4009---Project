@@ -1,9 +1,12 @@
 package main;
 
 import java.awt.Canvas;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
 
@@ -22,28 +25,31 @@ import States.State;
  *
  */
 public class Handler {
-	
+
 	private Map map;//Map being Player
 	private GameState gameState;//this is the gameState where everything is being run at (tick and render)
 	private QuestionState questionState;
 	private State currentState;
 	private KeyManager keyListener;
-	private MouseListener mouseListener; 
+	private MouseManager mouseListener; 
 	private int width, height;
-	
+
 	public Handler(Canvas canvas, Map map) {
 		this.map = map;
 		width = canvas.getWidth();
 		height = canvas.getHeight();
 		keyListener = new KeyManager();
+		mouseListener = new MouseManager();
 		canvas.setFocusable(true);
 		canvas.requestFocusInWindow();
 		canvas.addKeyListener(keyListener);
+		canvas.addMouseMotionListener(mouseListener);
+		canvas.addMouseListener(mouseListener);
 		gameState = new GameState(this);
 		questionState = new QuestionState(this);
 		currentState = gameState;
 	}
-	
+
 	public Map getMap() {
 		return map;
 	}
@@ -51,7 +57,7 @@ public class Handler {
 	public void setMap(Map map) {
 		this.map = map;
 	}
-	
+
 	public void tick() {
 		keyListener.tick();
 	}
@@ -79,7 +85,7 @@ public class Handler {
 	public void setCurrentState(State currentState) {
 		this.currentState = currentState;
 	}
-	
+
 	public GameState getGameState() {
 		return gameState;
 	}
@@ -87,7 +93,7 @@ public class Handler {
 	public void setGameState(GameState gameState) {
 		this.gameState = gameState;
 	}
-	
+
 	public QuestionState getQuestionState() {
 		return questionState;
 	}
@@ -104,21 +110,23 @@ public class Handler {
 		this.keyListener = keyListener;
 	}
 
-	public MouseListener getMouseListener() {
+	public MouseManager getMouseListener() {
 		return mouseListener;
 	}
 
-	public void setMouseListener(MouseListener mouseListener) {
+	public void setMouseListener(MouseManager mouseListener) {
 		this.mouseListener = mouseListener;
 	}
-	
-	
+
+	/**
+	 * 
+	 * @author Michael
+	 *
+	 */
 	public class KeyManager implements KeyListener {
 
 		private boolean[] keys,justPressed,cantPress;
 		public boolean up=false, down=false, left=false, right=false,pbutt=false,runbutt=false;
-	
-
 
 		public KeyManager(){
 			keys = new boolean[256];
@@ -163,12 +171,75 @@ public class Handler {
 		public void keyTyped(KeyEvent e) {
 
 		}
-
+		/**
+		 * 
+		 * @author Michael J. Alvarado
+		 * @date Mar 23, 2020
+		 *
+		 */
 		public boolean keyJustPressed(int keyCode){
 			if(keyCode < 0 || keyCode >= keys.length)
 				return false;
 			return justPressed[keyCode];
 		}
 	}
-	
+	/**
+	 * 
+	 * @author Michael
+	 *
+	 */
+	public class MouseManager implements MouseListener, MouseMotionListener{
+
+		int x,y;//Position of the mouse
+		boolean pressed, released;
+
+		public MouseManager(){
+			pressed = false;
+			released = false;
+		}
+
+		@Override
+		public void mouseDragged(MouseEvent arg0) {
+
+		}
+
+		@Override
+		public void mouseMoved(MouseEvent arg0) {
+			x = arg0.getX();
+			y = arg0.getY();
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			pressed = true;
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			released = true;
+			pressed = false;
+		}
+		/**
+		 * 
+		 * @author Michael J. Alvarado
+		 * @date Mar 30, 2020
+		 *
+		 */
+		public boolean clickedOn(Rectangle rec) {
+			return pressed && rec.contains(x,y);
+		}
+	}
+
 }
