@@ -1,6 +1,7 @@
 package Components;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -18,7 +19,7 @@ import main.Handler;
 
 public class Player {
 
-	private Point position;
+	private Rectangle bound;
 	private BufferedImage avatar;
 	private PlayerAnimation animation;
 	private boolean walking;
@@ -29,7 +30,7 @@ public class Player {
 
 	public Player(String name, Point initialPosition) {
 		this.name = name;
-		position = initialPosition;
+		bound = new Rectangle(initialPosition.x, initialPosition.y, 40,40);
 		animation = new PlayerAnimation();
 	}
 
@@ -45,38 +46,37 @@ public class Player {
 	public BufferedImage getAvatar() {
 		return this.avatar;
 	}
-	public void moveTo(Point p) {
-		this.position = p;
-	}
 	public Point getPosition() {
-		return this.position;
+		return bound.getLocation();
 	}
 	public void moveOnX(int x) {
-		position.x = x;
+		bound.setLocation(x, bound.y);
 	}
 	public void moveOnY(int y) {
-		position.y = y;
+		bound.setLocation(bound.x, y);
 	}
-
+	public Rectangle getBound() {
+		return bound;
+	}
 
 	//Tick for player must include, movement on each direction (UP, DOWN, LEFT, RIGHT) and the interaction with the Buildings once close.
 	//If decide to interact then make tick for the Questions found in Question yet to be implemented.
 	public void tick(Handler handler) {
 		walking = false;
 		if(handler.getKeyListener().up || handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_UP)) {
-			this.moveOnY(position.y - 1);
+			this.moveOnY(bound.y - 1);
 			walking = true;
 		}
 		if(handler.getKeyListener().left || handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_LEFT)) {
-			this.moveOnX(position.x - 1);
+			this.moveOnX(bound.x - 1);
 			walking = true;
 		}
 		if(handler.getKeyListener().right || handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_RIGHT)) {
-			this.moveOnX(position.x + 1);
+			this.moveOnX(bound.x + 1);
 			walking = true;
 		}
 		if(handler.getKeyListener().down || handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_DOWN)) {
-			this.moveOnY(position.y + 1);
+			this.moveOnY(bound.y + 1);
 			walking = true;
 		}
 	}
@@ -96,9 +96,10 @@ public class Player {
 	//Should let avatar visible
 	public void render(Graphics g) {
 		if(!walking)
-			g.drawImage(animation.getIdle(),this.getPosition().x, this.getPosition().y, 40, 40,null); 
+			g.drawImage(animation.getIdle(),getPosition().x, getPosition().y, bound.width, bound.height,null); 
 		else
-			g.drawImage(animation.getWalk(),this.getPosition().x, this.getPosition().y, 40, 40,null); 
+			g.drawImage(animation.getWalk(),getPosition().x, getPosition().y, bound.width, bound.height,null); 
+		g.drawRect(bound.x, bound.y, bound.width, bound.height);
 	}
 
 	private class PlayerAnimation {

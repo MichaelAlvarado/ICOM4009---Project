@@ -82,7 +82,7 @@ public class MenuState{
 
 		JLabel title = new JLabel(display.getTitle(), SwingConstants.CENTER);
 		title.setFont(new Font("Comic Sans MS", Font.BOLD, 90));	
-		title.setBounds(width/2, 150, 400, 100);
+		title.setBounds(width/2, 150, 400, 140);
 		panel.add(title);
 
 		BufferedImage img = ImageIO.read(new File("res/MenuSky1.png")); 
@@ -220,7 +220,6 @@ public class MenuState{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					//Start
-
 					System.out.println("Loading GameEngine...");
 					long start = System.nanoTime();
 					menu.loadingScreen();
@@ -251,10 +250,10 @@ public class MenuState{
 				public void actionPerformed(ActionEvent arg0) {
 					try {
 						map.generateMap(new File("TutorialMapConfigurationFile.txt"));
+						enter.getActionListeners()[0].actionPerformed(arg0);;
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
 					}
-					mapURL.setText("TutorialMapConfigurationFile.txt");
 				}
 			});
 			

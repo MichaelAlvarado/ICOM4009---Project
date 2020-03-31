@@ -217,9 +217,9 @@ public class Building {
 		//Place where the player must be to answer a Question
 		playerCloseBy=false;
 		for (Wall w : this.getWalls()) {
-			//un acercamiento aproximado a cualquier pared
-			if(player.getPosition().x >= w.getP1().x && player.getPosition().x <= w.getP2().x 
-					&& player.getPosition().y >= walls.getFirst().getP1().y - 100 && player.getPosition().y <= walls.getFirst().getP2().y + 100) {
+			Rectangle perimeter = perimeter();
+			//Rectangle bound = new Rectangle(perimeter.x-10,perimeter.y-10,perimeter.width+20, perimeter.height+20); //this is a bigger rectangle to know if player is close to the building
+			if(perimeter.intersects(player.getBound())) {
 				this.playerCloseBy = true;
 				if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_F)) {
 					handler.getQuestionState().setBuilding(this);	//this add the building to the Question State so it knows its questions
@@ -230,22 +230,27 @@ public class Building {
 	}
 
 	public void render(Graphics g, Handler handler) {
+		if(found) {
+			g.drawImage(this.getPicture(),this.perimeter().x,this.perimeter().y, width, height,null);
+		}
 		//Once the player is close, make wall visible
-		if(playerCloseBy) {
+		else if(playerCloseBy) {
 			double scaleX = (double)handler.getMap().getWidth()/(double)handler.getWidth();
 			double scaleY = (double)handler.getMap().getHeight()/(double)handler.getHeight();
 			for(Wall w: getWalls()) {
+				g.setColor(Color.BLACK);
 				g.drawLine((int)(w.getP1().getX()*scaleX), (int)(w.getP1().getY()/scaleY), (int)(w.getP2().getX()*scaleX), (int)(w.getP2().getY()/scaleY));
 			}
 			Rectangle rec = this.perimeter();
-			g.setColor(Color.BLACK);
 			g.drawString("Press F", rec.x+10, rec.y+(rec.height/2));
-
 		}
-		//	if(correct_answers == 3) {
-		//Una vez contestado correcto 3 veces
-		//	g.drawImage(this.getPicture(),this.perimeter().x,this.perimeter().y, width, height,null);
-		//	}
+		/*
+		 * Testing Only
+		 */
+		Rectangle perimeter = this.perimeter();
+		Rectangle bound = new Rectangle(perimeter.x-10,perimeter.y-10,perimeter.width+20, perimeter.height+20);
+		g.setColor(Color.RED);
+		g.drawRect(bound.x, bound.y, bound.width, bound.height);
 	}
 
 
