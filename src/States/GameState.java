@@ -22,10 +22,10 @@ import main.Handler;
  */
 public class GameState implements State{
 
-	Map map;
-	Player player;
-	int width, height;
-	Handler handler;
+	private Map map;
+	private Player player;
+	private int width, height;
+	private Handler handler;
 
 	public GameState(Handler handler) {
 		this.handler = handler;
@@ -36,7 +36,11 @@ public class GameState implements State{
 
 		player = new Player("Player" , new Point(100,100));
 	}
-
+	/**
+	 * @author Michael J. Alvarado
+	 * Objective - This method will make the game commands
+	 * @date Mar 16, 2020
+	 */
 	public void tick() {
 		map.tick(player,handler);
 		player.tick(handler);
@@ -45,11 +49,20 @@ public class GameState implements State{
 	/**
 	 * 
 	 * @author Michael J. Alvarado
+	 * Objective - This method will paint all components of the Game to the Canvas
 	 * @date Mar 16, 2020
 	 * @param g - from the Canvas in Game Engine
 	 */
 	public void render(Graphics g) {
 		map.render(g,handler);
 		player.render(g); 
+	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 }

@@ -212,7 +212,7 @@ public class Building {
 		r.setBounds((int)smallX, (int)smallY, (int)(bigX-smallX), (int)(bigY-smallY));
 		return r;
 	}
-	
+
 	/**
 	 * @author Michael J. Alvarado
 	 * Objective - it returns a rectangle bigger than the building to know if Player is close to the building
@@ -244,25 +244,32 @@ public class Building {
 	}
 
 	public void render(Graphics g, Handler handler) {
+		Rectangle bound = bound();
+
 		if(found) {
 			g.drawImage(this.getPicture(),this.perimeter().x,this.perimeter().y, width, height,null);
 		}
 		//Once the player is close, make wall visible
 		else if(playerCloseBy) {
-			for(Wall w: getWalls()) {
-			g.setColor(Color.BLACK);
-			g.drawLine(w.getP1().x, w.getP1().y, w.getP2().x, w.getP2().y);
-		}
 			Rectangle rec = this.perimeter();
+			g.setColor(Color.BLACK);
 			g.drawString("Press F", rec.x+10, rec.y+(rec.height/2));
+		}
+		//Need a fix (what if i got huge building, and this only take into account from the center point distance)
+		Point centerPoint = new Point((int)bound.getCenterX(), (int)bound.getCenterY());
+		if(centerPoint.distance(new Point((int)handler.getGameState().getPlayer().getBound().getCenterX(),(int)handler.getGameState().getPlayer().getBound().getCenterY()))<180) {
+			for(Wall w: getWalls()) {
+				int blackness = 255-(int)(1.3*centerPoint.distance(new Point((int)handler.getGameState().getPlayer().getBound().getCenterX(),(int)handler.getGameState().getPlayer().getBound().getCenterY())));
+				g.setColor(new Color(0, 0, 0, blackness));
+				g.drawLine(w.getP1().x, w.getP1().y, w.getP2().x, w.getP2().y);
+			}
 		}
 		/*
 		 * Testing Only
 		 */
 		if(debuggingMode) {
-		Rectangle bound = bound();
-		g.setColor(Color.RED);
-		g.drawRect(bound.x, bound.y, bound.width, bound.height);
+			g.setColor(Color.RED);
+			g.drawRect(bound.x, bound.y, bound.width, bound.height);
 		}
 	}
 
