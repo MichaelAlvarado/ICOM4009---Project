@@ -212,15 +212,25 @@ public class Building {
 		r.setBounds((int)smallX, (int)smallY, (int)(bigX-smallX), (int)(bigY-smallY));
 		return r;
 	}
-
+	
+	/**
+	 * @author Michael J. Alvarado
+	 * Objective - it returns a rectangle bigger than the building to know if Player is close to the building
+	 * @date Apr 1, 2020
+	 */
+	public Rectangle bound() {
+		Rectangle perimeter = perimeter();
+		int widther = 10;
+		int heigher = 10;
+		return new Rectangle(perimeter.x-widther,perimeter.y-heigher,perimeter.width+widther*2, perimeter.height+heigher*2);
+	}
 
 	public void tick(Player player, Handler handler) {
 		//Place where the player must be to answer a Question
 		playerCloseBy=false;
 		for (Wall w : this.getWalls()) {
-			Rectangle perimeter = perimeter();
-			//Rectangle bound = new Rectangle(perimeter.x-10,perimeter.y-10,perimeter.width+20, perimeter.height+20); //this is a bigger rectangle to know if player is close to the building
-			if(perimeter.intersects(player.getBound())) {
+			Rectangle bound = bound();
+			if(bound.intersects(player.getBound())) {
 				this.playerCloseBy = true;
 				if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_F)) {
 					handler.getQuestionState().setBuilding(this);	//this add the building to the Question State so it knows its questions
@@ -250,8 +260,7 @@ public class Building {
 		 * Testing Only
 		 */
 		if(debuggingMode) {
-		Rectangle perimeter = this.perimeter();
-		Rectangle bound = new Rectangle(perimeter.x-10,perimeter.y-10,perimeter.width+20, perimeter.height+20);
+		Rectangle bound = bound();
 		g.setColor(Color.RED);
 		g.drawRect(bound.x, bound.y, bound.width, bound.height);
 		}

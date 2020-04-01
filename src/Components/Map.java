@@ -132,15 +132,15 @@ public class Map {
 	 * 
 	 * @author Michael J. Alvarado
 	 * Objective - This method scale Buildings and map to fit on a dimension of width, height
+	 * Precondition - Map should have a non 0 dimension
+	 * PosCondition - The Trees and Buildings would be scaled and positioned in the correct position according to width and height given
 	 * @date Mar 31, 2020
-	 * @param width - The width of where you would like to fit the map components
-	 * @param height - The height of where you would like to fit the map components
+	 * @param width - The width of where you would like to fit the map components (in Game its given the Canvas Width)
+	 * @param height - The height of where you would like to fit the map components (in Game its given the Canvas Height)
 	 */
 	public void scaleComponentTo(int width, int height) {
 		double scaleX = (double)getWidth()/(double)width;
 		double scaleY = (double)getHeight()/(double)height;
-		System.out.println(scaleX);
-		System.out.println(scaleY);
 		for(Building building: getBuildingList()) {
 			for(Wall wall: building.getWalls()) {
 				wall.getP1().setLocation((int)(wall.getP1().getX()/scaleX), (int)(wall.getP1().getY()/scaleY));
@@ -357,12 +357,12 @@ public class Map {
 					if(treeLine.contains("ID:")) {
 						//ID of Tree
 						String treeID = treeLine.substring(treeLine.indexOf("ID:") + 4, index);
-						System.out.println(treeID);
+						//System.out.println(treeID);
 					
 						index = treeLine.indexOf(',', index + 1);
 						//Species of Tree
 						String treeSpecies = treeLine.substring(treeLine.indexOf("Species:") + 9);
-						System.out.println(treeSpecies);
+						//System.out.println(treeSpecies);
 //						index = treeLine.indexOf(',', index + 1);
 //						//Height of Tree
 //						String treeHeight = treeLine.substring(treeLine.indexOf("Height:") + 8);
@@ -379,7 +379,7 @@ public class Map {
 						//Coordinates of First Point
 						String p1X = treeLine.substring(treeLine.indexOf("Position:") + 10, index);
 						String p1Y = treeLine.substring(index + 2);
-						System.out.println(p1X + ", " + p1Y);
+						//System.out.println(p1X + ", " + p1Y);
 						t.setP1(new Point(Integer.valueOf(p1X), Integer.valueOf(p1Y))); 
 					}
 					
