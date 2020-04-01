@@ -28,10 +28,12 @@ public class GameState implements State{
 	Handler handler;
 
 	public GameState(Handler handler) {
-		this.map = handler.getMap();
 		this.handler = handler;
-		this.width = handler.getWidth();
-		this.height = handler.getHeight();
+		width = handler.getWidth();
+		height = handler.getHeight();
+		map = handler.getMap();
+		map.scaleComponentTo(width, height);
+
 		player = new Player("Player" , new Point(100,100));
 	}
 

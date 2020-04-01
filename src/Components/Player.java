@@ -27,6 +27,7 @@ public class Player {
 	Handler handler;
 	Building building; 
 	Wall walls;
+	private boolean debuggingMode;
 
 	public Player(String name, Point initialPosition) {
 		this.name = name;
@@ -79,6 +80,9 @@ public class Player {
 			this.moveOnY(bound.y + 1);
 			walking = true;
 		}
+		if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_C)) {
+			debuggingMode = !debuggingMode;
+		}
 	}
 
 	//Temporary place where the player must be
@@ -99,7 +103,8 @@ public class Player {
 			g.drawImage(animation.getIdle(),getPosition().x, getPosition().y, bound.width, bound.height,null); 
 		else
 			g.drawImage(animation.getWalk(),getPosition().x, getPosition().y, bound.width, bound.height,null); 
-		g.drawRect(bound.x, bound.y, bound.width, bound.height);
+		if(debuggingMode)
+			g.drawRect(bound.x, bound.y, bound.width, bound.height);
 	}
 
 	private class PlayerAnimation {

@@ -128,6 +128,29 @@ public class Map {
 	public void removeTree(Tree t) {
 		this.trees.remove(t);
 	}
+	/**
+	 * 
+	 * @author Michael J. Alvarado
+	 * Objective - This method scale Buildings and map to fit on a dimension of width, height
+	 * @date Mar 31, 2020
+	 * @param width - The width of where you would like to fit the map components
+	 * @param height - The height of where you would like to fit the map components
+	 */
+	public void scaleComponentTo(int width, int height) {
+		double scaleX = (double)getWidth()/(double)width;
+		double scaleY = (double)getHeight()/(double)height;
+		System.out.println(scaleX);
+		System.out.println(scaleY);
+		for(Building building: getBuildingList()) {
+			for(Wall wall: building.getWalls()) {
+				wall.getP1().setLocation((int)(wall.getP1().getX()/scaleX), (int)(wall.getP1().getY()/scaleY));
+				wall.getP2().setLocation((int)(wall.getP2().getX()/scaleX), (int)(wall.getP2().getY()/scaleY));
+			}
+		}
+		for(Tree tree: getTrees()) {
+			tree.getP1().setLocation((int)(tree.getP1().getX()/scaleX), (int)(tree.getP1().getY()/scaleY));
+		}
+	}
 	
 	//Para cada building creado en un mapa tendra su tick y render
 	public void tick(Player player, Handler handler) {

@@ -250,7 +250,7 @@ public class MenuState{
 				public void actionPerformed(ActionEvent arg0) {
 					try {
 						map.generateMap(new File("TutorialMapConfigurationFile.txt"));
-						enter.getActionListeners()[0].actionPerformed(arg0);;
+						enter.getActionListeners()[0].actionPerformed(arg0);
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
 					}

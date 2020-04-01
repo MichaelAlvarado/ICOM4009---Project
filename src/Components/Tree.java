@@ -165,8 +165,6 @@ public class Tree {
 	}
 
 	public void render(Graphics g, Handler handler) {
-		double scaleX = (double)handler.getMap().getWidth()/(double)handler.getWidth();
-		double scaleY = (double)handler.getMap().getHeight()/(double)handler.getHeight();
-		g.drawImage(treeImage, (int)(p1.getX()/scaleX), (int)(p1.getY()/scaleY), width, height, null);
+		g.drawImage(treeImage, p1.x, p1.y, width, height, null);
 	}
 }

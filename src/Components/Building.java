@@ -47,6 +47,7 @@ public class Building {
 	//GameRelated
 	private boolean playerCloseBy;
 	private boolean found;
+	private boolean debuggingMode;
 
 	// constructor
 	public Building(String buildingName) {
@@ -227,6 +228,9 @@ public class Building {
 				}
 			}
 		}
+		if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_C)) {
+			debuggingMode = !debuggingMode;
+		}
 	}
 
 	public void render(Graphics g, Handler handler) {
@@ -235,22 +239,22 @@ public class Building {
 		}
 		//Once the player is close, make wall visible
 		else if(playerCloseBy) {
-			double scaleX = (double)handler.getMap().getWidth()/(double)handler.getWidth();
-			double scaleY = (double)handler.getMap().getHeight()/(double)handler.getHeight();
 			for(Wall w: getWalls()) {
-				g.setColor(Color.BLACK);
-				g.drawLine((int)(w.getP1().getX()*scaleX), (int)(w.getP1().getY()/scaleY), (int)(w.getP2().getX()*scaleX), (int)(w.getP2().getY()/scaleY));
-			}
+			g.setColor(Color.BLACK);
+			g.drawLine(w.getP1().x, w.getP1().y, w.getP2().x, w.getP2().y);
+		}
 			Rectangle rec = this.perimeter();
 			g.drawString("Press F", rec.x+10, rec.y+(rec.height/2));
 		}
 		/*
 		 * Testing Only
 		 */
+		if(debuggingMode) {
 		Rectangle perimeter = this.perimeter();
 		Rectangle bound = new Rectangle(perimeter.x-10,perimeter.y-10,perimeter.width+20, perimeter.height+20);
 		g.setColor(Color.RED);
 		g.drawRect(bound.x, bound.y, bound.width, bound.height);
+		}
 	}
 
 

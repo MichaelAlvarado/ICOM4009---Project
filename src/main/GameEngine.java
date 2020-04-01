@@ -46,17 +46,9 @@ public class GameEngine implements Runnable {
 		canvas.setBounds(0, 0, display.getContentPane().getWidth(), display.getContentPane().getHeight());
 		canvas.setFocusable(true);
 		display.getContentPane().add(canvas);
-
-		init();
-	}
-	/**
-	 * @author Michael J. Alvarado
-	 * Date - 12/March/2020
-	 * This method will load files needed to play and add all the Mouse and Key Listener to play the game
-	 */
-	private void init(){
 		handler = new Handler(canvas, map);
 	}
+
 
 	/**
 	 * @author Michael J. Alvarado
@@ -79,10 +71,6 @@ public class GameEngine implements Runnable {
 	 * Runs render and tick at same fps
 	 */
 	public void run(){
-
-		//initiallizes everything in order to run without breaking
-		init();
-
 		double timePerTick = 1000000000 / fps;
 		double delta = 0;
 		long now;
