@@ -60,6 +60,7 @@ public class Handler {
 
 	public void tick() {
 		keyListener.tick();
+		mouseListener.tick();
 	}
 
 	public int getWidth() {
@@ -192,15 +193,28 @@ public class Handler {
 
 		int x,y;//Position of the mouse
 		boolean pressed, released;
+		int timer = 0;
 
 		public MouseManager(){
 			pressed = false;
 			released = false;
 		}
 
+		public void tick() {
+			if(pressed || released) {
+				if(timer > 1) {
+					pressed = false;
+					released = false;
+					timer = 0;
+				}
+				timer++;
+			}
+		}
+
 		@Override
 		public void mouseDragged(MouseEvent arg0) {
-
+			x = arg0.getX();
+			y = arg0.getY();
 		}
 
 		@Override
@@ -229,7 +243,6 @@ public class Handler {
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
 			released = true;
-			pressed = false;
 		}
 		/**
 		 * 
@@ -238,6 +251,9 @@ public class Handler {
 		 *
 		 */
 		public boolean clickedOn(Rectangle rec) {
+			return released && rec.contains(x,y);
+		}
+		public boolean pressedOn(Rectangle rec) {
 			return pressed && rec.contains(x,y);
 		}
 	}
