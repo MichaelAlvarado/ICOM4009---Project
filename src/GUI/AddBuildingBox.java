@@ -40,7 +40,7 @@ public class AddBuildingBox extends JPanel{
 	private Building building;
 	private Plane plane;
 	private JTextField name, picURL, wallHeight;
-	private JButton enter, exit, browseButton;
+	private JButton enter, exit, browseButton, remove;
 	private JLabel buildingName, picLabel, wallHeightLabel, p1Label, p2Label, p3Label, p4Label;
 	private JFileChooser browser;
 	static BufferedImage picture;
@@ -109,12 +109,11 @@ public class AddBuildingBox extends JPanel{
 
 		//Enter will be valid if all text boxes are correspondingly valid
 		enter = new JButton("Enter");
-		enter.setBounds(width/2-100, height-60, 100, 50);
+		enter.setBounds(width/2-150, height-60, 100, 50);
 		enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(name.getText().isEmpty()) {
-					System.out.println("aqui");
 					JOptionPane.showMessageDialog(plane, "Name of building cannot be blank. "
 							+ "Please enter a valid name for building.");
 				}
@@ -147,7 +146,7 @@ public class AddBuildingBox extends JPanel{
 
 		//Exit without new updates on building
 		exit = new JButton("Exit");
-		exit.setBounds(width/2, height-60, 100, 50);
+		exit.setBounds(width/2 - 50, height-60, 100, 50);
 		exit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -157,7 +156,19 @@ public class AddBuildingBox extends JPanel{
 				}
 			}
 		});
-
+		
+		remove = new JButton("Remove Building");
+		remove.setBounds(width/2 + 50, height-60, 130, 50);
+		remove.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+//				if (nameExistInList(plane.getMap().getBuildingList())){
+//					plane.getMap().removeBuilding(plane.currentBuilding);
+//					activationButton.setText("Add Building");
+//					exit();
+//				}
+			}
+		});
 		
 		//Add to Box PopUp
 		add(name);	
@@ -169,6 +180,7 @@ public class AddBuildingBox extends JPanel{
 		add(buildingName);
 		add(enter);
 		add(exit);
+		add(remove);
 
 	}
 	
