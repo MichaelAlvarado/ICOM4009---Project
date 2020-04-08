@@ -37,7 +37,7 @@ public class AddTreeBox extends JPanel{
 
 	private Tree tree;
 	private Plane plane;
-	private JButton enter, exit, activationButton;
+	private JButton enter, exit, activationButton, remove;
 	private JLabel treeSpecies, p1Label;
 	private JList treeSpeciesField;
 	private JFormattedTextField formattedTextP1X, formattedTextP1Y;
@@ -94,7 +94,7 @@ public class AddTreeBox extends JPanel{
 
 		//Enter will be valid if all text boxes are correspondingly valid
 		enter = new JButton("Enter");
-		enter.setBounds(width/2-100, height-60, 100, 50);
+		enter.setBounds(width/2-150, height-60, 100, 50);
 		enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -116,7 +116,7 @@ public class AddTreeBox extends JPanel{
 
 		//Exit without new updates on building
 		exit = new JButton("Exit");
-		exit.setBounds(width/2, height-60, 100, 50);
+		exit.setBounds(width/2 - 50, height-60, 100, 50);
 		exit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -126,10 +126,27 @@ public class AddTreeBox extends JPanel{
 				exit();
 			}
 		});
+		
+		remove = new JButton("Remove Tree");
+		remove.setBounds(width/2 + 50, height-60, 130, 50);
+		remove.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(newTree)
+					JOptionPane.showMessageDialog(plane, "Cannot remove a new tree.");
+				else {
+					plane.getMap().removeTree(plane.currentTree);
+					activationButton.setText("Add Tree");
+					plane.repaint();
+					exit();
+				}
+			}
+		});
 
 		//Add to Box PopUp
 		add(enter);
 		add(exit);
+		add(remove);
 		add(treeSpeciesField);
 		add(treeSpecies);
 		add(p1Label);
