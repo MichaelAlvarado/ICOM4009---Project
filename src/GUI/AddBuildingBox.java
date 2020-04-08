@@ -162,11 +162,14 @@ public class AddBuildingBox extends JPanel{
 		remove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				if (nameExistInList(plane.getMap().getBuildingList())){
-//					plane.getMap().removeBuilding(plane.currentBuilding);
-//					activationButton.setText("Add Building");
-//					exit();
-//				}
+				if(newBuilding)
+					JOptionPane.showMessageDialog(plane, "Cannot remove a new building.");
+				else {
+					plane.getMap().removeBuilding(plane.currentBuilding);
+					activationButton.setText("Add Building");
+					plane.repaint();
+					exit();
+				}
 			}
 		});
 		
