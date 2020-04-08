@@ -37,7 +37,7 @@ public class Building {
 
 	Question question;
 	Display display;
-	private static LinkedList<Wall> walls; // = new LinkedList<Wall>();
+	static LinkedList<Wall> walls; // = new LinkedList<Wall>();
 	private String buildingName; 
 	private BufferedImage picture;
 	private String pictureURL;
@@ -139,8 +139,8 @@ public class Building {
 		this.walls.add(w);		
 	}
 	
-	public static void removeWalls(Wall W) {
-		walls.remove(W);
+	public static void removeWalls() {
+		walls.clear();
 	}
 	/**
 	 * @author Fabiola Badillo
