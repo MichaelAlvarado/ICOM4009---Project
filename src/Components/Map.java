@@ -303,7 +303,7 @@ public class Map {
 					//					System.out.println(pointY2);
 					//					System.out.println(wImage);
 
-					Wall wall = new Wall(name, Double.valueOf(height), 
+					Wall wall = new Wall(name, Integer.valueOf(height), 
 							new Point(Integer.valueOf(pointX1), Integer.valueOf(pointY1)),
 							new Point(Integer.valueOf(pointX2), Integer.valueOf(pointY2)));
 					wall.setTextureURL(wImage);

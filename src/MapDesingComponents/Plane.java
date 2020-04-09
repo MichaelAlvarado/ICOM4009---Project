@@ -423,10 +423,10 @@ public class Plane extends JPanel{
 	 *	This class was made to make the drag functionality so its easier to interconnect points and to paint line while moving
 	 */
 	private class MouseMotion extends MouseMotionAdapter{
-		
+
 		private boolean enable;
 		private int x, y;
-		
+
 		public MouseMotion(){
 			super();
 			enable = true;
@@ -469,11 +469,13 @@ public class Plane extends JPanel{
 			//This is use to place initial point on a near Point 
 			x = arg0.getX();
 			y = arg0.getY();
-			if(enable && currentBuilding != null) {
+			if(enable) {
 				setFocusable(true);
 				requestFocus();
-				drag = dragToPoint(x, y);
-				repaint();
+				if(currentBuilding != null) {
+					drag = dragToPoint(x, y);
+					repaint();
+				}
 			}
 		}
 		public int getX() {
@@ -491,9 +493,9 @@ public class Plane extends JPanel{
 	 * This class was made so the user can do key shortcuts and for debugging
 	 */
 	private class Keyboard implements KeyListener{
-		
+
 		private boolean enable;
-		
+
 		public Keyboard() {
 			enable = true;
 		}
@@ -576,5 +578,5 @@ public class Plane extends JPanel{
 		public void keyTyped(KeyEvent arg0) {
 		}
 	}
-	
+
 }

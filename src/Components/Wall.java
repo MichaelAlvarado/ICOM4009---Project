@@ -18,7 +18,7 @@ public class Wall {
 
 	private Point p1;
 	private Point p2;
-	private double height;
+	private int height;
 	private BufferedImage texture;
 	private String textureURL;
 	private Color color; 
@@ -32,7 +32,7 @@ public class Wall {
 		this.color = Color.WHITE;
 	}
 	
-	public Wall(String name, double height, Point p1, Point p2) {
+	public Wall(String name, int height, Point p1, Point p2) {
 		wid = name;
 		this.p1 = p1;
 		this.p2 = p2;
@@ -61,7 +61,7 @@ public class Wall {
 		return this.p2;
 	}
 	
-	public double getHeight() {
+	public int getHeight() {
 		return this.height;
 	}
 	
@@ -86,7 +86,7 @@ public class Wall {
 		this.p2 = p2;
 	}
 	
-	public void setHeight(double height) {
+	public void setHeight(int height) {
 		this.height = height;
 	}
 	
