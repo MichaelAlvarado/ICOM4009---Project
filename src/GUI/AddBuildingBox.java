@@ -41,12 +41,12 @@ public class AddBuildingBox extends JPanel{
 	private Plane plane;
 	private JTextField name, picURL, wallHeight;
 	private JButton enter, exit, browseButton, remove;
-	private JLabel buildingName, picLabel, wallHeightLabel, p1Label, p2Label, p3Label, p4Label;
+	private JLabel buildingName, picLabel, wallHeightLabel;
 	private JFileChooser browser;
 	static BufferedImage picture;
 	private boolean newBuilding;
 	private JButton activationButton; //this is the button use to active this Window
-	
+
 
 
 	public AddBuildingBox(int x, int y, int width, int height, Plane plane, JButton activationButton) {
@@ -65,13 +65,14 @@ public class AddBuildingBox extends JPanel{
 		buildingName.setBounds(10, 40, 100, 25);
 		name = new JTextField();
 		name.setBounds(buildingName.getX()+buildingName.getWidth(), buildingName.getY(), (width/2), 25);
+		name.setFocusable(true);
 
 		//Label for the user to know he can set the texture image
 		picLabel = new JLabel("Building Texture:");
 		picLabel.setBounds(10, 100, 100, 25);
 		picURL = new JTextField();
 		picURL.setBounds(picLabel.getX()+picLabel.getWidth(), picLabel.getY(), (width/2), 25);
-		
+
 		//Search for Picture
 		browser = new JFileChooser();
 		browseButton = new  JButton("Browse");
@@ -105,7 +106,7 @@ public class AddBuildingBox extends JPanel{
 		wallHeightLabel.setBounds(10, 70, 100, 25);
 		wallHeight = new JTextField();
 		wallHeight.setBounds(wallHeightLabel.getX()+wallHeightLabel.getWidth(), wallHeightLabel.getY(), (width/2), 25);
-
+		wallHeight.setFocusable(true);
 
 		//Enter will be valid if all text boxes are correspondingly valid
 		enter = new JButton("Enter");
@@ -119,13 +120,10 @@ public class AddBuildingBox extends JPanel{
 				}
 				else {
 					if(nameExistInList(plane.getMap().getBuildingList())) {
-							JOptionPane.showMessageDialog(plane, "Building name already in use. Please choose another.");
-							exit();
-						}
+						JOptionPane.showMessageDialog(plane, "Building name already in use. Please choose another.");
+					}
 					else {
 						building.setName(name.getText());
-					
-						
 						try {
 							building.setBuildingHeight(Integer.valueOf(wallHeight.getText()));
 							if(picture != null) {
@@ -156,7 +154,7 @@ public class AddBuildingBox extends JPanel{
 				}
 			}
 		});
-		
+
 		remove = new JButton("Remove Building");
 		remove.setBounds(width/2 + 50, height-60, 130, 50);
 		remove.addActionListener(new ActionListener() {
@@ -167,12 +165,11 @@ public class AddBuildingBox extends JPanel{
 				else {
 					plane.getMap().removeBuilding(plane.currentBuilding);
 					activationButton.setText("Add Building");
-					plane.repaint();
 					exit();
 				}
 			}
 		});
-		
+
 		//Add to Box PopUp
 		add(name);	
 		add(browseButton);
@@ -186,7 +183,7 @@ public class AddBuildingBox extends JPanel{
 		add(remove);
 
 	}
-	
+
 	//This is a method to fill the box the the information of a Wall so you can edit it
 	public void edit(Building building) {
 		this.building = building;
@@ -194,14 +191,14 @@ public class AddBuildingBox extends JPanel{
 		setVisible(true);
 		activationButton.setText("Finish Building");
 		newBuilding = false;
+		plane.disable();
 		plane.setCurrentBuilding(building);
 	}
 
-	
+
 	public void addBuilding() {
 		building = new Building("");
-		setVisible(true);
-		plane.disable();
+		edit(building); //here error in exit without creating BUilding
 		newBuilding = true;
 
 	}
@@ -211,9 +208,9 @@ public class AddBuildingBox extends JPanel{
 		name.setText("");
 		picURL.setText(""); 
 		wallHeight.setText("");
-
 		setVisible(false);
 		building = null;
+		plane.repaint();
 		plane.enable();
 	}
 
@@ -222,7 +219,7 @@ public class AddBuildingBox extends JPanel{
 		picURL.setText(building.getPictureURL());
 		wallHeight.setText(String.valueOf(building.getBuildingHeight()));
 	}
-	
+
 	private boolean nameExistInList(LinkedList<Building> buildings) {
 		for(Building b: buildings) {
 			if (newBuilding && b.getName().equals(name.getText()))

@@ -116,7 +116,7 @@ public class Plane extends JPanel{
 				g.drawString(String.valueOf(Math.round(s*yGap*scaleY))+" m", xOrigin, (yOrigin - s*yGap)); //draw positive Y coordinate 
 			}
 		}
-
+		
 		//Draw lines from point to point
 		for(Building building: map.getBuildingList()) {
 			for(Wall line: building.getWalls()) {
@@ -164,9 +164,8 @@ public class Plane extends JPanel{
 			g.setColor(cP);
 			g.drawString("( " + Math.round(currentPointPair[0].getX()*scaleX) + " , " + Math.round(currentPointPair[0].getY()*scaleY) + " )", this.getWidth()-300, 20);
 			g.drawString("( " + Math.round(currentPointPair[1].getX()*scaleX) + " , " + Math.round(currentPointPair[1].getY()*scaleY) + " )", this.getWidth()-150, 20);
-
 		}
-		
+
 		//Draw Building Image
 		if(buildingImagesIsOn) {
 			for(Building building: map.getBuildingList()) {
@@ -176,7 +175,7 @@ public class Plane extends JPanel{
 				}
 			}
 		}
-		
+
 		//Draw Tree Image
 		for(Tree tree: map.getTrees()) {
 			g.drawImage(tree.getTreeImage(), tree.getP1().x, tree.getP1().y, tree.getWidth(), tree.getHeight(), null);
@@ -258,11 +257,11 @@ public class Plane extends JPanel{
 		map.addBuilding(building);
 		setCurrentBuilding(building);
 	}
-	
+
 	public void setGrid() {
 		gridIsOn = !gridIsOn;
 	}
-	
+
 	public boolean isBuildingImagesIsOn() {
 		return buildingImagesIsOn;
 	}
@@ -271,7 +270,7 @@ public class Plane extends JPanel{
 		this.buildingImagesIsOn = !buildingImagesIsOn;
 		this.repaint();
 	}
-	
+
 	/**
 	 * @author Michael J. Alvarado
 	 * This Methods paints the components  of traces and points specified  on the plane.
@@ -304,7 +303,7 @@ public class Plane extends JPanel{
 		this.isOpenTool = true;
 		this.repaint();
 	}
-	
+
 	/**
 	 * 
 	 * @author Michael J. Alvarado
@@ -325,7 +324,7 @@ public class Plane extends JPanel{
 		currentBuilding = building;
 		this.repaint();
 	}
-	
+
 	public Building getCurrentBuilding() {
 		return currentBuilding;
 	}
@@ -539,6 +538,14 @@ public class Plane extends JPanel{
 					}
 					else {
 						System.out.println("No current building");
+					}
+				}
+				if(arg0.getKeyCode() == arg0.VK_P) {
+					for(Building building: map.getBuildingList()) {
+						System.out.println("\nBuilding Info:");
+						System.out.println("Name: " + building.getName());
+						System.out.println("Building Height: " + building.getBuildingHeight());
+						System.out.println("Wall info:\n" + building.getWallInfo());
 					}
 				}
 			}
