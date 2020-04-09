@@ -3,7 +3,7 @@ package Components;
 import java.awt.event.KeyEvent;
 import java.util.Scanner;
 
-import Main.Handler;
+import GameSetUp.Handler;
 
 /**
  * 
@@ -92,16 +92,16 @@ public class Question {
 	//Navigate through the Question Pop Up, select next of previous answer (UP, DOWN) cancel (ESCAPE) or decide answer (ENTER)
 	//This if not implemented with JButtons. 
 	public void tick() {
-		if(Handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_UP)) {
+		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_KP_UP)) {
 			//next answer up
 		}
-		if(Handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_DOWN)) {
+		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_KP_DOWN)) {
 			//next answer down
 		}
-		if(Handler.getKeyListener().keyJustPressed(KeyEvent.VK_ENTER)) {
+		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
 			//choose answer
 		}
-		if(Handler.getKeyListener().keyJustPressed(KeyEvent.VK_ESCAPE)) {
+		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
 			//exit to try
 		}
 	}

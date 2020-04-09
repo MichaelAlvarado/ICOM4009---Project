@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 
 import Components.Map;
 import Components.Player;
-import Main.Handler;
+import GameSetUp.Handler;
 
 /**
  * @author Michael J. Alvarado

@@ -34,7 +34,7 @@ import javax.swing.text.MaskFormatter;
 import Components.Map;
 import Components.Wall;
 import GUI.Display;
-import Main.GameEngine;
+import GameSetUp.GameEngine;
 import MapDesingComponents.AddWallBox;
 import MapDesingComponents.Plane;
 

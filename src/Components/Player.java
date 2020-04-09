@@ -9,8 +9,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import Main.GameEngine;
-import Main.Handler;
+import GameSetUp.GameEngine;
+import GameSetUp.Handler;
 import Resources.Animation;
 
 /**
@@ -70,23 +70,23 @@ public class Player {
 	 */
 	public void tick() {
 		walking = false;
-		if(Handler.getKeyListener().up || Handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_UP)) {
+		if(Handler.getKeyManager().up || Handler.getKeyManager().keyJustPressed(KeyEvent.VK_KP_UP)) {
 			this.moveOnY(bound.y - 1);
 			walking = true;
 		}
-		if(Handler.getKeyListener().left || Handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_LEFT)) {
+		if(Handler.getKeyManager().left || Handler.getKeyManager().keyJustPressed(KeyEvent.VK_KP_LEFT)) {
 			this.moveOnX(bound.x - 1);
 			walking = true;
 		}
-		if(Handler.getKeyListener().right || Handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_RIGHT)) {
+		if(Handler.getKeyManager().right || Handler.getKeyManager().keyJustPressed(KeyEvent.VK_KP_RIGHT)) {
 			this.moveOnX(bound.x + 1);
 			walking = true;
 		}
-		if(Handler.getKeyListener().down || Handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_DOWN)) {
+		if(Handler.getKeyManager().down || Handler.getKeyManager().keyJustPressed(KeyEvent.VK_KP_DOWN)) {
 			this.moveOnY(bound.y + 1);
 			walking = true;
 		}
-		if(Handler.getKeyListener().keyJustPressed(KeyEvent.VK_C)) {
+		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_C)) {
 			debuggingMode = !debuggingMode;
 		}
 	}

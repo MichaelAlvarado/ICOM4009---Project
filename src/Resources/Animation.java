@@ -3,7 +3,7 @@ package Resources;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import Main.GameEngine;
+import GameSetUp.GameEngine;
 
 
 /**

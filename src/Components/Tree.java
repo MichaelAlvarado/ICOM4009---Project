@@ -9,7 +9,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import javax.imageio.ImageIO;
 
-import Main.Handler;
+import GameSetUp.Handler;
 
 import java.io.File;
 import java.io.IOException;

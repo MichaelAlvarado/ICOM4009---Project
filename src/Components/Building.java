@@ -12,7 +12,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 import GUI.Display;
-import Main.Handler;
+import GameSetUp.Handler;
 import MapDesingComponents.AddQuestionsBox;
 import MapDesingComponents.Plane;
 import States.QuestionState;
@@ -244,13 +244,13 @@ public class Building {
 			Rectangle bound = bound();
 			if(bound.intersects(player.getBound())) {
 				this.playerCloseBy = true;
-				if(Handler.getKeyListener().keyJustPressed(KeyEvent.VK_F)) {
+				if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_F)) {
 					Handler.getQuestionState().setBuilding(this);	//this add the building to the Question State so it knows its questions
 					Handler.setCurrentState(Handler.getQuestionState()); //change the state to Question State
 				}
 			}
 		}
-		if(Handler.getKeyListener().keyJustPressed(KeyEvent.VK_C)) {
+		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_C)) {
 			debuggingMode = !debuggingMode;
 		}
 	}

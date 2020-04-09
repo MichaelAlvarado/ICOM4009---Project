@@ -7,7 +7,7 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 import Components.Building;
-import Main.Handler;
+import GameSetUp.Handler;
 
 public class QuestionState implements State{
 
@@ -23,16 +23,16 @@ public class QuestionState implements State{
 
 	@Override
 	public void tick() {
-		if(Handler.getKeyListener().keyJustPressed(KeyEvent.VK_ESCAPE)) { //Shorcut Escape key to exit the Question State
+		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) { //Shorcut Escape key to exit the Question State
 			this.answering = false;
 			Handler.setCurrentState(Handler.getGameState());
 		}
 		
 		if(!answering) {
-			if(Handler.getMouseListener().clickedOn(yes)) {
+			if(Handler.getMouseManager().clickedOn(yes)) {
 				answering = true;
 			}
-			if(Handler.getMouseListener().clickedOn(no) || Handler.getKeyListener().keyJustPressed(KeyEvent.VK_ESCAPE)) {
+			if(Handler.getMouseManager().clickedOn(no) || Handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
 				Handler.setCurrentState(Handler.getGameState());
 			}
 		}

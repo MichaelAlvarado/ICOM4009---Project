@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
-import Main.Handler;
+import GameSetUp.Handler;
 import testers.WriteFile;
 
 
