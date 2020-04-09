@@ -37,6 +37,7 @@ import GUI.Display;
 import GameSetUp.GameEngine;
 import MapDesingComponents.AddWallBox;
 import MapDesingComponents.Plane;
+import Resources.ConfigurationFile;
 
 /**
  * 
@@ -222,7 +223,7 @@ public class MenuState{
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						map.generateMap(browser.getSelectedFile());
+						map = ConfigurationFile.generateMap(browser.getSelectedFile());
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -273,7 +274,7 @@ public class MenuState{
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						map.generateMap(new File("TutorialMapConfigurationFile.txt"));
+						map = ConfigurationFile.generateMap(new File("TutorialMapConfigurationFile.txt"));
 						enter.getActionListeners()[0].actionPerformed(arg0);
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();

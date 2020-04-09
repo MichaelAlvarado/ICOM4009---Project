@@ -65,6 +65,7 @@ import MapDesingComponents.AddQuestionsBox;
 import MapDesingComponents.AddTreeBox;
 import MapDesingComponents.AddWallBox;
 import MapDesingComponents.Plane;
+import Resources.ConfigurationFile;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JLayeredPane;
@@ -291,8 +292,8 @@ public class MapDesignState{
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					if(!(plane.getMap().getPicture() == null)) {
-						plane.getMap().generateTextFile();
-						plane.getMap().generateQuestionFile();
+						ConfigurationFile.generateTextFile(plane.getMap());
+						ConfigurationFile.generateQuestionFile(plane.getMap());
 						loadingScreen();
 						MenuState menu = new MenuState(display);
 					}

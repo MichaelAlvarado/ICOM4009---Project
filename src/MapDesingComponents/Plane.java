@@ -34,6 +34,7 @@ import Components.Building;
 import Components.Map;
 import Components.Question;
 import Components.Wall;
+import Resources.ConfigurationFile;
 import Components.Tree;
 
 /**
@@ -515,7 +516,7 @@ public class Plane extends JPanel{
 					undo();
 				}
 				if(arg0.isControlDown() && arg0.getKeyCode() == arg0.VK_S) {
-					map.generateTextFile();
+					ConfigurationFile.generateTextFile(map);
 					System.out.println("Map saved");
 				}
 			}

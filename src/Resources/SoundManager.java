@@ -22,8 +22,10 @@ public class SoundManager {
 
 	private AudioInputStream loadAudio(String url) {
 		try {
+			url = ConfigurationFile.OSCompability("res/music/" + url + ".wav");
+			System.out.println(url); //To be deleted
 			//Read Audio File
-			audioFile = new File("res/music/" + url + ".wav");
+			audioFile = new File(url);
 			audioStream = AudioSystem.getAudioInputStream(audioFile);
 			format = audioStream.getFormat();
 			info = new DataLine.Info(Clip.class, format);
@@ -31,7 +33,7 @@ public class SoundManager {
 			audioClip.open(audioStream);
 			//Set Volumen
 			FloatControl gainControl = (FloatControl) audioClip.getControl(FloatControl.Type.MASTER_GAIN);
-			gainControl.setValue(-25.0f);
+			gainControl.setValue(-20.0f);
 			
 			if(url.equals("background")){
 				audioClip.loop(-1);

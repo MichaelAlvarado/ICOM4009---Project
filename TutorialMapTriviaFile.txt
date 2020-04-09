@@ -1,0 +1,48 @@
+Building: House
+Question: 1+2
+Right: 3
+Wrong: 1
+Wrong: 2
+Wrong: 5
+Question: 2+5
+Right: 7
+Wrong: 2
+Wrong: 3
+Wrong: 6
+Question: 1+6
+Right: 7
+Wrong: 2
+Wrong: 3
+Wrong: 1
+Question: 9+2
+Right: 11
+Wrong: 21
+Wrong: 32
+Wrong: 12
+Question: 9+9
+Right: 18
+Wrong: 2
+Wrong: 4
+Wrong: 10
+Building: Mansion
+Question: WW1 ended in
+Right: 1945
+Wrong: 1939
+Wrong: 1920
+Wrong: 1950
+Question: Who is current US president
+Right: Donald Trump
+Wrong: Barack Obama
+Wrong: Bill Clinton
+Wrong: Washitong
+Question: 2+3
+Right: 5
+Wrong: 4
+Wrong: 2
+Wrong: 7
+Question: 1
+Right: 1
+Wrong: 2
+Wrong: 4
+Wrong: 6
+
