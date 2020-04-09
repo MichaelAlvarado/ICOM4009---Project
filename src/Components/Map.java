@@ -118,7 +118,7 @@ public class Map {
 	}
 
 	public void removeBuilding(Building b) {
-		b.removeWalls();
+		b.removeAllWalls();
 		this.buildingList.remove(b);
 	}
 
