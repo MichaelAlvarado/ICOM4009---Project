@@ -141,8 +141,12 @@ public class Building {
 		this.walls.add(w);		
 	}
 	
-	public void removeWalls() {
-		walls.clear();
+	public void removeWall(Wall wall) {
+		this.walls.remove(wall);
+	}
+	
+	public void removeAllWalls() {
+		this.walls.clear();
 	}
 	/**
 	 * @author Fabiola Badillo
@@ -290,6 +294,4 @@ public class Building {
 			g.drawRect(bound.x, bound.y, bound.width, bound.height);
 		}
 	}
-
-
 }
