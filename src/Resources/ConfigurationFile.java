@@ -101,7 +101,7 @@ public class ConfigurationFile {
 		map.setHeight(Integer.valueOf(size.substring(size.indexOf(',')+2, size.indexOf(')'))));
 		String imageURL = sc.nextLine();
 		try {
-			map.setImageURL(imageURL.substring(7));
+			map.setImageURL(ConfigurationFile.OSCompability(imageURL.substring(7)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -121,7 +121,7 @@ public class ConfigurationFile {
 				String bImage = sc.nextLine(); 
 				bImage = bImage.substring(bImage.indexOf("Building Image: ") + 16);
 				try {
-					building.setPictureURL(bImage);
+					building.setPictureURL(ConfigurationFile.OSCompability(bImage));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -162,7 +162,7 @@ public class ConfigurationFile {
 							new Point(Integer.valueOf(pointX1), Integer.valueOf(pointY1)),
 							new Point(Integer.valueOf(pointX2), Integer.valueOf(pointY2)));
 					wall.setHeight(Integer.valueOf(height));
-					wall.setTextureURL(wImage);
+					wall.setTextureURL(ConfigurationFile.OSCompability(wImage));
 					building.addWalls(wall);
 					wallLine=sc.nextLine();
 					if (wallLine.isEmpty())
@@ -279,7 +279,12 @@ public class ConfigurationFile {
 		}
 		return map;
 	}
-
+	/**
+	 * 
+	 * Description - This method returns the URL path with Operating System separator
+	 * @author - Michael J. Alvarado
+	 * @date Apr 9, 2020
+	 */
 	public static String OSCompability(String URL) {
 		String OS = System.getProperty("os.name").toLowerCase();
 		char separator = '/';
