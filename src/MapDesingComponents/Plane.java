@@ -162,15 +162,16 @@ public class Plane extends JPanel{
 			//Draw coordinates point on panel
 			g.setFont(new Font("Arial", Font.PLAIN, 20));
 			g.setColor(cP);
-			g.drawString("( " + Math.round(currentPointPair[0].getX()*scaleX) + " , " + Math.round(currentPointPair[0].getY()*scaleY) + " )", this.getWidth()-300, 20);
-			g.drawString("( " + Math.round(currentPointPair[1].getX()*scaleX) + " , " + Math.round(currentPointPair[1].getY()*scaleY) + " )", this.getWidth()-150, 20);
+			g.drawString("( " + Math.round(currentPointPair[0].getX()*scaleX) + " , " + Math.round(getHeight() - currentPointPair[0].getY()*scaleY) + " )", this.getWidth()-300, 20);
+			g.drawString("( " + Math.round(currentPointPair[1].getX()*scaleX) + " , " + Math.round(getHeight() - currentPointPair[1].getY()*scaleY) + " )", this.getWidth()-150, 20);
 		}
-		else{ 		//Draw Current Mouse Coordinates
+		//Draw Current Mouse Coordinates
+		else{ 		
 			g.setColor(new Color(0,0,0,100));
 			g.fillRect(this.getWidth()-150, 0, 150, 30);
 			g.setFont(new Font("Arial", Font.PLAIN, 20));
 			g.setColor(cP);
-			g.drawString("( " + Math.round(mouseMotion.getX()*scaleX) + " , " + Math.round(mouseMotion.getY()*scaleY) + " )", this.getWidth()-140, 20);
+			g.drawString("( " + Math.round(mouseMotion.getX()*scaleX) + " , " + Math.round(getHeight() - mouseMotion.getY()*scaleY) + " )", this.getWidth()-140, 20);
 		}
 
 		//Draw Building Image
