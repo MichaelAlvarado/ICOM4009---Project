@@ -38,7 +38,7 @@ public class AddWallBox extends JPanel{
 	JTextField wallHeight, imageURL;
 	static BufferedImage texture;
 	JFileChooser browser;
-	JButton enter, exit, browseButton;
+	JButton enter, exit, browseButton, remove;
 	Plane plane;
 	JLabel nameLabel, imageLabel, wallHeightLabel, p1Label, p2Label;
 	JFormattedTextField formattedTextP1X, formattedTextP1Y, formattedTextP2X, formattedTextP2Y;
@@ -149,7 +149,7 @@ public class AddWallBox extends JPanel{
 
 		// enter button
 		enter = new JButton("Enter");
-		enter.setBounds(width/2-100, height-60, 100, 50);
+		enter.setBounds(width/2-150, height-60, 100, 50);
 		enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -175,17 +175,32 @@ public class AddWallBox extends JPanel{
 
 		//Exit button
 		exit = new JButton("Exit");
-		exit.setBounds(width/2, height-60, 100, 50);
+		exit.setBounds(width/2 - 50, height-60, 100, 50);
 		exit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				exit();
 			}
 		});
+		
+		remove = new JButton("Remove Wall");
+		remove.setBounds(width/2 + 50, height-60, 130, 50);
+		remove.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(newWall)
+					JOptionPane.showMessageDialog(plane, "Cannot remove a new wall.");
+				else {
+					plane.currentBuilding.removeWall(wall);
+					exit();
+				}
+			}
+		});
 
 
 		add(enter);
 		add(exit);
+		add(remove);
 		add(browseButton);
 		add(wallHeight);
 		add(imageURL);
