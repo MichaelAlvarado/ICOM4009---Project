@@ -165,7 +165,7 @@ public class Plane extends JPanel{
 			g.drawString("( " + Math.round(currentPointPair[0].getX()*scaleX) + " , " + Math.round(currentPointPair[0].getY()*scaleY) + " )", this.getWidth()-300, 20);
 			g.drawString("( " + Math.round(currentPointPair[1].getX()*scaleX) + " , " + Math.round(currentPointPair[1].getY()*scaleY) + " )", this.getWidth()-150, 20);
 		}
-		else if(currentBuilding != null){ 		//Draw Current Mouse Coordinates
+		else{ 		//Draw Current Mouse Coordinates
 			g.setColor(new Color(0,0,0,100));
 			g.fillRect(this.getWidth()-150, 0, 150, 30);
 			g.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -474,8 +474,8 @@ public class Plane extends JPanel{
 				requestFocus();
 				if(currentBuilding != null) {
 					drag = dragToPoint(x, y);
-					repaint();
 				}
+				repaint();
 			}
 		}
 		public int getX() {
