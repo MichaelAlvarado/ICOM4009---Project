@@ -144,13 +144,15 @@ public class Map {
 		double scaleY = (double)getHeight()/(double)height;
 		for(Building building: getBuildingList()) {
 			for(Wall wall: building.getWalls()) {
-				wall.getP1().setLocation((int)(wall.getP1().getX()/scaleX), (int)(wall.getP1().getY()/scaleY));
-				wall.getP2().setLocation((int)(wall.getP2().getX()/scaleX), (int)(wall.getP2().getY()/scaleY));
+				wall.getP1().setLocation((int)((double)(wall.getP1().getX())/scaleX), (int)((double)(wall.getP1().getY())/scaleY));
+				wall.getP2().setLocation((int)((double)(wall.getP2().getX())/scaleX), (int)((double)(wall.getP2().getY())/scaleY));
 			}
 		}
 		for(Tree tree: getTrees()) {
 			tree.getP1().setLocation((int)(tree.getP1().getX()/scaleX), (int)(tree.getP1().getY()/scaleY));
 		}
+//		this.width = width;
+//		this.height = height;
 	}
 	
 
@@ -175,6 +177,7 @@ public class Map {
 		for(Tree tree: getTrees()) {
 			tree.render(g);
 		}
+//		scaleComponentTo(Handler.getWidth(), Handler.getHeight()); //To make screen responsive when resizing screen
 	}
 
 	/**

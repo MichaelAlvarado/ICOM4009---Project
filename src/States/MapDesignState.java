@@ -88,6 +88,8 @@ public class MapDesignState{
 
 	private Display display;
 	private Plane plane;
+	private JPanel panel;
+	private JButton help, setting, addWall, addTree, addQuestion, editMap, mapDone, addBuilding, wallList, buildingList, treeList, tool;
 	private int width, height;
 	protected boolean toolOpened;
 
@@ -102,69 +104,60 @@ public class MapDesignState{
 		this.display = display;
 		this.width = display.getContentPane().getWidth();
 		this.height = display.getContentPane().getHeight();
-		int canvasY = 85; //this is the position in Y where the division is between plane and menu
-
 		display.getContentPane().setBackground(Color.WHITE);
 		display.getContentPane().setLayout(null);
 
 		//This initialize plane which is what draw points and has the mouse and key listeners
 		plane = new Plane();
 		plane.setBackground(Color.WHITE);
-		plane.setLocation(0, canvasY);
-		plane.setBounds(0, canvasY, width, height-(canvasY));
 
 		//Buttons Panels
-		JPanel panel = new JPanel();
+		panel = new JPanel() {
+			@Override 
+			public void paint(Graphics g) {
+				super.paint(g);
+				setComponentsBound();
+			}
+		};
 		panel.setBackground(new Color(190,190,190));
 		panel.setBorder(new LineBorder(UIManager.getColor("Button.darkShadow"), 3, true));
-		panel.setBounds(0, 0, width, canvasY);
 		display.getContentPane().add(panel);
 		panel.setLayout(null);
 
 		//Buttons
-		JButton help = new JButton("Help");
-		help.setBounds(width-170, 15, 150, 25);
+		help = new JButton("Help");
 		panel.add(help);
 
-		JButton setting = new JButton("Setting");
-		setting.setBounds(width-170, canvasY-35, 150, 25);
+		setting = new JButton("Setting");
 		panel.add(setting);
 
-		JButton addWall = new JButton("Add Wall");
-		addWall.setBounds((panel.getWidth()/2)+5, 15, 150, 25);
+		addWall = new JButton("Add Wall");
 		panel.add(addWall);
 
-		JButton addTree = new JButton("Add Tree");
-		addTree.setBounds((panel.getWidth()/2)+165, 15, 150, 25);
+		addTree = new JButton("Add Tree");
 		panel.add(addTree);
 
-		JButton addQuestion = new JButton("Add Question");
-		addQuestion.setBounds((panel.getWidth()/2)+5, 50, 150, 25);
+		addQuestion = new JButton("Add Question");
 		panel.add(addQuestion);	
 
-		JButton editMap = new JButton("Edit Map");
-		editMap.setBounds(165, 15, 150, 25);
+		editMap = new JButton("Edit Map");
 		panel.add(editMap);
 
-		JButton mapDone = new JButton("Map Done");
-		mapDone.setBounds(320, 15, 150, 25);
+		mapDone = new JButton("Map Done");
 		panel.add(mapDone);
 
-		JButton addBuilding = new JButton("Add Building");
-		addBuilding.setBounds(10, 15, 150, 25);
+		addBuilding = new JButton("Add Building");
 		panel.add(addBuilding);
 
-		JButton wallList = new JButton("Current Walls");
-		wallList.setBounds(10,50,150,25);
+		wallList = new JButton("Current Walls");
 		panel.add(wallList);
 
-		JButton buildingList = new JButton("Building List");
-		buildingList.setBounds(165,50,150,25);
+		buildingList = new JButton("Building List");
 		panel.add(buildingList);
 
-		JButton treeList = new JButton("Tree List");
-		treeList.setBounds((panel.getWidth()/2)+165, 50, 150, 25);
+		treeList = new JButton("Tree List");
 		panel.add(treeList);
+
 
 		//Round Add Button in Plane
 		BufferedImage buttonIcon = null;
@@ -175,14 +168,14 @@ public class MapDesignState{
 		}
 		// Set the image icon here
 		Image dimg = buttonIcon.getScaledInstance(60, 60,Image.SCALE_SMOOTH); //scale the image
-		JButton tool = new JButton(new ImageIcon(dimg));
+		tool = new JButton(new ImageIcon(dimg));
 		tool.setBorderPainted(false);
 		tool.setContentAreaFilled(false);
 		tool.setFocusPainted(false);
 		tool.setOpaque(false);
-		tool.setBounds(plane.getWidth()-65, plane.getHeight()/2-60, 60, 60);
 		plane.add(tool);
 
+		setComponentsBound();
 		//Boxes which are made to add or edit map,buildings,wall,questions, trees.
 		AddBuildingBox addBuildingBox = new AddBuildingBox((width/2)-250, 200,500,200, plane, addBuilding);
 		addBuildingBox.setVisible(false);
@@ -349,6 +342,32 @@ public class MapDesignState{
 		});
 		display.repaint();
 	}//Last from Constructor
+	
+	/**
+	 * 
+	 * Description - set all the components to there position
+	 * @author - Michael J. Alvarado
+	 * @date Apr 9, 2020
+	 */
+	private void setComponentsBound() {
+		int canvasY = 85; //this is the position in Y where the division is between plane and menu
+		this.width = display.getContentPane().getWidth();
+		this.height = display.getContentPane().getHeight();
+		panel.setBounds(0, 0, width, canvasY);
+		plane.setBounds(0, canvasY, width, height-(canvasY));
+		help.setBounds(width-170, 15, 150, 25);
+		setting.setBounds(width-170, canvasY-35, 150, 25);
+		addWall.setBounds((panel.getWidth()/2)+5, 15, 150, 25);
+		addTree.setBounds((panel.getWidth()/2)+165, 15, 150, 25);
+		addQuestion.setBounds((panel.getWidth()/2)+5, 50, 150, 25);
+		editMap.setBounds(165, 15, 150, 25);
+		mapDone.setBounds(320, 15, 150, 25);
+		addBuilding.setBounds(10, 15, 150, 25);
+		wallList.setBounds(10,50,150,25);
+		buildingList.setBounds(165,50,150,25);
+		treeList.setBounds((panel.getWidth()/2)+165, 50, 150, 25);
+		tool.setBounds(plane.getWidth()-65, plane.getHeight()/2-60, 60, 60);
+	}
 
 	public void loadingScreen() {
 		display.setLoadingScreen();
@@ -591,6 +610,8 @@ public class MapDesignState{
 		String Instructions = "Help";
 		JOptionPane.showMessageDialog(display, Instructions);
 	}
+
+
 
 	//	private void setEnableButtons(JButton[] buttons, boolean enable) {
 	//		for(int i = 0; i < buttons.length; i++) {

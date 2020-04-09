@@ -20,7 +20,7 @@ public class Display extends JFrame{
 		setPreferredSize(new Dimension(width, height));
 		pack();
 		setLocationRelativeTo(null);
-		setResizable(false);
+		//setResizable(false);
 		setVisible(true);	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLoadingScreen();

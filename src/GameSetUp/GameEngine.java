@@ -35,8 +35,6 @@ public class GameEngine implements Runnable {
 	private Canvas canvas;
 	private static final int FPS = 60;
 	private Map map;
-	//Handler will have listeners
-	private Handler handler;
 
 	public GameEngine(Display display, Map map) {
 		this.display = display;
@@ -46,7 +44,7 @@ public class GameEngine implements Runnable {
 		canvas.setBounds(0, 0, display.getContentPane().getWidth(), display.getContentPane().getHeight());
 		canvas.setFocusable(true);
 		display.getContentPane().add(canvas);
-		handler = new Handler(canvas, map);
+		new Handler(canvas, map);
 	}
 	
 	public static int getFPS() {
@@ -111,9 +109,9 @@ public class GameEngine implements Runnable {
 	 * This method is will run the game code 
 	 */
 	private void tick(){
-		handler.tick();
-		if(handler.getCurrentState() != null) {
-			handler.getCurrentState().tick();
+		Handler.tick();
+		if(Handler.getCurrentState() != null) {
+			Handler.getCurrentState().tick();
 		}
 	}
 
@@ -135,9 +133,10 @@ public class GameEngine implements Runnable {
 		g.clearRect(0, 0,  display.getWidth(), display.getHeight());
 
 		//Draw Here!
-		if(handler.getCurrentState() != null) {
-			handler.getCurrentState().render(g);
+		if(Handler.getCurrentState() != null) {
+			Handler.getCurrentState().render(g);
 		}
+		canvas.setBounds(0, 0, display.getContentPane().getWidth(), display.getContentPane().getHeight());
 		//		g.setColor(Color.WHITE);
 		//		g.drawString("Game Engine Prints", 10, 10);
 		//		g.drawRect(200, 0, 50, 50);

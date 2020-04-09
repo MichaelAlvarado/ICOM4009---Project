@@ -47,6 +47,8 @@ public class AddMapBox extends JPanel{
 		super();
 		this.plane = plane;
 		map = new Map();
+		map.setWidth(plane.getWidth());
+		map.setHeight(plane.getHeight());
 		setLayout(null); //This make it possible to set position to components
 		setBounds(x, y, width, height);
 		setBorder(new LineBorder(UIManager.getColor("Button.darkShadow"), 3, true));
@@ -187,6 +189,8 @@ public class AddMapBox extends JPanel{
 	
 	private void autofill() {
 		name.setText(map.getMapName());
+		mapWidth.setText(String.valueOf(map.getWidth()));
+		mapHeight.setText(String.valueOf(map.getHeight()));
 	}
 
 

@@ -233,9 +233,10 @@ public class AddWallBox extends JPanel{
 		this.nameLabel.setText("Wall name: " + wall.getID());
 		if(!newWall) {
 			this.formattedTextP1X.setText(String.valueOf(wall.getP1().x));
-			this.formattedTextP1Y.setText(String.valueOf(wall.getP1().y));
+			this.formattedTextP1Y.setText(String.valueOf(plane.getHeight() - wall.getP1().y));
 			this.formattedTextP2X.setText(String.valueOf(wall.getP2().x));
-			this.formattedTextP2Y.setText(String.valueOf(wall.getP2().y));
+			this.formattedTextP2Y.setText(String.valueOf(plane.getHeight() - wall.getP2().y));
+			this.wallHeight.setText(String.valueOf(wall.getHeight()));
 			imageURL.setText(wall.getTextureURL());
 		}
 	}

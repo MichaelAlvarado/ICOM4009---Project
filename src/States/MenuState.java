@@ -47,9 +47,11 @@ import MapDesingComponents.Plane;
  */
 public class MenuState{
 
-	Display display;
-	JButton createMap, playGame, help;
-	int width, height;
+	private Display display;
+	private JButton createMap, playGame, help;
+	private MapSelect mapSelection;
+	private JLabel  title;
+	private int width, height;
 
 	public MenuState(Display display) throws IOException {
 		this.display = display;
@@ -57,13 +59,20 @@ public class MenuState{
 		this.height = display.getContentPane().getHeight();
 		display.getContentPane().setLayout(null);
 
-		JPanel panel = new JPanel(); 
+		JPanel panel = new JPanel(){
+			@Override
+			public void paint(Graphics g) {
+				super.paint(g);
+				setSize(width,height);
+				responsiveScreen();
+			}
+		};
 		panel.setLayout(null);
 		panel.setBounds(0, 0, width, height);
 
-		MapSelect selection = new MapSelect(width/2-250, height/2-100,500,200, this);
-		selection.setVisible(false);
-		panel.add(selection);
+		mapSelection = new MapSelect(width/2-250, height/2-100,500,200, this);
+		mapSelection.setVisible(false);
+		panel.add(mapSelection);
 
 		createMap = new JButton("Create new Map");
 		createMap.setFont(new Font("Comic Sans MS", Font.BOLD, 20));	
@@ -72,25 +81,28 @@ public class MenuState{
 
 		playGame = new JButton("Play Game");
 		playGame.setFont(new Font("Comic Sans MS", Font.BOLD, 20));	
-		playGame.setBounds(width/2+100, height/2 + 100, 250, 90);
 		panel.add(playGame);
 
 		help = new JButton("Help");
 		help.setFont(new Font("Comic Sans MS", Font.BOLD, 20));	
-		help.setBounds(width/2+100, height/2 + 230, 250, 90);
 		panel.add(help);
 
-		JLabel title = new JLabel(display.getTitle(), SwingConstants.CENTER);
+		title = new JLabel(display.getTitle(), SwingConstants.CENTER);
 		title.setFont(new Font("Comic Sans MS", Font.BOLD, 90));	
-		title.setBounds(width/2, 150, 400, 140);
 		panel.add(title);
 
 		BufferedImage img = ImageIO.read(new File("res/backgrounds/MenuSky1.png")); 
-		Image dimg = img.getScaledInstance(width, height,Image.SCALE_SMOOTH); //scale the image to fit JFrame
-		JLabel picLabel = new JLabel(new ImageIcon(dimg)); //add the image to a picLabel to display on the component
-		picLabel.setLayout(null);
-		picLabel.setBounds(0,0,width,height);
+		JLabel picLabel = new JLabel() {
+			@Override
+			public void paint(Graphics g) {
+				g.drawImage(img, 0, 0, display.getContentPane().getWidth(), display.getContentPane().getHeight(), null);
+				setBounds(0,0,display.getContentPane().getWidth(),display.getContentPane().getHeight());
+			} 
+		}; 
+		picLabel.setBounds(0,0,display.getContentPane().getWidth(),display.getContentPane().getHeight());
 		panel.add(picLabel);
+		
+		responsiveScreen();
 
 		display.getContentPane().add(panel);
 		/*
@@ -115,7 +127,7 @@ public class MenuState{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// The game engine should start here
-				selection.setVisible(true);
+				mapSelection.setVisible(true);
 				setButtonsEnable(false);
 			}
 		});
@@ -145,7 +157,23 @@ public class MenuState{
 	public void loadingScreen() {
 			display.setLoadingScreen();
 			display.getContentPane().removeAll();
-		
+	}
+	
+	/**
+	 * 
+	 * Description - This method set the position of all responsive Element
+	 * Responsive means its ajust then resizing display
+	 * @author - Michael J. Alvarado
+	 * @date Apr 9, 2020
+	 */
+	private void responsiveScreen() {
+		width = display.getContentPane().getWidth();
+		height = display.getContentPane().getHeight();
+		createMap.setBounds(width/2+100, height/2-30, 250, 90);
+		playGame.setBounds(width/2+100, height/2 + 100, 250, 90);
+		help.setBounds(width/2+100, height/2 + 230, 250, 90);
+		mapSelection.setBounds(width/2-250, height/2-100,500,200);
+		title.setBounds(width/2, 150, 400, 140);
 	}
 	/**
 	 * @author Michael J. Alvarado
@@ -181,7 +209,6 @@ public class MenuState{
 			setBounds(x, y, width, height);
 			setBorder(new LineBorder(UIManager.getColor("Button.darkShadow"), 3, true));
 			setBackground(new Color(190,190,190));
-
 
 			// browse for a wall texture
 			mapLabel = new JLabel("Map File URL");
@@ -266,7 +293,6 @@ public class MenuState{
 			setVisible(false);
 			menu.setButtonsEnable(true);
 		}
-
 
 	}
 }

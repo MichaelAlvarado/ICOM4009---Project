@@ -24,7 +24,7 @@ import java.io.IOException;
 
 public class Tree {
 
-	private int treeSpecies; // 1, 2 or 3
+	private int treeSpecies; // 0, 1 or 2
 	private BufferedImage treeImage;
 	private boolean found; // idk yet if trees are to be found or will be present in the map from the beginning 
 	private String pictureURL;
@@ -119,7 +119,7 @@ public class Tree {
 //	 * @return - N/A 
 //	 */
 	public void defineTreeImage() {
-		if (this.treeSpecies == 1) {
+		if (this.treeSpecies == 0) {
 			setHeight(25);
 			setWidth(25);
 			try {
@@ -130,7 +130,7 @@ public class Tree {
 				e.printStackTrace();
 			}
 		}
-		else if (this.treeSpecies == 2) {
+		else if (this.treeSpecies == 1) {
 			setHeight(50);
 			setWidth(50);
 			try {

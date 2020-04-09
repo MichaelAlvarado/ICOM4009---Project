@@ -37,12 +37,11 @@ public class Handler {
 	private static KeyManager keyManager;
 	private static MouseManager mouseManager; 
 	private static SoundManager soundManager;
-	private static int width, height;
+	private static Canvas canvas;
 
 	public Handler(Canvas canvas, Map map) {
-		this.map = map;
-		width = canvas.getWidth();
-		height = canvas.getHeight();
+		Handler.map = map;
+		Handler.canvas = canvas;
 		keyManager = new KeyManager();
 		mouseManager = new MouseManager();
 		soundManager = new SoundManager();
@@ -66,11 +65,11 @@ public class Handler {
 	}
 
 	public static int getWidth() {
-		return width;
+		return canvas.getWidth();
 	}
 
 	public static int getHeight() {
-		return height;
+		return canvas.getHeight();
 	}
 
 

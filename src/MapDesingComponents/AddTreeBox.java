@@ -183,7 +183,9 @@ public class AddTreeBox extends JPanel{
 	}
 
 	private void autofill(Tree tree) {
-		treeSpecies.setText(Integer.toString(tree.getTreeSpecies()));
+		treeSpeciesField.setSelectedIndex(tree.getTreeSpecies());
+		this.formattedTextP1X.setText(String.valueOf(tree.getP1().x));
+		this.formattedTextP1Y.setText(String.valueOf(plane.getHeight() - tree.getP1().y));
 	}
 }
 
