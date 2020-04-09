@@ -54,8 +54,7 @@ public class Tree {
 	public String getTreeInfo() {
 		String result = "";
 		result += "\nID: " + this.getID() + ", Species: " + this.getTreeSpecies()
-				+ "\nPosition: " + this.getP1().x + ", " + this.getP1().y 
-				+ "\nImage: "  + this.getPictureURL();
+				+ ", Position: (" + this.getP1().x + ", " + this.getP1().y  + ")";
 		return result;
 	}
 
