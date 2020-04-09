@@ -1,6 +1,3 @@
-/**
- * 
- */
 package States;
 
 import java.awt.Graphics;
@@ -14,7 +11,7 @@ import javax.imageio.ImageIO;
 
 import Components.Map;
 import Components.Player;
-import main.Handler;
+import Main.Handler;
 
 /**
  * @author Michael J. Alvarado
@@ -25,13 +22,11 @@ public class GameState implements State{
 	private Map map;
 	private Player player;
 	private int width, height;
-	private Handler handler;
 
-	public GameState(Handler handler) {
-		this.handler = handler;
-		width = handler.getWidth();
-		height = handler.getHeight();
-		map = handler.getMap();
+	public GameState() {
+		width = Handler.getWidth();
+		height = Handler.getHeight();
+		map = Handler.getMap();
 		map.scaleComponentTo(width, height);
 
 		player = new Player("Player" , new Point(100,100));
@@ -42,8 +37,8 @@ public class GameState implements State{
 	 * @date Mar 16, 2020
 	 */
 	public void tick() {
-		map.tick(player,handler);
-		player.tick(handler);
+		map.tick(player);
+		player.tick();
 	}
 
 	/**
@@ -54,7 +49,7 @@ public class GameState implements State{
 	 * @param g - from the Canvas in Game Engine
 	 */
 	public void render(Graphics g) {
-		map.render(g,handler);
+		map.render(g);
 		player.render(g); 
 	}
 	

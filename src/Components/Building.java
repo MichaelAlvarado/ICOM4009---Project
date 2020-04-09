@@ -10,11 +10,13 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import GUI.AddQuestionsBox;
+
 import GUI.Display;
-import GUI.Plane;
+import Main.Handler;
+import MapDesingComponents.AddQuestionsBox;
+import MapDesingComponents.Plane;
 import States.QuestionState;
-import main.Handler;
+
 import java.awt.Rectangle;
 import java.awt.Window;
 import java.awt.image.BufferedImage;
@@ -229,25 +231,37 @@ public class Building {
 		return new Rectangle(perimeter.x-widther,perimeter.y-heigher,perimeter.width+widther*2, perimeter.height+heigher*2);
 	}
 
-	public void tick(Player player, Handler handler) {
+	/**
+	 * Description - This method has the building actions in Game
+	 * Precondition - This method should only be use in Game
+	 * @author - Michael J. Alvarado
+	 * @date March 23, 2020
+	 */
+	public void tick(Player player) {
 		//Place where the player must be to answer a Question
 		playerCloseBy=false;
 		for (Wall w : this.getWalls()) {
 			Rectangle bound = bound();
 			if(bound.intersects(player.getBound())) {
 				this.playerCloseBy = true;
-				if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_F)) {
-					handler.getQuestionState().setBuilding(this);	//this add the building to the Question State so it knows its questions
-					handler.setCurrentState(handler.getQuestionState()); //change the state to Question State
+				if(Handler.getKeyListener().keyJustPressed(KeyEvent.VK_F)) {
+					Handler.getQuestionState().setBuilding(this);	//this add the building to the Question State so it knows its questions
+					Handler.setCurrentState(Handler.getQuestionState()); //change the state to Question State
 				}
 			}
 		}
-		if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_C)) {
+		if(Handler.getKeyListener().keyJustPressed(KeyEvent.VK_C)) {
 			debuggingMode = !debuggingMode;
 		}
 	}
 
-	public void render(Graphics g, Handler handler) {
+	/**
+	 * Description - This method paints the building of Game in Canvas
+	 * Precondition - This method should only be use in Game
+	 * @author - Michael J. Alvarado
+	 * @date March 23, 2020
+	 */
+	public void render(Graphics g) {
 		Rectangle bound = bound();
 
 		if(found) {
@@ -261,9 +275,9 @@ public class Building {
 		}
 		//Need a fix (what if i got huge building, and this only take into account from the center point distance)
 		Point centerPoint = new Point((int)bound.getCenterX(), (int)bound.getCenterY());
-		if(centerPoint.distance(new Point((int)handler.getGameState().getPlayer().getBound().getCenterX(),(int)handler.getGameState().getPlayer().getBound().getCenterY()))<180) {
+		if(centerPoint.distance(new Point((int)Handler.getGameState().getPlayer().getBound().getCenterX(),(int)Handler.getGameState().getPlayer().getBound().getCenterY()))<180) {
 			for(Wall w: getWalls()) {
-				int blackness = 255-(int)(1.3*centerPoint.distance(new Point((int)handler.getGameState().getPlayer().getBound().getCenterX(),(int)handler.getGameState().getPlayer().getBound().getCenterY())));
+				int blackness = 255-(int)(1.3*centerPoint.distance(new Point((int)Handler.getGameState().getPlayer().getBound().getCenterX(),(int)Handler.getGameState().getPlayer().getBound().getCenterY())));
 				g.setColor(new Color(0, 0, 0, blackness));
 				g.drawLine(w.getP1().x, w.getP1().y, w.getP2().x, w.getP2().y);
 			}

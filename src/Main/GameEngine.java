@@ -1,4 +1,4 @@
-package main;
+package Main;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -33,7 +33,7 @@ public class GameEngine implements Runnable {
 	private BufferStrategy bs;
 	private Graphics g;
 	private Canvas canvas;
-	private final int fps = 60;
+	private static final int FPS = 60;
 	private Map map;
 	//Handler will have listeners
 	private Handler handler;
@@ -48,8 +48,11 @@ public class GameEngine implements Runnable {
 		display.getContentPane().add(canvas);
 		handler = new Handler(canvas, map);
 	}
-
-
+	
+	public static int getFPS() {
+		return FPS;
+	}
+	
 	/**
 	 * @author Michael J. Alvarado
 	 * Date - 12/March/2020
@@ -71,7 +74,7 @@ public class GameEngine implements Runnable {
 	 * Runs render and tick at same fps
 	 */
 	public void run(){
-		double timePerTick = 1000000000 / fps;
+		double timePerTick = 1000000000 / FPS;
 		double delta = 0;
 		long now;
 		long lastTime = System.nanoTime();

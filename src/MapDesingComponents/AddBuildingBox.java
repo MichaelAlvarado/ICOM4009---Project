@@ -1,4 +1,4 @@
-package GUI;
+package MapDesingComponents;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -149,9 +149,9 @@ public class AddBuildingBox extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				exit();
-				if(plane.currentBuilding == null) {
-					activationButton.setText("Add Building");
-				}
+				plane.currentBuilding = null;
+				activationButton.setText("Add Building");
+
 			}
 		});
 

@@ -3,7 +3,7 @@ package Components;
 import java.awt.event.KeyEvent;
 import java.util.Scanner;
 
-import main.Handler;
+import Main.Handler;
 
 /**
  * 
@@ -19,7 +19,6 @@ public class Question {
 	
 	private String question, answer_1, answer_2, answer_3, answer_4;
 	private boolean correct;
-	Handler handler;
 	
 	//Creates Question Constructor to use as source for Question Pools for the buildings
 	public Question(String question, String answer_1, String answer_2, String answer_3, String answer_4, boolean theCorrect) {
@@ -93,16 +92,16 @@ public class Question {
 	//Navigate through the Question Pop Up, select next of previous answer (UP, DOWN) cancel (ESCAPE) or decide answer (ENTER)
 	//This if not implemented with JButtons. 
 	public void tick() {
-		if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_UP)) {
+		if(Handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_UP)) {
 			//next answer up
 		}
-		if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_DOWN)) {
+		if(Handler.getKeyListener().keyJustPressed(KeyEvent.VK_KP_DOWN)) {
 			//next answer down
 		}
-		if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_ENTER)) {
+		if(Handler.getKeyListener().keyJustPressed(KeyEvent.VK_ENTER)) {
 			//choose answer
 		}
-		if(handler.getKeyListener().keyJustPressed(KeyEvent.VK_ESCAPE)) {
+		if(Handler.getKeyListener().keyJustPressed(KeyEvent.VK_ESCAPE)) {
 			//exit to try
 		}
 	}

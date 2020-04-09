@@ -1,4 +1,4 @@
-package GUI;
+package MapDesingComponents;
 
 import java.awt.Color;
 import java.awt.Point;

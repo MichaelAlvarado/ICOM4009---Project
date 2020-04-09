@@ -33,10 +33,10 @@ import javax.swing.text.MaskFormatter;
 
 import Components.Map;
 import Components.Wall;
-import GUI.AddWallBox;
 import GUI.Display;
-import GUI.Plane;
-import main.GameEngine;
+import Main.GameEngine;
+import MapDesingComponents.AddWallBox;
+import MapDesingComponents.Plane;
 
 /**
  * 
@@ -103,7 +103,7 @@ public class MenuState{
 					System.out.println("Loading MapDesign App...");
 					long start = System.nanoTime();
 					loadingScreen();
-					MapDesign designMap = new MapDesign(display);
+					MapDesignState designMap = new MapDesignState(display);
 					System.out.println("Map Design App Loaded in: " + ((System.nanoTime()-start)/1000000000.0) + " seconds");
 				} catch (ParseException e) {
 					e.printStackTrace();

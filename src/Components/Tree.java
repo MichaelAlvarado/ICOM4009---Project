@@ -9,7 +9,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import javax.imageio.ImageIO;
 
-import main.Handler;
+import Main.Handler;
 
 import java.io.File;
 import java.io.IOException;
@@ -164,7 +164,7 @@ public class Tree {
 		this.pictureURL = pictureURL;
 	}
 
-	public void render(Graphics g, Handler handler) {
+	public void render(Graphics g) {
 		g.drawImage(treeImage, p1.x, p1.y, width, height, null);
 	}
 }

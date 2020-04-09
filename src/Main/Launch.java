@@ -1,9 +1,9 @@
-package main;
+package Main;
 
 import java.awt.EventQueue;
 
 import GUI.Display;
-import States.MapDesign;
+import States.MapDesignState;
 import States.MenuState;
 
 public class Launch {

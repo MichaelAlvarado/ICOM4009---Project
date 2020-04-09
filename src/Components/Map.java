@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
-import main.Handler;
+import Main.Handler;
 import testers.WriteFile;
 
 
@@ -153,21 +153,27 @@ public class Map {
 		}
 	}
 	
-	//Para cada building creado en un mapa tendra su tick y render
-	public void tick(Player player, Handler handler) {
+
+	public void tick(Player player) {
 		for (Building building : buildingList) {
-			building.tick(player, handler);
+			building.tick(player);
 		}
 	}
 	
-	public void render(Graphics g, Handler handler) {
+	/**
+	 * Description - This method paints all components in map of Game in Canvas
+	 * Precondition - This method should only be use in Game
+	 * @author - Joerge Calderon
+	 * @date March 28, 2020
+	 */
+	public void render(Graphics g) {
 		if(getPicture() != null)
-			g.drawImage(getPicture(),0,0, handler.getWidth(), handler.getHeight(),null);
+			g.drawImage(getPicture(),0,0, Handler.getWidth(), Handler.getHeight(),null);
 		for (Building building : buildingList) {
-			building.render(g, handler);
+			building.render(g);
 		}
 		for(Tree tree: getTrees()) {
-			tree.render(g, handler);
+			tree.render(g);
 		}
 	}
 

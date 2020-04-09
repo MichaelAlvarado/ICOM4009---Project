@@ -1,4 +1,4 @@
-package GUI;
+package MapDesingComponents;
 
 import java.awt.AWTException;
 import java.awt.Canvas;
@@ -116,7 +116,7 @@ public class Plane extends JPanel{
 				g.drawString(String.valueOf(Math.round(s*yGap*scaleY))+" m", xOrigin, (yOrigin - s*yGap)); //draw positive Y coordinate 
 			}
 		}
-		
+
 		//Draw lines from point to point
 		for(Building building: map.getBuildingList()) {
 			for(Wall line: building.getWalls()) {
@@ -154,7 +154,7 @@ public class Plane extends JPanel{
 			g.drawLine((int)currentPointPair[0].getX(), (int)currentPointPair[0].getY(), (int)currentPointPair[1].getX(), (int)currentPointPair[1].getY());
 		}
 
-		//Draw Current Coordinates
+		//Draw Current Pair Coordinates
 		if(currentPointPair[0] != null && currentPointPair[1] != null) {
 			//Draw panel with coordinates
 			g.setColor(new Color(0,0,0,100));
@@ -164,6 +164,13 @@ public class Plane extends JPanel{
 			g.setColor(cP);
 			g.drawString("( " + Math.round(currentPointPair[0].getX()*scaleX) + " , " + Math.round(currentPointPair[0].getY()*scaleY) + " )", this.getWidth()-300, 20);
 			g.drawString("( " + Math.round(currentPointPair[1].getX()*scaleX) + " , " + Math.round(currentPointPair[1].getY()*scaleY) + " )", this.getWidth()-150, 20);
+		}
+		else if(currentBuilding != null){ 		//Draw Current Mouse Coordinates
+			g.setColor(new Color(0,0,0,100));
+			g.fillRect(this.getWidth()-150, 0, 150, 30);
+			g.setFont(new Font("Arial", Font.PLAIN, 20));
+			g.setColor(cP);
+			g.drawString("( " + Math.round(mouseMotion.getX()*scaleX) + " , " + Math.round(mouseMotion.getY()*scaleY) + " )", this.getWidth()-140, 20);
 		}
 
 		//Draw Building Image
@@ -416,7 +423,10 @@ public class Plane extends JPanel{
 	 *	This class was made to make the drag functionality so its easier to interconnect points and to paint line while moving
 	 */
 	private class MouseMotion extends MouseMotionAdapter{
+		
 		private boolean enable;
+		private int x, y;
+		
 		public MouseMotion(){
 			super();
 			enable = true;
@@ -459,9 +469,18 @@ public class Plane extends JPanel{
 			//This is use to place initial point on a near Point
 			setFocusable(true);
 			requestFocus(); 
+			x = arg0.getX();
+			y = arg0.getY();
 			if(enable && currentBuilding != null) {
-				drag = dragToPoint(arg0.getX(), arg0.getY());
+				drag = dragToPoint(x, y);
+				repaint();
 			}
+		}
+		public int getX() {
+			return x;
+		}
+		public int getY() {
+			return y;
 		}
 
 	}
@@ -472,7 +491,9 @@ public class Plane extends JPanel{
 	 * This class was made so the user can do key shortcuts and for debugging
 	 */
 	private class Keyboard implements KeyListener{
+		
 		private boolean enable;
+		
 		public Keyboard() {
 			enable = true;
 		}
@@ -555,31 +576,5 @@ public class Plane extends JPanel{
 		public void keyTyped(KeyEvent arg0) {
 		}
 	}
-
-
-
-	/**
-	 * 
-	 */
-
-} //Last 
-
-//	/**
-//	 * @author Michael Alvarado
-//	 * Date - 13/Feb/2020
-//	 * @param coor - give the coordinate it want to draw on the plane
-//	 * @return - The position in x (in pixels) the coordinate should be painted
-//	 */
-//	private int printCoordinatesX(Coordinates coor) {
-//		return ((int)(coor.getX()/this.scale*xGap)+xOrigin);
-//	}
-//
-//	/**
-//	 * @author Michael Alvarado
-//	 * Date - 13/Feb/2020
-//	 * @param coor - give the coordinate it want to draw on the plane
-//	 * @return - The position in y (in pixels) the coordinate should be painted
-//	 */
-//	private int printCoordinatesY(Coordinates coor) {
-//		return ((int)(-coor.getY()/this.scale*yGap)+yOrigin);
-//	}
+	
+}

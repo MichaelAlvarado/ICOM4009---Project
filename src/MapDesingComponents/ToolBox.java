@@ -1,7 +1,7 @@
 /**
  * 
  */
-package GUI;
+package MapDesingComponents;
 
 
 import java.awt.Point;

@@ -58,12 +58,12 @@ import javax.swing.text.MaskFormatter;
 import Components.Building;
 import Components.Tree;
 import Components.Wall;
-import GUI.AddBuildingBox;
-import GUI.AddMapBox;
-import GUI.AddQuestionsBox;
-import GUI.AddTreeBox;
-import GUI.AddWallBox;
-import GUI.Plane;
+import MapDesingComponents.AddBuildingBox;
+import MapDesingComponents.AddMapBox;
+import MapDesingComponents.AddQuestionsBox;
+import MapDesingComponents.AddTreeBox;
+import MapDesingComponents.AddWallBox;
+import MapDesingComponents.Plane;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JLayeredPane;
@@ -83,7 +83,7 @@ import java.awt.Button;
  * This was made using Window Builder version 1.9.3 plug-in in Eclipse IDE
  */
 
-public class MapDesign{
+public class MapDesignState{
 
 	private JFrame display;
 	private Plane plane;
@@ -97,7 +97,7 @@ public class MapDesign{
 	 * Date - 28/Feb/2020
 	 * @throws ParseException 
 	 */
-	public MapDesign(JFrame display) throws ParseException {
+	public MapDesignState(JFrame display) throws ParseException {
 		this.display = display;
 		this.width = display.getContentPane().getWidth();
 		this.height = display.getContentPane().getHeight();

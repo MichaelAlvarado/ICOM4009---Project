@@ -1,4 +1,4 @@
-package GUI;
+package MapDesingComponents;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
