@@ -25,7 +25,7 @@ import States.GameState;
 
 public class GameEngine implements Runnable {
 	//Running Game
-	private JFrame display;
+	private Display display;
 	private boolean running = false;
 	private Thread thread;
 	//Paint Game
@@ -38,7 +38,7 @@ public class GameEngine implements Runnable {
 	//Handler will have listeners
 	private Handler handler;
 
-	public GameEngine(JFrame display, Map map) {
+	public GameEngine(Display display, Map map) {
 		this.display = display;
 		this.map = map;
 		threadB = false;

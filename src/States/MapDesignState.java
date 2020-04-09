@@ -58,6 +58,7 @@ import javax.swing.text.MaskFormatter;
 import Components.Building;
 import Components.Tree;
 import Components.Wall;
+import GUI.Display;
 import MapDesingComponents.AddBuildingBox;
 import MapDesingComponents.AddMapBox;
 import MapDesingComponents.AddQuestionsBox;
@@ -85,7 +86,7 @@ import java.awt.Button;
 
 public class MapDesignState{
 
-	private JFrame display;
+	private Display display;
 	private Plane plane;
 	private int width, height;
 	protected boolean toolOpened;
@@ -97,7 +98,7 @@ public class MapDesignState{
 	 * Date - 28/Feb/2020
 	 * @throws ParseException 
 	 */
-	public MapDesignState(JFrame display) throws ParseException {
+	public MapDesignState(Display display) throws ParseException {
 		this.display = display;
 		this.width = display.getContentPane().getWidth();
 		this.height = display.getContentPane().getHeight();
@@ -144,7 +145,7 @@ public class MapDesignState{
 		JButton editMap = new JButton("Edit Map");
 		editMap.setBounds(165, 15, 150, 25);
 		panel.add(editMap);
-		
+
 		JButton mapDone = new JButton("Map Done");
 		mapDone.setBounds(320, 15, 150, 25);
 		panel.add(mapDone);
@@ -164,11 +165,11 @@ public class MapDesignState{
 		JButton treeList = new JButton("Tree List");
 		treeList.setBounds((panel.getWidth()/2)+165, 50, 150, 25);
 		panel.add(treeList);
-		
+
 		//Round Add Button in Plane
 		BufferedImage buttonIcon = null;
 		try {
-		    buttonIcon = ImageIO.read(new File("res/addButton.png"));
+			buttonIcon = ImageIO.read(new File("res/addButton.png"));
 		}
 		catch(Exception ex) {
 		}
@@ -203,7 +204,7 @@ public class MapDesignState{
 		AddTreeBox addTreeBox = new AddTreeBox((width/2)-250, 200,500,180, plane, addTree);
 		addTreeBox.setVisible(false);
 		display.getContentPane().add(addTreeBox);
-		
+
 		display.getContentPane().add(plane);//add at the end so its on the bottom
 
 		/*
@@ -242,7 +243,7 @@ public class MapDesignState{
 				buildingListPopUp(buildingList.getX(),buildingList.getY()+buildingList.getHeight()*2, addBuildingBox);
 			}
 		});
-		
+
 		treeList.addActionListener(new ActionListener () {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -291,7 +292,7 @@ public class MapDesignState{
 
 			}
 		});
-		
+
 		mapDone.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -318,7 +319,7 @@ public class MapDesignState{
 				addMapBox.setVisible(false);
 			}
 		});
-		
+
 		addTree.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -329,15 +330,15 @@ public class MapDesignState{
 				addMapBox.setVisible(false);
 			}
 		});
-		
+
 		tool.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if(!toolOpened) {
-				plane.openTool();
-				tool.setVisible(true);
-				tool.setLocation(plane.getWidth()-65-100, tool.getLocation().y);
-				toolOpened = true;
+					plane.openTool();
+					tool.setVisible(true);
+					tool.setLocation(plane.getWidth()-65-100, tool.getLocation().y);
+					toolOpened = true;
 				}
 				else {
 					plane.closeTool();
@@ -348,14 +349,10 @@ public class MapDesignState{
 		});
 		display.repaint();
 	}//Last from Constructor
-	
+
 	public void loadingScreen() {
-		try {
-			display.getContentPane().getGraphics().drawImage(ImageIO.read(new File("res/loadingscreen.png")), 0, 0, width, height, null);
-			display.getContentPane().removeAll();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		display.setLoadingScreen();
+		display.getContentPane().removeAll();		
 	}
 
 	/**
@@ -413,7 +410,7 @@ public class MapDesignState{
 		display.add(buildingsPopUp);
 		buildingsPopUp.show(display, x, y);
 	}
-	
+
 	/**
 	 * @author Fabiola Badillo
 	 * This method creates a PopUP with the trees in the map being created.
@@ -441,7 +438,7 @@ public class MapDesignState{
 		display.add(treesPopUp);
 		treesPopUp.show(display, x, y);
 	}
-	
+
 	/**
 	 * @author Michael J. Alvarado
 	 * This method creates the PopUp of the settings and actions when clicked.
@@ -508,7 +505,7 @@ public class MapDesignState{
 				colorPopup(x,y,"previousLine");
 			}
 		});
-		
+
 		buildingImage.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -589,17 +586,17 @@ public class MapDesignState{
 		display.add(ColorPopup);
 		ColorPopup.show(display, x, y);
 	}
-	
+
 	private void helpScreen() {
 		String Instructions = "Help";
 		JOptionPane.showMessageDialog(display, Instructions);
 	}
 
-//	private void setEnableButtons(JButton[] buttons, boolean enable) {
-//		for(int i = 0; i < buttons.length; i++) {
-//			buttons[i].setVisible(enable);
-//		}
-//	}
+	//	private void setEnableButtons(JButton[] buttons, boolean enable) {
+	//		for(int i = 0; i < buttons.length; i++) {
+	//			buttons[i].setVisible(enable);
+	//		}
+	//	}
 
 
 }

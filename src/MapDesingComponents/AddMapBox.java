@@ -51,7 +51,7 @@ public class AddMapBox extends JPanel{
 		setBounds(x, y, width, height);
 		setBorder(new LineBorder(UIManager.getColor("Button.darkShadow"), 3, true));
 		setName("New Map");
-		this.setBackground(new Color(190,190,190));
+		setBackground(new Color(190,190,190));
 		
 		//Choose a name (default is Map)
 		nameLabel = new JLabel("Name of map");
@@ -187,8 +187,6 @@ public class AddMapBox extends JPanel{
 	
 	private void autofill() {
 		name.setText(map.getMapName());
-		//mapWidth
-		//mapHeight;
 	}
 
 

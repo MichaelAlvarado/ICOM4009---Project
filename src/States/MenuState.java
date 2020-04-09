@@ -47,11 +47,11 @@ import MapDesingComponents.Plane;
  */
 public class MenuState{
 
-	JFrame display;
+	Display display;
 	JButton createMap, playGame, help;
 	int width, height;
 
-	public MenuState(JFrame display) throws IOException {
+	public MenuState(Display display) throws IOException {
 		this.display = display;
 		this.width = display.getContentPane().getWidth();
 		this.height = display.getContentPane().getHeight();
@@ -85,7 +85,7 @@ public class MenuState{
 		title.setBounds(width/2, 150, 400, 140);
 		panel.add(title);
 
-		BufferedImage img = ImageIO.read(new File("res/MenuSky1.png")); 
+		BufferedImage img = ImageIO.read(new File("res/backgrounds/MenuSky1.png")); 
 		Image dimg = img.getScaledInstance(width, height,Image.SCALE_SMOOTH); //scale the image to fit JFrame
 		JLabel picLabel = new JLabel(new ImageIcon(dimg)); //add the image to a picLabel to display on the component
 		picLabel.setLayout(null);
@@ -143,12 +143,9 @@ public class MenuState{
 	 * This methods draw the Loading Screen Image and remove all Content in the display
 	 */
 	public void loadingScreen() {
-		try {
-			display.getContentPane().getGraphics().drawImage(ImageIO.read(new File("res/loadingscreen.png")), 0, 0, width, height, null);
+			display.setLoadingScreen();
 			display.getContentPane().removeAll();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 	}
 	/**
 	 * @author Michael J. Alvarado

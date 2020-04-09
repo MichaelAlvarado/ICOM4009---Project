@@ -125,7 +125,13 @@ public class AddBuildingBox extends JPanel{
 					else {
 						building.setName(name.getText());
 						try {
-							building.setBuildingHeight(Integer.valueOf(wallHeight.getText()));
+							int height = Integer.valueOf(wallHeight.getText());
+							if(height > 0) {
+								building.setBuildingHeight(height);
+							}
+							else {
+								throw new NumberFormatException();
+							}
 							if(picture != null) {
 								building.setPicture(picture);
 							} 
@@ -135,7 +141,7 @@ public class AddBuildingBox extends JPanel{
 							}
 							exit();
 						}catch(NumberFormatException n){
-							JOptionPane.showMessageDialog(plane, "Invalid Building Height.\nIt must be an Integer");
+							JOptionPane.showMessageDialog(plane, "Invalid Building Height.\nIt must be an Integer Number greater than 0");
 						}
 					}
 				}
@@ -197,10 +203,8 @@ public class AddBuildingBox extends JPanel{
 
 
 	public void addBuilding() {
-		building = new Building("");
-		edit(building); //here error in exit without creating BUilding
+		edit(new Building(""));
 		newBuilding = true;
-
 	}
 
 	//Empty the textFields

@@ -466,12 +466,12 @@ public class Plane extends JPanel{
 
 		@Override
 		public void mouseMoved(MouseEvent arg0) {
-			//This is use to place initial point on a near Point
-			setFocusable(true);
-			requestFocus(); 
+			//This is use to place initial point on a near Point 
 			x = arg0.getX();
 			y = arg0.getY();
 			if(enable && currentBuilding != null) {
+				setFocusable(true);
+				requestFocus();
 				drag = dragToPoint(x, y);
 				repaint();
 			}
