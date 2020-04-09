@@ -69,12 +69,22 @@ public class Building {
 	public String getQuestions() {
 		String result = "";
 		for (Question q: this.questionPool) {
-			result += "Question: " + q.getQuestion()
-			+ ", Correct Answer: " + q.getAnswer_1()
-			+", Incorrect Answer1: " + q.getAnswer_2()
-			+", Incorrect Answer2: " + q.getAnswer_3() 
-			+", Incorrect Answer3: " + q.getAnswer_4() 
-			+ " \n";
+			if (q.getQuestion().length() < 45) {
+				result += "Question: " + q.getQuestion() + "\n"
+						+ "Right: " + q.getAnswer_1() + "\n"
+						+"Wrong: " + q.getAnswer_2() + "\n"
+						+"Wrong: " + q.getAnswer_3() + "\n"
+						+"Wrong: " + q.getAnswer_4() + "\n";
+				}
+			else {
+				String split = q.getQuestion().substring(45);
+				result += "Question: " + q.getQuestion().substring(0, 44) + "\n"
+						+ split + "\n"
+						+ "Right: " + q.getAnswer_1() + "\n"
+						+"Wrong: " + q.getAnswer_2() + "\n"
+						+"Wrong: " + q.getAnswer_3() + "\n"
+						+"Wrong: " + q.getAnswer_4() + "\n";
+			}
 		}
 		return result;
 	}
@@ -90,9 +100,9 @@ public class Building {
 	public String getWallInfo() {
 		String result = "";
 		for (Wall w: this.walls) {
-			result += "ID: " + w.getID() + ", Height: " + w.getHeight() + ", First Point: " + w.getP1().x
-					+ ", " + w.getP1().y + ", Second Point: " + w.getP2().x + ", " + w.getP2().y +
-					", Wall Image: " + w.getTextureURL() + "\n";
+			result += "ID: " + w.getID() + ", Height: " + w.getHeight() + ", First Point: (" + w.getP1().x
+					+ ", " + w.getP1().y + "), Second Point: (" + w.getP2().x + ", " + w.getP2().y +
+					")\nWall Image: " + w.getTextureURL() + "\n";
 		}
 
 		return result;
@@ -159,7 +169,7 @@ public class Building {
 	}
 
 	public int getBuildingHeight() {
-		return buildingHeight;
+		return this.buildingHeight;
 	}
 
 	public void setBuildingHeight(int buildingHeight) {
