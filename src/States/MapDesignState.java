@@ -292,6 +292,7 @@ public class MapDesignState{
 				try {
 					if(!(plane.getMap().getPicture() == null)) {
 						plane.getMap().generateTextFile();
+						plane.getMap().generateQuestionFile();
 						loadingScreen();
 						MenuState menu = new MenuState(display);
 					}
