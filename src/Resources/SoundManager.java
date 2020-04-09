@@ -22,10 +22,8 @@ public class SoundManager {
 
 	private AudioInputStream loadAudio(String url) {
 		try {
-			url = ConfigurationFile.OSCompability("res/music/" + url + ".wav");
-			System.out.println(url); //To be deleted
 			//Read Audio File
-			audioFile = new File(url);
+			audioFile = new File("res/music/" + url + ".wav");
 			audioStream = AudioSystem.getAudioInputStream(audioFile);
 			format = audioStream.getFormat();
 			info = new DataLine.Info(Clip.class, format);

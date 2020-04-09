@@ -1,9 +1,9 @@
 Map: TutorialMap
 Size: (984, 676) 
-Image: res\maps\map4.jpg
+Image: res/maps/map4.jpg
 
 Building Name: House
-Building Image: res\buildings\house3.png
+Building Image: res/buildings/house3.png
 ID: House_w3, Height: 10, First Point: (677, 95), Second Point: (483, 96)
 Wall Image: null
 ID: House_w2, Height: 10, First Point: (674, 201), Second Point: (677, 95)
@@ -14,7 +14,7 @@ ID: House_w0, Height: 10, First Point: (483, 96), Second Point: (483, 198)
 Wall Image: null
 
 Building Name: Mansion
-Building Image: res\buildings\house4.png
+Building Image: res/buildings/house4.png
 ID: Mansion_w3, Height: 30, First Point: (846, 251), Second Point: (586, 248)
 Wall Image: null
 ID: Mansion_w2, Height: 30, First Point: (864, 360), Second Point: (846, 251)

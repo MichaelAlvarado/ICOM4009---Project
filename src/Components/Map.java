@@ -110,7 +110,6 @@ public class Map {
 	public void setImageURL(String imageURL) throws IOException {
 		this.imageURL = imageURL;
 		this.setPicture(ImageIO.read(new File(imageURL)));
-
 	}
 
 	public void addBuilding(Building b) {
