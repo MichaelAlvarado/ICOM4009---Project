@@ -344,7 +344,6 @@ public class Plane extends JPanel{
 
 	public void setMap(Map map) {
 		this.map = map;
-
 	}
 	/**
 	 * @author Michael Alvarado

@@ -151,17 +151,17 @@ public class Map {
 		for(Tree tree: getTrees()) {
 			tree.getP1().setLocation((int)(tree.getP1().getX()/scaleX), (int)(tree.getP1().getY()/scaleY));
 		}
-//		this.width = width;
-//		this.height = height;
+		//		this.width = width;
+		//		this.height = height;
 	}
-	
+
 
 	public void tick(Player player) {
 		for (Building building : buildingList) {
 			building.tick(player);
 		}
 	}
-	
+
 	/**
 	 * Description - This method paints all components in map of Game in Canvas
 	 * Precondition - This method should only be use in Game
@@ -177,7 +177,7 @@ public class Map {
 		for(Tree tree: getTrees()) {
 			tree.render(g);
 		}
-//		scaleComponentTo(Handler.getWidth(), Handler.getHeight()); //To make screen responsive when resizing screen
+		//		scaleComponentTo(Handler.getWidth(), Handler.getHeight()); //To make screen responsive when resizing screen
 	}
 
 	/**
@@ -211,7 +211,7 @@ public class Map {
 		for(Tree trees: trees) {
 			file += trees.getTreeInfo();
 		}
-		
+
 		file += "\n\nQuestionsFile: " + mapName + "TriviaFile.txt";
 		//Write String file to the Configuration File
 		try {
@@ -220,7 +220,7 @@ public class Map {
 			System.out.println("Something went wrong!");
 		}	
 	}
-	
+
 	public void generateQuestionFile() {
 		WriteFile data = new WriteFile(mapName + "TriviaFile.txt", false);
 		String file = "";
@@ -228,7 +228,7 @@ public class Map {
 			file += "Building: " + b.getName() + "\n"
 					+ b.getQuestions();
 		}
-		
+
 		try {
 			data.writeToFile(file);
 		} catch (IOException e) {
@@ -309,13 +309,13 @@ public class Map {
 					wallLine=sc.nextLine();
 					String wImage = wallLine.substring(wallLine.indexOf("Wall Image:" ) + 12);
 
-//										System.out.println(name);
-//									System.out.println(height);
-//										System.out.println(pointX1);
-//										System.out.println(pointY1);
-//										System.out.println(pointX2);
-//										System.out.println(pointY2);
-//										System.out.println(wImage);
+					//										System.out.println(name);
+					//									System.out.println(height);
+					//										System.out.println(pointX1);
+					//										System.out.println(pointY1);
+					//										System.out.println(pointX2);
+					//										System.out.println(pointY2);
+					//										System.out.println(wImage);
 
 					Wall wall = new Wall(name, 
 							new Point(Integer.valueOf(pointX1), Integer.valueOf(pointY1)),
@@ -328,7 +328,7 @@ public class Map {
 						breakLine = sc.nextLine();
 
 				}
-				
+
 				//Add Building
 				this.addBuilding(building);
 				//System.out.println("Load Done");
@@ -338,16 +338,16 @@ public class Map {
 			//System.out.println(treeLine);
 			if(treeLine.contains("Trees:")) {
 				if (sc.hasNext())
-						treeLine = sc.nextLine();
+					treeLine = sc.nextLine();
 				int index = 0;
 				while(treeLine.contains("ID:")) {
 					Tree t = new Tree();
 					index = treeLine.indexOf(',');
-					
+
 					//ID of Tree
 					String treeID = treeLine.substring(treeLine.indexOf("ID:") + 4, index);
 					//System.out.println(treeID);
-					
+
 					index = treeLine.indexOf(',', index + 1);
 					//Species of Tree
 					String treeSpecies = treeLine.substring(treeLine.indexOf("Species:") + 9, index);
@@ -360,7 +360,7 @@ public class Map {
 					t.setTreeSpecies(Integer.valueOf(treeSpecies));
 					t.setP1(new Point(Integer.valueOf(p1X), Integer.valueOf(p1Y))); 
 					//System.out.println(p1X + ", " + p1Y);
-					
+
 					//treeLine = sc.nextLine();
 					if(!(t.getID() == null)) {
 						trees.add(t);
@@ -373,12 +373,12 @@ public class Map {
 			//System.out.println(q);
 			String OS = System.getProperty("os.name").toLowerCase();
 			if(OS.indexOf("mac") >= 0) {
-				 filepath = file.getParentFile().toString() + "/" + mapName + "TriviaFile.txt";
+				filepath = file.getParentFile().toString() + "/" + mapName + "TriviaFile.txt";
 				// System.out.println("aqui");
 			}
 			else {
-				 filepath = file.getParentFile().toString() + "\\" + mapName + "TriviaFile.txt";
-				 //System.out.println("aqui2");
+				filepath = file.getParentFile().toString() + "\\" + mapName + "TriviaFile.txt";
+				//System.out.println("aqui2");
 			}
 			//System.out.println(filepath);
 			Scanner sc2 = new Scanner (new File(filepath));
@@ -389,54 +389,54 @@ public class Map {
 			String w1Ans = "";
 			String w2Ans = "";
 			String w3Ans = "";
-			int counter = 0;
+			String nextLine = "";
 			while(sc2.hasNextLine()) {
 				//System.out.println("llegamos");
 				if(bname.contains("Building:")) {
 					//System.out.println("building");
 
 					bname = bname.substring(bname.indexOf("Building:") + 10);
-					//System.out.println(bname);
+					System.out.println("Building: " + bname);
 				}
-				
-				while (counter < 4) {
-					qname = sc2.nextLine();
+				nextLine = sc2.nextLine();
+
+				while (nextLine.contains("Question:")) {
+					qname = nextLine;
 					qname = qname.substring(qname.indexOf("Question:") + 10);
-					//System.out.println(qname);
+					System.out.println("Question: " + qname);
 					rAns = sc2.nextLine();
-					
-					
+
+
 					rAns = rAns.substring(rAns.indexOf("Right:") + 7);
-					//System.out.println(rAns);
+					System.out.println("Answer Correct: " + rAns);
 					w1Ans = sc2.nextLine();
-					
-					
+
+
 					w1Ans = w1Ans.substring(w1Ans.indexOf("Wrong:") + 7);
-					//System.out.println(w1Ans);
+					System.out.println("Answer Incorrect: " + w1Ans);
 					w2Ans = sc2.nextLine();
-					
-					
+
+
 					w2Ans = w2Ans.substring(w2Ans.indexOf("Wrong:") + 7);
-					//System.out.println(w2Ans);
+					System.out.println("Answer Incorrect: " + w2Ans);
 					w3Ans = sc2.nextLine();
-						
-			
+
+
 					w3Ans = w3Ans.substring(w3Ans.indexOf("Wrong:") + 7);
-					//System.out.println(w3Ans);
-					
+					System.out.println("Answer Incorrect: " + w3Ans);
+
 					Question question = new Question(qname, rAns, w1Ans, w2Ans, w3Ans);
-					
+
 					for (Building b: buildingList){
 						if (b.getName().equals(bname)) {
 							//System.out.println("for loop");
 							b.addQuestion(question);;
 						}
 					}
-					counter++;
+					nextLine = sc2.nextLine();
 				}
-				counter = 0;
-				bname = sc2.nextLine();
-			
+				bname = nextLine;
+
 			}
 		}
 

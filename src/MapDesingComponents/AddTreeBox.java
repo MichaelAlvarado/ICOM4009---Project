@@ -160,14 +160,14 @@ public class AddTreeBox extends JPanel{
 		autofill(tree);
 		setVisible(true);
 		newTree = false;
+		plane.disable();
 		plane.setCurrentTree(tree); 
 	}
 
 
 	public void addTree() {
 		tree = new Tree(plane.map, 1, new Point()); // TODO: implement
-		setVisible(true);
-		plane.disable();
+		edit(tree);
 		newTree = true;
 	}
 
