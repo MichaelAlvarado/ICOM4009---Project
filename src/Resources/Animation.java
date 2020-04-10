@@ -19,9 +19,8 @@ public class Animation {
 	private int x,y,width,height;
 	private BufferedImage[] animation;
 
-
 	/**
-	 * Description - this Object will have images that it can animate
+	 * Description - this Object will have images that it can animate (Mainly use for Effects)
 	 * PostCondition - it has to implement the method render(g) so it can be displayed on Canvas
 	 * @author Michael J. Alvarado
 	 * @param images - list of Images to animate through time. The first at the array is idle image(Cannot be an empty list)
@@ -46,6 +45,15 @@ public class Animation {
 		this.animation = images;
 		timePerImage = time/animation.length;
 	}
+	
+	public BufferedImage[] getAnimation() {
+		return animation;
+	}
+
+	public void setAnimation(BufferedImage[] animation) {
+		this.animation = animation;
+	}
+	
 	/**
 	 * 
 	 * Description - paint of Canvas the Animation sprite only if animation started

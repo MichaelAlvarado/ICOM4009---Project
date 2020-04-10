@@ -39,6 +39,7 @@ import GameSetUp.GameEngine;
 import MapDesingComponents.AddWallBox;
 import MapDesingComponents.Plane;
 import Resources.ConfigurationFile;
+import Resources.Images;
 
 /**
  * 
@@ -339,6 +340,7 @@ public class MenuState{
 					// The game engine should start here
 					mapSelection.setVisible(true);
 					charSelection.setVisible(false);
+					new Images(characterSel.getAnchorSelectionIndex());
 					setButtonsEnable(false);
 				}
 			});
