@@ -15,9 +15,6 @@ public class SoundManager {
 	private DataLine.Info info;
 	private HashMap<String,Clip> audioChannels;
 
-	private Clip background; 
-	private long clipTime = 0;
-
 	public SoundManager(){
 		audioChannels = new HashMap<String,Clip>();
 	}
@@ -54,21 +51,6 @@ public class SoundManager {
 	public void play(String str) {
 		Clip clip = loadAudio(str);
 		clip.start();
-	}
-
-	public void resumeBackground(){
-		background.setMicrosecondPosition(clipTime);
-		background.start();
-	}
-
-	public void pauseBackground(){
-		clipTime = background.getMicrosecondPosition();
-		background.stop();
-	}
-
-	public void restartBackground() {
-		clipTime = 0;
-		resumeBackground();
 	}
 
 	/**

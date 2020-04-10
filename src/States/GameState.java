@@ -40,7 +40,7 @@ public class GameState implements State{
 		Handler.getSoundManager().resumeAudio("background");
 		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
 			Handler.setCurrentState(Handler.getPauseState());
-			Handler.getSoundManager().pauseBackground();
+			Handler.getSoundManager().stopAudio("background");
 		}
 		map.tick(player);
 		player.tick();

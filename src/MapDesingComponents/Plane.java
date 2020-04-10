@@ -172,7 +172,7 @@ public class Plane extends JPanel{
 			g.fillRect(this.getWidth()-150, 0, 150, 30);
 			g.setFont(new Font("Arial", Font.PLAIN, 20));
 			g.setColor(cP);
-			g.drawString("( " + Math.round(mouseMotion.getX()*scaleX) + " , " + Math.round(getHeight() - mouseMotion.getY()*scaleY) + " )", this.getWidth()-140, 20);
+			g.drawString("( " + Math.round(mouseMotion.getX()*scaleX) + " , " + Math.round((getHeight() - mouseMotion.getY())*scaleY) + " )", this.getWidth()-140, 20);
 		}
 
 		//Draw Building Image
