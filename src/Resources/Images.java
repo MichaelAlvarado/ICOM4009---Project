@@ -116,7 +116,7 @@ public class Images {
 				CharacterSpriteRight[9] =  ImageIO.read(new File("res/animation_Images/a_girl/Walk (9).png"));
 
 				//Lefts
-				CharacterSpriteLeft[0] =  ImageIO.read(new File("res/animation_Images/a_girlIdleLeft (1).png")); //IDLE
+				CharacterSpriteLeft[0] =  ImageIO.read(new File("res/animation_Images/a_girl/IdleLeft (1).png")); //IDLE
 				CharacterSpriteLeft[1] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (1).png"));
 				CharacterSpriteLeft[2] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (2).png"));
 				CharacterSpriteLeft[3] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (3).png"));
