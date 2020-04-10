@@ -5,13 +5,17 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.Collections;
+import java.util.LinkedList;
 
 import Components.Building;
+import Components.Question;
 import GameSetUp.Handler;
 
 public class QuestionState implements State{
 
 	private Building building;
+	private LinkedList<String> qList, aList;
 	private Rectangle yes, no;
 	private boolean answering; //if this is true then its on state where it ask the player if he wants to answer the questions of building
 
@@ -71,6 +75,25 @@ public class QuestionState implements State{
 
 	public void setBuilding(Building building) {
 		this.building = building;
+	}
+	
+	public void questionRandomizer() {
+		qList = new LinkedList<String>();
+		for(Question q: building.getQuestionPool()) {
+			qList.add(q.getQuestion());
+		}
+		Collections.shuffle(qList);	
+	}
+	
+	public void answerRandomizer() {
+		aList = new LinkedList<String>();
+		for(Question q: building.getQuestionPool()) {
+			aList.add(q.getAnswer_1());
+			aList.add(q.getAnswer_2());
+			aList.add(q.getAnswer_3());
+			aList.add(q.getAnswer_4());
+		}
+		Collections.shuffle(aList);
 	}
 
 }
