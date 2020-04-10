@@ -159,7 +159,7 @@ public class MapDesignState{
 
 		treeList = new JButton("Tree List");
 		panel.add(treeList);
-		
+
 		questionList = new JButton("Question List");
 		panel.add(questionList);
 
@@ -248,7 +248,7 @@ public class MapDesignState{
 				treeListPopUp(treeList.getX(), treeList.getY()+treeList.getHeight()*2, addTreeBox);
 			}
 		});
-		
+
 		questionList.addActionListener(new ActionListener () {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -302,14 +302,24 @@ public class MapDesignState{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					if(!(plane.getMap().getPicture() == null)) {
-						ConfigurationFile.generateTextFile(plane.getMap());
-						ConfigurationFile.generateQuestionFile(plane.getMap());
+					Object[] options = { "YES", "NO" };
+					int x = JOptionPane.showOptionDialog(null, "Do you wish to save the Map?", "Warning",
+							JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
+							null, options, options[0]);
+					if (x == 0) {
+						if(!(plane.getMap().getPicture() == null)) {
+							ConfigurationFile.generateTextFile(plane.getMap());
+							ConfigurationFile.generateQuestionFile(plane.getMap());
+							loadingScreen();
+							MenuState menu = new MenuState(display);
+						}
+						else
+							JOptionPane.showMessageDialog(plane, "Map must contain an Image");
+					}
+					else {
 						loadingScreen();
 						MenuState menu = new MenuState(display);
 					}
-					else
-						JOptionPane.showMessageDialog(plane, "Map must contain an Image");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -355,7 +365,7 @@ public class MapDesignState{
 		});
 		display.repaint();
 	}//Last from Constructor
-	
+
 	/**
 	 * 
 	 * Description - set all the components to there position
@@ -471,7 +481,7 @@ public class MapDesignState{
 		display.add(treesPopUp);
 		treesPopUp.show(display, x, y);
 	}
-	
+
 	/**
 	 * @author jorgecalderon
 	 * This method creates a PopUP with the questions in the building being created.
