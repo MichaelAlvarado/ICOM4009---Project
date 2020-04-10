@@ -23,6 +23,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -51,6 +52,7 @@ public class MenuState{
 	private Display display;
 	private JButton createMap, playGame, help;
 	private MapSelect mapSelection;
+	private charSelect charSelection;
 	private JLabel  title;
 	private int width, height;
 
@@ -74,6 +76,10 @@ public class MenuState{
 		mapSelection = new MapSelect(width/2-250, height/2-100,500,200, this);
 		mapSelection.setVisible(false);
 		panel.add(mapSelection);
+		
+		charSelection = new charSelect(width/2-250, height/2-100,500,200, this);
+		charSelection.setVisible(false);
+		panel.add(charSelection);
 
 		createMap = new JButton("Create new Map");
 		createMap.setFont(new Font("Comic Sans MS", Font.BOLD, 20));	
@@ -128,7 +134,7 @@ public class MenuState{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// The game engine should start here
-				mapSelection.setVisible(true);
+				charSelection.setVisible(true);
 				setButtonsEnable(false);
 			}
 		});
@@ -296,4 +302,71 @@ public class MenuState{
 		}
 
 	}
+	
+	public class charSelect extends JPanel{
+
+
+		JButton enter, exit;
+		JList character;
+		JLabel charLabel;
+		MenuState menu;
+
+		public charSelect(int x, int y, int width, int height, MenuState menu) {
+			super();
+			this.menu = menu;
+			setLayout(null);
+			setBounds(x, y, width, height);
+			setBorder(new LineBorder(UIManager.getColor("Button.darkShadow"), 3, true));
+			setBackground(new Color(190,190,190));
+
+			// browse for a wall texture
+			charLabel = new JLabel("Choose Your Character");
+			charLabel.setBounds(10, 70, 150, 25);
+						
+			
+			String num[]= { "Boy","Girl","Adventure Boy","Adventure Girl","Cat","Dog"};
+			character = new JList(num);
+			character.setBounds(charLabel.getX()+charLabel.getWidth(), charLabel.getY()-50, (width/2)-75, 110);
+
+
+			// enter button
+			enter = new JButton("OK");
+			enter.setBounds(width/2-100, height-60, 200, 50);
+			enter.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					//Start
+					// The game engine should start here
+					mapSelection.setVisible(true);
+					charSelection.setVisible(false);
+					setButtonsEnable(false);
+				}
+			});
+
+			exit = new JButton("Exit");
+			exit.setBorder(BorderFactory.createEtchedBorder(Color.RED, Color.BLACK));
+			exit.setBounds(width-55, 5, 50, 30);
+			exit.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					exit();
+				}
+			});
+			
+			
+			add(enter);
+			add(exit);
+			add(charLabel);
+			add(character);
+
+		}
+
+		private void exit() {
+			setVisible(false);
+			menu.setButtonsEnable(true);
+		}
+
+	}
+	
 }

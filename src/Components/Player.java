@@ -112,14 +112,22 @@ public class Player {
 	 * @date March 29, 2020
 	 */
 	private class PlayerAnimation {
-
 		private BufferedImage idle;
 		private BufferedImage[] walk;
 		Animation animation;
 
 		public PlayerAnimation(){
+
 			walk = new BufferedImage[5];
 			try {
+				while(Handler.getKeyManager().left || Handler.getKeyManager().keyJustPressed(KeyEvent.VK_KP_LEFT)) {
+					idle = ImageIO.read(new File("res/animation_Images/Idle (1).png"));
+					walk[0] = idle;
+					walk[1] =  ImageIO.read(new File("res/animation_Images/WalkLeft (1).png"));
+					walk[2] =  ImageIO.read(new File("res/animation_Images/WalkLeft (3).png"));
+					walk[3] =  ImageIO.read(new File("res/animation_Images/WalkLeft (5).png"));
+					walk[4] =  ImageIO.read(new File("res/animation_Images/WalkLeft (7).png"));
+				}
 				idle = ImageIO.read(new File("res/animation_Images/Idle (1).png"));
 				walk[0] = idle;
 				walk[1] =  ImageIO.read(new File("res/animation_Images/Walk (1).png"));
@@ -131,6 +139,7 @@ public class Player {
 			}
 			Handler.getSoundManager().addAudio("footsteps");			
 			animation = new Animation(walk, 0.6);
+			
 		}
 
 
