@@ -440,11 +440,11 @@ public class Plane extends JPanel{
 		}
 		private Point dragToPoint(double x, double y) {
 			for(Wall line: currentBuilding.getWalls()) {
-				if(line.getP1().distance(x/scaleX, y/scaleY) < pointWidth) {
-					return  new Point((int)Math.round(line.getP1().x*scaleX), (int)Math.round(line.getP1().y*scaleY));
+				if(line.getP1().distance(x*scaleX, y*scaleY) < pointWidth) {
+					return  new Point((int)Math.round(line.getP1().x/scaleX), (int)Math.round(line.getP1().y/scaleY));
 				}
-				else if(line.getP2().distance(x/scaleX, y/scaleY) < pointWidth) {
-					return  new Point((int)Math.round(line.getP2().x*scaleX), (int)Math.round(line.getP2().y*scaleY));
+				else if(line.getP2().distance(x*scaleX, y*scaleY) < pointWidth) {
+					return  new Point((int)Math.round(line.getP2().x/scaleX), (int)Math.round(line.getP2().y/scaleY));
 				}
 			}
 			return null;
