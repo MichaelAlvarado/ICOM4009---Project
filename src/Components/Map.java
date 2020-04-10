@@ -141,10 +141,12 @@ public class Map {
 	public void scaleComponentTo(int width, int height) {
 		double scaleX = (double)getWidth()/(double)width;
 		double scaleY = (double)getHeight()/(double)height;
+		setWidth(width);
+		setHeight(height);
 		for(Building building: getBuildingList()) {
 			for(Wall wall: building.getWalls()) {
-				wall.getP1().setLocation((int)((double)(wall.getP1().getX())/scaleX), (int)((double)(wall.getP1().getY())/scaleY));
-				wall.getP2().setLocation((int)((double)(wall.getP2().getX())/scaleX), (int)((double)(wall.getP2().getY())/scaleY));
+				wall.getP1().setLocation((int)((wall.getP1().x)/scaleX), (int)((wall.getP1().y))/scaleY);
+				wall.getP2().setLocation((int)((wall.getP2().x)/scaleX), (int)((wall.getP2().y)/scaleY));
 			}
 		}
 		for(Tree tree: getTrees()) {
@@ -168,15 +170,15 @@ public class Map {
 	 * @date March 28, 2020
 	 */
 	public void render(Graphics g) {
+	//	scaleComponentTo(Handler.getWidth(), Handler.getHeight()); //To make screen responsive when resizing screen
 		if(getPicture() != null)
-			g.drawImage(getPicture(),0,0, Handler.getWidth(), Handler.getHeight(),null);
+			g.drawImage(getPicture(),0,0, width, height,null);
 		for (Building building : buildingList) {
 			building.render(g);
 		}
 		for(Tree tree: getTrees()) {
 			tree.render(g);
 		}
-		//		scaleComponentTo(Handler.getWidth(), Handler.getHeight()); //To make screen responsive when resizing screen
 	}
 
 

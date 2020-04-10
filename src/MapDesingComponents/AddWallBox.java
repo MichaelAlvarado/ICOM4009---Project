@@ -264,10 +264,6 @@ public class AddWallBox extends JPanel{
 	}
 
 	private boolean isValidTextField() {
-//		return formattedTextP1X.getValue() != null &&
-//				formattedTextP1Y.getValue() != null &&
-//				formattedTextP2X.getValue() != null &&
-//				formattedTextP2Y.getValue() != null;
 		return 	formattedTextP1X.isValid() && 
 				formattedTextP1Y.isValid() &&
 				formattedTextP2X.isValid() &&

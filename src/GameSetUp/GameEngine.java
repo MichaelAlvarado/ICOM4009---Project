@@ -136,11 +136,8 @@ public class GameEngine implements Runnable {
 		if(Handler.getCurrentState() != null) {
 			Handler.getCurrentState().render(g);
 		}
-		canvas.setBounds(0, 0, display.getContentPane().getWidth(), display.getContentPane().getHeight());
-		//		g.setColor(Color.WHITE);
-		//		g.drawString("Game Engine Prints", 10, 10);
-		//		g.drawRect(200, 0, 50, 50);
-		//		g.drawRect(200, canvas.getHeight()-50, 50, 50);
+		canvas.setBounds(0, 0, display.getContentPane().getWidth(), display.getContentPane().getHeight()); //Resize Canvas
+		
 		//End Drawing!
 		bs.show();
 		g.dispose();

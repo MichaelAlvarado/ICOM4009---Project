@@ -125,7 +125,7 @@ public class Plane extends JPanel{
 				//				g.fillOval((int)(line.getP1().getX()-(pointWidth/2)), (int)(line.getP1().getY()-(pointWidth/2)), pointWidth, pointWidth);
 				//				g.fillOval((int)(line.getP2().getX()-(pointWidth/2)), (int)(line.getP2().getY()-(pointWidth/2)), pointWidth, pointWidth);
 				g.setColor(pL);//Color of Lines
-				g.drawLine((int)(line.getP1().getX()*scaleX), (int)(line.getP1().getY()*scaleY), (int)(line.getP2().getX()*scaleX), (int)(line.getP2().getY()*scaleY));
+				g.drawLine((int)(line.getP1().getX()/scaleX), (int)(line.getP1().getY()/scaleY), (int)(line.getP2().getX()/scaleX), (int)(line.getP2().getY()/scaleY));
 			}
 		}
 
@@ -133,10 +133,10 @@ public class Plane extends JPanel{
 		if(currentBuilding != null) {
 			for(Wall line: currentBuilding.getWalls()) {
 				g.setColor(cP);//Color of Points
-				g.fillOval((int)Math.round((line.getP1().getX()*scaleX-(pointWidth/2))), (int)Math.round((line.getP1().getY()*scaleY-(pointWidth/2))), pointWidth, pointWidth);
-				g.fillOval((int)Math.round((line.getP2().getX()*scaleX-(pointWidth/2))), (int)Math.round((line.getP2().getY()*scaleY-(pointWidth/2))), pointWidth, pointWidth);
+				g.fillOval((int)Math.round((line.getP1().getX()/scaleX-(pointWidth/2))), (int)Math.round((line.getP1().getY()/scaleY-(pointWidth/2))), pointWidth, pointWidth);
+				g.fillOval((int)Math.round((line.getP2().getX()/scaleX-(pointWidth/2))), (int)Math.round((line.getP2().getY()/scaleY-(pointWidth/2))), pointWidth, pointWidth);
 				g.setColor(cL);//Color of Lines
-				g.drawLine((int)(line.getP1().getX()*scaleX), (int)(line.getP1().getY()*scaleY), (int)(line.getP2().getX()*scaleX), (int)(line.getP2().getY()*scaleY));
+				g.drawLine((int)(line.getP1().getX()/scaleX), (int)(line.getP1().getY()/scaleY), (int)(line.getP2().getX()/scaleX), (int)(line.getP2().getY()/scaleY));
 			}
 		}
 
@@ -187,7 +187,7 @@ public class Plane extends JPanel{
 
 		//Draw Tree Image
 		for(Tree tree: map.getTrees()) {
-			g.drawImage(tree.getTreeImage(), tree.getP1().x, tree.getP1().y, tree.getWidth(), tree.getHeight(), null);
+			g.drawImage(tree.getTreeImage(), (int)(tree.getP1().x/scaleX), (int)(tree.getP1().y/scaleY), (int)(tree.getWidth()/scaleX), (int)(tree.getHeight()/scaleY), null);
 		}
 
 		//Draw tool panel
@@ -401,8 +401,8 @@ public class Plane extends JPanel{
 					System.out.println("Released / "+"x: " + arg0.getX() + "  y:" + (getHeight() - arg0.getY()));
 					if(currentPointPair[1] != null && currentPointPair[0] != null) {
 						//add to wall only if there was a mouse displacement
-						currentPointPair[0].setLocation(currentPointPair[0].x/scaleX, currentPointPair[0].y/scaleY); //remember the origin in the plane is bottom left
-						currentPointPair[1].setLocation(currentPointPair[1].x/scaleX, currentPointPair[1].y/scaleY); //remember the origin in the plane is bottom left
+						currentPointPair[0].setLocation(currentPointPair[0].x*scaleX, currentPointPair[0].y*scaleY); //remember the origin in the plane is bottom left
+						currentPointPair[1].setLocation(currentPointPair[1].x*scaleX, currentPointPair[1].y*scaleY); //remember the origin in the plane is bottom left
 						addWall(currentPointPair[0], currentPointPair[1]);
 					}
 					currentPointPair[0] = null;
