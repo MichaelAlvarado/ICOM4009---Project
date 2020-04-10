@@ -21,6 +21,7 @@ public class AddQuestionsBox extends JPanel{
 	private Building building;
 	private JTextField question, correct, fail1, fail2, fail3;
 	private JButton enter, exit;
+	private Question q;
 
 	public AddQuestionsBox(int x, int y, int width, int height, Plane plane) {
 		super();
@@ -116,12 +117,22 @@ public class AddQuestionsBox extends JPanel{
 		add(exit);
 	}
 
-	public void edit(Building building) {
-		//This is a method to fill the box the the information of a Wall so you can edit it
-		this.building = building;
-		plane.disable();
+	public void edit(Question q) {
+		this.q = q;
+		autofill(q);
 		setVisible(true);
+		plane.disable();
+		plane.setCurrentBuilding(building);
 	}
+	private void autofill(Question question) {
+		this.question.setText(question.getQuestion());
+		correct.setText(question.getAnswer_1());
+		fail1.setText(question.getAnswer_2());
+		fail2.setText(question.getAnswer_3());
+		fail3.setText(question.getAnswer_4());
+		
+	}
+
 	public void addQuestion() {
 		setVisible(true);
 		plane.disable();
@@ -129,7 +140,7 @@ public class AddQuestionsBox extends JPanel{
 	private void exit() { 
 		plane.enable();
 		setVisible(false);
-		building = null;
+		this.question = null;
 	}
 
 

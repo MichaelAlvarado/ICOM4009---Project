@@ -56,6 +56,7 @@ import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.MaskFormatter;
 
 import Components.Building;
+import Components.Question;
 import Components.Tree;
 import Components.Wall;
 import GUI.Display;
@@ -90,7 +91,7 @@ public class MapDesignState{
 	private Display display;
 	private Plane plane;
 	private JPanel panel;
-	private JButton help, setting, addWall, addTree, addQuestion, editMap, mapDone, addBuilding, wallList, buildingList, treeList, tool;
+	private JButton help, setting, addWall, addTree, addQuestion, editMap, mapDone, addBuilding, wallList, buildingList, treeList, tool, questionList;
 	private int width, height;
 	protected boolean toolOpened;
 
@@ -158,6 +159,9 @@ public class MapDesignState{
 
 		treeList = new JButton("Tree List");
 		panel.add(treeList);
+		
+		questionList = new JButton("Question List");
+		panel.add(questionList);
 
 
 		//Round Add Button in Plane
@@ -242,6 +246,13 @@ public class MapDesignState{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				treeListPopUp(treeList.getX(), treeList.getY()+treeList.getHeight()*2, addTreeBox);
+			}
+		});
+		
+		questionList.addActionListener(new ActionListener () {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				questionListPopUp(questionList.getX(), questionList.getY()+questionList.getHeight()*2, addQuestionBox);
 			}
 		});
 
@@ -368,6 +379,7 @@ public class MapDesignState{
 		wallList.setBounds(10,50,150,25);
 		buildingList.setBounds(165,50,150,25);
 		treeList.setBounds((panel.getWidth()/2)+165, 50, 150, 25);
+		questionList.setBounds(320, 50, 150, 25);
 		tool.setBounds(plane.getWidth()-65, plane.getHeight()/2-60, 60, 60);
 	}
 
@@ -458,6 +470,26 @@ public class MapDesignState{
 		}
 		display.add(treesPopUp);
 		treesPopUp.show(display, x, y);
+	}
+	
+	private void questionListPopUp(int x, int y, AddQuestionsBox addQuestionBox) {
+		PopupMenu questionPopUp = new PopupMenu("Questions on: " +  plane.getMap().getMapName());
+		questionPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
+		for(Question q: plane.getCurrentBuilding().getQuestionPool()) {
+			MenuItem questionOption = new MenuItem(q.getQuestion());
+			questionOption.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					addQuestionBox.edit(q);
+					addQuestionBox.setVisible(true);
+				}
+
+			});
+			questionPopUp.add(questionOption);
+		}
+		display.add(questionPopUp);
+		questionPopUp.show(display, x, y);
 	}
 
 	/**
