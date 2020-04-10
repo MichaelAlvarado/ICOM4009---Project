@@ -3,10 +3,11 @@ package Resources;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class SoundManager {
 
-	//Res.music
+	//Audio
 	private File audioFile;
 	private AudioInputStream audioStream;
 	private AudioFormat format;
@@ -15,7 +16,7 @@ public class SoundManager {
 
 	private Clip background; 
 	private long clipTime = 0;
-
+	
 	public SoundManager(){
 		background = getClip(loadAudio("background"));
 	}
@@ -59,6 +60,18 @@ public class SoundManager {
 
 		return null;
 	}
+	
+	/**
+	 * Description - This method play a given .wav sound
+	 * Preconditio - Placed the .wav file in res/music/
+	 * @author - Michael J. Alvarado
+	 * @date Apr 9, 2020
+	 * @param str - This is the name of the Audiofile (It must be in res/music/). This file must be .wav and dont give + ".wav" just give the name.
+	 */
+	public void play(String str) {
+		Clip clip = getClip(loadAudio(str));
+		clip.start();
+	}
 
 	public void resumeBackground(){
 		background.setMicrosecondPosition(clipTime);
@@ -79,17 +92,24 @@ public class SoundManager {
 		return background.getMicrosecondLength()-10<=background.getMicrosecondPosition();
 	}
 	
-	/**
-	 * 
-	 * Description - This method play a given .wav sound
-	 * Preconditio - Placed the .wav file in res/music/
-	 * @author - Michael J. Alvarado
-	 * @date Apr 9, 2020
-	 * @param str - This is the name of the Audiofile (It must be in res/music/). This file must be .wav and dont give + ".wav" just give the name.
-	 */
-	public void play(String str) {
+	public Clip addAudio(String str) {
 		Clip clip = getClip(loadAudio(str));
-		clip.start();
+		audioClip.stop();
+		return clip;
+	}
+	public void resumeAudio(Clip clip) {
+		clip.setMicrosecondPosition(clip.getMicrosecondPosition());
+		audioClip.start();
+	}
+	public void stopAudio(Clip clip) {
+		audioClip.stop();
+	}
+	/*
+	 * Not Working
+	 */
+	public void setVolumen(Clip clip) {
+		FloatControl gainControl = (FloatControl) audioClip.getControl(FloatControl.Type.MASTER_GAIN);
+		gainControl.setValue(-40.0f);
 	}
 
 }

@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
 
 import GameSetUp.GameEngine;
 import GameSetUp.Handler;
@@ -115,6 +116,7 @@ public class Player {
 		private BufferedImage idle;
 		private BufferedImage[] walk;
 		Animation animation;
+		private Clip clip;
 
 		public PlayerAnimation(){
 			walk = new BufferedImage[5];
@@ -128,6 +130,7 @@ public class Player {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			clip = Handler.getSoundManager().addAudio("footsteps");
 			animation = new Animation(walk, 0.6);
 		}
 
@@ -140,9 +143,14 @@ public class Player {
 		 * @date Apr 9, 2020
 		 */
 		public BufferedImage getPlayerFrame() {
+			if(walking)
+				Handler.getSoundManager().resumeAudio(clip);
+			else {
+				Handler.getSoundManager().stopAudio(clip);
+			}
 			return animation.getCurrentFrame();
 		}
-		
+
 		public Animation getAnimation() {
 			return animation;
 		}
