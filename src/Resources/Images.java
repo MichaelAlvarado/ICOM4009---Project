@@ -36,6 +36,7 @@ public class Images {
 				CharacterSpriteLeft[2] =  ImageIO.read(new File("res/animation_Images/boy/WalkLeft (3).png"));
 				CharacterSpriteLeft[3] =  ImageIO.read(new File("res/animation_Images/boy/WalkLeft (5).png"));
 				CharacterSpriteLeft[4] =  ImageIO.read(new File("res/animation_Images/boy/WalkLeft (7).png"));
+				break;
 			case 1:
 				//Rights
 				CharacterSpriteRight[0] = ImageIO.read(new File("res/animation_Images/girl/Idle (1).png")); //IDLE
@@ -49,6 +50,7 @@ public class Images {
 				CharacterSpriteLeft[2] =  ImageIO.read(new File("res/animation_Images/girl/WalkLeft (3).png"));
 				CharacterSpriteLeft[3] =  ImageIO.read(new File("res/animation_Images/girl/WalkLeft (5).png"));
 				CharacterSpriteLeft[4] =  ImageIO.read(new File("res/animation_Images/girl/WalkLeft (7).png"));
+				break;
 			case 2:
 				//Rights
 				CharacterSpriteRight[0] = ImageIO.read(new File("res/animation_Images/a_boy/Idle (1).png")); //IDLE
@@ -62,6 +64,7 @@ public class Images {
 				CharacterSpriteLeft[2] =  ImageIO.read(new File("res/animation_Images/a_boy/WalkLeft (3).png"));
 				CharacterSpriteLeft[3] =  ImageIO.read(new File("res/animation_Images/a_boy/WalkLeft (5).png"));
 				CharacterSpriteLeft[4] =  ImageIO.read(new File("res/animation_Images/a_boy/WalkLeft (7).png"));
+				break;
 			case 3:
 				//Rights
 				CharacterSpriteRight[0] = ImageIO.read(new File("res/animation_Images/a_girl/Idle (1).png")); //IDLE
@@ -75,6 +78,7 @@ public class Images {
 				CharacterSpriteLeft[2] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (3).png"));
 				CharacterSpriteLeft[3] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (5).png"));
 				CharacterSpriteLeft[4] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (7).png"));
+				break;
 			case 4:
 				//Rights
 				CharacterSpriteRight[0] = ImageIO.read(new File("res/animation_Images/cat/Idle (1).png")); //IDLE
@@ -88,6 +92,7 @@ public class Images {
 				CharacterSpriteLeft[2] =  ImageIO.read(new File("res/animation_Images/cat/WalkLeft (3).png"));
 				CharacterSpriteLeft[3] =  ImageIO.read(new File("res/animation_Images/cat/WalkLeft (5).png"));
 				CharacterSpriteLeft[4] =  ImageIO.read(new File("res/animation_Images/cat/WalkLeft (7).png"));
+				break;
 			case 5:
 				//Rights
 				CharacterSpriteRight[0] = ImageIO.read(new File("res/animation_Images/dog/Idle (1).png")); //IDLE
@@ -101,6 +106,7 @@ public class Images {
 				CharacterSpriteLeft[2] =  ImageIO.read(new File("res/animation_Images/dog/WalkLeft (3).png"));
 				CharacterSpriteLeft[3] =  ImageIO.read(new File("res/animation_Images/dog/WalkLeft (5).png"));
 				CharacterSpriteLeft[4] =  ImageIO.read(new File("res/animation_Images/dog/WalkLeft (7).png"));
+				break;
 			} 
 				
 		}catch (IOException e) {
