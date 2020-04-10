@@ -75,21 +75,21 @@ public class Player {
 	 */
 	public void tick() {
 		walking = false;
-		if(Handler.getKeyManager().up || Handler.getKeyManager().keyJustPressed(KeyEvent.VK_KP_UP)) {
+		if(Handler.getKeyManager().up && bound.y > 0) {
 			this.moveOnY(bound.y - 1);
 			walking = true;
 		}
-		if(Handler.getKeyManager().left || Handler.getKeyManager().keyJustPressed(KeyEvent.VK_KP_LEFT)) {
+		if(Handler.getKeyManager().left && bound.x > 0) {
 			this.moveOnX(bound.x - 1);
 			walking = true;
 			animation.setRight(false);
 		}
-		if(Handler.getKeyManager().right || Handler.getKeyManager().keyJustPressed(KeyEvent.VK_KP_RIGHT)) {
+		if(Handler.getKeyManager().right && bound.x+bound.width < Handler.getWidth()) {
 			this.moveOnX(bound.x + 1);
 			walking = true;
 			animation.setRight(true);
 		}
-		if(Handler.getKeyManager().down || Handler.getKeyManager().keyJustPressed(KeyEvent.VK_KP_DOWN)) {
+		if(Handler.getKeyManager().down && bound.y+bound.height < Handler.getHeight()) {
 			this.moveOnY(bound.y + 1);
 			walking = true;
 		}
@@ -126,9 +126,7 @@ public class Player {
 			setRight(true);
 		}
 
-
 		/**
-		 * 
 		 * Description - It animates walk images
 		 * PreCondition - This method should be use in render(g)
 		 * @author - Michael J. Alvarado
