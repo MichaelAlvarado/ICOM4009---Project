@@ -307,7 +307,7 @@ public class MenuState{
 
 
 		JButton enter, exit;
-		JList character;
+		JList characterSel;
 		JLabel charLabel;
 		MenuState menu;
 
@@ -325,8 +325,8 @@ public class MenuState{
 						
 			
 			String num[]= { "Boy","Girl","Adventure Boy","Adventure Girl","Cat","Dog"};
-			character = new JList(num);
-			character.setBounds(charLabel.getX()+charLabel.getWidth(), charLabel.getY()-50, (width/2)-75, 110);
+			characterSel = new JList(num);
+			characterSel.setBounds(charLabel.getX()+charLabel.getWidth(), charLabel.getY()-50, (width/2)-75, 110);
 
 
 			// enter button
@@ -358,7 +358,7 @@ public class MenuState{
 			add(enter);
 			add(exit);
 			add(charLabel);
-			add(character);
+			add(characterSel);
 
 		}
 
