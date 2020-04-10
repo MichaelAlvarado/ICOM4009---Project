@@ -57,8 +57,8 @@ public class ConfigurationFile {
 
 	/**
 	 * 
-	 * Description -
-	 * @author - 
+	 * Description - Generate the questions text file
+	 * @author - jorgecalderon
 	 * @date Apr 9, 2020
 	 */
 	public static void generateQuestionFile(Map map) {
