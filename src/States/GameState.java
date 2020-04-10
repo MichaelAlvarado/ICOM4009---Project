@@ -37,6 +37,13 @@ public class GameState implements State{
 	 * @date Mar 16, 2020
 	 */
 	public void tick() {
+		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE)) {
+			System.out.println("Pause music");
+			Handler.getSoundManager().pauseBackground();
+		}
+		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_L)) {
+			Handler.getSoundManager().resumeBackground();
+		}
 		map.tick(player);
 		player.tick();
 	}

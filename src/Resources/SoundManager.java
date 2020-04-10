@@ -3,6 +3,7 @@ package Resources;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class SoundManager {
@@ -12,13 +13,13 @@ public class SoundManager {
 	private AudioInputStream audioStream;
 	private AudioFormat format;
 	private DataLine.Info info;
-	private Clip audioClip;
+	private HashMap<String,Clip> audioChannels = new HashMap<String,Clip>();
 
 	private Clip background; 
 	private long clipTime = 0;
-	
+
 	public SoundManager(){
-		background = getClip(loadAudio("background"));
+		loadAudio("background");
 	}
 
 	private AudioInputStream loadAudio(String url) {
@@ -28,24 +29,23 @@ public class SoundManager {
 			audioStream = AudioSystem.getAudioInputStream(audioFile);
 			format = audioStream.getFormat();
 			info = new DataLine.Info(Clip.class, format);
-			audioClip = (Clip) AudioSystem.getLine(info);
-			audioClip.open(audioStream);
-			//Set Volumen
-			FloatControl gainControl = (FloatControl) audioClip.getControl(FloatControl.Type.MASTER_GAIN);
-			gainControl.setValue(-20.0f);
-			
+
 			if(url.equals("background")){
-				audioClip.loop(-1);
+				background = (Clip) AudioSystem.getLine(info);
+				background.open(audioStream);
+				background.loop(Clip.LOOP_CONTINUOUSLY);
+				setVolumen(background, (float) 25.0);
 			}else{
+				Clip audioClip = (Clip) AudioSystem.getLine(info);
+				audioClip.open(audioStream);
 				audioClip.loop(0);
+				setVolumen(audioClip, (float) 30.0);
+				audioChannels.put(url, audioClip);
 			}
-
 			return audioStream;
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return null;
 	}
 
@@ -60,10 +60,10 @@ public class SoundManager {
 
 		return null;
 	}
-	
+
 	/**
-	 * Description - This method play a given .wav sound
-	 * Preconditio - Placed the .wav file in res/music/
+	 * Description - This method play once a given .wav sound
+	 * Precondition - Placed the .wav file in res/music/
 	 * @author - Michael J. Alvarado
 	 * @date Apr 9, 2020
 	 * @param str - This is the name of the Audiofile (It must be in res/music/). This file must be .wav and dont give + ".wav" just give the name.
@@ -75,41 +75,90 @@ public class SoundManager {
 
 	public void resumeBackground(){
 		background.setMicrosecondPosition(clipTime);
-		audioClip.start();
+		background.start();
 	}
 
 	public void pauseBackground(){
 		clipTime = background.getMicrosecondPosition();
-		audioClip.stop();
+		background.stop();
 	}
 
 	public void restartBackground() {
 		clipTime = 0;
 		resumeBackground();
 	}
-	
-	public boolean ended(){
-		return background.getMicrosecondLength()-10<=background.getMicrosecondPosition();
+
+	/**
+	 * Description - This method let you add sounds to use later with methods startAudio, resumeAudio, stopAudio
+	 * @author - Michael J. Alvarado
+	 * @date Apr 10, 2020
+	 * @param str - name of the .wav file in res/music/
+	 */
+	public void addAudio(String str) {
+		getClip(loadAudio(str)).stop();
 	}
-	
-	public Clip addAudio(String str) {
-		Clip clip = getClip(loadAudio(str));
-		audioClip.stop();
-		return clip;
-	}
-	public void resumeAudio(Clip clip) {
-		clip.setMicrosecondPosition(clip.getMicrosecondPosition());
+
+	/**
+	 * Description - This method resume the audio given. Could be use in tick or render to keep a loop audio.
+	 * PreCondition - the audio has to be added first by using addAudio(str) method 
+	 * @author - Michael J. Alvarado
+	 * @date Apr 10, 2020
+	 * @param str - name of the .wav file in res/music/. (Has to be added by using addAudio)
+	 */
+	public void resumeAudio(String clip) {
+		Clip audioClip = audioChannels.get(clip);
+		if(audioClip.getMicrosecondPosition() == audioClip.getMicrosecondLength()) {
+			startAudio(clip);
+		}
 		audioClip.start();
 	}
-	public void stopAudio(Clip clip) {
-		audioClip.stop();
-	}
-	/*
-	 * Not Working
+
+	/**
+	 * Description - restarts Audio and play.
+	 * PreCondition - the audio has to be added first by using addAudio(str) method 
+	 * @author - Michael J. Alvarado
+	 * @date Apr 10, 2020
+	 * @param str - name of the .wav file in res/music/. (Has to be added by using addAudio)
 	 */
-	public void setVolumen(Clip clip) {
-		FloatControl gainControl = (FloatControl) audioClip.getControl(FloatControl.Type.MASTER_GAIN);
-		gainControl.setValue(-40.0f);
+	public void startAudio(String clip) {
+		Clip audioClip = audioChannels.get(clip);
+		audioClip.setMicrosecondPosition(0);
+		audioClip.start();
+	}
+
+	/**
+	 * Description - stops the audio
+	 * PreCondition - the audio has to be added first by using addAudio(str) method 
+	 * @author - Michael J. Alvarado
+	 * @date Apr 10, 2020
+	 * @param str - name of the .wav file in res/music/. (Has to be added by using addAudio)
+	 */
+	public void stopAudio(String clip) {
+		audioChannels.get(clip).stop();
+	}
+
+	/**
+	 * Description - returns the Clip with clip name
+	 * PreCondition - the audio has to be added first by using addAudio(str) method 
+	 * @author - Michael J. Alvarado
+	 * @date Apr 10, 2020
+	 * @param str - name of the .wav file in res/music/. (Has to be added by using addAudio) 
+	 */
+	public Clip getAudioClip(String clip) {
+		return audioChannels.get(clip);
+	}
+
+	/**
+	 * Description - Set volumen of the given clip
+	 * PreCondition - if given a volumen greater that 46 it fails
+	 * @author - Michael J. Alvarado
+	 * @date Apr 10, 2020
+	 * @param clip - Clip to set the volumen to
+	 * @param volumen - 0 is no sound to 46.0 which is high volumen
+	 */
+	public void setVolumen(Clip clip, float volumen) {
+		FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+		gainControl.setValue(volumen-40);
 	}
 
 }

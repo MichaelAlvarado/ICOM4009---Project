@@ -116,7 +116,6 @@ public class Player {
 		private BufferedImage idle;
 		private BufferedImage[] walk;
 		Animation animation;
-		private Clip clip;
 
 		public PlayerAnimation(){
 			walk = new BufferedImage[5];
@@ -130,7 +129,7 @@ public class Player {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			clip = Handler.getSoundManager().addAudio("footsteps");
+			Handler.getSoundManager().addAudio("footsteps");			
 			animation = new Animation(walk, 0.6);
 		}
 
@@ -143,10 +142,11 @@ public class Player {
 		 * @date Apr 9, 2020
 		 */
 		public BufferedImage getPlayerFrame() {
-			if(walking)
-				Handler.getSoundManager().resumeAudio(clip);
+			if(walking) {
+				Handler.getSoundManager().resumeAudio("footsteps");
+			}
 			else {
-				Handler.getSoundManager().stopAudio(clip);
+				Handler.getSoundManager().stopAudio("footsteps");
 			}
 			return animation.getCurrentFrame();
 		}
