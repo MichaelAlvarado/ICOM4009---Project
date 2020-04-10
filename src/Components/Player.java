@@ -13,6 +13,7 @@ import javax.sound.sampled.Clip;
 import GameSetUp.GameEngine;
 import GameSetUp.Handler;
 import Resources.Animation;
+import Resources.Images;
 import States.MenuState;
 import States.MenuState.charSelect;
 
@@ -81,10 +82,12 @@ public class Player {
 		if(Handler.getKeyManager().left || Handler.getKeyManager().keyJustPressed(KeyEvent.VK_KP_LEFT)) {
 			this.moveOnX(bound.x - 1);
 			walking = true;
+			animation.setRight(false);
 		}
 		if(Handler.getKeyManager().right || Handler.getKeyManager().keyJustPressed(KeyEvent.VK_KP_RIGHT)) {
 			this.moveOnX(bound.x + 1);
 			walking = true;
+			animation.setRight(true);
 		}
 		if(Handler.getKeyManager().down || Handler.getKeyManager().keyJustPressed(KeyEvent.VK_KP_DOWN)) {
 			this.moveOnY(bound.y + 1);
@@ -102,8 +105,6 @@ public class Player {
 	 * @date March 23, 2020
 	 */
 	public void render(Graphics g) {
-		if(walking)
-			animation.getAnimation().startAnimation();
 		g.drawImage(animation.getPlayerFrame(),getPosition().x, getPosition().y, bound.width, bound.height,null); 
 		if(debuggingMode)
 			g.drawRect(bound.x, bound.y, bound.width, bound.height);
@@ -115,36 +116,14 @@ public class Player {
 	 * @date March 29, 2020
 	 */
 	private class PlayerAnimation {
-		private BufferedImage idle;
-		private BufferedImage[] walk;
-		Animation animation;
 
+		private Animation animation;
+		private boolean right; //if player looking right
 
 		public PlayerAnimation(){
-			
-		
-			walk = new BufferedImage[5];
-			try {
-//				while(Handler.getKeyManager().left || Handler.getKeyManager().keyJustPressed(KeyEvent.VK_KP_LEFT)) {
-//					idle = ImageIO.read(new File("res/animation_Images/Idle (1).png"));
-//					walk[0] = idle;
-//					walk[1] =  ImageIO.read(new File("res/animation_Images/WalkLeft (1).png"));
-//					walk[2] =  ImageIO.read(new File("res/animation_Images/WalkLeft (3).png"));
-//					walk[3] =  ImageIO.read(new File("res/animation_Images/WalkLeft (5).png"));
-//					walk[4] =  ImageIO.read(new File("res/animation_Images/WalkLeft (7).png"));
-//				}
-				idle = ImageIO.read(new File("res/animation_Images/Idle (1).png"));
-				walk[0] = idle;
-				walk[1] =  ImageIO.read(new File("res/animation_Images/Walk (1).png"));
-				walk[2] =  ImageIO.read(new File("res/animation_Images/Walk (3).png"));
-				walk[3] =  ImageIO.read(new File("res/animation_Images/Walk (5).png"));
-				walk[4] =  ImageIO.read(new File("res/animation_Images/Walk (7).png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 			Handler.getSoundManager().addAudio("footsteps");			
-			animation = new Animation(walk, 0.6);
-			
+			animation = new Animation(Images.CharacterSpriteRight, 0.6);
+			setRight(true);
 		}
 
 
@@ -156,17 +135,35 @@ public class Player {
 		 * @date Apr 9, 2020
 		 */
 		public BufferedImage getPlayerFrame() {
+			if(right) {
+				animation.setAnimation(Images.CharacterSpriteRight);
+			}
+			else {
+				animation.setAnimation(Images.CharacterSpriteLeft);
+			}
 			if(walking) {
 				Handler.getSoundManager().resumeAudio("footsteps");
+				animation.startAnimation();
 			}
 			else {
 				Handler.getSoundManager().stopAudio("footsteps");
+				animation.stopAnimation();
 			}
 			return animation.getCurrentFrame();
 		}
 
 		public Animation getAnimation() {
 			return animation;
+		}
+
+
+		public boolean isRight() {
+			return right;
+		}
+
+
+		public void setRight(boolean right) {
+			this.right = right;
 		}
 
 	}
