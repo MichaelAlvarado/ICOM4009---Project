@@ -54,6 +54,13 @@ public class Animation {
 		this.animation = animation;
 	}
 	
+	public void setBound(int x, int y, int width, int height) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+	}
+	
 	/**
 	 * 
 	 * Description - paint of Canvas the Animation sprite only if animation started

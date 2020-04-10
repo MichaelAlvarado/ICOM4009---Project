@@ -13,14 +13,16 @@ import javax.imageio.ImageIO;
  */
 public class Images {
 
+	private static BufferedImage starEffectSprite;
+	public static BufferedImage[] starEffect;
 	public static BufferedImage[] CharacterSpriteRight;
 	public static BufferedImage[] CharacterSpriteLeft;
 
-
 	public Images(int CharacterIndex) {
+		
 		CharacterSpriteRight = new BufferedImage[10];
 		CharacterSpriteLeft = new BufferedImage[10];
-
+		starEffect = new BufferedImage[5];
 		try {
 			switch(CharacterIndex) {
 			//BOY SPRITE
@@ -180,7 +182,12 @@ public class Images {
 				CharacterSpriteLeft[9] =  ImageIO.read(new File("res/animation_Images/dog/WalkLeft (9).png"));
 				break;
 			} 
-				
+			starEffectSprite = ImageIO.read(new File("res/effects/star effect.png"));
+			starEffect[0] = starEffectSprite.getSubimage(24, 13, 7, 7);
+			starEffect[1] = starEffectSprite.getSubimage(123, 11, 9, 9);
+			starEffect[2] = starEffectSprite.getSubimage(222, 9, 12, 12);
+			starEffect[3] = starEffectSprite.getSubimage(322, 7, 14, 14);
+			starEffect[4] = starEffectSprite.getSubimage(420, 4, 17, 17);
 		}catch (IOException e) {
 			e.printStackTrace();
 		}

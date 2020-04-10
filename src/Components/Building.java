@@ -2,6 +2,7 @@ package Components;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Random;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -15,6 +16,8 @@ import GUI.Display;
 import GameSetUp.Handler;
 import MapDesingComponents.AddQuestionsBox;
 import MapDesingComponents.Plane;
+import Resources.Animation;
+import Resources.Images;
 import States.QuestionState;
 
 import java.awt.Rectangle;
@@ -50,6 +53,7 @@ public class Building {
 	private boolean playerCloseBy;
 	private boolean found;
 	private boolean debuggingMode;
+	private Animation stars = new Animation(Images.starEffect,0.6);
 
 	// constructor
 	public Building(String buildingName) {
@@ -277,12 +281,19 @@ public class Building {
 	 */
 	public void render(Graphics g) {
 		Rectangle bound = bound();
+		Rectangle perimeter = perimeter();
 
 		if(found) {
-			g.drawImage(this.getPicture(),this.perimeter().x,this.perimeter().y, width, height,null);
+			g.drawImage(getPicture(),perimeter.x,perimeter.y, perimeter.width, perimeter.height,null);
 		}
 		//Once the player is close, make wall visible
 		else if(playerCloseBy) {
+			if(!stars.isAnimating()) {
+				Random rand = new Random();
+				stars.setBound(rand.nextInt(perimeter.width)+perimeter.x, rand.nextInt(perimeter.height)+perimeter.y, 20, 20);
+			}
+			stars.startAnimation();
+			stars.render(g);
 			Rectangle rec = this.perimeter();
 			g.setColor(Color.BLACK);
 			g.drawString("Press F", rec.x+10, rec.y+(rec.height/2));
