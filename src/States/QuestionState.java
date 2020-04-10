@@ -78,6 +78,14 @@ public class QuestionState implements State{
 		this.building = building;
 	}
 	
+
+/**
+ * 
+ * @author jorgecalderon
+ * Date - April 10, 2020
+ * Method to randomize the order of the questions of a building
+ *
+ */
 	public static void questionRandomizer() {
 		qList = new LinkedList<Question>();
 		randQList = new LinkedList<Question>();
