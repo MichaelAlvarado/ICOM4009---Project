@@ -49,32 +49,32 @@ public class Images {
 				CharacterSpriteLeft[2] =  ImageIO.read(new File("res/animation_Images/girl/WalkLeft (3).png"));
 				CharacterSpriteLeft[3] =  ImageIO.read(new File("res/animation_Images/girl/WalkLeft (5).png"));
 				CharacterSpriteLeft[4] =  ImageIO.read(new File("res/animation_Images/girl/WalkLeft (7).png"));
-//			case 2:
-//				//Rights
-//				CharacterSpriteRight[0] = ImageIO.read(new File("res/animation_Images/a_boy/Idle (1).png")); //IDLE
-//				CharacterSpriteRight[1] =  ImageIO.read(new File("res/animation_Images/a_boy/Walk (1).png"));
-//				CharacterSpriteRight[2] =  ImageIO.read(new File("res/animation_Images/a_boy/Walk (3).png"));
-//				CharacterSpriteRight[3] =  ImageIO.read(new File("res/animation_Images/a_boy/Walk (5).png"));
-//				CharacterSpriteRight[4] =  ImageIO.read(new File("res/animation_Images/a_boy/Walk (7).png"));
-//				//Lefts
-//				CharacterSpriteLeft[0] =  ImageIO.read(new File("res/animation_Images/a_boy/WalkLeft (1).png")); //Testing please delete
-//				CharacterSpriteLeft[1] =  ImageIO.read(new File("res/animation_Images/a_boy/WalkLeft (1).png"));
-//				CharacterSpriteLeft[2] =  ImageIO.read(new File("res/animation_Images/a_boy/WalkLeft (3).png"));
-//				CharacterSpriteLeft[3] =  ImageIO.read(new File("res/animation_Images/a_boy/WalkLeft (5).png"));
-//				CharacterSpriteLeft[4] =  ImageIO.read(new File("res/animation_Images/a_boy/WalkLeft (7).png"));
-//			case 3:
-//				//Rights
-//				CharacterSpriteRight[0] = ImageIO.read(new File("res/animation_Images/a_girl/Idle (1).png")); //IDLE
-//				CharacterSpriteRight[1] =  ImageIO.read(new File("res/animation_Images/a_girl/Walk (1).png"));
-//				CharacterSpriteRight[2] =  ImageIO.read(new File("res/animation_Images/a_girl/Walk (3).png"));
-//				CharacterSpriteRight[3] =  ImageIO.read(new File("res/animation_Images/a_girl/Walk (5).png"));
-//				CharacterSpriteRight[4] =  ImageIO.read(new File("res/animation_Images/a_girl/Walk (7).png"));
-//				//Lefts
-//				CharacterSpriteLeft[0] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (1).png")); //Testing please delete
-//				CharacterSpriteLeft[1] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (1).png"));
-//				CharacterSpriteLeft[2] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (3).png"));
-//				CharacterSpriteLeft[3] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (5).png"));
-//				CharacterSpriteLeft[4] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (7).png"));
+			case 2:
+				//Rights
+				CharacterSpriteRight[0] = ImageIO.read(new File("res/animation_Images/a_boy/Idle (1).png")); //IDLE
+				CharacterSpriteRight[1] =  ImageIO.read(new File("res/animation_Images/a_boy/Walk (1).png"));
+				CharacterSpriteRight[2] =  ImageIO.read(new File("res/animation_Images/a_boy/Walk (3).png"));
+				CharacterSpriteRight[3] =  ImageIO.read(new File("res/animation_Images/a_boy/Walk (5).png"));
+				CharacterSpriteRight[4] =  ImageIO.read(new File("res/animation_Images/a_boy/Walk (7).png"));
+				//Lefts
+				CharacterSpriteLeft[0] =  ImageIO.read(new File("res/animation_Images/a_boy/WalkLeft (1).png")); //Testing please delete
+				CharacterSpriteLeft[1] =  ImageIO.read(new File("res/animation_Images/a_boy/WalkLeft (1).png"));
+				CharacterSpriteLeft[2] =  ImageIO.read(new File("res/animation_Images/a_boy/WalkLeft (3).png"));
+				CharacterSpriteLeft[3] =  ImageIO.read(new File("res/animation_Images/a_boy/WalkLeft (5).png"));
+				CharacterSpriteLeft[4] =  ImageIO.read(new File("res/animation_Images/a_boy/WalkLeft (7).png"));
+			case 3:
+				//Rights
+				CharacterSpriteRight[0] = ImageIO.read(new File("res/animation_Images/a_girl/Idle (1).png")); //IDLE
+				CharacterSpriteRight[1] =  ImageIO.read(new File("res/animation_Images/a_girl/Walk (1).png"));
+				CharacterSpriteRight[2] =  ImageIO.read(new File("res/animation_Images/a_girl/Walk (3).png"));
+				CharacterSpriteRight[3] =  ImageIO.read(new File("res/animation_Images/a_girl/Walk (5).png"));
+				CharacterSpriteRight[4] =  ImageIO.read(new File("res/animation_Images/a_girl/Walk (7).png"));
+				//Lefts
+				CharacterSpriteLeft[0] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (1).png")); //Testing please delete
+				CharacterSpriteLeft[1] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (1).png"));
+				CharacterSpriteLeft[2] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (3).png"));
+				CharacterSpriteLeft[3] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (5).png"));
+				CharacterSpriteLeft[4] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (7).png"));
 			case 4:
 				//Rights
 				CharacterSpriteRight[0] = ImageIO.read(new File("res/animation_Images/cat/Idle (1).png")); //IDLE
