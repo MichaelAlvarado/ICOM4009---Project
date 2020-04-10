@@ -28,8 +28,8 @@ public class GameState implements State{
 		height = Handler.getHeight();
 		map = Handler.getMap();
 		map.scaleComponentTo(width, height);
-
 		player = new Player("Player" , new Point(100,100));
+		Handler.getSoundManager().addAudio("background");
 	}
 	/**
 	 * @author Michael J. Alvarado
@@ -37,12 +37,10 @@ public class GameState implements State{
 	 * @date Mar 16, 2020
 	 */
 	public void tick() {
-		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE)) {
-			System.out.println("Pause music");
+		Handler.getSoundManager().resumeAudio("background");
+		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
+			Handler.setCurrentState(Handler.getPauseState());
 			Handler.getSoundManager().pauseBackground();
-		}
-		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_L)) {
-			Handler.getSoundManager().resumeBackground();
 		}
 		map.tick(player);
 		player.tick();

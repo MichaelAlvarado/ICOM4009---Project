@@ -13,16 +13,16 @@ public class SoundManager {
 	private AudioInputStream audioStream;
 	private AudioFormat format;
 	private DataLine.Info info;
-	private HashMap<String,Clip> audioChannels = new HashMap<String,Clip>();
+	private HashMap<String,Clip> audioChannels;
 
 	private Clip background; 
 	private long clipTime = 0;
 
 	public SoundManager(){
-		loadAudio("background");
+		audioChannels = new HashMap<String,Clip>();
 	}
 
-	private AudioInputStream loadAudio(String url) {
+	private Clip loadAudio(String url) {
 		try {
 			//Read Audio File
 			audioFile = new File("res/music/" + url + ".wav");
@@ -30,36 +30,19 @@ public class SoundManager {
 			format = audioStream.getFormat();
 			info = new DataLine.Info(Clip.class, format);
 
-			if(url.equals("background")){
-				background = (Clip) AudioSystem.getLine(info);
-				background.open(audioStream);
-				background.loop(Clip.LOOP_CONTINUOUSLY);
-				setVolumen(background, (float) 25.0);
-			}else{
-				Clip audioClip = (Clip) AudioSystem.getLine(info);
-				audioClip.open(audioStream);
-				audioClip.loop(0);
-				setVolumen(audioClip, (float) 30.0);
-				audioChannels.put(url, audioClip);
-			}
-			return audioStream;
+			Clip audioClip = (Clip) AudioSystem.getLine(info);
+			audioClip.open(audioStream);
+			audioClip.loop(0);
+			setVolumen(audioClip, (float) 30.0);
+			
+			return audioClip;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	private Clip getClip(AudioInputStream stream) {
-		try {
-			Clip clip = AudioSystem.getClip();
-			clip.open(stream);
-			return clip;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return null;
-	}
+	
 
 	/**
 	 * Description - This method play once a given .wav sound
@@ -69,7 +52,7 @@ public class SoundManager {
 	 * @param str - This is the name of the Audiofile (It must be in res/music/). This file must be .wav and dont give + ".wav" just give the name.
 	 */
 	public void play(String str) {
-		Clip clip = getClip(loadAudio(str));
+		Clip clip = loadAudio(str);
 		clip.start();
 	}
 
@@ -95,7 +78,8 @@ public class SoundManager {
 	 * @param str - name of the .wav file in res/music/
 	 */
 	public void addAudio(String str) {
-		getClip(loadAudio(str)).stop();
+		audioChannels.put(str, loadAudio(str));
+		stopAudio(str);
 	}
 
 	/**

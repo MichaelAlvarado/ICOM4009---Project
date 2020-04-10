@@ -17,6 +17,7 @@ import Resources.KeyManager;
 import Resources.MouseManager;
 import Resources.SoundManager;
 import States.GameState;
+import States.PauseState;
 import States.QuestionState;
 import States.State;
 
@@ -29,15 +30,18 @@ import States.State;
  *
  */
 public class Handler {
-
+	
 	private static Map map;//Map being Player
-	private static GameState gameState;//this is the gameState where everything is being run at (tick and render)
+	private static Canvas canvas;
+	//States
+	private static GameState gameState;
 	private static QuestionState questionState;
+	private static PauseState pauseState;
 	private static State currentState;
+	//Managers
 	private static KeyManager keyManager;
 	private static MouseManager mouseManager; 
 	private static SoundManager soundManager;
-	private static Canvas canvas;
 
 	public Handler(Canvas canvas, Map map) {
 		Handler.map = map;
@@ -52,6 +56,7 @@ public class Handler {
 		canvas.addMouseListener(mouseManager);
 		gameState = new GameState();
 		questionState = new QuestionState();
+		pauseState = new PauseState();
 		currentState = gameState;
 	}
 
@@ -99,6 +104,10 @@ public class Handler {
 	
 	public static SoundManager getSoundManager() {
 		return soundManager;
+	}
+
+	public static PauseState getPauseState() {
+		return pauseState;
 	}
 
 }
