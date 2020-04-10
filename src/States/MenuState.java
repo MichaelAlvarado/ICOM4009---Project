@@ -338,9 +338,9 @@ public class MenuState{
 				public void actionPerformed(ActionEvent e) {
 					//Start
 					// The game engine should start here
+					new Images(characterSel.getSelectedIndex());
 					mapSelection.setVisible(true);
 					charSelection.setVisible(false);
-					new Images(characterSel.getAnchorSelectionIndex());
 					setButtonsEnable(false);
 				}
 			});
