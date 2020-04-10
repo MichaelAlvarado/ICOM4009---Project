@@ -14,8 +14,9 @@ import GameSetUp.Handler;
 
 public class QuestionState implements State{
 
-	private Building building;
-	private LinkedList<String> qList, aList;
+	private static Building building;
+	private static LinkedList<Question> qList;
+	private static LinkedList<Question> randQList;
 	private Rectangle yes, no;
 	private boolean answering; //if this is true then its on state where it ask the player if he wants to answer the questions of building
 
@@ -77,23 +78,28 @@ public class QuestionState implements State{
 		this.building = building;
 	}
 	
-	public void questionRandomizer() {
-		qList = new LinkedList<String>();
+
+/**
+ * 
+ * @author jorgecalderon
+ * Date - April 10, 2020
+ * Method to randomize the order of the questions of a building
+ *
+ */
+	public static void questionRandomizer() {
+		qList = new LinkedList<Question>();
+		randQList = new LinkedList<Question>();
 		for(Question q: building.getQuestionPool()) {
-			qList.add(q.getQuestion());
+			qList.add(q);
 		}
 		Collections.shuffle(qList);	
+		for(Question q1: qList) {
+			q1.randonmizeAnswers();
+			randQList.add(q1);
+//			System.out.println(q1.getQuestion());
+//			System.out.println(q1.getAnswers());
+		}
 	}
 	
-	public void answerRandomizer() {
-		aList = new LinkedList<String>();
-		for(Question q: building.getQuestionPool()) {
-			aList.add(q.getAnswer_1());
-			aList.add(q.getAnswer_2());
-			aList.add(q.getAnswer_3());
-			aList.add(q.getAnswer_4());
-		}
-		Collections.shuffle(aList);
-	}
 
 }
