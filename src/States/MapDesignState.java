@@ -500,9 +500,7 @@ public class MapDesignState{
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					addQuestionBox.edit(q);
-					addQuestionBox.setVisible(true);
 				}
-
 			});
 			questionPopUp.add(questionOption);
 		}

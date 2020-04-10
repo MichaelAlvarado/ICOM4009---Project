@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -18,10 +19,10 @@ import Components.Question;
 public class AddQuestionsBox extends JPanel{
 
 	private Plane plane;
-	private Building building;
 	private JTextField question, correct, fail1, fail2, fail3;
 	private JButton enter, exit;
 	private Question q;
+	private boolean newQuestion;
 
 	public AddQuestionsBox(int x, int y, int width, int height, Plane plane) {
 		super();
@@ -78,16 +79,18 @@ public class AddQuestionsBox extends JPanel{
 		enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(plane.currentBuilding != null) {
+				if(plane.currentBuilding != null && newQuestion) {
 					plane.currentBuilding.addQuestion(
 							new Question(question.getText(), correct.getText(),
 									fail1.getText(), fail2.getText(), fail3.getText()));
 				}
-				question.setText("");
-				correct.setText("");
-				fail1.setText("");
-				fail2.setText("");
-				fail3.setText("");
+				else {
+					q.setQuestion(question.getText());
+					q.setAnswer_1(correct.getText());
+					q.setAnswer_2(fail1.getText());
+					q.setAnswer_3(fail2.getText());
+					q.setAnswer_4(fail3.getText());
+				}
 				exit();
 			}
 		});
@@ -119,28 +122,41 @@ public class AddQuestionsBox extends JPanel{
 
 	public void edit(Question q) {
 		this.q = q;
-		autofill(q);
 		setVisible(true);
+		autofill(q);
 		plane.disable();
-		plane.setCurrentBuilding(building);
+		newQuestion = false;
 	}
-	private void autofill(Question question) {
-		this.question.setText(question.getQuestion());
-		correct.setText(question.getAnswer_1());
-		fail1.setText(question.getAnswer_2());
-		fail2.setText(question.getAnswer_3());
-		fail3.setText(question.getAnswer_4());
-		
+
+	private void autofill(Question q) {
+		question.setText(q.getQuestion());
+		correct.setText(q.getAnswer_1());
+		fail1.setText(q.getAnswer_2());
+		fail2.setText(q.getAnswer_3());
+		fail3.setText(q.getAnswer_4());
+
 	}
 
 	public void addQuestion() {
-		setVisible(true);
-		plane.disable();
+		if(plane.getCurrentBuilding() != null) {
+			setVisible(true);
+			plane.disable();
+		}
+		else {
+			JOptionPane.showMessageDialog(plane, "Must create a building to add Questions to");
+		}
+		newQuestion = true;
 	}
+
 	private void exit() { 
 		plane.enable();
+		q = null;
 		setVisible(false);
-		this.question = null;
+		question.setText("");
+		correct.setText("");
+		fail1.setText("");
+		fail2.setText("");
+		fail3.setText("");
 	}
 
 
