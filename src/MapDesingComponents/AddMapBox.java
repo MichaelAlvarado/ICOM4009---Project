@@ -178,6 +178,7 @@ public class AddMapBox extends JPanel{
 	public void edit() {
 		exit.setVisible(true);
 		plane.disable();
+		autofill();
 		setVisible(true);
 		setFocusable(true);
 
@@ -194,6 +195,7 @@ public class AddMapBox extends JPanel{
 		name.setText(map.getMapName());
 		mapWidth.setText(String.valueOf(map.getWidth()));
 		mapHeight.setText(String.valueOf(map.getHeight()));
+		imageURL.setText(map.getImageURL());
 	}
 
 
