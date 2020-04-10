@@ -472,6 +472,14 @@ public class MapDesignState{
 		treesPopUp.show(display, x, y);
 	}
 	
+	/**
+	 * @author jorgecalderon
+	 * This method creates a PopUP with the questions in the building being created.
+	 * Date - April 10, 2020
+	 * @param x - Position x in pixels to display PopUP (Origin is from the JFrame)
+	 * @param y - Position y in pixels to display PopUP (Origin is from the JFrame)
+	 * @param addQuestionBox - This must be given the addQuestionBox so that it can be edit when clicked on a specific Building from the PopUp
+	 */
 	private void questionListPopUp(int x, int y, AddQuestionsBox addQuestionBox) {
 		PopupMenu questionPopUp = new PopupMenu("Questions on: " +  plane.getMap().getMapName());
 		questionPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
