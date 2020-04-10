@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 import GameSetUp.Handler;
 
+import java.util.Random;
+
 /**
  * 
  * @author Anel Martinez
@@ -19,6 +21,8 @@ public class Question {
 	
 	private String question, answer_1, answer_2, answer_3, answer_4;
 	private boolean correct;
+	private Random random = new Random();
+	String temp1, temp2, temp3, temp4;
 	
 	//Creates Question Constructor to use as source for Question Pools for the buildings
 	public Question(String question, String answer_1, String answer_2, String answer_3, String answer_4, boolean theCorrect) {
@@ -103,6 +107,91 @@ public class Question {
 		}
 		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
 			//exit to try
+		}
+	}
+	
+	
+	/**
+	 * 
+	 * @author jorgecalderon
+	 * Date - April 10, 2020
+	 * This method utilizes a random integer to randomize the order of the answers of the question  
+	 *
+	 */
+	
+	public void randonmizeAnswers() {
+		int rand = random.nextInt(101);
+		
+		if(rand <= 15 ) {
+			temp1 = this.answer_1;
+			temp2 = this.answer_2;
+			temp3 = this.answer_3;
+			temp4 = this.answer_4;
+			this.answer_1 = temp2;
+			this.answer_2 = temp3;
+			this.answer_3 = temp4;
+			this.answer_4 = temp1;
+		}
+		else if(rand > 15 && rand <= 30) {
+			temp1 = this.answer_1;
+			temp2 = this.answer_2;
+			temp3 = this.answer_3;
+			temp4 = this.answer_4;
+			this.answer_1 = temp4;
+			this.answer_2 = temp3;
+			this.answer_3 = temp1;
+			this.answer_4 = temp2;
+			
+		}
+		else if(rand > 30 && rand <= 45) {
+			temp1 = this.answer_1;
+			temp2 = this.answer_2;
+			temp3 = this.answer_3;
+			temp4 = this.answer_4;
+			this.answer_1 = temp4;
+			this.answer_2 = temp1;
+			this.answer_3 = temp2;
+			this.answer_4 = temp3;
+		}
+		else if(rand > 45 && rand <= 60) {
+			temp1 = this.answer_1;
+			temp2 = this.answer_2;
+			temp3 = this.answer_3;
+			temp4 = this.answer_4;
+			this.answer_1 = temp1;
+			this.answer_2 = temp3;
+			this.answer_3 = temp4;
+			this.answer_4 = temp2;
+		}
+		else if(rand > 60 && rand <= 75) {
+			temp1 = this.answer_1;
+			temp2 = this.answer_2;
+			temp3 = this.answer_3;
+			temp4 = this.answer_4;
+			this.answer_1 = temp2;
+			this.answer_2 = temp3;
+			this.answer_3 = temp1;
+			this.answer_4 = temp4;
+		}
+		else if(rand >75 && rand <= 90) {
+			temp1 = this.answer_1;
+			temp2 = this.answer_2;
+			temp3 = this.answer_3;
+			temp4 = this.answer_4;
+			this.answer_1 = temp2;
+			this.answer_2 = temp4;
+			this.answer_3 = temp3;
+			this.answer_4 = temp1;
+		}
+		else {
+			temp1 = this.answer_1;
+			temp2 = this.answer_2;
+			temp3 = this.answer_3;
+			temp4 = this.answer_4;
+			this.answer_1 = temp1;
+			this.answer_2 = temp2;
+			this.answer_3 = temp3;
+			this.answer_4 = temp4;
 		}
 	}
 	
