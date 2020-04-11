@@ -18,8 +18,8 @@ import Resources.Button;
 
 public class QuestionState implements State{
 
-	private static Building building;
-	private static LinkedList<Question> randQList;
+	private Building building;
+	private LinkedList<Question> randQList;
 	private Button yes, no;
 	private Button opt1, opt2, opt3, opt4;
 	private boolean answering; //if this is true then its on state where it ask the player if he wants to answer the questions of building
@@ -220,7 +220,7 @@ public class QuestionState implements State{
  * Method to randomize the order of the questions of a building
  *
  */
-	public static void questionRandomizer() {
+	public void questionRandomizer() {
 		randQList = new LinkedList<Question>();
 		for(Question q: building.getQuestionPool()) {
 			randQList.add(q);
