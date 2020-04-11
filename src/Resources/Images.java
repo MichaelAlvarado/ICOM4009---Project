@@ -183,11 +183,11 @@ public class Images {
 				break;
 			} 
 			starEffectSprite = ImageIO.read(new File("res/effects/star effect.png"));
-			starEffect[0] = starEffectSprite.getSubimage(24, 13, 7, 7);
-			starEffect[1] = starEffectSprite.getSubimage(123, 11, 9, 9);
-			starEffect[2] = starEffectSprite.getSubimage(222, 9, 12, 12);
-			starEffect[3] = starEffectSprite.getSubimage(322, 7, 14, 14);
-			starEffect[4] = starEffectSprite.getSubimage(420, 4, 17, 17);
+			starEffect[0] = starEffectSprite.getSubimage(8, 500, 30, 45);
+			starEffect[1] = starEffectSprite.getSubimage(108, 500, 30, 45);
+			starEffect[2] = starEffectSprite.getSubimage(210, 500, 30, 45);
+			starEffect[3] = starEffectSprite.getSubimage(307, 500, 33, 45);
+			starEffect[4] = starEffectSprite.getSubimage(405, 500, 36, 45);
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
