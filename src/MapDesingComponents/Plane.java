@@ -381,7 +381,6 @@ public class Plane extends JPanel{
 			if(enable) {
 				if(currentTree != null) {
 					addTree(currentTree);
-					tool.resetTree();
 				}
 				else if(currentBuilding != null) {
 					System.out.println("Released / "+"x: " + arg0.getX() + "  y:" + (getHeight() - arg0.getY()));

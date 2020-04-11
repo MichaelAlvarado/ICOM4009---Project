@@ -57,8 +57,8 @@ public class ToolBox{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				isOpen = !isOpen;
-				tool.setLocation(plane.getWidth()-165, plane.getHeight()/2-60);
-				resetTree();
+				tool.setLocation(plane.getWidth()-160, plane.getHeight()/2-60);
+				resetTreesLocation();			
 				plane.repaint();
 			}
 		});
@@ -90,6 +90,7 @@ public class ToolBox{
 			int x = tool.getX()+tool.getWidth();//x of panel
 			g.setColor(new Color(0,0,0,100));
 			g.fillRect(x, 0, 100, plane.getHeight());
+			resetTreesLocation();
 			g.drawImage(defaultTrees1.getTreeImage(), defaultTrees1.getP1().x, defaultTrees1.getP1().y, defaultTrees1.getWidth(), defaultTrees1.getHeight(), null);
 			g.drawImage(defaultTrees2.getTreeImage(), defaultTrees2.getP1().x, defaultTrees2.getP1().y, defaultTrees2.getWidth(), defaultTrees2.getHeight(),null);
 			g.drawImage(defaultTrees3.getTreeImage(), defaultTrees3.getP1().x, defaultTrees3.getP1().y, defaultTrees3.getWidth(), defaultTrees3.getHeight(),null);
@@ -99,11 +100,11 @@ public class ToolBox{
 		}
 	}
 
-	public void resetTree() {
+	private void resetTreesLocation() {
 		int x = tool.getX()+tool.getWidth();//x of panel
-		defaultTrees1.setP1(new Point(x,10));
-		defaultTrees2.setP1(new Point(x,15 + defaultTrees1.getHeight()));
-		defaultTrees3.setP1(new Point(x,15 +defaultTrees1.getHeight()+defaultTrees2.getHeight()));
+		defaultTrees1.setP1(new Point((x+50)-(defaultTrees1.getWidth()/2),10));
+		defaultTrees2.setP1(new Point((x+50)-(defaultTrees2.getWidth()/2),20 + defaultTrees1.getHeight()));
+		defaultTrees3.setP1(new Point(x,30 +defaultTrees1.getHeight()+defaultTrees2.getHeight()));
 	}
 
 }

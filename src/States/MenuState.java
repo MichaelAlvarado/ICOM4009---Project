@@ -82,7 +82,7 @@ public class MenuState{
 		charSelection.setVisible(false);
 		panel.add(charSelection);
 
-		createMap = new JButton("Create new Map");
+		createMap = new JButton("Map Design");
 		createMap.setFont(new Font("Comic Sans MS", Font.BOLD, 20));	
 		createMap.setBounds(width/2+100, height/2-30, 250, 90);
 		panel.add(createMap);
