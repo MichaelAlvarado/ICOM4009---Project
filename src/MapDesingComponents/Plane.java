@@ -49,23 +49,24 @@ public class Plane extends JPanel{
 
 	Map map;
 	Building currentBuilding; //the building currently being edit
-	Tree currentTree; //the tree currently being added
+	//Drawing
 	Color cP, cL, pP, pL; //Color for c=current p=previous P=Point L=Line
+	boolean buildingImagesIsOn; //draw building images
 	boolean gridIsOn; //draw the grid line in plane
-	boolean buildingImagesIsOn;
 	private Point[] currentPointPair; //this is the current trace being drawn
 	private Point drag; //this is use to interconnect points
 	private int pointWidth; //points of coordinates
 	private int xGap, yGap; //this is the distance of line to line
 	private int xOrigin, yOrigin; //Pixel position on canvas origin
+	private double scaleX, scaleY; //This is to scale the map
+	//Listeners
 	private Mouse mouse; //use to create walls with mouse
 	private MouseMotion mouseMotion; //use to drag points
-	Keyboard keyboard; //use for shortcuts
-	private double scaleX, scaleY; //This is to scale the map
-	private boolean isOpenTool; //Testing
+	private Keyboard keyboard; //use for shortcuts
+	private ToolBox tool;
 
-	public Plane() {
-		isOpenTool = false;
+	public Plane(int x, int y, int width, int height) {
+		this.setBounds(x, y, width, height);
 		setLayout(null);
 		pointWidth = 10;
 		cP = Color.BLUE;
@@ -82,6 +83,7 @@ public class Plane extends JPanel{
 		addMouseListener(mouse);
 		addMouseMotionListener(mouseMotion);
 		addKeyListener(keyboard);
+		tool = new ToolBox(this);
 	}
 
 	@Override 
@@ -191,10 +193,7 @@ public class Plane extends JPanel{
 		}
 
 		//Draw tool panel
-		if(isOpenTool) {
-			g.setColor(new Color(0,0,0,100));
-			g.fillRect(this.getWidth()-100, 0, 200, getHeight());
-		}
+		tool.paint(g);
 	} //Paint end
 
 	/**
@@ -302,31 +301,8 @@ public class Plane extends JPanel{
 		return map;
 	}
 
-	/**
-	 * 
-	 * @author Michael J. Alvarado
-	 * This methods prints the tool panel in plane
-	 * @date Mar 12, 2020
-	 */
-	public void openTool() {
-		this.isOpenTool = true;
-		this.repaint();
-	}
-
-	/**
-	 * 
-	 * @author Michael J. Alvarado
-	 * This methods ignore print tool panel 
-	 * @date Mar 12, 2020
-	 */
-	public void closeTool() {
-		this.isOpenTool = false;
-		this.repaint();
-	}
-
 	public void addTree(Tree tree) {
 		map.addTree(tree);
-		setCurrentTree(tree);
 	}
 
 	public void setCurrentBuilding(Building building) {
@@ -338,10 +314,6 @@ public class Plane extends JPanel{
 		return currentBuilding;
 	}
 
-	public void setCurrentTree(Tree tree) {
-		currentTree = tree;
-		this.repaint();
-	}
 
 	public void setMap(Map map) {
 		this.map = map;

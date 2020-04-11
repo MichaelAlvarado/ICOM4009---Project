@@ -120,7 +120,7 @@ public class AddTreeBox extends JPanel{
 		exit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(plane.currentTree == null) { 
+				if(tree == null) { 
 					activationButton.setText("Add Tree");				
 				}
 				exit();
@@ -135,7 +135,6 @@ public class AddTreeBox extends JPanel{
 				if(newTree)
 					JOptionPane.showMessageDialog(plane, "Cannot remove a new tree.");
 				else {
-					plane.getMap().removeTree(plane.currentTree);
 					activationButton.setText("Add Tree");
 					plane.repaint();
 					exit();
@@ -161,7 +160,6 @@ public class AddTreeBox extends JPanel{
 		setVisible(true);
 		newTree = false;
 		plane.disable();
-		plane.setCurrentTree(tree); 
 	}
 
 

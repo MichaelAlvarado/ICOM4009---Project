@@ -91,9 +91,9 @@ public class MapDesignState{
 	private Display display;
 	private Plane plane;
 	private JPanel panel;
-	private JButton help, setting, addWall, addTree, addQuestion, editMap, mapDone, addBuilding, wallList, buildingList, treeList, tool, questionList;
+	private JButton help, setting, addWall, addTree, addQuestion, editMap, mapDone, addBuilding, wallList, buildingList, treeList, questionList;
 	private int width, height;
-	protected boolean toolOpened;
+	private int canvasY = 85; //this is the position in Y where the division is between plane and menu
 
 	/**
 	 * @author Michael J. Alvarado
@@ -110,7 +110,7 @@ public class MapDesignState{
 		display.getContentPane().setLayout(null);
 
 		//This initialize plane which is what draw points and has the mouse and key listeners
-		plane = new Plane();
+		plane = new Plane(0, canvasY, width, height-(canvasY));
 		plane.setBackground(Color.WHITE);
 
 		//Buttons Panels
@@ -165,20 +165,6 @@ public class MapDesignState{
 
 
 		//Round Add Button in Plane
-		BufferedImage buttonIcon = null;
-		try {
-			buttonIcon = ImageIO.read(new File("res/addButton.png"));
-		}
-		catch(Exception ex) {
-		}
-		// Set the image icon here
-		Image dimg = buttonIcon.getScaledInstance(60, 60,Image.SCALE_SMOOTH); //scale the image
-		tool = new JButton(new ImageIcon(dimg));
-		tool.setBorderPainted(false);
-		tool.setContentAreaFilled(false);
-		tool.setFocusPainted(false);
-		tool.setOpaque(false);
-		plane.add(tool);
 
 		setComponentsBound();
 		//Boxes which are made to add or edit map,buildings,wall,questions, trees.
@@ -347,22 +333,6 @@ public class MapDesignState{
 			}
 		});
 
-		tool.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if(!toolOpened) {
-					plane.openTool();
-					tool.setVisible(true);
-					tool.setLocation(plane.getWidth()-65-100, tool.getLocation().y);
-					toolOpened = true;
-				}
-				else {
-					plane.closeTool();
-					tool.setLocation(plane.getWidth()-65, tool.getLocation().y);
-					toolOpened = false;
-				}
-			}
-		});
 		display.repaint();
 	}//Last from Constructor
 
@@ -373,7 +343,6 @@ public class MapDesignState{
 	 * @date Apr 9, 2020
 	 */
 	private void setComponentsBound() {
-		int canvasY = 85; //this is the position in Y where the division is between plane and menu
 		this.width = display.getContentPane().getWidth();
 		this.height = display.getContentPane().getHeight();
 		panel.setBounds(0, 0, width, canvasY);
@@ -390,7 +359,6 @@ public class MapDesignState{
 		buildingList.setBounds(165,50,150,25);
 		treeList.setBounds((panel.getWidth()/2)+165, 50, 150, 25);
 		questionList.setBounds(320, 50, 150, 25);
-		tool.setBounds(plane.getWidth()-65, plane.getHeight()/2-60, 60, 60);
 	}
 
 	public void loadingScreen() {
