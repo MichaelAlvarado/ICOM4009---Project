@@ -234,34 +234,34 @@ public class ConfigurationFile {
 					//System.out.println("building");
 
 					bname = bname.substring(bname.indexOf("Building:") + 10);
-					System.out.println("Building: " + bname);
+					//System.out.println("Building: " + bname);
 				}
 				nextLine = sc2.nextLine();
 
 				while (nextLine.contains("Question:")) {
 					qname = nextLine;
 					qname = qname.substring(qname.indexOf("Question:") + 10);
-					System.out.println("Question: " + qname);
+					//System.out.println("Question: " + qname);
 					rAns = sc2.nextLine();
 
 
 					rAns = rAns.substring(rAns.indexOf("Right:") + 7);
-					System.out.println("Answer Correct: " + rAns);
+					//System.out.println("Answer Correct: " + rAns);
 					w1Ans = sc2.nextLine();
 
 
 					w1Ans = w1Ans.substring(w1Ans.indexOf("Wrong:") + 7);
-					System.out.println("Answer Incorrect: " + w1Ans);
+					//System.out.println("Answer Incorrect: " + w1Ans);
 					w2Ans = sc2.nextLine();
 
 
 					w2Ans = w2Ans.substring(w2Ans.indexOf("Wrong:") + 7);
-					System.out.println("Answer Incorrect: " + w2Ans);
+					//System.out.println("Answer Incorrect: " + w2Ans);
 					w3Ans = sc2.nextLine();
 
 
 					w3Ans = w3Ans.substring(w3Ans.indexOf("Wrong:") + 7);
-					System.out.println("Answer Incorrect: " + w3Ans);
+					//System.out.println("Answer Incorrect: " + w3Ans);
 
 					Question question = new Question(qname, rAns, w1Ans, w2Ans, w3Ans);
 

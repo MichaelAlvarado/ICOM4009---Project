@@ -53,12 +53,14 @@ public class Building {
 	private boolean playerCloseBy;
 	private boolean found;
 	private boolean debuggingMode;
+	private BuildingAnimation animation;
 
 	// constructor
 	public Building(String buildingName) {
 		this.buildingName = buildingName;
 		walls = new LinkedList<Wall>();
 		questionPool = new LinkedList<Question>();
+		animation = new BuildingAnimation();
 	}
 
 	/**
@@ -78,7 +80,7 @@ public class Building {
 						+"Wrong: " + q.getAnswer_2() + "\n"
 						+"Wrong: " + q.getAnswer_3() + "\n"
 						+"Wrong: " + q.getAnswer_4() + "\n";
-				}
+			}
 			else {
 				String split = q.getQuestion().substring(45);
 				result += "Question: " + q.getQuestion().substring(0, 44) + "\n"
@@ -153,11 +155,11 @@ public class Building {
 	public void addWalls(Wall w) {
 		this.walls.add(w);		
 	}
-	
+
 	public void removeWall(Wall wall) {
 		this.walls.remove(wall);
 	}
-	
+
 	public void removeAllWalls() {
 		this.walls.clear();
 	}
@@ -287,12 +289,7 @@ public class Building {
 		}
 		//Once the player is close, make wall visible
 		else if(playerCloseBy) {
-			if(!BuildingAnimation.stars.isAnimating()) {
-				Random rand = new Random();
-				BuildingAnimation.stars.setBound(rand.nextInt(perimeter.width)+perimeter.x, rand.nextInt(perimeter.height)+perimeter.y, 20, 20);
-			}
-			BuildingAnimation.stars.startAnimation();
-			BuildingAnimation.stars.render(g);
+			animation.stars.render(g);
 			Rectangle rec = this.perimeter();
 			g.setColor(Color.BLACK);
 			g.drawString("Press F", rec.x+10, rec.y+(rec.height/2));
@@ -314,8 +311,19 @@ public class Building {
 			g.drawRect(bound.x, bound.y, bound.width, bound.height);
 		}
 	}
-	
-	private static class BuildingAnimation {
-		public static Animation stars = new Animation(Images.starEffect,0.6);
+
+	private class BuildingAnimation {
+		public Animation stars = new Animation(Images.starEffect,0.6) {
+			@Override 
+			public void render(Graphics g) {
+				Rectangle perimeter = perimeter();
+				if(!stars.isAnimating()) {
+					Random rand = new Random();
+					stars.setBound(rand.nextInt(perimeter.width)+perimeter.x, rand.nextInt(perimeter.height)+perimeter.y, 20, 20);
+				}
+				stars.startAnimation();
+				super.render(g);
+			}
+		};
 	}
 }

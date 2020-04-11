@@ -37,15 +37,17 @@ public class Animation {
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		timePerImage = time/animation.length;
+		if(images != null)
+			timePerImage = time/animation.length;
 	}
-	
+
 	public Animation(BufferedImage[] images, double time) {
 		this.time = time;
 		this.animation = images;
-		timePerImage = time/animation.length;
+		if(images != null)
+			timePerImage = time/animation.length;
 	}
-	
+
 	public BufferedImage[] getAnimation() {
 		return animation;
 	}
@@ -53,14 +55,14 @@ public class Animation {
 	public void setAnimation(BufferedImage[] animation) {
 		this.animation = animation;
 	}
-	
+
 	public void setBound(int x, int y, int width, int height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
 	}
-	
+
 	/**
 	 * 
 	 * Description - paint of Canvas the Animation sprite only if animation started
@@ -83,14 +85,14 @@ public class Animation {
 		}
 		tick = 1;
 	}
-	
+
 	/**
 	 * Stop animation and go to idle 
 	 */
 	public void stopAnimation() {
 		tick = 0;
 	}
-	
+
 	public boolean isAnimating() {
 		return tick > 0;
 	}

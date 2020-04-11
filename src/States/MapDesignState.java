@@ -253,8 +253,9 @@ public class MapDesignState{
 					addBuildingBox.addBuilding();
 				}
 				else {
-					if(plane.getCurrentBuilding().getQuestionPool().size() < 4) 
-						JOptionPane.showMessageDialog(plane, "Building must contain at least 4 questions.");
+					if(plane.getCurrentBuilding().getQuestionPool().size() < 4 || plane.getCurrentBuilding().getWalls().size() < 1) {
+						JOptionPane.showMessageDialog(plane, "Building must contain at least 1 wall and 4 questions.");
+					}
 					else {
 						plane.setCurrentBuilding(null);
 						addBuilding.setText("Add Building");
@@ -294,6 +295,8 @@ public class MapDesignState{
 							null, options, options[0]);
 					if (x == 0) {
 						if(!(plane.getMap().getPicture() == null)) {
+							if(plane.getCurrentBuilding().getWalls().size() < 1 || plane.getCurrentBuilding().getQuestionPool().size() < 4)
+								plane.getMap().removeBuilding(plane.getCurrentBuilding());
 							ConfigurationFile.generateTextFile(plane.getMap());
 							ConfigurationFile.generateQuestionFile(plane.getMap());
 							loadingScreen();
