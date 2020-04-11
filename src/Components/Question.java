@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class Question {
 	
-	private String question, answer_1, answer_2, answer_3, answer_4;
+	private String question, answer_1, answer_2, answer_3, answer_4, correct_answer;
 	private boolean correct;
 	private Random random = new Random();
 	String temp1, temp2, temp3, temp4;
@@ -31,7 +31,7 @@ public class Question {
 		this.answer_2 = answer_2;
 		this.answer_3 = answer_3;
 		this.answer_4 = answer_4;		
-		this.correct = theCorrect;
+		this.correct_answer = answer_1;
 	}
 	public Question(String question, String answer_1, String answer_2, String answer_3, String answer_4) {
 	this.question = question;
@@ -39,6 +39,8 @@ public class Question {
 	this.answer_2 = answer_2;
 	this.answer_3 = answer_3;
 	this.answer_4 = answer_4;
+	this.correct_answer = answer_1;
+	
 	}
 	public String getQuestion() {
 		return question;
@@ -62,6 +64,10 @@ public class Question {
 
 	public String getAnswer_4() {
 		return answer_4;
+	}
+	
+	public String getCorrectAnswer() {
+		return correct_answer;
 	}
 
 	public boolean isCorrect() {

@@ -23,6 +23,18 @@ public abstract class Button {
 		name = message;
 
 	}
+	
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	public String getMessage() {
+		return this.message;
+	}
+	
+	public void setColor(Color color) {
+		this.color = color;
+	}
 
 	public void tick() {
 		if(Handler.getMouseManager().clickedOn(rec)) {
