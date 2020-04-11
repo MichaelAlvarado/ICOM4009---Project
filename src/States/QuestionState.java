@@ -21,15 +21,15 @@ public class QuestionState implements State{
 	private static Building building;
 	private static LinkedList<Question> randQList;
 	private Button yes, no;
-	private static Button opt1, opt2, opt3, opt4;
+	private Button opt1, opt2, opt3, opt4;
 	private boolean answering; //if this is true then its on state where it ask the player if he wants to answer the questions of building
 	private boolean isCorrect;
-	private static boolean display;
-	private static Question currentQuestion;
-	private static String correctAnswer;
-	private static int questionNumber = 0;
-	private static int correctlyAnsweredQuestions = 0;
-	private static int incorrectlyAnsweredQuestions = 0;
+	private boolean display;
+	private Question currentQuestion;
+	private String correctAnswer;
+	private int questionNumber = 0;
+	private int correctlyAnsweredQuestions = 0;
+	private int incorrectlyAnsweredQuestions = 0;
 	
 	public QuestionState() {
 		building = new Building("Question Building"); //its a dummy building 
@@ -157,7 +157,7 @@ public class QuestionState implements State{
 	 * Method to set the buttons for the next question to be answered
 	 *
 	 */
-	public static void getNextQuestion() {
+	public void getNextQuestion() {
 		if (questionNumber<4 && correctlyAnsweredQuestions<3 && incorrectlyAnsweredQuestions<2) {
 			currentQuestion = randQList.get(questionNumber);
 			correctAnswer = currentQuestion.getCorrectAnswer();
@@ -205,7 +205,7 @@ public class QuestionState implements State{
 		getNextQuestion();
 	}
 	
-	public static void resetQuestionState() {
+	public void resetQuestionState() {
 		correctlyAnsweredQuestions = 0;
 		incorrectlyAnsweredQuestions = 0;
 		questionNumber = 0;
