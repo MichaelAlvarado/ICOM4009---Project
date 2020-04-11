@@ -7,7 +7,7 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.Collections;
 import java.util.LinkedList;
-
+import java.util.concurrent.TimeUnit;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -20,12 +20,16 @@ public class QuestionState implements State{
 
 	private static Building building;
 	private static LinkedList<Question> randQList;
-	private Button yes, no, opt1, opt2, opt3, opt4;
+	private Button yes, no;
+	private static Button opt1, opt2, opt3, opt4;
 	private boolean answering; //if this is true then its on state where it ask the player if he wants to answer the questions of building
 	private boolean isCorrect;
-	Question currentQuestion;
-	private String correctAnswer;
-	private JLabel question;
+	private static boolean display;
+	private static Question currentQuestion;
+	private static String correctAnswer;
+	private static int questionNumber = 0;
+	private static int correctlyAnsweredQuestions = 0;
+	private static int incorrectlyAnsweredQuestions = 0;
 	
 	public QuestionState() {
 		building = new Building("Question Building"); //its a dummy building 
@@ -36,7 +40,9 @@ public class QuestionState implements State{
 			@Override
 			public void action() {
 				answering = true;
-				questionRandomizer(); // this randomizes the questions each time the question state is created
+				questionRandomizer(); // this randomizes the questions each time the player wants to answer a set of questions
+				getNextQuestion();
+				
 			}
 			
 		};
@@ -51,31 +57,25 @@ public class QuestionState implements State{
 		opt1 = new Button("Option1", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)-80, 100, 30, Color.CYAN) {
 			@Override
 			public void action() {
-				if (opt1.getMessage().equals(correctAnswer)) {
-					System.out.println("Correct");
-				}
+				displayNextQuestion(opt1, correctAnswer);
 			}
 		};
 		opt2 = new Button("Option2", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)-40, 100, 30, Color.CYAN) {
 			@Override
 			public void action() {
-				if (opt2.getMessage().equals(correctAnswer)) {
-					System.out.println("Correct");
-				}
+				displayNextQuestion(opt2, correctAnswer);
 			}
 		};
 		opt3 = new Button("Option3", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2), 100, 30, Color.CYAN) {
 			@Override
 			public void action() {
-				if (opt3.getMessage().equals(correctAnswer)) {
-					System.out.println("Correct");
-				}
+				displayNextQuestion(opt3, correctAnswer);
 			}
 		};
 		opt4 = new Button("Option4", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)+40, 100, 30, Color.CYAN) {
 			@Override
 			public void action() {
-				System.out.println("testing 4");
+				displayNextQuestion(opt4, correctAnswer);
 			}
 		};
 	}
@@ -92,15 +92,10 @@ public class QuestionState implements State{
 			no.tick();
 		}
 		else {
-			for (int i = 0; i < 4; i++) {
-				currentQuestion = randQList.get(i);
-				correctAnswer = currentQuestion.getCorrectAnswer();
-				opt1.setMessage(currentQuestion.getAnswer_1());
-				opt2.setMessage(currentQuestion.getAnswer_2());
-				opt3.setMessage(currentQuestion.getAnswer_3());
-				opt4.setMessage(currentQuestion.getAnswer_4());
-			}
-			
+			opt1.tick();
+			opt2.tick();
+			opt3.tick();
+			opt4.tick();
 		}
 	}
 	
@@ -126,7 +121,6 @@ public class QuestionState implements State{
 			
 		}
 		else {
-			//Displays the Question of the building(Not implemented)
 			g.setColor(Color.BLACK);
 			g.setFont(new Font("Arial", Font.PLAIN, 25));
 			g.drawString(currentQuestion.getQuestion(), (Handler.getWidth()/2)-15, (Handler.getHeight()/2)-(height/2)+25);
@@ -135,10 +129,86 @@ public class QuestionState implements State{
 			opt3.render(g);
 			opt4.render(g);
 		}
+		if (isCorrect && display) {
+			g.setColor(Color.BLACK);
+			g.setFont(new Font("Arial", Font.PLAIN, 25));
+			g.drawString("Correct!!", (Handler.getWidth()/2)-(width/2), (Handler.getHeight()/2)-(height/2)+25);
+			
+			
+		}
+		if (!isCorrect && display) {
+			g.setColor(Color.BLACK);
+			g.setFont(new Font("Arial", Font.PLAIN, 25));
+			g.drawString("Oops, wrong answer!", (Handler.getWidth()/2)-(width/2), (Handler.getHeight()/2)-(height/2)+25);
+			
+		}
 	}
 
 	public void setBuilding(Building building) {
 		this.building = building;
+		
+	}
+	
+	
+	/**
+	 * 
+	 * @author Fabiola Badillo
+	 * Date - April 11, 2020
+	 * Method to set the buttons for the next queston to be answered
+	 *
+	 */
+	public static void getNextQuestion() {
+		if (questionNumber<4 && correctlyAnsweredQuestions<3 && incorrectlyAnsweredQuestions<2) {
+			currentQuestion = randQList.get(questionNumber);
+			correctAnswer = currentQuestion.getCorrectAnswer();
+			opt1.setMessage(currentQuestion.getAnswer_1());
+			opt2.setMessage(currentQuestion.getAnswer_2());
+			opt3.setMessage(currentQuestion.getAnswer_3());
+			opt4.setMessage(currentQuestion.getAnswer_4());
+			questionNumber++;			
+		}
+		if (incorrectlyAnsweredQuestions >= 2) {
+			System.out.println("Oops, try unlocking the building again");
+			Handler.setCurrentState(Handler.getGameState());
+			resetQuestionState();
+		}
+		if (correctlyAnsweredQuestions == 3) {
+			System.out.println("Congrats, you just unlocked the building");
+			Handler.setCurrentState(Handler.getGameState());
+			resetQuestionState();
+		}
+	}
+	
+	/**
+	 * 
+	 * @author Fabiola Badillo
+	 * Date - April 11, 2020
+	 * Method to check if the question was correctly answered
+	 *
+	 */
+	public void displayNextQuestion(Button b, String str) {
+		display = false;
+		if (b.getMessage().equals(str)) {
+			System.out.println("Correct");
+			correctlyAnsweredQuestions++;
+			System.out.println("correct answers: " + correctlyAnsweredQuestions);
+			isCorrect = true;
+			display = true;
+		}
+		else {
+			incorrectlyAnsweredQuestions++;
+			System.out.println("incorrect answers: " + incorrectlyAnsweredQuestions);
+			isCorrect = false;
+			display=true;
+		}
+		getNextQuestion();
+	}
+	
+	public static void resetQuestionState() {
+		correctlyAnsweredQuestions = 0;
+		incorrectlyAnsweredQuestions = 0;
+		questionNumber = 0;
+		display = false;
 	}
 	
 
