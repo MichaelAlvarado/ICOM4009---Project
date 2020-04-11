@@ -53,7 +53,6 @@ public class Building {
 	private boolean playerCloseBy;
 	private boolean found;
 	private boolean debuggingMode;
-	private Animation stars = new Animation(Images.starEffect,0.6);
 
 	// constructor
 	public Building(String buildingName) {
@@ -288,12 +287,12 @@ public class Building {
 		}
 		//Once the player is close, make wall visible
 		else if(playerCloseBy) {
-			if(!stars.isAnimating()) {
+			if(!BuildingAnimation.stars.isAnimating()) {
 				Random rand = new Random();
-				stars.setBound(rand.nextInt(perimeter.width)+perimeter.x, rand.nextInt(perimeter.height)+perimeter.y, 20, 20);
+				BuildingAnimation.stars.setBound(rand.nextInt(perimeter.width)+perimeter.x, rand.nextInt(perimeter.height)+perimeter.y, 20, 20);
 			}
-			stars.startAnimation();
-			stars.render(g);
+			BuildingAnimation.stars.startAnimation();
+			BuildingAnimation.stars.render(g);
 			Rectangle rec = this.perimeter();
 			g.setColor(Color.BLACK);
 			g.drawString("Press F", rec.x+10, rec.y+(rec.height/2));
@@ -314,5 +313,9 @@ public class Building {
 			g.setColor(Color.RED);
 			g.drawRect(bound.x, bound.y, bound.width, bound.height);
 		}
+	}
+	
+	private static class BuildingAnimation {
+		public static Animation stars = new Animation(Images.starEffect,0.6);
 	}
 }
