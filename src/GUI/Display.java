@@ -14,17 +14,16 @@ import javax.swing.JFrame;
  */
 public class Display extends JFrame{
 
-	public Display(String title, int width, int height) throws IOException {
+	public Display(String title) throws IOException {
 		super();
 		setTitle(title);
-		setPreferredSize(new Dimension(width, height));
 		pack();
-		setLocationRelativeTo(null);
 		//setResizable(false);
+		setLayout(null);
+		setSize(getMaximumSize().width, getMaximumSize().height-900);
 		setVisible(true);	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLoadingScreen();
-		setSize(getPreferredSize()); //make sure its on the PreferredSize
 	}
 	public void setLoadingScreen() {
 		try {
