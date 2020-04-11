@@ -209,6 +209,7 @@ public class QuestionState implements State{
 		correctlyAnsweredQuestions = 0;
 		incorrectlyAnsweredQuestions = 0;
 		questionNumber = 0;
+		answering = false;
 		display = false;
 	}
 	
