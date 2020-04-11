@@ -28,7 +28,7 @@ public class Player {
 	private Rectangle bound;
 	private BufferedImage avatar;
 	private PlayerAnimation animation;
-	private boolean walking;
+	private boolean walking, lastPressed;
 	private String name;
 	Building building; 
 	Wall walls;
@@ -75,6 +75,7 @@ public class Player {
 	 */
 	public void tick() {
 		walking = false;
+
 		if(Handler.getKeyManager().up && bound.y > 0) {
 			this.moveOnY(bound.y - 1);
 			walking = true;
@@ -83,11 +84,13 @@ public class Player {
 			this.moveOnX(bound.x - 1);
 			walking = true;
 			animation.setRight(false);
+			animation.setLastPressed(true);
 		}
 		if(Handler.getKeyManager().right && bound.x+bound.width < Handler.getWidth()) {
 			this.moveOnX(bound.x + 1);
 			walking = true;
 			animation.setRight(true);
+			animation.setLastPressed(false);
 		}
 		if(Handler.getKeyManager().down && bound.y+bound.height < Handler.getHeight()) {
 			this.moveOnY(bound.y + 1);
@@ -118,7 +121,7 @@ public class Player {
 	private class PlayerAnimation {
 
 		private Animation animation;
-		private boolean right; //if player looking right
+		private boolean right, lastPressed; //if player looking right
 
 		public PlayerAnimation(){
 			Handler.getSoundManager().addAudio("footsteps");			
@@ -133,7 +136,11 @@ public class Player {
 		 * @date Apr 9, 2020
 		 */
 		public BufferedImage getPlayerFrame() {
-			if(right) {
+			if(!walking && lastPressed) {
+				animation.setAnimation(Images.CharacterSpriteIdleLeft);
+			} else if (!walking && !lastPressed) {
+				animation.setAnimation(Images.CharacterSpriteIdleRight);
+			} else if(right) {
 				animation.setAnimation(Images.CharacterSpriteRight);
 			}
 			else {
@@ -162,6 +169,14 @@ public class Player {
 
 		public void setRight(boolean right) {
 			this.right = right;
+		}
+
+		public boolean isLastPressed() {
+			return lastPressed;
+		}
+
+		public void setLastPressed(boolean lastPressed) {
+			this.lastPressed = lastPressed;
 		}
 
 	}
