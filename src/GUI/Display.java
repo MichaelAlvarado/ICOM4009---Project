@@ -18,9 +18,9 @@ public class Display extends JFrame{
 		super();
 		setTitle(title);
 		pack();
-		//setResizable(false);
 		setLayout(null);
-		setSize(getMaximumSize().width, getMaximumSize().height-900);
+		setSize(getMaximumSize().width, getMaximumSize().height);
+		setExtendedState(MAXIMIZED_BOTH);
 		setVisible(true);	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLoadingScreen();
