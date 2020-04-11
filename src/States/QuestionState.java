@@ -154,7 +154,7 @@ public class QuestionState implements State{
 	 * 
 	 * @author Fabiola Badillo
 	 * Date - April 11, 2020
-	 * Method to set the buttons for the next queston to be answered
+	 * Method to set the buttons for the next question to be answered
 	 *
 	 */
 	public static void getNextQuestion() {
@@ -175,6 +175,7 @@ public class QuestionState implements State{
 		if (correctlyAnsweredQuestions == 3) {
 			System.out.println("Congrats, you just unlocked the building");
 			Handler.setCurrentState(Handler.getGameState());
+			building.setFound(true);
 			resetQuestionState();
 		}
 	}
