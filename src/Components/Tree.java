@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
 import java.lang.String;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
+
 import javax.imageio.ImageIO;
 
 import GameSetUp.Handler;
@@ -106,6 +108,9 @@ public class Tree {
 	}
 	public String getID() {
 		return this.tid;
+	}
+	public Rectangle getBound() {
+		return new Rectangle(p1.x,p1.y,width,height);
 	}
 	
 	

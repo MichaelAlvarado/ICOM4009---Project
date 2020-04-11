@@ -191,7 +191,7 @@ public class AddWallBox extends JPanel{
 				if(newWall)
 					JOptionPane.showMessageDialog(plane, "Cannot remove a new wall.");
 				else {
-					plane.currentBuilding.removeWall(wall);
+					plane.getCurrentBuilding().removeWall(wall);
 					exit();
 				}
 			}

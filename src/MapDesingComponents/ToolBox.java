@@ -57,19 +57,31 @@ public class ToolBox{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				isOpen = !isOpen;
+				tool.setLocation(plane.getWidth()-165, plane.getHeight()/2-60);
+				resetTree();
 				plane.repaint();
 			}
 		});
 		tool.setBounds(plane.getWidth()-65, plane.getHeight()/2-60, 60, 60);
 		plane.add(tool);
 	}
-	
+
 	public boolean isOpen() {
 		return isOpen;
 	}
-	
-	public void actions() {
 
+	public Tree pressedOnTree(int x, int y) {
+		Tree tree = null;
+		if(defaultTrees1.getBound().contains(x,y)) {
+			tree = new Tree(plane.getMap(), defaultTrees1.getTreeSpecies(), defaultTrees1.getP1());
+		}
+		else if(defaultTrees2.getBound().contains(x,y))	{
+			tree = new Tree(plane.getMap(), defaultTrees2.getTreeSpecies(), defaultTrees2.getP1());
+		}
+		else if(defaultTrees3.getBound().contains(x,y))	{
+			tree = new Tree(plane.getMap(), defaultTrees3.getTreeSpecies(), defaultTrees3.getP1());
+		}
+		return tree;
 	}
 
 	public void paint(Graphics g) {
@@ -78,17 +90,20 @@ public class ToolBox{
 			int x = tool.getX()+tool.getWidth();//x of panel
 			g.setColor(new Color(0,0,0,100));
 			g.fillRect(x, 0, 100, plane.getHeight());
-			g.drawImage(defaultTrees1.getTreeImage(), x, 10,defaultTrees1.getWidth(), defaultTrees1.getHeight(),null);
-			g.drawImage(defaultTrees2.getTreeImage(), x, 15 + defaultTrees1.getHeight(), defaultTrees2.getWidth(), defaultTrees2.getHeight(),null);
-			g.drawImage(defaultTrees3.getTreeImage(), x, 15 +defaultTrees1.getHeight()+defaultTrees2.getHeight(),defaultTrees3.getWidth(), defaultTrees3.getHeight(),null);
+			g.drawImage(defaultTrees1.getTreeImage(), defaultTrees1.getP1().x, defaultTrees1.getP1().y, defaultTrees1.getWidth(), defaultTrees1.getHeight(), null);
+			g.drawImage(defaultTrees2.getTreeImage(), defaultTrees2.getP1().x, defaultTrees2.getP1().y, defaultTrees2.getWidth(), defaultTrees2.getHeight(),null);
+			g.drawImage(defaultTrees3.getTreeImage(), defaultTrees3.getP1().x, defaultTrees3.getP1().y, defaultTrees3.getWidth(), defaultTrees3.getHeight(),null);
 		}
 		else {
 			tool.setLocation(plane.getWidth()-65, plane.getHeight()/2-60);
 		}
 	}
 
-	public void placeTree() {
-
+	public void resetTree() {
+		int x = tool.getX()+tool.getWidth();//x of panel
+		defaultTrees1.setP1(new Point(x,10));
+		defaultTrees2.setP1(new Point(x,15 + defaultTrees1.getHeight()));
+		defaultTrees3.setP1(new Point(x,15 +defaultTrees1.getHeight()+defaultTrees2.getHeight()));
 	}
 
 }

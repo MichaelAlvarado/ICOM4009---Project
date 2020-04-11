@@ -79,8 +79,8 @@ public class AddQuestionsBox extends JPanel{
 		enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(plane.currentBuilding != null && newQuestion) {
-					plane.currentBuilding.addQuestion(
+				if(plane.getCurrentBuilding() != null && newQuestion) {
+					plane.getCurrentBuilding().addQuestion(
 							new Question(question.getText(), correct.getText(),
 									fail1.getText(), fail2.getText(), fail3.getText()));
 				}

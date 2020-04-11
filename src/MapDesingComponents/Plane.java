@@ -48,7 +48,8 @@ import Components.Tree;
 public class Plane extends JPanel{
 
 	Map map;
-	Building currentBuilding; //the building currently being edit
+	private Building currentBuilding; //the building currently being edit
+	private Tree currentTree; //The tree being drag off the tool
 	//Drawing
 	Color cP, cL, pP, pL; //Color for c=current p=previous P=Point L=Line
 	boolean buildingImagesIsOn; //draw building images
@@ -192,6 +193,10 @@ public class Plane extends JPanel{
 			g.drawImage(tree.getTreeImage(), (int)(tree.getP1().x/scaleX), (int)(tree.getP1().y/scaleY), (int)(tree.getWidth()/scaleX), (int)(tree.getHeight()/scaleY), null);
 		}
 
+		//Draw CurrentTree
+		if(currentTree != null)
+			g.drawImage(currentTree.getTreeImage(), (int)(currentTree.getP1().x/scaleX), (int)(currentTree.getP1().y/scaleY), (int)(currentTree.getWidth()/scaleX), (int)(currentTree.getHeight()/scaleY), null);
+
 		//Draw tool panel
 		tool.paint(g);
 	} //Paint end
@@ -303,6 +308,7 @@ public class Plane extends JPanel{
 
 	public void addTree(Tree tree) {
 		map.addTree(tree);
+		currentTree = null;
 	}
 
 	public void setCurrentBuilding(Building building) {
@@ -353,23 +359,31 @@ public class Plane extends JPanel{
 
 		@Override
 		public void mousePressed(MouseEvent arg0) {
-			if(enable && currentBuilding != null) {
-				System.out.println("Pressed / "+"x: " + arg0.getX() + "  y:" + (getHeight()-arg0.getY()));
-				if(drag == null) {
-					currentPointPair[0] = new Point(arg0.getX(), arg0.getY());
+			if(enable)
+				if(tool.isOpen() && tool.pressedOnTree(arg0.getX(), arg0.getY()) != null) {
+					currentTree = tool.pressedOnTree(arg0.getX(), arg0.getY());
 				}
-				else {
-					currentPointPair[0] = drag;
+				else if(currentBuilding != null) {
+					System.out.println("Pressed / "+"x: " + arg0.getX() + "  y:" + (getHeight()-arg0.getY()));
+					if(drag == null) {
+						currentPointPair[0] = new Point(arg0.getX(), arg0.getY());
+					}
+					else {
+						currentPointPair[0] = drag;
+					}
+					currentPointPair[1] = null;
+					repaint();
 				}
-				currentPointPair[1] = null;
-				repaint();
-			}
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
 			if(enable) {
-				if(currentBuilding != null) {
+				if(currentTree != null) {
+					addTree(currentTree);
+					tool.resetTree();
+				}
+				else if(currentBuilding != null) {
 					System.out.println("Released / "+"x: " + arg0.getX() + "  y:" + (getHeight() - arg0.getY()));
 					if(currentPointPair[1] != null && currentPointPair[0] != null) {
 						//add to wall only if there was a mouse displacement
@@ -425,13 +439,20 @@ public class Plane extends JPanel{
 		@Override
 		public void mouseDragged(MouseEvent arg0) {
 			//This is use to put the dragging point on near Point
-			if(enable && currentBuilding != null) {
-				drag = dragToPoint(arg0.getX(), arg0.getY());
-				if(drag == null) {
-					currentPointPair[1] = new Point(arg0.getX(), arg0.getY());
+			x = arg0.getX();
+			y = arg0.getY();
+			if(enable) {
+				if(currentTree != null) {
+					currentTree.setP1(new Point(x,y));
 				}
-				else {
-					currentPointPair[1] = drag;
+				else if(currentBuilding != null) {
+					drag = dragToPoint(arg0.getX(), arg0.getY());
+					if(drag == null) {
+						currentPointPair[1] = new Point(arg0.getX(), arg0.getY());
+					}
+					else {
+						currentPointPair[1] = drag;
+					}
 				}
 				repaint();
 			}

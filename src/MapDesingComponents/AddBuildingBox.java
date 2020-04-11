@@ -155,7 +155,7 @@ public class AddBuildingBox extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				exit();
-				plane.currentBuilding = null;
+				plane.setCurrentBuilding(null);
 				activationButton.setText("Add Building");
 
 			}
@@ -169,7 +169,7 @@ public class AddBuildingBox extends JPanel{
 				if(newBuilding)
 					JOptionPane.showMessageDialog(plane, "Cannot remove a new building.");
 				else {
-					plane.getMap().removeBuilding(plane.currentBuilding);
+					plane.getMap().removeBuilding(plane.getCurrentBuilding());
 					activationButton.setText("Add Building");
 					exit();
 				}
