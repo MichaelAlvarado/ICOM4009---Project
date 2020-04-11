@@ -57,12 +57,9 @@ public class ToolBox{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if(isOpen) {
-					tool.setVisible(true);
-					tool.setLocation(tool.getX()+100, tool.getY());
 					isOpen = false;
 				}
 				else {
-					tool.setLocation(tool.getX()-100, tool.getY());
 					isOpen = true;
 				}
 				plane.repaint();
@@ -76,6 +73,10 @@ public class ToolBox{
 		if(isOpen) {
 			g.setColor(new Color(0,0,0,100));
 			g.fillRect(tool.getX()+tool.getWidth(), 0, 100, plane.getHeight());
+			tool.setLocation(plane.getWidth()-165, plane.getHeight()/2-60);
+		}
+		else {
+			tool.setLocation(plane.getWidth()-65, plane.getHeight()/2-60);
 		}
 	}
 	
