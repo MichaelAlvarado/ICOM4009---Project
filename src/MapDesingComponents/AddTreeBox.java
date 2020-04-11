@@ -135,7 +135,7 @@ public class AddTreeBox extends JPanel{
 				if(newTree)
 					JOptionPane.showMessageDialog(plane, "Cannot remove a new tree.");
 				else {
-					activationButton.setText("Add Tree");
+					plane.getMap().removeTree(tree);
 					plane.repaint();
 					exit();
 				}
