@@ -60,9 +60,9 @@ public class Plane extends JPanel{
 	private int xOrigin, yOrigin; //Pixel position on canvas origin
 	private double scaleX, scaleY; //This is to scale the map
 	//Listeners
-	private Mouse mouse; //use to create walls with mouse
-	private MouseMotion mouseMotion; //use to drag points
-	private Keyboard keyboard; //use for shortcuts
+	public Mouse mouse; //use to create walls with mouse
+	public MouseMotion mouseMotion; //use to drag points
+	public Keyboard keyboard; //use for shortcuts
 	private ToolBox tool;
 
 	public Plane(int x, int y, int width, int height) {

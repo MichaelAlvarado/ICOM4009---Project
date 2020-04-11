@@ -36,7 +36,7 @@ public class Tree {
 	// constructor
 	@SuppressWarnings("static-access")
 	public Tree(Map map, int treeSpecies, Point p1) {
-		this.treeSpecies = treeSpecies;
+		setTreeSpecies(treeSpecies);
 		this.p1 = p1;
 		this.tid = map.getMapName() + "_t" + map.getTrees().size();
 	}

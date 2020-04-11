@@ -29,17 +29,17 @@ import Components.Map;
 public class ToolBox{
 
 	private Plane plane;
-	private Tree defaultTrees[];
+	private Tree defaultTrees1, defaultTrees2, defaultTrees3;
 	private boolean isOpen;
 	private JButton tool;
-	
+
 	public ToolBox(Plane plane) {
 		isOpen = false;
 		this.plane = plane;
 		Point p1 = new Point();
-//		defaultTrees[0] = new Tree(plane.map, 0,p1);
-//		defaultTrees[1] = new Tree(plane.map, 1,p1);
-//		defaultTrees[2] = new Tree(plane.map, 2,p1);
+		defaultTrees1 = new Tree(plane.map, 0,p1);
+		defaultTrees2 = new Tree(plane.map, 1,p1);
+		defaultTrees3 = new Tree(plane.map, 2,p1);
 		BufferedImage buttonIcon = null;
 		try {
 			buttonIcon = ImageIO.read(new File("res/addButton.png"));
@@ -56,12 +56,7 @@ public class ToolBox{
 		tool.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(isOpen) {
-					isOpen = false;
-				}
-				else {
-					isOpen = true;
-				}
+				isOpen = !isOpen;
 				plane.repaint();
 			}
 		});
@@ -69,19 +64,31 @@ public class ToolBox{
 		plane.add(tool);
 	}
 	
+	public boolean isOpen() {
+		return isOpen;
+	}
+	
+	public void actions() {
+
+	}
+
 	public void paint(Graphics g) {
 		if(isOpen) {
-			g.setColor(new Color(0,0,0,100));
-			g.fillRect(tool.getX()+tool.getWidth(), 0, 100, plane.getHeight());
 			tool.setLocation(plane.getWidth()-165, plane.getHeight()/2-60);
+			int x = tool.getX()+tool.getWidth();//x of panel
+			g.setColor(new Color(0,0,0,100));
+			g.fillRect(x, 0, 100, plane.getHeight());
+			g.drawImage(defaultTrees1.getTreeImage(), x, 10,defaultTrees1.getWidth(), defaultTrees1.getHeight(),null);
+			g.drawImage(defaultTrees2.getTreeImage(), x, 15 + defaultTrees1.getHeight(), defaultTrees2.getWidth(), defaultTrees2.getHeight(),null);
+			g.drawImage(defaultTrees3.getTreeImage(), x, 15 +defaultTrees1.getHeight()+defaultTrees2.getHeight(),defaultTrees3.getWidth(), defaultTrees3.getHeight(),null);
 		}
 		else {
 			tool.setLocation(plane.getWidth()-65, plane.getHeight()/2-60);
 		}
 	}
-	
+
 	public void placeTree() {
-		
+
 	}
 
 }
