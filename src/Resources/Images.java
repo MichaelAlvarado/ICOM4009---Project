@@ -30,7 +30,7 @@ public class Images {
 		CharacterSpriteIdleRight = new BufferedImage[1];
 		CharacterSpriteIdleLeft = new BufferedImage[1];
 		starEffect = new BufferedImage[5];
-		correct = new BufferedImage[3];
+		correct = new BufferedImage[5];
 		try {
 			switch(CharacterIndex) {
 			//BOY SPRITE
@@ -212,6 +212,9 @@ public class Images {
 			correct[0]= ImageIO.read(new File("res/effects/correct1.png"));
 			correct[1]= ImageIO.read(new File("res/effects/correct2.png"));
 			correct[2]= ImageIO.read(new File("res/effects/correct3.png"));
+			correct[3]= ImageIO.read(new File("res/effects/correct4.png"));
+			correct[4]= ImageIO.read(new File("res/effects/correct5.png"));
+
 
 
 		}catch (IOException e) {
