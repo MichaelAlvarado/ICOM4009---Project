@@ -8,6 +8,9 @@ import java.awt.event.KeyEvent;
 import java.util.Collections;
 import java.util.LinkedList;
 
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 import Components.Building;
 import Components.Question;
 import GameSetUp.Handler;
@@ -20,10 +23,13 @@ public class QuestionState implements State{
 	private Button yes, no, opt1, opt2, opt3, opt4;
 	private boolean answering; //if this is true then its on state where it ask the player if he wants to answer the questions of building
 	private boolean isCorrect;
-
+	Question currentQuestion;
+	private String correctAnswer;
+	private JLabel question;
+	
 	public QuestionState() {
 		building = new Building("Question Building"); //its a dummy building 
-		
+		currentQuestion = new Question();
 		
 		yes = new Button("Yes", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2), 100, 30, Color.CYAN) {
 
@@ -45,19 +51,25 @@ public class QuestionState implements State{
 		opt1 = new Button("Option1", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)-80, 100, 30, Color.CYAN) {
 			@Override
 			public void action() {
-				System.out.println("testing 1");
+				if (opt1.getMessage().equals(correctAnswer)) {
+					System.out.println("Correct");
+				}
 			}
 		};
 		opt2 = new Button("Option2", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)-40, 100, 30, Color.CYAN) {
 			@Override
 			public void action() {
-				System.out.println("testing 2");
+				if (opt2.getMessage().equals(correctAnswer)) {
+					System.out.println("Correct");
+				}
 			}
 		};
 		opt3 = new Button("Option3", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2), 100, 30, Color.CYAN) {
 			@Override
 			public void action() {
-				System.out.println("testing 3");
+				if (opt3.getMessage().equals(correctAnswer)) {
+					System.out.println("Correct");
+				}
 			}
 		};
 		opt4 = new Button("Option4", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)+40, 100, 30, Color.CYAN) {
@@ -80,37 +92,19 @@ public class QuestionState implements State{
 			no.tick();
 		}
 		else {
-//			for (int i = 0; i < 4; i++) {
-//				Question q = randQList.get(i);
-//				opt1 = new Button(q.getAnswer_1(), 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)+40, 100, 30, Color.CYAN) {
-//					@Override
-//					public void action() {
-//						// TODO
-//					}
-//				};
-//				opt2 = new Button(q.getAnswer_2(), 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)+40, 100, 30, Color.CYAN) {
-//					@Override
-//					public void action() {
-//						// TODO
-//					}
-//				};
-//				opt3 = new Button(q.getAnswer_3(), 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)+40, 100, 30, Color.CYAN) {
-//					@Override
-//					public void action() {
-//						// TODO
-//					}
-//				};
-//				opt4 = new Button(q.getAnswer_4(), 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)+40, 100, 30, Color.CYAN) {
-//					@Override
-//					public void action() {
-//						// TODO
-//					}
-//				};
-//			}
+			for (int i = 0; i < 4; i++) {
+				currentQuestion = randQList.get(i);
+				correctAnswer = currentQuestion.getCorrectAnswer();
+				opt1.setMessage(currentQuestion.getAnswer_1());
+				opt2.setMessage(currentQuestion.getAnswer_2());
+				opt3.setMessage(currentQuestion.getAnswer_3());
+				opt4.setMessage(currentQuestion.getAnswer_4());
+			}
 			
 		}
 	}
-
+	
+	
 	@Override
 	public void render(Graphics g) {
 		//this print background
@@ -133,6 +127,9 @@ public class QuestionState implements State{
 		}
 		else {
 			//Displays the Question of the building(Not implemented)
+			g.setColor(Color.BLACK);
+			g.setFont(new Font("Arial", Font.PLAIN, 25));
+			g.drawString(currentQuestion.getQuestion(), (Handler.getWidth()/2)-15, (Handler.getHeight()/2)-(height/2)+25);
 			opt1.render(g);
 			opt2.render(g);
 			opt3.render(g);

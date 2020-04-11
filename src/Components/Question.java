@@ -24,6 +24,10 @@ public class Question {
 	private Random random = new Random();
 	String temp1, temp2, temp3, temp4;
 	
+	public Question() {
+		question = "Place Holder";
+	}
+	
 	//Creates Question Constructor to use as source for Question Pools for the buildings
 	public Question(String question, String answer_1, String answer_2, String answer_3, String answer_4, boolean theCorrect) {
 		this.question = question;
