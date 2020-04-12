@@ -30,13 +30,14 @@ public class QuestionState implements State{
 	private int questionNumber = 0;
 	private int correctlyAnsweredQuestions = 0;
 	private int incorrectlyAnsweredQuestions = 0;
-	private Animation correct, incorrect;
+	private Animation correct, incorrect, playAgain;
 	
 	public QuestionState() {
 		building = new Building("Question Building"); //its a dummy building 
 		currentQuestion = new Question();
 		correct = new Animation(Images.correct,Handler.getWidth()/2,150,100,100,0.5);
 		incorrect = new Animation(Images.incorrect, (Handler.getWidth()/2)-60, 150, 200, 100, 0.5);
+		playAgain = new Animation(Images.playAgain, (Handler.getWidth()/2)-60, 150, 200, 100, 0.5);
 		
 		yes = new Button("Yes", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2), 100, 30, Color.CYAN) {
 
@@ -134,6 +135,7 @@ public class QuestionState implements State{
 			
 			correct.render(g);
 			incorrect.render(g);
+			playAgain.render(g);
 		}
 
 	}
@@ -162,7 +164,7 @@ public class QuestionState implements State{
 			questionNumber++;			
 		}
 		if (incorrectlyAnsweredQuestions >= 2) {
-			System.out.println("Oops, try unlocking the building again");
+			playAgain.startAnimation();
 			Handler.setCurrentState(Handler.getGameState());
 			resetQuestionState();
 		}
