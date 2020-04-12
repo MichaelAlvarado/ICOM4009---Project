@@ -18,7 +18,7 @@ import Resources.Animation;
 import Resources.Button;
 import Resources.Images;
 
-public class QuestionState implements State{
+public class QuestionState implements State{ 
 
 	private Building building;
 	private LinkedList<Question> randQList;
@@ -30,12 +30,13 @@ public class QuestionState implements State{
 	private int questionNumber = 0;
 	private int correctlyAnsweredQuestions = 0;
 	private int incorrectlyAnsweredQuestions = 0;
-	private Animation correct;
+	private Animation correct, incorrect;
 	
 	public QuestionState() {
 		building = new Building("Question Building"); //its a dummy building 
 		currentQuestion = new Question();
-		correct = new Animation(Images.correct,0,0,100,100,0.7);
+		correct = new Animation(Images.correct,Handler.getWidth()/2,150,100,100,0.5);
+		incorrect = new Animation(Images.incorrect, (Handler.getWidth()/2)-60, 150, 200, 100, 0.5);
 		
 		yes = new Button("Yes", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2), 100, 30, Color.CYAN) {
 
@@ -132,6 +133,7 @@ public class QuestionState implements State{
 			opt4.render(g);
 			
 			correct.render(g);
+			incorrect.render(g);
 		}
 
 	}
@@ -183,12 +185,11 @@ public class QuestionState implements State{
 		if (b.getMessage().equals(str)) {
 			System.out.println("Correct");
 			correctlyAnsweredQuestions++;
-			System.out.println("correct answers: " + correctlyAnsweredQuestions);
 			correct.startAnimation();
 		}
 		else {
 			incorrectlyAnsweredQuestions++;
-			System.out.println("incorrect answers: " + incorrectlyAnsweredQuestions);
+			incorrect.startAnimation();
 		}
 		getNextQuestion();
 	}
