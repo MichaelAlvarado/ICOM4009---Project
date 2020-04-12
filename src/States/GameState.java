@@ -28,7 +28,7 @@ public class GameState implements State{
 	public GameState() {
 		map = Handler.getMap();
 		map.scaleComponentTo(Handler.getWidth(), Handler.getHeight());
-		player = new Player("Player" , new Point(100,100));
+		player = new Player("Player" , new Point(160,100));
 		Handler.getSoundManager().addAudio("background");
 	}
 	/**
