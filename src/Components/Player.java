@@ -28,16 +28,16 @@ public class Player {
 	private Rectangle bound;
 	private BufferedImage avatar;
 	private PlayerAnimation animation;
-	private boolean walking, lastPressed;
+	private boolean walking;
 	private String name;
-	Building building; 
-	Wall walls;
 	private boolean debuggingMode;
+	private int speed;
 
 	public Player(String name, Point initialPosition) {
 		this.name = name;
 		bound = new Rectangle(initialPosition.x, initialPosition.y, 40,40);
 		animation = new PlayerAnimation();
+		speed = 1;
 	}
 
 	public void setName(String s) {
@@ -75,25 +75,30 @@ public class Player {
 	 */
 	public void tick() {
 		walking = false;
-
+		if(Handler.getKeyManager().runbutt) {
+			speed = 2;
+		}
+		else {
+			speed = 1;
+		}
 		if(Handler.getKeyManager().up && bound.y > 0) {
-			this.moveOnY(bound.y - 1);
+			this.moveOnY(bound.y - speed);
 			walking = true;
 		}
 		if(Handler.getKeyManager().left && bound.x > 0) {
-			this.moveOnX(bound.x - 1);
+			this.moveOnX(bound.x - speed);
 			walking = true;
 			animation.setRight(false);
 			animation.setLastPressed(true);
 		}
 		if(Handler.getKeyManager().right && bound.x+bound.width < Handler.getWidth()) {
-			this.moveOnX(bound.x + 1);
+			this.moveOnX(bound.x + speed);
 			walking = true;
 			animation.setRight(true);
 			animation.setLastPressed(false);
 		}
 		if(Handler.getKeyManager().down && bound.y+bound.height < Handler.getHeight()) {
-			this.moveOnY(bound.y + 1);
+			this.moveOnY(bound.y + speed);
 			walking = true;
 		}
 		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_C)) {
