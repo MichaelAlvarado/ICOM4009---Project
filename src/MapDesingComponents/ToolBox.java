@@ -42,7 +42,7 @@ public class ToolBox{
 		defaultTrees3 = new Tree(plane.map, 2,p1);
 		BufferedImage buttonIcon = null;
 		try {
-			buttonIcon = ImageIO.read(new File("res/addButton.png"));
+			buttonIcon = ImageIO.read(new File("res/icons/addButton.png"));
 		}
 		catch(Exception ex) {
 		}
@@ -57,7 +57,6 @@ public class ToolBox{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				isOpen = !isOpen;
-				tool.setLocation(plane.getWidth()-160, plane.getHeight()/2-60);
 				resetTreesLocation();			
 				plane.repaint();
 			}
@@ -87,7 +86,7 @@ public class ToolBox{
 	public void paint(Graphics g) {
 		if(isOpen) {
 			tool.setLocation(plane.getWidth()-165, plane.getHeight()/2-60);
-			int x = tool.getX()+tool.getWidth();//x of panel
+			int x = getToolBoxX();//x of panel
 			g.setColor(new Color(0,0,0,100));
 			g.fillRect(x, 0, 100, plane.getHeight());
 			resetTreesLocation();
@@ -101,10 +100,19 @@ public class ToolBox{
 	}
 
 	private void resetTreesLocation() {
-		int x = tool.getX()+tool.getWidth();//x of panel
+		int x = getToolBoxX();//x of panel
 		defaultTrees1.setP1(new Point((x+50)-(defaultTrees1.getWidth()/2),10));
 		defaultTrees2.setP1(new Point((x+50)-(defaultTrees2.getWidth()/2),20 + defaultTrees1.getHeight()));
 		defaultTrees3.setP1(new Point(x,30 +defaultTrees1.getHeight()+defaultTrees2.getHeight()));
+	}
+	public int getToolBoxX() {
+		if(isOpen())
+			return plane.getWidth()-toolWidth();
+		else
+			return plane.getWidth();//x of panel
+	}
+	public int toolWidth() {
+		return 100;
 	}
 
 }

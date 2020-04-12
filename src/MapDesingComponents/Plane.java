@@ -160,22 +160,30 @@ public class Plane extends JPanel{
 
 		//Draw Current Pair Coordinates
 		if(currentPointPair[0] != null && currentPointPair[1] != null) {
+			int x = getWidth()-300;
+			if(tool.isOpen()) {
+				x -= tool.toolWidth();
+			}
 			//Draw panel with coordinates
 			g.setColor(new Color(0,0,0,100));
-			g.fillRect(this.getWidth()-300, 0, 300, 30);
+			g.fillRect(x, 0, 300, 30);
 			//Draw coordinates point on panel
 			g.setFont(new Font("Arial", Font.PLAIN, 20));
 			g.setColor(cP);
-			g.drawString("( " + Math.round(currentPointPair[0].getX()*scaleX) + " , " + Math.round(getHeight() - currentPointPair[0].getY()*scaleY) + " )", this.getWidth()-300, 20);
-			g.drawString("( " + Math.round(currentPointPair[1].getX()*scaleX) + " , " + Math.round(getHeight() - currentPointPair[1].getY()*scaleY) + " )", this.getWidth()-150, 20);
+			g.drawString("( " + Math.round(currentPointPair[0].getX()*scaleX) + " , " + Math.round(getHeight() - currentPointPair[0].getY()*scaleY) + " )", x+10, 20);
+			g.drawString("( " + Math.round(currentPointPair[1].getX()*scaleX) + " , " + Math.round(getHeight() - currentPointPair[1].getY()*scaleY) + " )", x+150, 20);
 		}
 		//Draw Current Mouse Coordinates
-		else{ 		
+		else{
+			int x = getWidth()-150;
+			if(tool.isOpen()) {
+				x -= tool.toolWidth();
+			}
 			g.setColor(new Color(0,0,0,100));
-			g.fillRect(this.getWidth()-150, 0, 150, 30);
+			g.fillRect(x, 0, 150, 30);
 			g.setFont(new Font("Arial", Font.PLAIN, 20));
 			g.setColor(cP);
-			g.drawString("( " + Math.round(mouseMotion.getX()*scaleX) + " , " + Math.round((getHeight() - mouseMotion.getY())*scaleY) + " )", this.getWidth()-140, 20);
+			g.drawString("( " + Math.round(mouseMotion.getX()*scaleX) + " , " + Math.round((getHeight() - mouseMotion.getY())*scaleY) + " )", x+10, 20);
 		}
 
 		//Draw Building Image
@@ -199,6 +207,7 @@ public class Plane extends JPanel{
 
 		//Draw tool panel
 		tool.paint(g);
+		super.paintComponents(g);
 	} //Paint end
 
 	/**
