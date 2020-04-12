@@ -37,7 +37,8 @@ public class ConfigurationFile {
 		//Iterate through list of buildings to store info on file
 		for(Building b: map.getBuildingList()){
 			file += "\nBuilding Name: " + b.getName() + "\n" 
-					+ "Building Image: " + b.getPictureURL() + "\n"
+					+ "Building Image: " + b.getPictureURL() + 
+					", Building Height: " + b.getBuildingHeight() + "\n"
 					+ b.getWallInfo(); //map method add printLine already
 		}
 		file += "\nTrees:";
@@ -93,6 +94,7 @@ public class ConfigurationFile {
 		String questionLine;
 		String treeLine;
 		String breakLine = "";
+		
 
 		//load Map info (name, size image)
 		map.setMapName(sc.nextLine().substring(5)); 
@@ -113,15 +115,21 @@ public class ConfigurationFile {
 		while (sc.hasNextLine()) {
 			//create a building
 			while(breakLine.contains("Building Name")) {
+				int index = 0;
 				//name of Building
 				String name = breakLine.substring(breakLine.indexOf("Name:")+6); //+6 to exclude "Name: "
 				//System.out.println(name);
 				building = new Building(name);
 				//Building Image 
-				String bImage = sc.nextLine(); 
-				bImage = bImage.substring(bImage.indexOf("Building Image: ") + 16);
+				String bLine = sc.nextLine(); 
+				String bImage= "";
+				index = bLine.indexOf(',');
+				String bHeight = "";
+				bImage = bLine.substring(bLine.indexOf("Building Image: ") + 16, index);
+				bHeight = bLine.substring(index + 10);
 				try {
 					building.setPictureURL(bImage);
+					building.setBuildingHeight(Integer.valueOf(bHeight));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -130,7 +138,7 @@ public class ConfigurationFile {
 				wallLine = sc.nextLine();
 				while(wallLine.contains("ID")) {
 					//name
-					int index = wallLine.indexOf(',');
+					index = wallLine.indexOf(',');
 					name = wallLine.substring(wallLine.indexOf("ID:")+4, index);
 					//height
 					index = wallLine.indexOf(',',index+1);
