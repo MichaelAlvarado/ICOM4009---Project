@@ -130,7 +130,7 @@ public class MapDesignState{
 		help = new JButton("Help");
 		panel.add(help);
 
-		setting = new JButton("Setting");
+		setting = new JButton("Settings");
 		panel.add(setting);
 
 		addWall = new JButton("Add Wall");
@@ -151,7 +151,7 @@ public class MapDesignState{
 		addBuilding = new JButton("Add Building");
 		panel.add(addBuilding);
 
-		wallList = new JButton("Current Walls");
+		wallList = new JButton("Wall List");
 		panel.add(wallList);
 
 		buildingList = new JButton("Building List");
@@ -352,16 +352,17 @@ public class MapDesignState{
 		plane.setBounds(0, canvasY, width, height-(canvasY));
 		help.setBounds(width-170, 15, 150, 25);
 		setting.setBounds(width-170, canvasY-35, 150, 25);
-		addWall.setBounds((panel.getWidth()/2)+5, 15, 150, 25);
+		addWall.setBounds((panel.getWidth()/2) - 150, 15, 150, 25);
 		addTree.setBounds((panel.getWidth()/2)+165, 15, 150, 25);
-		addQuestion.setBounds((panel.getWidth()/2)+5, 50, 150, 25);
-		editMap.setBounds(165, 15, 150, 25);
-		mapDone.setBounds(320, 15, 150, 25);
-		addBuilding.setBounds(10, 15, 150, 25);
-		wallList.setBounds(10,50,150,25);
-		buildingList.setBounds(165,50,150,25);
+		addQuestion.setBounds((panel.getWidth()/2)+5, 15, 150, 25);
+		editMap.setBounds(10, 50, 150, 25);
+		mapDone.setBounds(10,15,150,25);
+		addBuilding.setBounds((panel.getWidth()/2) - 300, 15, 150, 25);
+		wallList.setBounds((panel.getWidth()/2) - 150, 50, 150, 25);
+		buildingList.setBounds((panel.getWidth()/2) - 300,50,150,25);
 		treeList.setBounds((panel.getWidth()/2)+165, 50, 150, 25);
-		questionList.setBounds(320, 50, 150, 25);
+		questionList.setBounds((panel.getWidth()/2)+5, 50, 150, 25);
+		
 	}
 
 	public void loadingScreen() {
