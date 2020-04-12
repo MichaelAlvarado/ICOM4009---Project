@@ -287,20 +287,22 @@ public class Building {
 		if(found) {
 			g.drawImage(getPicture(),perimeter.x,perimeter.y, perimeter.width, perimeter.height,null);
 		}
-		//Once the player is close, make wall visible
-		else if(playerCloseBy) {
-			animation.stars.render(g);
-			Rectangle rec = this.perimeter();
-			g.setColor(Color.BLACK);
-			g.drawString("Press F", rec.x+10, rec.y+(rec.height/2));
-		}
-		//Need a fix (what if i got huge building, and this only take into account from the center point distance)
-		Point centerPoint = new Point((int)bound.getCenterX(), (int)bound.getCenterY());
-		if(centerPoint.distance(new Point((int)Handler.getGameState().getPlayer().getBound().getCenterX(),(int)Handler.getGameState().getPlayer().getBound().getCenterY()))<180) {
-			for(Wall w: getWalls()) {
-				int blackness = 255-(int)(1.3*centerPoint.distance(new Point((int)Handler.getGameState().getPlayer().getBound().getCenterX(),(int)Handler.getGameState().getPlayer().getBound().getCenterY())));
-				g.setColor(new Color(0, 0, 0, blackness));
-				g.drawLine(w.getP1().x, w.getP1().y, w.getP2().x, w.getP2().y);
+		else {
+			//Once the player is close, make wall visible
+			if(playerCloseBy) {
+				animation.stars.render(g);
+				Rectangle rec = this.perimeter();
+				g.setColor(Color.BLACK);
+				g.drawString("Press F", rec.x+10, rec.y+(rec.height/2));
+			}
+			//Need a fix (what if i got huge building, and this only take into account from the center point distance)
+			Point centerPoint = new Point((int)bound.getCenterX(), (int)bound.getCenterY());
+			if(centerPoint.distance(new Point((int)Handler.getGameState().getPlayer().getBound().getCenterX(),(int)Handler.getGameState().getPlayer().getBound().getCenterY()))<180) {
+				for(Wall w: getWalls()) {
+					int blackness = 255-(int)(1.3*centerPoint.distance(new Point((int)Handler.getGameState().getPlayer().getBound().getCenterX(),(int)Handler.getGameState().getPlayer().getBound().getCenterY())));
+					g.setColor(new Color(0, 0, 0, blackness));
+					g.drawLine(w.getP1().x, w.getP1().y, w.getP2().x, w.getP2().y);
+				}
 			}
 		}
 		/*
@@ -329,7 +331,7 @@ public class Building {
 			};
 			if(Images.starEffect == null) 
 				System.out.println("WTF");
-			
+
 		}
 	}
 }
