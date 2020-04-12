@@ -73,7 +73,7 @@ public class MenuState{
 		};
 		panel.setLayout(null);
 		panel.setBounds(0, 0, width, height);
-		
+
 		charSelection = new charSelect(width/2-250, height/2-100,500,200, this);
 		charSelection.setVisible(false);
 		panel.add(charSelection);
@@ -108,7 +108,7 @@ public class MenuState{
 		}; 
 		picLabel.setBounds(0,0,display.getContentPane().getWidth(),display.getContentPane().getHeight());
 		panel.add(picLabel);
-		
+
 		responsiveScreen();
 
 		display.getContentPane().add(panel);
@@ -163,10 +163,10 @@ public class MenuState{
 	 * This methods draw the Loading Screen Image and remove all Content in the display
 	 */
 	public void loadingScreen() {
-			display.setLoadingScreen();
-			display.getContentPane().removeAll();
+		display.setLoadingScreen();
+		display.getContentPane().removeAll();
 	}
-	
+
 	/**
 	 * 
 	 * Description - This method set the position of all responsive Element
@@ -184,7 +184,7 @@ public class MenuState{
 		charSelection.setBounds(width/2-250, height/2-100,500,200);
 		title.setBounds(width/2, 150, 400, 140);
 	}
-	
+
 	/**
 	 * @author Michael J. Alvarado
 	 * Date - 12/March/2020
@@ -214,7 +214,7 @@ public class MenuState{
 		public MapSelect(int x, int y, int width, int height, MenuState menu) {
 			super();
 			this.menu = menu;
-			map = new Map();
+			map = null;
 			setLayout(null);
 			setBounds(x, y, width, height);
 			setBorder(new LineBorder(UIManager.getColor("Button.darkShadow"), 3, true));
@@ -254,14 +254,19 @@ public class MenuState{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					//Start
-					System.out.println("Loading GameEngine...");
-					long start = System.nanoTime();
-					menu.loadingScreen();
-					new Images(charSelection.getSelectedIndex());
-					GameEngine gameEngine = new GameEngine(display, map);
-					gameEngine.start();
-					System.out.println("GameEngine Loaded in: " + ((System.nanoTime()-start)/1000000000.0) + " seconds");
-					exit();
+					if(map != null) {
+						System.out.println("Loading GameEngine...");
+						long start = System.nanoTime();
+						menu.loadingScreen();
+						new Images(charSelection.getSelectedIndex());
+						GameEngine gameEngine = new GameEngine(display, map);
+						gameEngine.start();
+						System.out.println("GameEngine Loaded in: " + ((System.nanoTime()-start)/1000000000.0) + " seconds");
+						exit();
+					}
+					else {
+						JOptionPane.showMessageDialog(display, "Please load a map");
+					}
 				}
 			});
 
@@ -275,7 +280,7 @@ public class MenuState{
 					exit();
 				}
 			});
-			
+
 			//Tutorial Default Map
 			defaultMap = new JButton("Default Map");
 			defaultMap.setBounds(10, 10, 150, 30);
@@ -291,7 +296,7 @@ public class MenuState{
 					}
 				}
 			});
-			
+
 			add(enter);
 			add(exit);
 			add(browseButton);
@@ -306,7 +311,7 @@ public class MenuState{
 		}
 
 	}
-	
+
 	public class charSelect extends JPanel{
 
 
@@ -326,8 +331,8 @@ public class MenuState{
 			// browse for a wall texture
 			charLabel = new JLabel("Choose Your Character");
 			charLabel.setBounds(10, 70, 150, 25);
-						
-			
+
+
 			String num[]= { "Boy","Girl","Adventure Boy","Adventure Girl","Cat","Dog"};
 			characterSel = new JList(num);
 			characterSel.setSelectedIndex(0);
@@ -358,7 +363,7 @@ public class MenuState{
 					exit();
 				}
 			});
-			
+
 			add(enter);
 			add(exit);
 			add(charLabel);
@@ -374,5 +379,5 @@ public class MenuState{
 		}
 
 	}
-	
+
 }
