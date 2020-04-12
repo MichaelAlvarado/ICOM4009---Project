@@ -73,18 +73,17 @@ public class MenuState{
 		};
 		panel.setLayout(null);
 		panel.setBounds(0, 0, width, height);
-
-		mapSelection = new MapSelect(width/2-250, height/2-100,500,200, this);
-		mapSelection.setVisible(false);
-		panel.add(mapSelection);
 		
 		charSelection = new charSelect(width/2-250, height/2-100,500,200, this);
 		charSelection.setVisible(false);
 		panel.add(charSelection);
 
+		mapSelection = new MapSelect(width/2-250, height/2-100,500,200, this);
+		mapSelection.setVisible(false);
+		panel.add(mapSelection);
+
 		createMap = new JButton("Map Design");
 		createMap.setFont(new Font("Comic Sans MS", Font.BOLD, 20));	
-		createMap.setBounds(width/2+100, height/2-30, 250, 90);
 		panel.add(createMap);
 
 		playGame = new JButton("Play Game");
@@ -135,8 +134,9 @@ public class MenuState{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// The game engine should start here
-				charSelection.setVisible(true);
 				setButtonsEnable(false);
+				charSelection.setVisible(true);
+				charSelection.requestFocus();
 			}
 		});
 
@@ -181,8 +181,10 @@ public class MenuState{
 		playGame.setBounds(width/2+100, height/2 + 100, 250, 90);
 		help.setBounds(width/2+100, height/2 + 230, 250, 90);
 		mapSelection.setBounds(width/2-250, height/2-100,500,200);
+		charSelection.setBounds(width/2-250, height/2-100,500,200);
 		title.setBounds(width/2, 150, 400, 140);
 	}
+	
 	/**
 	 * @author Michael J. Alvarado
 	 * Date - 12/March/2020
@@ -327,6 +329,7 @@ public class MenuState{
 			
 			String num[]= { "Boy","Girl","Adventure Boy","Adventure Girl","Cat","Dog"};
 			characterSel = new JList(num);
+			characterSel.setSelectedIndex(0);
 			characterSel.setBounds(charLabel.getX()+charLabel.getWidth(), charLabel.getY()-50, (width/2)-75, 110);
 
 
@@ -356,12 +359,10 @@ public class MenuState{
 				}
 			});
 			
-			
 			add(enter);
 			add(exit);
 			add(charLabel);
 			add(characterSel);
-
 		}
 
 		private void exit() {
