@@ -257,6 +257,7 @@ public class MenuState{
 					System.out.println("Loading GameEngine...");
 					long start = System.nanoTime();
 					menu.loadingScreen();
+					new Images(charSelection.getSelectedIndex());
 					GameEngine gameEngine = new GameEngine(display, map);
 					gameEngine.start();
 					System.out.println("GameEngine Loaded in: " + ((System.nanoTime()-start)/1000000000.0) + " seconds");
@@ -341,7 +342,6 @@ public class MenuState{
 				public void actionPerformed(ActionEvent e) {
 					//Start
 					// The game engine should start here
-					new Images(characterSel.getSelectedIndex());
 					mapSelection.setVisible(true);
 					charSelection.setVisible(false);
 					setButtonsEnable(false);
@@ -363,6 +363,9 @@ public class MenuState{
 			add(exit);
 			add(charLabel);
 			add(characterSel);
+		}
+		public int getSelectedIndex() {
+			return characterSel.getSelectedIndex();
 		}
 
 		private void exit() {
