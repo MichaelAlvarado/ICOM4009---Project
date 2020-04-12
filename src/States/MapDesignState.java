@@ -378,22 +378,32 @@ public class MapDesignState{
 	 * @param addWallBox - This must be given the addWallBox so that it can be displayed when clicked on a specifi Wall from the PopUp
 	 */
 	private void wallsListPopUp(int x, int y, AddWallBox addWallBox) {
-		PopupMenu wallsPopUp = new PopupMenu("Walls on: " + plane.getCurrentBuilding().getName());
-		wallsPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-		for(Wall wall: plane.getCurrentBuilding().getWalls()) {
-			MenuItem wallOption = new MenuItem(wall.getID());
-			wallOption.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					addWallBox.edit(wall);
-					addWallBox.setVisible(true);
+		if(addBuilding.getText().contentEquals("Finish Building")) {
+			PopupMenu wallsPopUp = new PopupMenu("Walls on: " + plane.getCurrentBuilding().getName());
+			wallsPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
+			if(!plane.getCurrentBuilding().getWalls().isEmpty()) {
+				for(Wall wall: plane.getCurrentBuilding().getWalls()) {
+					MenuItem wallOption = new MenuItem(wall.getID());
+					wallOption.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent arg0) {
+							addWallBox.edit(wall);
+							addWallBox.setVisible(true);
+						}
+
+					});
+					wallsPopUp.add(wallOption);
 				}
 
-			});
-			wallsPopUp.add(wallOption);
-		}
-		display.add(wallsPopUp);
-		wallsPopUp.show(display, x, y);
+				display.add(wallsPopUp);
+				wallsPopUp.show(display, x, y);
+			}
+			else
+				JOptionPane.showMessageDialog(plane, "There are currently no walls in this building.");}
+		else
+			JOptionPane.showMessageDialog(plane, "You must first create or select a building"
+					+ " to access its list of walls.");
+
 
 	}
 
@@ -406,23 +416,28 @@ public class MapDesignState{
 	 * @param addBuildingBox - This must be given the addBuldingBox so that it can be edit when clicked on a specific Building from the PopUp
 	 */
 	private void buildingListPopUp(int x, int y, AddBuildingBox addBuildingBox) {
-		PopupMenu buildingsPopUp = new PopupMenu("Buildings on: " +  plane.getMap().getMapName());
-		buildingsPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-		for(Building building: plane.getMap().getBuildingList()) {
-			MenuItem buildingOption = new MenuItem(building.getName());
-			buildingOption.addActionListener(new ActionListener() {
+		if(!plane.getMap().getBuildingList().isEmpty()) {
+			PopupMenu buildingsPopUp = new PopupMenu("Buildings on: " +  plane.getMap().getMapName());
+			buildingsPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
+			for(Building building: plane.getMap().getBuildingList()) {
+				MenuItem buildingOption = new MenuItem(building.getName());
+				buildingOption.addActionListener(new ActionListener() {
 
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					addBuildingBox.edit(building);
-					addBuildingBox.setVisible(true);
-				}
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						addBuildingBox.edit(building);
+						addBuildingBox.setVisible(true);
+					}
 
-			});
-			buildingsPopUp.add(buildingOption);
+				});
+				buildingsPopUp.add(buildingOption);
+			}
+			display.add(buildingsPopUp);
+			buildingsPopUp.show(display, x, y);
 		}
-		display.add(buildingsPopUp);
-		buildingsPopUp.show(display, x, y);
+		else
+			JOptionPane.showMessageDialog(plane, "There currently no buildings in this map.");
+
 	}
 
 	/**
@@ -434,23 +449,27 @@ public class MapDesignState{
 	 * @param addTreeBox - This must be given the addTreeBox so that it can be edit when clicked on a specific Building from the PopUp
 	 */
 	private void treeListPopUp(int x, int y, AddTreeBox addTreeBox) {
-		PopupMenu treesPopUp = new PopupMenu("Trees on: " +  plane.getMap().getMapName());
-		treesPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-		for(Tree tree: plane.getMap().getTrees()) {
-			MenuItem treeOption = new MenuItem(tree.getID());
-			treeOption.addActionListener(new ActionListener() {
+		if(!plane.getMap().getTrees().isEmpty()) {
+			PopupMenu treesPopUp = new PopupMenu("Trees on: " +  plane.getMap().getMapName());
+			treesPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
+			for(Tree tree: plane.getMap().getTrees()) {
+				MenuItem treeOption = new MenuItem(tree.getID());
+				treeOption.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						addTreeBox.edit(tree);
+						addTreeBox.setVisible(true);
+					}
 
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					addTreeBox.edit(tree);
-					addTreeBox.setVisible(true);
-				}
-
-			});
-			treesPopUp.add(treeOption);
+				});
+				treesPopUp.add(treeOption);
+			}
+			display.add(treesPopUp);
+			treesPopUp.show(display, x, y);
 		}
-		display.add(treesPopUp);
-		treesPopUp.show(display, x, y);
+		else
+			JOptionPane.showMessageDialog(plane, "There are currently no trees in this map.");
+
 	}
 
 	/**
@@ -462,21 +481,31 @@ public class MapDesignState{
 	 * @param addQuestionBox - This must be given the addQuestionBox so that it can be edit when clicked on a specific Building from the PopUp
 	 */
 	private void questionListPopUp(int x, int y, AddQuestionsBox addQuestionBox) {
-		PopupMenu questionPopUp = new PopupMenu("Questions on: " +  plane.getMap().getMapName());
-		questionPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-		for(Question q: plane.getCurrentBuilding().getQuestionPool()) {
-			MenuItem questionOption = new MenuItem(q.getQuestion());
-			questionOption.addActionListener(new ActionListener() {
+		if(addBuilding.getText().contentEquals("Finish Building")) {
+			PopupMenu questionPopUp = new PopupMenu("Questions on: " +  plane.getMap().getMapName());
+			questionPopUp.setFont(new Font("Arial", Font.PLAIN, 15));
+			if(!plane.getCurrentBuilding().getQuestionPool().isEmpty()) {
+				for(Question q: plane.getCurrentBuilding().getQuestionPool()) {
+					MenuItem questionOption = new MenuItem(q.getQuestion());
+					questionOption.addActionListener(new ActionListener() {
 
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					addQuestionBox.edit(q);
+						@Override
+						public void actionPerformed(ActionEvent arg0) {
+							addQuestionBox.edit(q);
+						}
+					});
+					questionPopUp.add(questionOption);
 				}
-			});
-			questionPopUp.add(questionOption);
+				display.add(questionPopUp);
+				questionPopUp.show(display, x, y);
+			}
+			else
+				JOptionPane.showMessageDialog(plane, "There are currently no questions in this building.");
 		}
-		display.add(questionPopUp);
-		questionPopUp.show(display, x, y);
+		else
+			JOptionPane.showMessageDialog(plane, "You must first create or select a building"
+					+ " to access its list of questions.");
+
 	}
 
 	/**
