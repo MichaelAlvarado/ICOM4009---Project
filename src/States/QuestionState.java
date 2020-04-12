@@ -14,7 +14,9 @@ import javax.swing.JTextField;
 import Components.Building;
 import Components.Question;
 import GameSetUp.Handler;
+import Resources.Animation;
 import Resources.Button;
+import Resources.Images;
 
 public class QuestionState implements State{
 
@@ -23,17 +25,17 @@ public class QuestionState implements State{
 	private Button yes, no;
 	private Button opt1, opt2, opt3, opt4;
 	private boolean answering; //if this is true then its on state where it ask the player if he wants to answer the questions of building
-	private boolean isCorrect;
-	private boolean display;
 	private Question currentQuestion;
 	private String correctAnswer;
 	private int questionNumber = 0;
 	private int correctlyAnsweredQuestions = 0;
 	private int incorrectlyAnsweredQuestions = 0;
+	private Animation correct;
 	
 	public QuestionState() {
 		building = new Building("Question Building"); //its a dummy building 
 		currentQuestion = new Question();
+		correct = new Animation(Images.correct,0,0,100,100,0.7);
 		
 		yes = new Button("Yes", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2), 100, 30, Color.CYAN) {
 
@@ -128,20 +130,10 @@ public class QuestionState implements State{
 			opt2.render(g);
 			opt3.render(g);
 			opt4.render(g);
-		}
-		if (isCorrect && display) {
-			g.setColor(Color.BLACK);
-			g.setFont(new Font("Arial", Font.PLAIN, 25));
-			g.drawString("Correct!!", (Handler.getWidth()/2)-(width/2), (Handler.getHeight()/2)-(height/2)+25);
 			
-			
+			correct.render(g);
 		}
-		if (!isCorrect && display) {
-			g.setColor(Color.BLACK);
-			g.setFont(new Font("Arial", Font.PLAIN, 25));
-			g.drawString("Oops, wrong answer!", (Handler.getWidth()/2)-(width/2), (Handler.getHeight()/2)-(height/2)+25);
-			
-		}
+
 	}
 
 	public void setBuilding(Building building) {
@@ -188,19 +180,15 @@ public class QuestionState implements State{
 	 *
 	 */
 	public void displayNextQuestion(Button b, String str) {
-		display = false;
 		if (b.getMessage().equals(str)) {
 			System.out.println("Correct");
 			correctlyAnsweredQuestions++;
 			System.out.println("correct answers: " + correctlyAnsweredQuestions);
-			isCorrect = true;
-			display = true;
+			correct.startAnimation();
 		}
 		else {
 			incorrectlyAnsweredQuestions++;
 			System.out.println("incorrect answers: " + incorrectlyAnsweredQuestions);
-			isCorrect = false;
-			display=true;
 		}
 		getNextQuestion();
 	}
@@ -210,7 +198,6 @@ public class QuestionState implements State{
 		incorrectlyAnsweredQuestions = 0;
 		questionNumber = 0;
 		answering = false;
-		display = false;
 	}
 	
 
