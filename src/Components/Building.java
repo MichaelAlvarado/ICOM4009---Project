@@ -313,17 +313,23 @@ public class Building {
 	}
 
 	private class BuildingAnimation {
-		public Animation stars = new Animation(Images.starEffect,0.6) {
-			@Override 
-			public void render(Graphics g) {
-				Rectangle perimeter = perimeter();
-				if(!stars.isAnimating()) {
-					Random rand = new Random();
-					stars.setBound(rand.nextInt(perimeter.width)+perimeter.x, rand.nextInt(perimeter.height)+perimeter.y, 20, 20);
+		public Animation stars;
+		public BuildingAnimation() {
+			stars = new Animation(Images.starEffect,0.6) {
+				@Override 
+				public void render(Graphics g) {
+					Rectangle perimeter = perimeter();
+					if(!stars.isAnimating()) {
+						Random rand = new Random();
+						stars.setBound(rand.nextInt(perimeter.width)+perimeter.x, rand.nextInt(perimeter.height)+perimeter.y, 20, 20);
+					}
+					stars.startAnimation();
+					super.render(g);
 				}
-				stars.startAnimation();
-				super.render(g);
-			}
-		};
+			};
+			if(Images.starEffect == null) 
+				System.out.println("WTF");
+			
+		}
 	}
 }

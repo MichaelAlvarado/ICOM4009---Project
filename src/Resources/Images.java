@@ -35,6 +35,7 @@ public class Images {
 		correct = new BufferedImage[5];
 		incorrect = new BufferedImage[5];
 		playAgain = new BufferedImage[5];
+		
 		try {
 			switch(CharacterIndex) {
 			//BOY SPRITE
@@ -230,8 +231,6 @@ public class Images {
 			playAgain[2] = ImageIO.read(new File("res/effects/playagain.png"));
 			playAgain[3] = ImageIO.read(new File("res/effects/playagain.png"));
 			playAgain[4] = ImageIO.read(new File("res/effects/playagain.png"));
-
-
 
 
 		}catch (IOException e) {
