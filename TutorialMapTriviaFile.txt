@@ -34,15 +34,15 @@ Question: Who is current US president
 Right: Donald Trump
 Wrong: Barack Obama
 Wrong: Bill Clinton
-Wrong: Washitong
+Wrong: Washington
 Question: 2+3
 Right: 5
 Wrong: 4
 Wrong: 2
 Wrong: 7
-Question: 1
-Right: 1
-Wrong: 2
-Wrong: 4
-Wrong: 6
+Question: Who is the heaviest animal?
+Right: Blue Whale
+Wrong: Elephant
+Wrong: Kodiak Bear
+Wrong: Hippopotamus
 
