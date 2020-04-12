@@ -231,7 +231,6 @@ public class MenuState{
 			browser.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					loadMap(browser.getSelectedFile());
 					mapURL.setText(browser.getSelectedFile().getPath());
 				}
 			});
@@ -249,17 +248,11 @@ public class MenuState{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					//Start
-					if(map != null) {
-						System.out.println("Loading GameEngine...");
-						long start = System.nanoTime();
-						menu.loadingScreen();
-						GameEngine gameEngine = new GameEngine(display, map);
-						gameEngine.start();
-						System.out.println("GameEngine Loaded in: " + ((System.nanoTime()-start)/1000000000.0) + " seconds");
-						exit();
+					if(!mapURL.getText().isEmpty()) {		
+						loadMap();
 					}
 					else {
-						JOptionPane.showMessageDialog(display, "Please load a map");
+						JOptionPane.showMessageDialog(display, "Please Choose Your Map");
 					}
 				}
 			});
@@ -282,8 +275,8 @@ public class MenuState{
 
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					loadMap(new File("TutorialMapConfigurationFile.txt"));
-					enter.getActionListeners()[0].actionPerformed(arg0);
+					mapURL.setText("TutorialMapConfigurationFile.txt");
+					loadMap();
 				}
 			});
 
@@ -295,10 +288,16 @@ public class MenuState{
 			add(defaultMap);
 		}
 
-		private void loadMap(File file) {
+		private void loadMap() {
 			try {
+				menu.loadingScreen();
+				System.out.println("Loading GameEngine...");
+				long start = System.nanoTime();
 				new Images(charSelection.getSelectedIndex());
-				map = ConfigurationFile.generateMap(file);
+				map = ConfigurationFile.generateMap(new File(mapURL.getText()));
+				GameEngine gameEngine = new GameEngine(display, map);
+				gameEngine.start();
+				System.out.println("GameEngine Loaded in: " + ((System.nanoTime()-start)/1000000000.0) + " seconds");
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
