@@ -305,10 +305,7 @@ public class MapDesignState{
 						else
 							JOptionPane.showMessageDialog(plane, "Map must contain an Image");
 					}
-					else if(x == -1) {
-						;
-					}
-					else {
+					else if(x == 1) {
 						loadingScreen();
 						MenuState menu = new MenuState(display);
 					}
