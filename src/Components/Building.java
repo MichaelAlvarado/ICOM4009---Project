@@ -329,9 +329,6 @@ public class Building {
 					super.render(g);
 				}
 			};
-			if(Images.starEffect == null) 
-				System.out.println("WTF");
-
 		}
 	}
 }

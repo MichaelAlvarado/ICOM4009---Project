@@ -64,7 +64,7 @@ public class Player {
 	public Rectangle getBound() {
 		return bound;
 	}
-	
+
 
 
 	/**
@@ -89,13 +89,11 @@ public class Player {
 			this.moveOnX(bound.x - speed);
 			walking = true;
 			animation.setRight(false);
-			animation.setLastPressed(true);
 		}
 		if(Handler.getKeyManager().right && bound.x+bound.width < Handler.getWidth()) {
 			this.moveOnX(bound.x + speed);
 			walking = true;
 			animation.setRight(true);
-			animation.setLastPressed(false);
 		}
 		if(Handler.getKeyManager().down && bound.y+bound.height < Handler.getHeight()) {
 			this.moveOnY(bound.y + speed);
@@ -126,7 +124,7 @@ public class Player {
 	private class PlayerAnimation {
 
 		private Animation animation;
-		private boolean right, lastPressed; //if player looking right
+		private boolean right; //if player looking right
 
 		public PlayerAnimation(){
 			Handler.getSoundManager().addAudio("footsteps");			
@@ -141,23 +139,22 @@ public class Player {
 		 * @date Apr 9, 2020
 		 */
 		public BufferedImage getPlayerFrame() {
-			if(!walking && lastPressed) {
-				animation.setAnimation(Images.CharacterSpriteIdleLeft);
-			} else if (!walking && !lastPressed) {
-				animation.setAnimation(Images.CharacterSpriteIdleRight);
-			} else if(right) {
-				animation.setAnimation(Images.CharacterSpriteRight);
-			}
-			else {
-				animation.setAnimation(Images.CharacterSpriteLeft);
-			}
-			if(walking) {
-				Handler.getSoundManager().resumeAudio("footsteps");
-				animation.startAnimation();
-			}
-			else {
+			if(!walking) {
+				if(right)
+					animation.setAnimation(Images.CharacterSpriteIdleRight);
+				else
+					animation.setAnimation(Images.CharacterSpriteIdleLeft);
 				Handler.getSoundManager().stopAudio("footsteps");
 				animation.stopAnimation();
+			}
+			else {
+				if(right) 
+					animation.setAnimation(Images.CharacterSpriteRight);
+
+				else 
+					animation.setAnimation(Images.CharacterSpriteLeft);
+				Handler.getSoundManager().resumeAudio("footsteps");
+				animation.startAnimation();
 			}
 			return animation.getCurrentFrame();
 		}
@@ -174,14 +171,6 @@ public class Player {
 
 		public void setRight(boolean right) {
 			this.right = right;
-		}
-
-		public boolean isLastPressed() {
-			return lastPressed;
-		}
-
-		public void setLastPressed(boolean lastPressed) {
-			this.lastPressed = lastPressed;
 		}
 
 	}
