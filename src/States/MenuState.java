@@ -57,7 +57,7 @@ public class MenuState{
 	private JLabel  title;
 	private int width, height;
 
-	public MenuState(Display display) throws IOException {
+	public MenuState(Display display){
 		this.display = display;
 		this.width = display.getContentPane().getWidth();
 		this.height = display.getContentPane().getHeight();
@@ -98,17 +98,22 @@ public class MenuState{
 		title.setFont(new Font("Comic Sans MS", Font.BOLD, 90));	
 		panel.add(title);
 
-		BufferedImage img = ImageIO.read(new File("res/backgrounds/MenuSky1.png")); 
-		JLabel picLabel = new JLabel() {
-			@Override
-			public void paint(Graphics g) {
-				g.drawImage(img, 0, 0, display.getContentPane().getWidth(), display.getContentPane().getHeight(), null);
-				setBounds(0,0,display.getContentPane().getWidth(),display.getContentPane().getHeight());
-			} 
-		}; 
-		picLabel.setBounds(0,0,display.getContentPane().getWidth(),display.getContentPane().getHeight());
-		panel.add(picLabel);
+		BufferedImage img;
+		try {
+			img = ImageIO.read(new File("res/backgrounds/MenuSky1.png"));
+			JLabel picLabel = new JLabel() {
+				@Override
+				public void paint(Graphics g) {
+					g.drawImage(img, 0, 0, display.getContentPane().getWidth(), display.getContentPane().getHeight(), null);
+					setBounds(0,0,display.getContentPane().getWidth(),display.getContentPane().getHeight());
+				} 
+			}; 
+			picLabel.setBounds(0,0,display.getContentPane().getWidth(),display.getContentPane().getHeight());
+			panel.add(picLabel);
 
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} 
 		responsiveScreen();
 
 		display.getContentPane().add(panel);

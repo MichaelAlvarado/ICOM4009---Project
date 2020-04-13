@@ -288,30 +288,27 @@ public class MapDesignState{
 		mapDone.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					Object[] options = { "YES", "NO" };
-					int x = JOptionPane.showOptionDialog(null, "Do you wish to save the Map?", "Warning",
-							JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
-							null, options, options[0]);
-					if (x == 0) {
-						if(!(plane.getMap().getPicture() == null)) {
-							if(plane.getCurrentBuilding().getWalls().size() < 1 || plane.getCurrentBuilding().getQuestionPool().size() < 4)
-								plane.getMap().removeBuilding(plane.getCurrentBuilding());
-							ConfigurationFile.generateTextFile(plane.getMap());
-							ConfigurationFile.generateQuestionFile(plane.getMap());
-							loadingScreen();
-							MenuState menu = new MenuState(display);
-						}
-						else
-							JOptionPane.showMessageDialog(plane, "Map must contain an Image");
-					}
-					else if(x == 1) {
+
+				Object[] options = { "YES", "NO" };
+				int x = JOptionPane.showOptionDialog(null, "Do you wish to save the Map?", "Warning",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
+						null, options, options[0]);
+				if (x == 0) {
+					if(!(plane.getMap().getPicture() == null)) {
+						if(plane.getCurrentBuilding().getWalls().size() < 1 || plane.getCurrentBuilding().getQuestionPool().size() < 4)
+							plane.getMap().removeBuilding(plane.getCurrentBuilding());
+						ConfigurationFile.generateTextFile(plane.getMap());
+						ConfigurationFile.generateQuestionFile(plane.getMap());
+						System.out.println("Map Saved");
 						loadingScreen();
-						MenuState menu = new MenuState(display);
 					}
-				} catch (IOException e) {
-					e.printStackTrace();
+					else
+						JOptionPane.showMessageDialog(plane, "Map must contain an Image");
 				}
+				else if(x == 1) {
+					loadingScreen();
+				}
+
 			}
 		});
 
@@ -348,26 +345,31 @@ public class MapDesignState{
 	private void setComponentsBound() {
 		this.width = display.getContentPane().getWidth();
 		this.height = display.getContentPane().getHeight();
-		panel.setBounds(0, 0, width, canvasY);
-		plane.setBounds(0, canvasY, width, height-(canvasY));
-		help.setBounds(width-170, 15, 150, 25);
-		setting.setBounds(width-170, canvasY-35, 150, 25);
-		addWall.setBounds((panel.getWidth()/2) - 150, 15, 150, 25);
-		addTree.setBounds((panel.getWidth()/2)+165, 15, 150, 25);
-		addQuestion.setBounds((panel.getWidth()/2)+5, 15, 150, 25);
-		editMap.setBounds(10, 50, 150, 25);
-		mapDone.setBounds(10,15,150,25);
-		addBuilding.setBounds((panel.getWidth()/2) - 300, 15, 150, 25);
-		wallList.setBounds((panel.getWidth()/2) - 150, 50, 150, 25);
-		buildingList.setBounds((panel.getWidth()/2) - 300,50,150,25);
-		treeList.setBounds((panel.getWidth()/2)+165, 50, 150, 25);
-		questionList.setBounds((panel.getWidth()/2)+5, 50, 150, 25);
-		
+		panel.setBounds(0, 0, this.width, canvasY);
+		plane.setBounds(0, canvasY, this.width, this.height-(canvasY));
+		//Buttons
+		int y1 = 10;
+		int y2 = 45;
+		int width = 200;
+		int height = 30;
+		mapDone.setBounds(10,y1,width,height);
+		editMap.setBounds(10, y2, width, height);
+		addBuilding.setBounds((panel.getWidth()/2) - 400, y1, width, height);
+		buildingList.setBounds((panel.getWidth()/2) - 400,y2,width, height);
+		addWall.setBounds((panel.getWidth()/2) - 200, y1, width, height);
+		wallList.setBounds((panel.getWidth()/2) - 200, y2, width, height);
+		addQuestion.setBounds((panel.getWidth()/2), y1, width, height);
+		questionList.setBounds((panel.getWidth()/2), y2, width, height);
+		addTree.setBounds((panel.getWidth()/2)+200, y1, width, height);
+		treeList.setBounds((panel.getWidth()/2)+200, y2, width, height);
+		help.setBounds(this.width-220, y1, width, height);
+		setting.setBounds(this.width-220, y2, width, height);
 	}
 
 	public void loadingScreen() {
 		display.setLoadingScreen();
-		display.getContentPane().removeAll();		
+		display.getContentPane().removeAll();	
+		MenuState menu = new MenuState(display);
 	}
 
 	/**

@@ -77,6 +77,9 @@ public class Plane extends JPanel{
 		gridIsOn = true;
 		buildingImagesIsOn = false;
 		map = new Map();
+		map.setMapName("Map");
+		map.setWidth(width);
+		map.setHeight(height);
 		currentPointPair = new Point[2];
 		mouse = new Mouse();
 		mouseMotion = new MouseMotion();
