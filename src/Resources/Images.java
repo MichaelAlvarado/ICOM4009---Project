@@ -29,8 +29,8 @@ public class Images {
 		
 		CharacterSpriteRight = new BufferedImage[9];
 		CharacterSpriteLeft = new BufferedImage[9];
-		CharacterSpriteIdleRight = new BufferedImage[1];
-		CharacterSpriteIdleLeft = new BufferedImage[1];
+		CharacterSpriteIdleRight = new BufferedImage[9];
+		CharacterSpriteIdleLeft = new BufferedImage[9];
 		starEffect = new BufferedImage[5];
 		correct = new BufferedImage[5];
 		incorrect = new BufferedImage[5];
@@ -42,6 +42,14 @@ public class Images {
 			case 0:
 				//Rights
 				CharacterSpriteIdleRight[0] = ImageIO.read(new File("res/animation_Images/boy/Idle (1).png")); //IDLE
+				CharacterSpriteIdleRight[1] = ImageIO.read(new File("res/animation_Images/boy/Idle (2).png")); //IDLE
+				CharacterSpriteIdleRight[2] = ImageIO.read(new File("res/animation_Images/boy/Idle (3).png")); //IDLE
+				CharacterSpriteIdleRight[3] = ImageIO.read(new File("res/animation_Images/boy/Idle (4).png")); //IDLE
+				CharacterSpriteIdleRight[4] = ImageIO.read(new File("res/animation_Images/boy/Idle (5).png")); //IDLE
+				CharacterSpriteIdleRight[5] = ImageIO.read(new File("res/animation_Images/boy/Idle (6).png")); //IDLE
+				CharacterSpriteIdleRight[6] = ImageIO.read(new File("res/animation_Images/boy/Idle (7).png")); //IDLE
+				CharacterSpriteIdleRight[7] = ImageIO.read(new File("res/animation_Images/boy/Idle (8).png")); //IDLE
+				CharacterSpriteIdleRight[8] = ImageIO.read(new File("res/animation_Images/boy/Idle (9).png")); //IDLE
 				
 				CharacterSpriteRight[0] =  ImageIO.read(new File("res/animation_Images/boy/Walk (1).png"));
 				CharacterSpriteRight[1] =  ImageIO.read(new File("res/animation_Images/boy/Walk (2).png"));
@@ -54,7 +62,15 @@ public class Images {
 				CharacterSpriteRight[8] =  ImageIO.read(new File("res/animation_Images/boy/Walk (9).png"));
 
 				//Lefts
-				CharacterSpriteIdleLeft[0] =  ImageIO.read(new File("res/animation_Images/boy/IdleLeft (1).png")); //IDLE
+				CharacterSpriteIdleLeft[0] = ImageIO.read(new File("res/animation_Images/boy/IdleLeft (1).png")); //IDLE
+				CharacterSpriteIdleLeft[1] = ImageIO.read(new File("res/animation_Images/boy/IdleLeft (2).png")); //IDLE
+				CharacterSpriteIdleLeft[2] = ImageIO.read(new File("res/animation_Images/boy/IdleLeft (3).png")); //IDLE
+				CharacterSpriteIdleLeft[3] = ImageIO.read(new File("res/animation_Images/boy/IdleLeft (4).png")); //IDLE
+				CharacterSpriteIdleLeft[4] = ImageIO.read(new File("res/animation_Images/boy/IdleLeft (5).png")); //IDLE
+				CharacterSpriteIdleLeft[5] = ImageIO.read(new File("res/animation_Images/boy/IdleLeft (6).png")); //IDLE
+				CharacterSpriteIdleLeft[6] = ImageIO.read(new File("res/animation_Images/boy/IdleLeft (7).png")); //IDLE
+				CharacterSpriteIdleLeft[7] = ImageIO.read(new File("res/animation_Images/boy/IdleLeft (8).png")); //IDLE
+				CharacterSpriteIdleLeft[8] = ImageIO.read(new File("res/animation_Images/boy/IdleLeft (9).png")); //IDLE
 				
 				CharacterSpriteLeft[0] =  ImageIO.read(new File("res/animation_Images/boy/WalkLeft (1).png"));
 				CharacterSpriteLeft[1] =  ImageIO.read(new File("res/animation_Images/boy/WalkLeft (2).png"));
@@ -70,6 +86,14 @@ public class Images {
 			case 1:
 				//Rights
 				CharacterSpriteIdleRight[0] = ImageIO.read(new File("res/animation_Images/girl/Idle (1).png")); //IDLE
+				CharacterSpriteIdleRight[1] = ImageIO.read(new File("res/animation_Images/girl/Idle (2).png")); //IDLE
+				CharacterSpriteIdleRight[2] = ImageIO.read(new File("res/animation_Images/girl/Idle (3).png")); //IDLE
+				CharacterSpriteIdleRight[3] = ImageIO.read(new File("res/animation_Images/girl/Idle (4).png")); //IDLE
+				CharacterSpriteIdleRight[4] = ImageIO.read(new File("res/animation_Images/girl/Idle (5).png")); //IDLE
+				CharacterSpriteIdleRight[5] = ImageIO.read(new File("res/animation_Images/girl/Idle (6).png")); //IDLE
+				CharacterSpriteIdleRight[6] = ImageIO.read(new File("res/animation_Images/girl/Idle (7).png")); //IDLE
+				CharacterSpriteIdleRight[7] = ImageIO.read(new File("res/animation_Images/girl/Idle (8).png")); //IDLE
+				CharacterSpriteIdleRight[8] = ImageIO.read(new File("res/animation_Images/girl/Idle (9).png")); //IDLE
 				
 				CharacterSpriteRight[0] =  ImageIO.read(new File("res/animation_Images/girl/Walk (1).png"));
 				CharacterSpriteRight[1] =  ImageIO.read(new File("res/animation_Images/girl/Walk (2).png"));
@@ -82,7 +106,15 @@ public class Images {
 				CharacterSpriteRight[8] =  ImageIO.read(new File("res/animation_Images/girl/Walk (9).png"));
 
 				//Lefts
-				CharacterSpriteIdleLeft[0] =  ImageIO.read(new File("res/animation_Images/girl/IdleLeft (1).png")); //IDLE
+				CharacterSpriteIdleLeft[0] =  ImageIO.read(new File("res/animation_Images/girl/IdleLeft (1).png"));
+				CharacterSpriteIdleLeft[1] =  ImageIO.read(new File("res/animation_Images/girl/IdleLeft (2).png"));
+				CharacterSpriteIdleLeft[2] =  ImageIO.read(new File("res/animation_Images/girl/IdleLeft (3).png"));
+				CharacterSpriteIdleLeft[3] =  ImageIO.read(new File("res/animation_Images/girl/IdleLeft (4).png"));
+				CharacterSpriteIdleLeft[4] =  ImageIO.read(new File("res/animation_Images/girl/IdleLeft (5).png"));
+				CharacterSpriteIdleLeft[5] =  ImageIO.read(new File("res/animation_Images/girl/IdleLeft (6).png"));
+				CharacterSpriteIdleLeft[6] =  ImageIO.read(new File("res/animation_Images/girl/IdleLeft (7).png"));
+				CharacterSpriteIdleLeft[7] =  ImageIO.read(new File("res/animation_Images/girl/IdleLeft (8).png"));
+				CharacterSpriteIdleLeft[8] =  ImageIO.read(new File("res/animation_Images/girl/IdleLeft (9).png"));
 				
 				CharacterSpriteLeft[0] =  ImageIO.read(new File("res/animation_Images/girl/WalkLeft (1).png"));
 				CharacterSpriteLeft[1] =  ImageIO.read(new File("res/animation_Images/girl/WalkLeft (2).png"));
@@ -98,6 +130,14 @@ public class Images {
 			case 2:
 				//Rights
 				CharacterSpriteIdleRight[0] = ImageIO.read(new File("res/animation_Images/a_boy/Idle (1).png")); //IDLE
+				CharacterSpriteIdleRight[1] = ImageIO.read(new File("res/animation_Images/a_boy/Idle (2).png")); //IDLE
+				CharacterSpriteIdleRight[2] = ImageIO.read(new File("res/animation_Images/a_boy/Idle (3).png")); //IDLE
+				CharacterSpriteIdleRight[3] = ImageIO.read(new File("res/animation_Images/a_boy/Idle (4).png")); //IDLE
+				CharacterSpriteIdleRight[4] = ImageIO.read(new File("res/animation_Images/a_boy/Idle (5).png")); //IDLE
+				CharacterSpriteIdleRight[5] = ImageIO.read(new File("res/animation_Images/a_boy/Idle (6).png")); //IDLE
+				CharacterSpriteIdleRight[6] = ImageIO.read(new File("res/animation_Images/a_boy/Idle (7).png")); //IDLE
+				CharacterSpriteIdleRight[7] = ImageIO.read(new File("res/animation_Images/a_boy/Idle (8).png")); //IDLE
+				CharacterSpriteIdleRight[8] = ImageIO.read(new File("res/animation_Images/a_boy/Idle (9).png")); //IDLE
 				
 				CharacterSpriteRight[0] =  ImageIO.read(new File("res/animation_Images/a_boy/Walk (1).png"));
 				CharacterSpriteRight[1] =  ImageIO.read(new File("res/animation_Images/a_boy/Walk (2).png"));
@@ -110,7 +150,15 @@ public class Images {
 				CharacterSpriteRight[8] =  ImageIO.read(new File("res/animation_Images/a_boy/Walk (9).png"));
 
 				//Lefts
-				CharacterSpriteIdleLeft[0] =  ImageIO.read(new File("res/animation_Images/a_boy/IdleLeft (1).png")); //IDLE
+				CharacterSpriteIdleLeft[0] = ImageIO.read(new File("res/animation_Images/a_boy/IdleLeft (1).png")); //IDLE
+				CharacterSpriteIdleLeft[1] = ImageIO.read(new File("res/animation_Images/a_boy/IdleLeft (2).png")); //IDLE
+				CharacterSpriteIdleLeft[2] = ImageIO.read(new File("res/animation_Images/a_boy/IdleLeft (3).png")); //IDLE
+				CharacterSpriteIdleLeft[3] = ImageIO.read(new File("res/animation_Images/a_boy/IdleLeft (4).png")); //IDLE
+				CharacterSpriteIdleLeft[4] = ImageIO.read(new File("res/animation_Images/a_boy/IdleLeft (5).png")); //IDLE
+				CharacterSpriteIdleLeft[5] = ImageIO.read(new File("res/animation_Images/a_boy/IdleLeft (6).png")); //IDLE
+				CharacterSpriteIdleLeft[6] = ImageIO.read(new File("res/animation_Images/a_boy/IdleLeft (7).png")); //IDLE
+				CharacterSpriteIdleLeft[7] = ImageIO.read(new File("res/animation_Images/a_boy/IdleLeft (8).png")); //IDLE
+				CharacterSpriteIdleLeft[8] = ImageIO.read(new File("res/animation_Images/a_boy/IdleLeft (9).png")); //IDLE
 				
 				CharacterSpriteLeft[0] =  ImageIO.read(new File("res/animation_Images/a_boy/WalkLeft (1).png"));
 				CharacterSpriteLeft[1] =  ImageIO.read(new File("res/animation_Images/a_boy/WalkLeft (2).png"));
@@ -126,6 +174,14 @@ public class Images {
 			case 3:
 				//Rights
 				CharacterSpriteIdleRight[0] = ImageIO.read(new File("res/animation_Images/a_girl/Idle (1).png")); //IDLE
+				CharacterSpriteIdleRight[1] = ImageIO.read(new File("res/animation_Images/a_girl/Idle (2).png")); //IDLE
+				CharacterSpriteIdleRight[2] = ImageIO.read(new File("res/animation_Images/a_girl/Idle (3).png")); //IDLE
+				CharacterSpriteIdleRight[3] = ImageIO.read(new File("res/animation_Images/a_girl/Idle (4).png")); //IDLE
+				CharacterSpriteIdleRight[4] = ImageIO.read(new File("res/animation_Images/a_girl/Idle (5).png")); //IDLE
+				CharacterSpriteIdleRight[5] = ImageIO.read(new File("res/animation_Images/a_girl/Idle (6).png")); //IDLE
+				CharacterSpriteIdleRight[6] = ImageIO.read(new File("res/animation_Images/a_girl/Idle (7).png")); //IDLE
+				CharacterSpriteIdleRight[7] = ImageIO.read(new File("res/animation_Images/a_girl/Idle (8).png")); //IDLE
+				CharacterSpriteIdleRight[8] = ImageIO.read(new File("res/animation_Images/a_girl/Idle (9).png")); //IDLE
 				
 				CharacterSpriteRight[0] =  ImageIO.read(new File("res/animation_Images/a_girl/Walk (1).png"));
 				CharacterSpriteRight[1] =  ImageIO.read(new File("res/animation_Images/a_girl/Walk (2).png"));
@@ -138,7 +194,15 @@ public class Images {
 				CharacterSpriteRight[8] =  ImageIO.read(new File("res/animation_Images/a_girl/Walk (9).png"));
 
 				//Lefts
-				CharacterSpriteIdleLeft[0] =  ImageIO.read(new File("res/animation_Images/a_girl/IdleLeft (1).png")); //IDLE
+				CharacterSpriteIdleLeft[0] = ImageIO.read(new File("res/animation_Images/a_girl/IdleLeft (1).png")); //IDLE
+				CharacterSpriteIdleLeft[1] = ImageIO.read(new File("res/animation_Images/a_girl/IdleLeft (2).png")); //IDLE
+				CharacterSpriteIdleLeft[2] = ImageIO.read(new File("res/animation_Images/a_girl/IdleLeft (3).png")); //IDLE
+				CharacterSpriteIdleLeft[3] = ImageIO.read(new File("res/animation_Images/a_girl/IdleLeft (4).png")); //IDLE
+				CharacterSpriteIdleLeft[4] = ImageIO.read(new File("res/animation_Images/a_girl/IdleLeft (5).png")); //IDLE
+				CharacterSpriteIdleLeft[5] = ImageIO.read(new File("res/animation_Images/a_girl/IdleLeft (6).png")); //IDLE
+				CharacterSpriteIdleLeft[6] = ImageIO.read(new File("res/animation_Images/a_girl/IdleLeft (7).png")); //IDLE
+				CharacterSpriteIdleLeft[7] = ImageIO.read(new File("res/animation_Images/a_girl/IdleLeft (8).png")); //IDLE
+				CharacterSpriteIdleLeft[8] = ImageIO.read(new File("res/animation_Images/a_girl/IdleLeft (9).png")); //IDLE
 				
 				CharacterSpriteLeft[0] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (1).png"));
 				CharacterSpriteLeft[1] =  ImageIO.read(new File("res/animation_Images/a_girl/WalkLeft (2).png"));
@@ -154,6 +218,14 @@ public class Images {
 			case 4:
 				//Rights
 				CharacterSpriteIdleRight[0] = ImageIO.read(new File("res/animation_Images/cat/Idle (1).png")); //IDLE
+				CharacterSpriteIdleRight[1] = ImageIO.read(new File("res/animation_Images/cat/Idle (2).png")); //IDLE
+				CharacterSpriteIdleRight[2] = ImageIO.read(new File("res/animation_Images/cat/Idle (3).png")); //IDLE
+				CharacterSpriteIdleRight[3] = ImageIO.read(new File("res/animation_Images/cat/Idle (4).png")); //IDLE
+				CharacterSpriteIdleRight[4] = ImageIO.read(new File("res/animation_Images/cat/Idle (5).png")); //IDLE
+				CharacterSpriteIdleRight[5] = ImageIO.read(new File("res/animation_Images/cat/Idle (6).png")); //IDLE
+				CharacterSpriteIdleRight[6] = ImageIO.read(new File("res/animation_Images/cat/Idle (7).png")); //IDLE
+				CharacterSpriteIdleRight[7] = ImageIO.read(new File("res/animation_Images/cat/Idle (8).png")); //IDLE
+				CharacterSpriteIdleRight[8] = ImageIO.read(new File("res/animation_Images/cat/Idle (9).png")); //IDLE
 				
 				CharacterSpriteRight[0] =  ImageIO.read(new File("res/animation_Images/cat/Walk (1).png"));
 				CharacterSpriteRight[1] =  ImageIO.read(new File("res/animation_Images/cat/Walk (2).png"));
@@ -166,7 +238,15 @@ public class Images {
 				CharacterSpriteRight[8] =  ImageIO.read(new File("res/animation_Images/cat/Walk (9).png"));
 
 				//Lefts
-				CharacterSpriteIdleLeft[0] =  ImageIO.read(new File("res/animation_Images/cat/IdleLeft (1).png")); //IDLE
+				CharacterSpriteIdleLeft[0] = ImageIO.read(new File("res/animation_Images/cat/IdleLeft (1).png")); //IDLE
+				CharacterSpriteIdleLeft[1] = ImageIO.read(new File("res/animation_Images/cat/IdleLeft (2).png")); //IDLE
+				CharacterSpriteIdleLeft[2] = ImageIO.read(new File("res/animation_Images/cat/IdleLeft (3).png")); //IDLE
+				CharacterSpriteIdleLeft[3] = ImageIO.read(new File("res/animation_Images/cat/IdleLeft (4).png")); //IDLE
+				CharacterSpriteIdleLeft[4] = ImageIO.read(new File("res/animation_Images/cat/IdleLeft (5).png")); //IDLE
+				CharacterSpriteIdleLeft[5] = ImageIO.read(new File("res/animation_Images/cat/IdleLeft (6).png")); //IDLE
+				CharacterSpriteIdleLeft[6] = ImageIO.read(new File("res/animation_Images/cat/IdleLeft (7).png")); //IDLE
+				CharacterSpriteIdleLeft[7] = ImageIO.read(new File("res/animation_Images/cat/IdleLeft (8).png")); //IDLE
+				CharacterSpriteIdleLeft[8] = ImageIO.read(new File("res/animation_Images/cat/IdleLeft (9).png")); //IDLE
 				
 				CharacterSpriteLeft[0] =  ImageIO.read(new File("res/animation_Images/cat/WalkLeft (1).png"));
 				CharacterSpriteLeft[1] =  ImageIO.read(new File("res/animation_Images/cat/WalkLeft (2).png"));
@@ -182,6 +262,14 @@ public class Images {
 			case 5:
 				//Rights
 				CharacterSpriteIdleRight[0] = ImageIO.read(new File("res/animation_Images/dog/Idle (1).png")); //IDLE
+				CharacterSpriteIdleRight[1] = ImageIO.read(new File("res/animation_Images/dog/Idle (2).png")); //IDLE
+				CharacterSpriteIdleRight[2] = ImageIO.read(new File("res/animation_Images/dog/Idle (3).png")); //IDLE
+				CharacterSpriteIdleRight[3] = ImageIO.read(new File("res/animation_Images/dog/Idle (4).png")); //IDLE
+				CharacterSpriteIdleRight[4] = ImageIO.read(new File("res/animation_Images/dog/Idle (5).png")); //IDLE
+				CharacterSpriteIdleRight[5] = ImageIO.read(new File("res/animation_Images/dog/Idle (6).png")); //IDLE
+				CharacterSpriteIdleRight[6] = ImageIO.read(new File("res/animation_Images/dog/Idle (7).png")); //IDLE
+				CharacterSpriteIdleRight[7] = ImageIO.read(new File("res/animation_Images/dog/Idle (8).png")); //IDLE
+				CharacterSpriteIdleRight[8] = ImageIO.read(new File("res/animation_Images/dog/Idle (9).png")); //IDLE
 				
 				CharacterSpriteRight[0] =  ImageIO.read(new File("res/animation_Images/dog/Walk (1).png"));
 				CharacterSpriteRight[1] =  ImageIO.read(new File("res/animation_Images/dog/Walk (2).png"));
@@ -194,7 +282,15 @@ public class Images {
 				CharacterSpriteRight[8] =  ImageIO.read(new File("res/animation_Images/dog/Walk (9).png"));
 
 				//Lefts
-				CharacterSpriteIdleLeft[0] =  ImageIO.read(new File("res/animation_Images/dog/IdleLeft (1).png")); //IDLE
+				CharacterSpriteIdleLeft[0] = ImageIO.read(new File("res/animation_Images/dog/IdleLeft (1).png")); //IDLE
+				CharacterSpriteIdleLeft[1] = ImageIO.read(new File("res/animation_Images/dog/IdleLeft (2).png")); //IDLE
+				CharacterSpriteIdleLeft[2] = ImageIO.read(new File("res/animation_Images/dog/IdleLeft (3).png")); //IDLE
+				CharacterSpriteIdleLeft[3] = ImageIO.read(new File("res/animation_Images/dog/IdleLeft (4).png")); //IDLE
+				CharacterSpriteIdleLeft[4] = ImageIO.read(new File("res/animation_Images/dog/IdleLeft (5).png")); //IDLE
+				CharacterSpriteIdleLeft[5] = ImageIO.read(new File("res/animation_Images/dog/IdleLeft (6).png")); //IDLE
+				CharacterSpriteIdleLeft[6] = ImageIO.read(new File("res/animation_Images/dog/IdleLeft (7).png")); //IDLE
+				CharacterSpriteIdleLeft[7] = ImageIO.read(new File("res/animation_Images/dog/IdleLeft (8).png")); //IDLE
+				CharacterSpriteIdleLeft[8] = ImageIO.read(new File("res/animation_Images/dog/IdleLeft (9).png")); //IDLE
 				
 				CharacterSpriteLeft[0] =  ImageIO.read(new File("res/animation_Images/dog/WalkLeft (1).png"));
 				CharacterSpriteLeft[1] =  ImageIO.read(new File("res/animation_Images/dog/WalkLeft (2).png"));
