@@ -145,7 +145,7 @@ public class Player {
 				else
 					animation.setAnimation(Images.CharacterSpriteIdleLeft);
 				Handler.getSoundManager().stopAudio("footsteps");
-				animation.stopAnimation();
+				animation.startAnimation();
 			}
 			else {
 				if(right) 
