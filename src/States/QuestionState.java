@@ -169,7 +169,6 @@ public class QuestionState implements State{
 			resetQuestionState();
 		}
 		if (correctlyAnsweredQuestions == 3) {
-			System.out.println("Congrats, you just unlocked the building");
 			Handler.setCurrentState(Handler.getGameState());
 			building.setFound(true);
 			resetQuestionState();
