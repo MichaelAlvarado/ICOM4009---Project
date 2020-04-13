@@ -113,8 +113,8 @@ public class QuestionState implements State{
 		int width = 500;
 		int height = 250;
 		g.setColor(new Color(100,100,100));
-		g.fillRoundRect((Handler.getWidth()/2)-(width/2), (Handler.getHeight()/2)-(height/2), width, height, 20, 20);
 		if(!answering) {
+			g.fillRoundRect((Handler.getWidth()/2)-(width/2), (Handler.getHeight()/2)-(height/2), width, height, 20, 20);
 			g.setColor(Color.BLACK);
 			g.setFont(new Font("Arial", Font.PLAIN, 25));
 			g.drawString("Do you want to answer the questions of:", (Handler.getWidth()/2)-(width/2), (Handler.getHeight()/2)-(height/2)+25);
@@ -127,7 +127,7 @@ public class QuestionState implements State{
 		else {
 			g.setColor(Color.BLACK);
 			g.setFont(new Font("Arial", Font.PLAIN, 25));
-			g.drawString(currentQuestion.getQuestion(), (Handler.getWidth()/2)-15, (Handler.getHeight()/2)-(height/2)+25);
+			g.drawString(currentQuestion.getQuestion(), (Handler.getWidth()/2)-200, (Handler.getHeight()/2)-(height/2)+25);
 			opt1.render(g);
 			opt2.render(g);
 			opt3.render(g);
@@ -185,7 +185,6 @@ public class QuestionState implements State{
 	 */
 	public void displayNextQuestion(Button b, String str) {
 		if (b.getMessage().equals(str)) {
-			System.out.println("Correct");
 			correctlyAnsweredQuestions++;
 			correct.startAnimation();
 		}
@@ -196,6 +195,13 @@ public class QuestionState implements State{
 		getNextQuestion();
 	}
 	
+	/**
+	 * 
+	 * @author Fabiola Badillo
+	 * Date - April 11, 2020
+	 * Method to reset the question state for the next building
+	 *
+	 */
 	public void resetQuestionState() {
 		correctlyAnsweredQuestions = 0;
 		incorrectlyAnsweredQuestions = 0;
