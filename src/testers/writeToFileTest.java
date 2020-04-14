@@ -1,5 +1,6 @@
 package testers;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -7,6 +8,7 @@ import java.util.Map.Entry;
 
 import Components.Building;
 import Components.Question;
+import Resources.ConfigurationFile;
 import States.QuestionState;
 
 
@@ -54,7 +56,10 @@ public class writeToFileTest {
 //			System.out.println();
 //			System.out.println(q.getAnswers());
 //		}
-
+		/*
+		 * Open File with predetermine app
+		 */
+		ConfigurationFile.openFile(new File("TestingConfigurationFile.txt"));
 	}
 
 	//	public void generateTextFile(LinkedList<Building> buildingList) {

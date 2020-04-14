@@ -1,5 +1,6 @@
 package Resources;
 
+import java.awt.Desktop;
 import java.awt.Point;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -94,7 +95,7 @@ public class ConfigurationFile {
 		String questionLine;
 		String treeLine;
 		String breakLine = "";
-		
+
 
 		//load Map info (name, size image)
 		map.setMapName(sc.nextLine().substring(5)); 
@@ -286,6 +287,22 @@ public class ConfigurationFile {
 			}
 		}
 		return map;
+	}
+
+	/**
+	 * 
+	 * Description - This method opens a file in its corresponding File type
+	 * @author - Michael J. Alvarado
+	 * @date Apr 14, 2020
+	 * @param file - file to be opened
+	 */
+	public static void openFile(File file) {
+		try {	       
+			Desktop desktop = Desktop.getDesktop();
+			desktop.open(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * 
