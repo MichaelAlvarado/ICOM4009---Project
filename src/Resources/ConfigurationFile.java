@@ -324,13 +324,29 @@ public class ConfigurationFile {
 	}
 	
 	public static void testVRML() {
+		Map map = null;
+		try {
+			map = ConfigurationFile.generateMap(new File("TutorialMapConfigurationFile.txt"));
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
 		WriteFile wrl = new WriteFile("MapVRML.wrl", false);
 		String data = "#VRML V2.0 utf8\n"; //VRML version
-		data += "DEF dad_Box1 Transform {\n"
-				+ "translation -.04575 0 -4.53007\n"
-				+ "scale 8 3 1\n"
+		data += VRMLFloor(map);
+		data += VRMLBuilding(map.getBuildingList().get(0));
+		try {
+			wrl.writeToFile(data);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	private static String VRMLBuilding(Building build) {
+		String data = "DEF Building Transform {\n"
+				+ "translation " + build.perimeter().x + " " + 0+(build.getBuildingHeight()/2) +" " + build.perimeter().y +"\n"
+				+ "scale "+build.perimeter().width+" "+build.getBuildingHeight()+" "+build.perimeter().height+"\n"
 				+ "children [\n"
-				+ "DEF Box1 Shape {\n"
+				+ "DEF Box Shape {\n"
 				+ "appearance Appearance {\n"
 				+ "material DEF Black Material {\n"
 				+ "ambientIntensity 0.200\n"
@@ -344,14 +360,27 @@ public class ConfigurationFile {
 				+ "geometry DEF geoBox1 Box {\n"
 				+ "size 1 1 1\n"
 				+ "}\n}\n]\n}"
-				+ "";
-		try {
-			wrl.writeToFile(data);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-				
-
+				+ "\n";
+		return data;
+	}
+	private static String VRMLFloor(Map map) {
+		String data = "DEF Floor Transform {\n"
+				+ "translation " +0+" "+0+" "+0+"\n"
+				+ "scale "+map.getWidth()+" "+1+" "+map.getHeight()+"\n"
+				+ "children [\n"
+				+ "DEF Box Shape {\n"
+				+ "appearance Appearance {\n"
+				+ "material DEF Black Material {\n"
+				+ "ambientIntensity 0.200\n"
+				+ "shininess 0.200\n"
+				+ "diffuseColor 1 1 1\n"
+				+ "}\n"
+				+ "}\n"
+				+ "geometry DEF geoBox1 Box {\n"
+				+ "size 1 1 1\n"
+				+ "}\n}\n]\n}"
+				+ "\n";
+		return data;
 	}
 	/**
 	 * 
