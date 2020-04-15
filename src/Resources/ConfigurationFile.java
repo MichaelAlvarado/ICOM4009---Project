@@ -304,6 +304,51 @@ public class ConfigurationFile {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 
+	 * Description -This method generate a .wrl file of the 3D map
+	 * @author - Michael J. Alvarado
+	 * @date Apr 14, 2020
+	 * @param file - ConfigurationFile of the map to convert to 3D 
+	 */
+	public static void generateVRLM(File file) {
+		try {
+			Map map = ConfigurationFile.generateMap(file);
+			WriteFile wrl = new WriteFile(map.getMapName() +"MapVRML.wrl", false);
+			String data = "#VRML V2.0 utf8"; //VRML version
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void testVRML() {
+		WriteFile wrl = new WriteFile("MapVRML.wrl", false);
+		String data = "#VRML V2.0 utf8\n"; //VRML version
+		data += "DEF dad_Box1 Transform {\n"
+				+ "translation -.04575 0 -4.53007\n"
+				+ "scale 8 3 1\n"
+				+ "children [\n"
+				+ "DEF Box1 Shape {\n"
+				+ "appearance Appearance {\n"
+				+ "material DEF Red Material {\n"
+				+ "ambientIntensity 0.200\n"
+				+ "shininess 0.200\n"
+				+ "diffuseColor 1 0 0\n"
+				+ "}\n}\n"
+				+ "geometry DEF geoBox1 Box {\n"
+				+ "size 1 1 1\n"
+				+ "}\n}\n]\n}"
+				+ "";
+		try {
+			wrl.writeToFile(data);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+				
+
+	}
 	/**
 	 * 
 	 * Description - This method returns the URL path with Operating System separator

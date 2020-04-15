@@ -59,7 +59,8 @@ public class writeToFileTest {
 		/*
 		 * Open File with predetermine app
 		 */
-		ConfigurationFile.openFile(new File("TestingConfigurationFile.txt"));
+		ConfigurationFile.testVRML();
+		ConfigurationFile.openFile(new File("MapVRML.wrl"));
 	}
 
 	//	public void generateTextFile(LinkedList<Building> buildingList) {
