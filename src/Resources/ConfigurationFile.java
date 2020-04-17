@@ -343,8 +343,8 @@ public class ConfigurationFile {
 	}
 	
 	private static String VRMLBuilding(Building build) {
-		String data = "DEF Building Transform {\n"
-				+ "translation " + (build.perimeter().x+(build.perimeter().width/2)) + " " + 0+(build.getBuildingHeight()/2) +" " + (build.perimeter().y+(build.perimeter().height/2)) +"\n"
+		String data = "DEF "+build.getName()+" Transform {\n"
+				+ "translation "+(build.perimeter().x+(build.perimeter().width/2))+ " " +(build.getBuildingHeight()/2)+" " +(build.perimeter().y+(build.perimeter().height/2))+"\n"
 				+ "scale "+build.perimeter().width+" "+build.getBuildingHeight()+" "+build.perimeter().height+"\n"
 				+ "children [\n"
 				+ "DEF Box Shape {\n"
@@ -352,10 +352,10 @@ public class ConfigurationFile {
 				+ "material DEF Black Material {\n"
 				+ "ambientIntensity 0.200\n"
 				+ "shininess 0.200\n"
-				+ "diffuseColor 0 0 0\n"
+				+ "diffuseColor 1 1 1\n"
 				+ "}\n"
 				+ "texture ImageTexture {\n"
-				+ "url "+ '"' + "res/wallTexture/wall.png" +'"' + "\n"
+				+ "url "+'"'+build.getPicture()+'"'+"\n"
 				+ "}\n"
 				+ "}\n"
 				+ "geometry DEF geoBox1 Box {\n"
