@@ -304,9 +304,8 @@ public class ConfigurationFile {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
-	 * 
 	 * Description -This method generate a .wrl file of the 3D map
 	 * @author - Michael J. Alvarado
 	 * @date Apr 14, 2020
@@ -315,14 +314,36 @@ public class ConfigurationFile {
 	public static void generateVRLM(File file) {
 		try {
 			Map map = ConfigurationFile.generateMap(file);
-			WriteFile wrl = new WriteFile(map.getMapName() +"MapVRML.wrl", false);
-			String data = "#VRML V2.0 utf8"; //VRML version
-
+			generateVRML(map);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Description - This method generate a .wrl file of the map (VRML)
+	 * @author - Michael J. Alvarado
+	 * @date Apr 17, 2020
+	 * @param map - map to be converted
+	 */
+	public static void generateVRML(Map map) {
+		WriteFile wrl = new WriteFile("MapVRML.wrl", false);
+
+		String data = "#VRML V2.0 utf8\n"; //VRML version
+		data += VRMLFloor(map);
+		for(Building building: map.getBuildingList()) {
+			data += VRMLBuilding(building);
+			for(Wall wall: building.getWalls()) {
+				data += VRMLWall(wall);
+			}
+		}
+		try {
+			wrl.writeToFile(data);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+	}
+
 	public static void testVRML() {
 		Map map = null;
 		try {
@@ -331,17 +352,29 @@ public class ConfigurationFile {
 			e1.printStackTrace();
 		}
 		WriteFile wrl = new WriteFile("MapVRML.wrl", false);
+
 		String data = "#VRML V2.0 utf8\n"; //VRML version
 		data += VRMLFloor(map);
-		for(Building building: map.getBuildingList())
-		data += VRMLBuilding(building);
+		for(Building building: map.getBuildingList()) {
+			data += VRMLBuilding(building);
+			for(Wall wall: building.getWalls()) {
+				data += VRMLWall(wall);
+			}
+		}
 		try {
 			wrl.writeToFile(data);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		
 	}
-	
+
+	/**
+	 * Description - Make a VRML code of the building with the 2D Image in it (Testing Uses)
+	 * @author - Michael J. Alvarado
+	 * @date Apr 17, 2020
+	 * @param build - building to be converted to VRML code
+	 * @return A string with the VRML code of the building
+	 */
 	private static String VRMLBuilding(Building build) {
 		String data = "DEF "+build.getName()+" Transform {\n"
 				+ "translation "+(build.perimeter().x+(build.perimeter().width/2))+ " " +(build.getBuildingHeight()/2)+" " +(build.perimeter().y+(build.perimeter().height/2))+"\n"
@@ -349,13 +382,13 @@ public class ConfigurationFile {
 				+ "children [\n"
 				+ "DEF Box Shape {\n"
 				+ "appearance Appearance {\n"
-				+ "material DEF Black Material {\n"
+				+ "material DEF White Material {\n"
 				+ "ambientIntensity 0.200\n"
 				+ "shininess 0.200\n"
-				+ "diffuseColor 1 1 1\n"
+				+ "diffuseColor 1 1 1\n" 
 				+ "}\n"
 				+ "texture ImageTexture {\n"
-				+ "url "+'"'+build.getPicture()+'"'+"\n"
+				+ "url "+'"'+build.getPictureURL()+'"'+"\n"
 				+ "}\n"
 				+ "}\n"
 				+ "geometry DEF geoBox1 Box {\n"
@@ -364,6 +397,58 @@ public class ConfigurationFile {
 				+ "\n";
 		return data;
 	}
+
+	/**
+	 * Description - Make a VRML code of a wall
+	 * @author - Michael J. Alvarado
+	 * @date Apr 17, 2020
+	 * @param wall - wall to be converted to VRML code
+	 * @return A string with the VRML code of the wall
+	 */
+	private static String VRMLWall(Wall wall) {
+		double x = (wall.getP1().getX() + wall.getP2().getX())/2; //center X position of wall
+		double y = (wall.getP1().getY() + wall.getP2().getY())/2; //center Y position of wall
+		double width = wall.getP1().distance(wall.getP2()); //width of the wall
+		/*
+		 * Rotation calculation using Cosine Law in a isosceles
+		 */
+		double a = width/2;
+		double c = wall.getP2().y > wall.getP1().y? wall.getP1().distance(x+a, y): wall.getP2().distance(x+a, y);
+		double cosine = 1-((c*c)/(2.00*a*a)); 
+		double rotation = Math.acos(cosine);
+		/*
+		 * Conver the data of Wall to VRML
+		 */
+		String data = "DEF "+wall.getID()+" Transform {\n"
+				+ "translation "+x+ " " +wall.getHeight()/2+" " +y+"\n"
+				+ "scale "+width+" "+wall.getHeight()+" "+1+"\n"
+				+ "rotation 0 1 0 "+rotation+"\n"
+				+ "children [\n"
+				+ "DEF Box Shape {\n"
+				+ "appearance Appearance {\n"
+				+ "material DEF White Material {\n"
+				+ "ambientIntensity 0.200\n"
+				+ "shininess 0.200\n"
+				+ "diffuseColor 1 1 1\n" 
+				+ "}\n"
+				+ "texture ImageTexture {\n"
+				+ "url "+'"'+wall.getTextureURL()+'"'+"\n"
+				+ "}\n"
+				+ "}\n"
+				+ "geometry DEF geoBox1 Box {\n"
+				+ "size 1 1 1\n"
+				+ "}\n}\n]\n}"
+				+ "\n";
+		return data;
+	}
+
+	/**
+	 * Description - Make the floors the the map to place the components on top
+	 * @author - Michael J. Alvarado
+	 * @date Apr 17, 2020
+	 * @param map - the map so it can make the floor with
+	 * @return A string with the VRML code a the floor with map dimension and image
+	 */
 	private static String VRMLFloor(Map map) {
 		String data = "DEF Floor Transform {\n"
 				+ "translation " +map.getWidth()/2+" "+0+" "+map.getHeight()/2+"\n"
@@ -386,6 +471,7 @@ public class ConfigurationFile {
 				+ "\n";
 		return data;
 	}
+	
 	/**
 	 * 
 	 * Description - This method returns the URL path with Operating System separator
