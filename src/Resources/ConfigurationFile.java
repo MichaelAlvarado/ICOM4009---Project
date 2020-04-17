@@ -333,7 +333,8 @@ public class ConfigurationFile {
 		WriteFile wrl = new WriteFile("MapVRML.wrl", false);
 		String data = "#VRML V2.0 utf8\n"; //VRML version
 		data += VRMLFloor(map);
-		data += VRMLBuilding(map.getBuildingList().get(0));
+		for(Building building: map.getBuildingList())
+		data += VRMLBuilding(building);
 		try {
 			wrl.writeToFile(data);
 		} catch (IOException e) {
@@ -343,7 +344,7 @@ public class ConfigurationFile {
 	
 	private static String VRMLBuilding(Building build) {
 		String data = "DEF Building Transform {\n"
-				+ "translation " + build.perimeter().x + " " + 0+(build.getBuildingHeight()/2) +" " + build.perimeter().y +"\n"
+				+ "translation " + (build.perimeter().x+(build.perimeter().width/2)) + " " + 0+(build.getBuildingHeight()/2) +" " + (build.perimeter().y+(build.perimeter().height/2)) +"\n"
 				+ "scale "+build.perimeter().width+" "+build.getBuildingHeight()+" "+build.perimeter().height+"\n"
 				+ "children [\n"
 				+ "DEF Box Shape {\n"
@@ -365,7 +366,7 @@ public class ConfigurationFile {
 	}
 	private static String VRMLFloor(Map map) {
 		String data = "DEF Floor Transform {\n"
-				+ "translation " +0+" "+0+" "+0+"\n"
+				+ "translation " +map.getWidth()/2+" "+0+" "+map.getHeight()/2+"\n"
 				+ "scale "+map.getWidth()+" "+1+" "+map.getHeight()+"\n"
 				+ "children [\n"
 				+ "DEF Box Shape {\n"
@@ -374,6 +375,9 @@ public class ConfigurationFile {
 				+ "ambientIntensity 0.200\n"
 				+ "shininess 0.200\n"
 				+ "diffuseColor 1 1 1\n"
+				+ "}\n"
+				+ "texture ImageTexture {\n"
+				+ "url "+ '"' + map.getImageURL() +'"' + "\n"
 				+ "}\n"
 				+ "}\n"
 				+ "geometry DEF geoBox1 Box {\n"
