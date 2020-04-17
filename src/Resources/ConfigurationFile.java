@@ -329,7 +329,7 @@ public class ConfigurationFile {
 	public static void generateVRML(Map map) {
 		WriteFile wrl = new WriteFile("MapVRML.wrl", false);
 
-		String data = "#VRML V2.0 utf8\n"; //VRML version
+		String data = "#VRML V2.0 utf8\n\n"; //VRML version
 		data += VRMLFloor(map);
 		for(Building building: map.getBuildingList()) {
 			data += VRMLBuilding(building);
@@ -356,10 +356,7 @@ public class ConfigurationFile {
 		String data = "#VRML V2.0 utf8\n"; //VRML version
 		data += VRMLFloor(map);
 		for(Building building: map.getBuildingList()) {
-			data += VRMLBuilding(building);
-			for(Wall wall: building.getWalls()) {
-				data += VRMLWall(wall);
-			}
+			VRMLBuilding(building);
 		}
 		try {
 			wrl.writeToFile(data);
@@ -375,12 +372,12 @@ public class ConfigurationFile {
 	 * @param build - building to be converted to VRML code
 	 * @return A string with the VRML code of the building
 	 */
-	private static String VRMLBuilding(Building build) {
+	private static String VRMLTestBuilding(Building build) {
 		String data = "DEF "+build.getName()+" Transform {\n"
-				+ "translation "+(build.perimeter().x+(build.perimeter().width/2))+ " " +(build.getBuildingHeight()/2)+" " +(build.perimeter().y+(build.perimeter().height/2))+"\n"
-				+ "scale "+build.perimeter().width+" "+build.getBuildingHeight()+" "+build.perimeter().height+"\n"
-				+ "children [\n"
-				+ "DEF Box Shape {\n"
+				+ "\ttranslation "+(build.perimeter().x+(build.perimeter().width/2))+ " " +(build.getBuildingHeight()/2)+" " +(build.perimeter().y+(build.perimeter().height/2))+"\n"
+				+ "\tscale "+build.perimeter().width+" "+build.getBuildingHeight()+" "+build.perimeter().height+"\n"
+				+ "\tchildren [\n"
+				+ "\t\tDEF Box Shape {\n"
 				+ "appearance Appearance {\n"
 				+ "material DEF White Material {\n"
 				+ "ambientIntensity 0.200\n"
@@ -395,6 +392,35 @@ public class ConfigurationFile {
 				+ "size 1 1 1\n"
 				+ "}\n}\n]\n}"
 				+ "\n";
+		return data;
+	}
+	
+	private static String VRMLBuilding(Building building) {
+		String data = "DEF "+ building.getName()+"Roof"+" Transform {\n"
+				+ "\ttranslation "+(building.perimeter().x+(building.perimeter().width/2))+ " " +building.getWalls().get(0).getHeight()+" " +(building.perimeter().y+(building.perimeter().height/2))+"\n"
+				+ "\tscale "+building.perimeter().width+" "+1+" "+building.perimeter().height+"\n"
+				+ "\tchildren [\n"
+				+ "\t\tDEF Box Shape {\n"
+				+ "\t\t\tappearance Appearance {\n"
+				+ "\t\t\t\tmaterial DEF White Material {\n"
+				+ "\t\t\t\t\tambientIntensity 0.200\n"
+				+ "\t\t\t\t\tshininess 0.200\n"
+				+ "\t\t\t\t\tdiffuseColor 1 1 1\n" 
+				+ "\t\t\t\t}\n"
+				+ "\t\t\t\ttexture ImageTexture {\n"
+				+ "\t\t\t\t\turl "+'"'+""+'"'+"\n"
+				+ "\t\t\t\t}\n"
+				+ "\t\t\t}\n"
+				+ "\t\t\tgeometry DEF geoBox1 Box {\n"
+				+ "\t\t\t\tsize 1 1 1\n"
+				+ "\t\t\t}\n"
+				+ "\t\t}\n"
+				+ "\t]\n"
+				+ "}"
+				+ "\n\n";
+		for(Wall wall: building.getWalls()) {
+			data += VRMLWall(wall);
+		}
 		return data;
 	}
 
@@ -420,25 +446,28 @@ public class ConfigurationFile {
 		 * Conver the data of Wall to VRML
 		 */
 		String data = "DEF "+wall.getID()+" Transform {\n"
-				+ "translation "+x+ " " +wall.getHeight()/2+" " +y+"\n"
-				+ "scale "+width+" "+wall.getHeight()+" "+1+"\n"
-				+ "rotation 0 1 0 "+rotation+"\n"
-				+ "children [\n"
-				+ "DEF Box Shape {\n"
-				+ "appearance Appearance {\n"
-				+ "material DEF White Material {\n"
-				+ "ambientIntensity 0.200\n"
-				+ "shininess 0.200\n"
-				+ "diffuseColor 1 1 1\n" 
-				+ "}\n"
-				+ "texture ImageTexture {\n"
-				+ "url "+'"'+wall.getTextureURL()+'"'+"\n"
-				+ "}\n"
-				+ "}\n"
-				+ "geometry DEF geoBox1 Box {\n"
-				+ "size 1 1 1\n"
-				+ "}\n}\n]\n}"
-				+ "\n";
+				+ "\ttranslation "+x+ " " +wall.getHeight()/2+" " +y+"\n"
+				+ "\tscale "+width+" "+wall.getHeight()+" "+1+"\n"
+				+ "\trotation 0 1 0 "+rotation+"\n"
+				+ "\tchildren [\n"
+				+ "\t\tDEF Box Shape {\n"
+				+ "\t\t\tappearance Appearance {\n"
+				+ "\t\t\t\tmaterial DEF White Material {\n"
+				+ "\t\t\t\t\tambientIntensity 0.200\n"
+				+ "\t\t\t\t\tshininess 0.200\n"
+				+ "\t\t\t\t\tdiffuseColor 1 1 1\n" 
+				+ "\t\t\t\t}\n"
+				+ "\t\t\t\ttexture ImageTexture {\n"
+				+ "\t\t\t\t\turl "+'"'+wall.getTextureURL()+'"'+"\n"
+				+ "\t\t\t\t}\n"
+				+ "\t\t\t}\n"
+				+ "\t\t\tgeometry DEF geoBox1 Box {\n"
+				+ "\t\t\t\tsize 1 1 1\n"
+				+ "\t\t\t}\n"
+				+ "\t\t}\n"
+				+ "\t]\n"
+				+ "}"
+				+ "\n\n";
 		return data;
 	}
 
@@ -451,24 +480,27 @@ public class ConfigurationFile {
 	 */
 	private static String VRMLFloor(Map map) {
 		String data = "DEF Floor Transform {\n"
-				+ "translation " +map.getWidth()/2+" "+0+" "+map.getHeight()/2+"\n"
-				+ "scale "+map.getWidth()+" "+1+" "+map.getHeight()+"\n"
-				+ "children [\n"
-				+ "DEF Box Shape {\n"
-				+ "appearance Appearance {\n"
-				+ "material DEF Black Material {\n"
-				+ "ambientIntensity 0.200\n"
-				+ "shininess 0.200\n"
-				+ "diffuseColor 1 1 1\n"
-				+ "}\n"
+				+ "\ttranslation " +map.getWidth()/2+" "+0+" "+map.getHeight()/2+"\n"
+				+ "\tscale "+map.getWidth()+" "+1+" "+map.getHeight()+"\n"
+				+ "\tchildren [\n"
+				+ "\t\tDEF Box Shape {\n"
+				+ "\t\t\tappearance Appearance {\n"
+				+ "\t\t\t\tmaterial DEF White Material {\n"
+				+ "\t\t\t\t\tambientIntensity 0.200\n"
+				+ "\t\t\t\t\tshininess 0.200\n"
+				+ "\t\t\t\t\tdiffuseColor 1 1 1\n" 
+				+ "\t\t\t\t}\n"
 				+ "texture ImageTexture {\n"
-				+ "url "+ '"' + map.getImageURL() +'"' + "\n"
-				+ "}\n"
-				+ "}\n"
-				+ "geometry DEF geoBox1 Box {\n"
-				+ "size 1 1 1\n"
-				+ "}\n}\n]\n}"
-				+ "\n";
+				+ "\t\t\t\t\turl "+'"'+map.getImageURL()+'"'+"\n"
+				+ "\t\t\t\t}\n"
+				+ "\t\t\t}\n"
+				+ "\t\t\tgeometry DEF geoBox1 Box {\n"
+				+ "\t\t\t\tsize 1 1 1\n"
+				+ "\t\t\t}\n"
+				+ "\t\t}\n"
+				+ "\t]\n"
+				+ "}"
+				+ "\n\n";
 		return data;
 	}
 	
