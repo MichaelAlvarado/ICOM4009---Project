@@ -3,6 +3,7 @@ package States;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -33,10 +34,16 @@ import States.MenuState.charSelect;
 
 public class PauseState implements State {
 	
-	Button continueGame, saveMap, open3D, settings, help, exitGame;
+	private Display display;
+	Button continueGame, saveMap, open3D, settings, help, help_exit, exitGame;
+	Label helpLabel;
+	GameState gameS;
+	boolean is_help = false;
 
 	
 	public PauseState(){
+
+
 		
 		continueGame = new Button("Continue", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)- 120, 100, 30, Color.CYAN) {
 
@@ -68,15 +75,26 @@ public class PauseState implements State {
 
 			@Override
 			public void action() {
-				Handler.setCurrentState(Handler.getGameState());				
-			}	
+				Handler.setCurrentState(Handler.getGameState());
+				Handler.getSoundManager().stopAudio("background");
+
+				
+			}
 		};
 		
 		help = new Button("Help", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2) + 40, 100, 30, Color.CYAN) {
 
 			@Override
 			public void action() {
-				Handler.setCurrentState(Handler.getGameState());				
+				is_help = true;
+			}	
+		};
+		
+		help_exit = new Button("Exit", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2) + 40, 100, 30, Color.CYAN) {
+
+			@Override
+			public void action() {
+				is_help = false;
 			}	
 		};
 		
@@ -84,10 +102,13 @@ public class PauseState implements State {
 
 			@Override
 			public void action() {
-				Handler.setCurrentState(Handler.getGameState());				
-			}	
+				Handler.setCurrentState(Handler.getGameState());
+//				display.setLoadingScreen();
+//				display.getContentPane().removeAll();	
+//				MenuState menu = new MenuState(display);				
+			}		
 		};
-	
+		
 	}
 
 
@@ -98,16 +119,30 @@ public class PauseState implements State {
 		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
 			Handler.setCurrentState(Handler.getGameState());
 		}
+		if(is_help==true) {
+		help_exit.tick();
+		} else {
 		continueGame.tick();
 		saveMap.tick();
 		open3D.tick();
 		settings.tick();
-		exitGame.tick();
 		help.tick();
+		exitGame.tick();
+		}
 	}
 
 	@Override
 	public void render(Graphics g) {
+		int width = 500;
+		int height = 250;
+	if(is_help == true) {
+
+		g.fillRoundRect((Handler.getWidth()/2)-(width/2), (Handler.getHeight()/2)-(height/2), width, height, 20, 20);
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("Arial", Font.PLAIN, 20));
+		g.drawString("Insert Help Info Here:", (Handler.getWidth()/2)-(width/2) + 10, (Handler.getHeight()/2)-(height/2)+25);
+		help_exit.render(g);
+		} else {
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, Handler.getWidth(), Handler.getHeight());
 		continueGame.render(g);
@@ -117,6 +152,7 @@ public class PauseState implements State {
 		exitGame.render(g);
 		help.render(g);		
 		
+		}
 		
 	}
 
