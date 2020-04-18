@@ -29,10 +29,10 @@ public class PauseState implements State {
 	
 	
 	public PauseState(){
-		this.display = display;
-		this.width = display.getContentPane().getWidth();
-		this.height = display.getContentPane().getHeight();
-		display.getContentPane().setLayout(null);
+//		this.display = display;
+//		this.width = display.getContentPane().getWidth();
+//		this.height = display.getContentPane().getHeight();
+//		display.getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel(){
 			@Override
@@ -69,14 +69,14 @@ public class PauseState implements State {
 		exitGame = new JButton("Exit to Main Menu");
 		exitGame.setFont(new Font("Comic Sans MS", Font.BOLD, 20));	
 		panel.add(exitGame);
-		
-		title = new JLabel(display.getTitle(), SwingConstants.CENTER);
-		title.setFont(new Font("Comic Sans MS", Font.BOLD, 90));	
-		panel.add(title);
+//		
+//		title = new JLabel(display.getTitle(), SwingConstants.CENTER);
+//		title.setFont(new Font("Comic Sans MS", Font.BOLD, 90));	
+//		panel.add(title);
 
 		responsiveScreen();
-
-		display.getContentPane().add(panel);
+//
+//		display.getContentPane().add(panel);
 
 		continueGame.addActionListener(new ActionListener() {
 			@Override
@@ -152,23 +152,21 @@ public class PauseState implements State {
 			}
 		});
 		
-		
-		display.repaint();
+//		
+//		display.repaint();
 
 	}
 
 	private void responsiveScreen() {
-		width = display.getContentPane().getWidth();
-		height = display.getContentPane().getHeight();
+//		width = display.getContentPane().getWidth();
+//		height = display.getContentPane().getHeight();
 		continueGame.setBounds(width/2+100, height/2-30, 250, 90);
 		saveMap.setBounds(width/2+100, height/2-30, 250, 90);
 		open3D.setBounds(width/2+100, height/2 + 100, 250, 90);
 		settings.setBounds(width/2+100, height/2-30, 250, 90);
 		help.setBounds(width/2+100, height/2 + 230, 250, 90);
 		exitGame.setBounds(width/2+100, height/2-30, 250, 90);
-		mapSelection.setBounds(width/2-250, height/2-100,500,200);
-		charSelection.setBounds(width/2-250, height/2-100,500,200);
-		title.setBounds(width/2, 150, 400, 140);
+
 		
 	}
 	
