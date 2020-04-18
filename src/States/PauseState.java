@@ -1,196 +1,125 @@
 package States;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
 
+import Components.Map;
 import GUI.Display;
+import GameSetUp.GameEngine;
 import GameSetUp.Handler;
+import Resources.Button;
+import Resources.ConfigurationFile;
+import Resources.Images;
 import States.MenuState.MapSelect;
 import States.MenuState.charSelect;
 
 public class PauseState implements State {
 	
-	private Display display;
-	private JButton saveMap, exitGame, continueGame,settings, open3D, help;
-	private MapSelect mapSelection;
-	private charSelect charSelection;
-	private JLabel  title;
-	private int width, height;
-	
+	Button continueGame, saveMap, open3D, settings, help, exitGame;
+
 	
 	public PauseState(){
-//		this.display = display;
-//		this.width = display.getContentPane().getWidth();
-//		this.height = display.getContentPane().getHeight();
-//		display.getContentPane().setLayout(null);
+		
+		continueGame = new Button("Continue", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)- 120, 100, 30, Color.CYAN) {
 
-		JPanel panel = new JPanel(){
 			@Override
-			public void paint(Graphics g) {
-				super.paint(g);
-				setSize(width,height);
-				responsiveScreen();
-			}
+			public void action() {
+				Handler.setCurrentState(Handler.getGameState());				
+			}	
 		};
 		
-		panel.setLayout(null);
-		panel.setBounds(0, 0, width, height);
 		
-		continueGame = new JButton("Continue");
-		continueGame.setFont(new Font("Comic Sans MS", Font.BOLD, 20));	
-		panel.add(continueGame);
-		
-		saveMap = new JButton("Save");
-		saveMap.setFont(new Font("Comic Sans MS", Font.BOLD, 20));	
-		panel.add(saveMap);	
-		
-		open3D = new JButton("Open in 3D");
-		open3D.setFont(new Font("Comic Sans MS", Font.BOLD, 20));	
-		panel.add(open3D);
-				
-		settings = new JButton("Settings");
-		settings.setFont(new Font("Comic Sans MS", Font.BOLD, 20));	
-		panel.add(settings);
-		
-		help = new JButton("Help");
-		help.setFont(new Font("Comic Sans MS", Font.BOLD, 20));	
-		panel.add(help);
-		
-		exitGame = new JButton("Exit to Main Menu");
-		exitGame.setFont(new Font("Comic Sans MS", Font.BOLD, 20));	
-		panel.add(exitGame);
-//		
-//		title = new JLabel(display.getTitle(), SwingConstants.CENTER);
-//		title.setFont(new Font("Comic Sans MS", Font.BOLD, 90));	
-//		panel.add(title);
+		saveMap = new Button("Save Map", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2) - 80, 100, 30, Color.CYAN) {
 
-		responsiveScreen();
-//
-//		display.getContentPane().add(panel);
-
-		continueGame.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					System.out.println("Loading MapDesign App...");
-					long start = System.nanoTime();
-					//loadingScreen();
-					MapDesignState designMap = new MapDesignState(display);
-					System.out.println("Map Design App Loaded in: " + ((System.nanoTime()-start)/1000000000.0) + " seconds");
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-			}
-		});
+			public void action() {
+				Handler.setCurrentState(Handler.getGameState());				
+			}	
+		};
+		
+		
+		open3D = new Button("Open 3D World", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2) - 40, 100, 30, Color.CYAN) {
 
-		saveMap.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				// The game engine should start here
-				setButtonsEnable(false);
-				charSelection.setVisible(true);
-				charSelection.requestFocus();
-			}
-		});
+			public void action() {
+				Handler.setCurrentState(Handler.getGameState());				
+			}	
+		};
 		
-		
-		open3D.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// The game engine should start here
-				setButtonsEnable(false);
-				charSelection.setVisible(true);
-				charSelection.requestFocus();
-			}
-		});
-		
-		
-		settings.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// The game engine should start here
-				setButtonsEnable(false);
-				charSelection.setVisible(true);
-				charSelection.requestFocus();
-			}
-		});
+		settings = new Button("Settings", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2), 100, 30, Color.CYAN) {
 
-		help.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				String help = "Create Map buttons allows you to create your own map to play.\n"+
-						"Play Game buttons can get you playing with map already made.\n"+
-						"Have fun XD"+
-						"\n\n" +
-						"This app was made by: \n"+
-						"	Michael Alvarado\r\n" + 
-						"	Fabiola Badillo\r\n" + 
-						"	Anel Martinez\r\n" + 
-						"	Jorge Calderon\n\n";
-				JOptionPane.showMessageDialog(display, help);
-			}
-		});
+			public void action() {
+				Handler.setCurrentState(Handler.getGameState());				
+			}	
+		};
 		
-		
-		exitGame.addActionListener(new ActionListener() {
+		help = new Button("Help", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2) + 40, 100, 30, Color.CYAN) {
+
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				// The game engine should start here
-				setButtonsEnable(false);
-				charSelection.setVisible(true);
-				charSelection.requestFocus();
-			}
-		});
+			public void action() {
+				Handler.setCurrentState(Handler.getGameState());				
+			}	
+		};
 		
-//		
-//		display.repaint();
+		exitGame = new Button("Exit Game", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2) + 80, 100, 30, Color.CYAN) {
 
-	}
-
-	private void responsiveScreen() {
-//		width = display.getContentPane().getWidth();
-//		height = display.getContentPane().getHeight();
-		continueGame.setBounds(width/2+100, height/2-30, 250, 90);
-		saveMap.setBounds(width/2+100, height/2-30, 250, 90);
-		open3D.setBounds(width/2+100, height/2 + 100, 250, 90);
-		settings.setBounds(width/2+100, height/2-30, 250, 90);
-		help.setBounds(width/2+100, height/2 + 230, 250, 90);
-		exitGame.setBounds(width/2+100, height/2-30, 250, 90);
-
-		
-	}
+			@Override
+			public void action() {
+				Handler.setCurrentState(Handler.getGameState());				
+			}	
+		};
 	
-	public void setButtonsEnable(boolean arg) {
-		continueGame.setEnabled(arg);
-		saveMap.setEnabled(arg);
-		open3D.setEnabled(arg);
-		settings.setEnabled(arg);
-		help.setEnabled(arg);
-		exitGame.setEnabled(arg);
-
 	}
+
+
+
 
 	@Override
 	public void tick() {
 		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
 			Handler.setCurrentState(Handler.getGameState());
 		}
+		continueGame.tick();
+		saveMap.tick();
+		open3D.tick();
+		settings.tick();
+		exitGame.tick();
+		help.tick();
 	}
 
 	@Override
 	public void render(Graphics g) {
-		// TODO Auto-generated method stub
+		g.setColor(Color.DARK_GRAY);
+		g.fillRect(0, 0, Handler.getWidth(), Handler.getHeight());
+		continueGame.render(g);
+		saveMap.render(g);
+		open3D.render(g);
+		settings.render(g);
+		exitGame.render(g);
+		help.render(g);		
+		
 		
 	}
+
+
 
 }
