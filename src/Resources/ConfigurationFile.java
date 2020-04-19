@@ -290,8 +290,8 @@ public class ConfigurationFile {
 	}
 
 	/**
-	 * 
-	 * Description - This method opens a file in its corresponding File type
+	 * Description - This method opens a file in its corresponding File type.
+	 * Precondition - To open certain file the user must have app to open those files (for .wrl must have a VRML viewer app)
 	 * @author - Michael J. Alvarado
 	 * @date Apr 14, 2020
 	 * @param file - file to be opened

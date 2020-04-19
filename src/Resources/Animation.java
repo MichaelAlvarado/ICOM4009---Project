@@ -8,8 +8,8 @@ import GameSetUp.GameEngine;
 
 /**
  * Description - This class contains method to animate images
- * @author 
- * @date
+ * @author Michael J. Alvarado 
+ * @date Apr 9, 2020
  */
 public class Animation {
 
@@ -100,6 +100,8 @@ public class Animation {
 	/**
 	 * Description - This method animate the images from the animation in the time
 	 * PreCondition - This method should be implemented in render 
+	 * @author - Michael J. Alvarado
+	 * @date Apr 9, 2020
 	 * @return the image that should be displaying
 	 */
 	public BufferedImage getCurrentFrame() {

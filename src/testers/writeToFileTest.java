@@ -19,8 +19,8 @@ public class writeToFileTest {
 		/*
 		 * Open File with predetermine app
 		 */
-		ConfigurationFile.generateVRLM(new File("TutorialMapConfigurationFile.txt"));
-		ConfigurationFile.openFile(new File("MapVRML.wrl"));
+			ConfigurationFile.generateVRLM(new File("TutorialMapConfigurationFile.txt"));
+			ConfigurationFile.openFile(new File("MapVRML.wrl"));
 	}
 	//     
 	//		 WriteFile data = new WriteFile("ConfigurationFile.txt", true);
@@ -30,39 +30,39 @@ public class writeToFileTest {
 	//		} catch (IOException e) {
 	//			System.out.println("Something went wrong!");
 	//		}
-	
-	
-	
-	////////// To test randomizer
-//	LinkedList<Question> qList = new LinkedList<Question>();
-//
-//	Question q1 = new Question("A","1","2","3", "4");
-//	Question q2 = new Question("B","1","2","3", "4");
-//	Question q3 = new Question("C","1","2","3", "4");
-//	Question q4 = new Question("D","1","2","3", "4");
-//	Question q5 = new Question("E","1","2","3", "4");
-//	Question q6 = new Question("F","1","2","3", "4");
-//
-//	qList.add(q1);
-//	qList.add(q2);
-//	qList.add(q3);
-//	qList.add(q4);
-//	qList.add(q5);
-//	qList.add(q6);
 
-//	for(Question q: qList) {
-//		System.out.println(q.getQuestion());
-//		System.out.println(q.getAnswers());
-//	}
-//	System.out.println();
-//	QuestionState.questionRandomizer(qList);
-	
-//	for(Question q: qList) {
-//		System.out.println(q.getQuestion());
-//		System.out.println();
-//		System.out.println(q.getAnswers());
-//	}
-	
+
+
+	////////// To test randomizer
+	//	LinkedList<Question> qList = new LinkedList<Question>();
+	//
+	//	Question q1 = new Question("A","1","2","3", "4");
+	//	Question q2 = new Question("B","1","2","3", "4");
+	//	Question q3 = new Question("C","1","2","3", "4");
+	//	Question q4 = new Question("D","1","2","3", "4");
+	//	Question q5 = new Question("E","1","2","3", "4");
+	//	Question q6 = new Question("F","1","2","3", "4");
+	//
+	//	qList.add(q1);
+	//	qList.add(q2);
+	//	qList.add(q3);
+	//	qList.add(q4);
+	//	qList.add(q5);
+	//	qList.add(q6);
+
+	//	for(Question q: qList) {
+	//		System.out.println(q.getQuestion());
+	//		System.out.println(q.getAnswers());
+	//	}
+	//	System.out.println();
+	//	QuestionState.questionRandomizer(qList);
+
+	//	for(Question q: qList) {
+	//		System.out.println(q.getQuestion());
+	//		System.out.println();
+	//		System.out.println(q.getAnswers());
+	//	}
+
 	//	public void generateTextFile(LinkedList<Building> buildingList) {
 	//
 	//		WriteFile data = new WriteFile("ConfigurationFile.txt", true);
@@ -90,6 +90,6 @@ public class writeToFileTest {
 	//
 	//		}
 	//
-		//}
+	//}
 
 }
