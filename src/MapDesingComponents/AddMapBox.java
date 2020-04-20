@@ -69,7 +69,7 @@ public class AddMapBox extends JPanel{
 		imageURL.setBounds(imageLabel.getX()+imageLabel.getWidth(), imageLabel.getY(), (width/2), 25);
 		browserImage = new JFileChooser();
 		browseButton = new JButton("Browse");
-		browseButton.setBounds((imageURL.getX()+imageURL.getWidth()), imageURL.getY(), 100, 20);
+		browseButton.setBounds((imageURL.getX()+imageURL.getWidth()), imageURL.getY(), 100, 25);
 		browserImage.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -90,8 +90,8 @@ public class AddMapBox extends JPanel{
 		});
 		
 		//Set the map size (default is the Plane Size)
-		mapSize = new JLabel("Map Size");
-		mapSize.setBounds(10, 100, 100, 25);
+		mapSize = new JLabel("Map Size (in meters):");
+		mapSize.setBounds(10, 100, 140, 25);
 		mapWidth = new JTextField(String.valueOf(plane.getWidth()));
 		mapWidth.setBounds(mapSize.getX()+mapSize.getWidth(), mapSize.getY(), 50, 25);
 		mapHeight = new JTextField(String.valueOf(plane.getHeight()));
