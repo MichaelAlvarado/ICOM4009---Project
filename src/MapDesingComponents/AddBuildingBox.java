@@ -62,21 +62,21 @@ public class AddBuildingBox extends JPanel{
 
 		//name = new JTextField("Building");
 		buildingName = new JLabel("Building name: "); 
-		buildingName.setBounds(10, 40, 100, 25);
+		buildingName.setBounds(10, 40, 130, 25);
 		name = new JTextField();
 		name.setBounds(buildingName.getX()+buildingName.getWidth(), buildingName.getY(), (width/2), 25);
 		name.setFocusable(true);
 
 		//Label for the user to know he can set the texture image
 		picLabel = new JLabel("Building Texture:");
-		picLabel.setBounds(10, 100, 100, 25);
+		picLabel.setBounds(10, 100, 130, 25);
 		picURL = new JTextField();
 		picURL.setBounds(picLabel.getX()+picLabel.getWidth(), picLabel.getY(), (width/2), 25);
 
 		//Search for Picture
 		browser = new JFileChooser();
 		browseButton = new  JButton("Browse");
-		browseButton.setBounds((picURL.getX()+picURL.getWidth())+10, picURL.getY(), 100, 20);
+		browseButton.setBounds((picURL.getX()+picURL.getWidth())+10, picURL.getY(), 80, 20);
 		browser.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -102,8 +102,8 @@ public class AddBuildingBox extends JPanel{
 		});
 
 		//Height Label for the height of building to be set
-		wallHeightLabel = new JLabel("Building height");
-		wallHeightLabel.setBounds(10, 70, 100, 25);
+		wallHeightLabel = new JLabel("Building height (m):");
+		wallHeightLabel.setBounds(10, 70, 130, 25);
 		wallHeight = new JTextField();
 		wallHeight.setBounds(wallHeightLabel.getX()+wallHeightLabel.getWidth(), wallHeightLabel.getY(), (width/2), 25);
 		wallHeight.setFocusable(true);
