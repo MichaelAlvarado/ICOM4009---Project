@@ -88,7 +88,7 @@ public class AddWallBox extends JPanel{
 		});
 
 		// set the wall height for the 3D representation
-		wallHeightLabel = new JLabel("Wall height");
+		wallHeightLabel = new JLabel("Wall height (m):");
 		wallHeightLabel.setBounds(10, 100, 100, 25);
 		wallHeight = new JTextField();
 		wallHeight.setBounds(wallHeightLabel.getX()+wallHeightLabel.getWidth(), wallHeightLabel.getY(), (width/2), 25);
