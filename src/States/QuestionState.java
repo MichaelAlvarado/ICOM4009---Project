@@ -30,7 +30,7 @@ public class QuestionState implements State{
 	private int questionNumber = 0;
 	private int correctlyAnsweredQuestions = 0;
 	private int incorrectlyAnsweredQuestions = 0;
-	private Animation correct, incorrect, playAgain, yay;
+	private Animation correct, incorrect, playAgain;
 	
 	public QuestionState() {
 		building = new Building("Question Building"); //its a dummy building 
@@ -40,7 +40,6 @@ public class QuestionState implements State{
 		correct = new Animation(Images.correct,Handler.getWidth()/2,150,100,100,0.5);
 		incorrect = new Animation(Images.incorrect, (Handler.getWidth()/2)-60, 150, 200, 100, 0.5);
 		playAgain = new Animation(Images.playAgain, (Handler.getWidth()/2)-60, 150, 200, 100, 0.5);
-		yay = new Animation(Images.yay, (Handler.getWidth()/2)-60, 150, 200, 100, 0.5);
 		
 		yes = new Button("Yes", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2), 100, 30, Color.YELLOW) {
 
@@ -142,7 +141,7 @@ public class QuestionState implements State{
 			correct.render(g);
 			incorrect.render(g);
 			playAgain.render(g);
-			yay.render(g);
+			
 		}
 		
 
@@ -177,7 +176,6 @@ public class QuestionState implements State{
 			resetQuestionState();
 		}
 		if (correctlyAnsweredQuestions == 3) {
-			yay.startAnimation();
 			building.setFound(true);
 			resetQuestionState();
 			Handler.setCurrentState(Handler.getGameState());
