@@ -22,6 +22,7 @@ public class Images {
 	public static BufferedImage[] CharacterSpriteIdleLeft;
 	public static BufferedImage[] incorrect;
 	public static BufferedImage[] playAgain;
+	public static BufferedImage[] yay;
 
 
 
@@ -35,6 +36,7 @@ public class Images {
 		correct = new BufferedImage[5];
 		incorrect = new BufferedImage[5];
 		playAgain = new BufferedImage[5];
+		yay = new BufferedImage[5];
 		
 		try {
 			switch(CharacterIndex) {
@@ -328,6 +330,12 @@ public class Images {
 			playAgain[3] = ImageIO.read(new File("res/effects/playagain.png"));
 			playAgain[4] = ImageIO.read(new File("res/effects/playagain.png"));
 
+			
+			yay[0] = ImageIO.read(new File("res/effects/yay.png"));
+			yay[1] = ImageIO.read(new File("res/effects/yay.png"));
+			yay[2] = ImageIO.read(new File("res/effects/yay.png"));
+			yay[3] = ImageIO.read(new File("res/effects/yay.png"));
+			yay[4] = ImageIO.read(new File("res/effects/yay.png"));
 
 		}catch (IOException e) {
 			e.printStackTrace();
