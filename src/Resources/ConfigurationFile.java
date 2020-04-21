@@ -39,7 +39,7 @@ public class ConfigurationFile {
 		for(Building b: map.getBuildingList()){
 			file += "\nBuilding Name: " + b.getName() + "\n" 
 					+ "Building Image: " + b.getPictureURL() + 
-					", Building Height: " + b.getBuildingHeight() + "\n"
+					", Height: " + b.getBuildingHeight() + "\n"
 					+ b.getWallInfo(); //map method add printLine already
 		}
 		file += "\nTrees:";
@@ -128,6 +128,7 @@ public class ConfigurationFile {
 				String bHeight = "";
 				bImage = bLine.substring(bLine.indexOf("Building Image: ") + 16, index);
 				bHeight = bLine.substring(index + 10);
+				System.out.println(bHeight);
 				try {
 					building.setPictureURL(bImage);
 					building.setBuildingHeight(Integer.valueOf(bHeight));
