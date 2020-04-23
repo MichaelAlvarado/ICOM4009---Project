@@ -17,6 +17,7 @@ import Resources.KeyManager;
 import Resources.MouseManager;
 import Resources.SoundManager;
 import States.GameState;
+import States.MenuState;
 import States.PauseState;
 import States.QuestionState;
 import States.State;
@@ -32,6 +33,7 @@ import States.State;
 public class Handler {
 	
 	private static Map map;//Map being Player
+	private static Display display;
 	private static Canvas canvas;
 	//States
 	private static GameState gameState;
@@ -43,8 +45,9 @@ public class Handler {
 	private static MouseManager mouseManager; 
 	private static SoundManager soundManager;
 
-	public Handler(Canvas canvas, Map map) {
+	public Handler(Display display, Canvas canvas, Map map) {
 		Handler.map = map;
+		Handler.display = display;
 		Handler.canvas = canvas;
 		keyManager = new KeyManager();
 		mouseManager = new MouseManager();
@@ -108,6 +111,12 @@ public class Handler {
 
 	public static PauseState getPauseState() {
 		return pauseState;
+	}
+	
+	public static void returnMenuState() {
+		display.getContentPane().removeAll();	
+		display.setLoadingScreen();
+		MenuState menu = new MenuState(display);
 	}
 
 }

@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 
 import Components.Map;
 import GUI.Display;
+import Resources.ConfigurationFile;
 import States.GameState;
 
 
@@ -39,12 +40,13 @@ public class GameEngine implements Runnable {
 	public GameEngine(Display display, Map map) {
 		this.display = display;
 		this.map = map;
+		ConfigurationFile.generateVRML(map);
 		threadB = false;
 		canvas = new Canvas();
 		canvas.setBounds(0, 0, display.getContentPane().getWidth(), display.getContentPane().getHeight());
 		canvas.setFocusable(true);
 		display.getContentPane().add(canvas);
-		new Handler(canvas, map);
+		new Handler(display, canvas, map);
 	}
 	
 	public static int getFPS() {
