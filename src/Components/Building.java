@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Font;
 
 import GUI.Display;
 import GameSetUp.Handler;
@@ -293,7 +294,8 @@ public class Building {
 				animation.stars.render(g);
 				Rectangle rec = this.perimeter();
 				g.setColor(Color.BLACK);
-				g.drawString("Press F", rec.x+10, rec.y+(rec.height/2));
+				g.setFont(new Font("SansSerif", Font.PLAIN, 20));
+				g.drawString("Press F to try to discover the building", rec.x+10, rec.y+(rec.height/2));
 			}
 			//Need a fix (what if i got huge building, and this only take into account from the center point distance)
 			Point centerPoint = new Point((int)bound.getCenterX(), (int)bound.getCenterY());
