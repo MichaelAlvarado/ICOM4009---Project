@@ -129,7 +129,7 @@ public class QuestionState implements State{
 		}
 		else {
 			g.setColor(Color.RED);
-			g.draw3DRect(500, 300, width*2-50, height*2, true);
+			g.draw3DRect((Handler.getWidth()/2)-(width/2), (Handler.getHeight()/2)-(height/2)-50, width+100, height+100, true);
 			g.setColor(Color.BLACK);
 			g.setFont(new Font("Arial", Font.PLAIN, 25));
 			g.drawString(currentQuestion.getQuestion(), (Handler.getWidth()/2)-200, (Handler.getHeight()/2)-(height/2)); 
@@ -192,13 +192,13 @@ public class QuestionState implements State{
 	public void displayNextQuestion(Button b, String str) {
 		if (b.getMessage().equals(str)) {
 			correctlyAnsweredQuestions++;
-			Handler.getSoundManager().resumeAudio("correct");
 			correct.startAnimation();
+			Handler.getSoundManager().resumeAudio("correct");
 		}
 		else {
 			incorrectlyAnsweredQuestions++;
-			Handler.getSoundManager().resumeAudio("wrong");
 			incorrect.startAnimation();
+			Handler.getSoundManager().resumeAudio("wrong");
 		}
 		getNextQuestion();
 	}
