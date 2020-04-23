@@ -49,6 +49,7 @@ public class GameState implements State{
 		player.tick();
 		if (undiscoveredBuildings() == 0) {
 			youWin.startAnimation();
+			Handler.setCurrentState(Handler.getPauseState());
 		}
 	}
 
