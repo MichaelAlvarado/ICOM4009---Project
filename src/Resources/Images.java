@@ -23,7 +23,7 @@ public class Images {
 	public static BufferedImage[] incorrect;
 	public static BufferedImage[] playAgain;
 	public static BufferedImage[] youWin;
-
+	public static BufferedImage[] yay; 
 
 
 	public Images(int CharacterIndex) {
@@ -37,6 +37,7 @@ public class Images {
 		incorrect = new BufferedImage[5];
 		playAgain = new BufferedImage[5];
 		youWin = new BufferedImage[5];
+		yay = new BufferedImage[5];
 		
 		try {
 			switch(CharacterIndex) {
@@ -336,6 +337,12 @@ public class Images {
 			youWin[2] = ImageIO.read(new File("res/effects/youWin.png"));
 			youWin[3] = ImageIO.read(new File("res/effects/youWin.png"));
 			youWin[4] = ImageIO.read(new File("res/effects/youWin.png"));
+			
+			yay[0] = ImageIO.read(new File("res/effects/yay.png"));
+			yay[1] = ImageIO.read(new File("res/effects/yay.png"));
+			yay[2] = ImageIO.read(new File("res/effects/yay.png"));
+			yay[3] = ImageIO.read(new File("res/effects/yay.png"));
+			yay[4] = ImageIO.read(new File("res/effects/yay.png"));
 
 		}catch (IOException e) {
 			e.printStackTrace();

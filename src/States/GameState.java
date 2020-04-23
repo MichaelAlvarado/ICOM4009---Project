@@ -34,7 +34,7 @@ public class GameState implements State{
 		player = new Player("Player" , new Point(160,100));
 		Handler.getSoundManager().addAudio("background");
 		youWin = new Animation(Images.youWin, (Handler.getWidth()/2)-500, 50, 900, 900, 0.5);
-		congratulation = new Animation(Images.youWin, (Handler.getWidth()/2)-500, 50, 900, 900, 1);
+		congratulation = new Animation(Images.yay, (Handler.getWidth()/2)-500, 50, 900, 900, 1.2);
 	}
 	
 	/**
