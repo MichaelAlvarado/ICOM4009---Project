@@ -169,7 +169,8 @@ public class QuestionState implements State{
 		}
 		if (incorrectlyAnsweredQuestions >= 2) {
 			playAgain.startAnimation();
-			Handler.setCurrentState(Handler.getGameState());
+			if(!playAgain.isAnimating())
+				Handler.setCurrentState(Handler.getGameState());
 			resetQuestionState();
 		}
 		if (correctlyAnsweredQuestions == 3) {
@@ -198,7 +199,8 @@ public class QuestionState implements State{
 			incorrect.startAnimation();
 			Handler.getSoundManager().resumeAudio("wrong");
 		}
-		getNextQuestion();
+		if (!correct.isAnimating() || !incorrect.isAnimating())
+			getNextQuestion();
 	}
 	
 	/**
