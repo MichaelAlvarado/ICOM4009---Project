@@ -29,14 +29,16 @@ public class GameState implements State{
 	private Animation youWin;
 	private Animation congratulation;
 	private Button yes, no;
+	private boolean goBackToGame;
 
 	public GameState() {
+		goBackToGame = false;
 		map = Handler.getMap();
 		map.scaleComponentTo(Handler.getWidth(), Handler.getHeight());
 		player = new Player("Player" , new Point(160,100));
 		Handler.getSoundManager().addAudio("background");
 		youWin = new Animation(Images.youWin, (Handler.getWidth()/2)-500, 50, 900, 900, 1.2);
-		congratulation = new Animation(Images.yay, (Handler.getWidth()/2)-500, 50, 900, 900, 1.2);
+		congratulation = new Animation(Images.yay, (Handler.getWidth()/2)-(Handler.getWidth()/8), (Handler.getHeight()/2)-(Handler.getHeight()/4), 400, 400, 1.2);
 		
 		yes = new Button("Yes", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2), 100, 30, Color.YELLOW) {
 			@Override
@@ -50,7 +52,7 @@ public class GameState implements State{
 		no = new Button("No", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)+40, 100, 30, Color.YELLOW) {
 			@Override
 			public void action() {
-				System.out.println("no");
+				goBackToGame = true;
 			}
 			
 		};
@@ -103,8 +105,21 @@ public class GameState implements State{
 			g.drawString("Do you want to see the 3D map?", (Handler.getWidth()/2)-(width/2), (Handler.getHeight()/2)-(height/2)+25);
 			yes.render(g);
 			no.render(g);
+			if (goBackToGame) {
+				goToDiscoveredMap(g);
+			}
 		}
 		congratulation.render(g);
+	}
+	
+	private void goToDiscoveredMap(Graphics g) {
+		map.render(g);
+		player.render(g); 
+		g.setColor(new Color(100,100,100,210));
+		g.fillRect(Handler.getWidth()-180, 0, 180, 25);
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Arial", Font.PLAIN, 15));
+		g.drawString(undiscoveredBuildings() + " Building left to discover", Handler.getWidth()-180, 20);
 	}
 	
 	public Player getPlayer() {
