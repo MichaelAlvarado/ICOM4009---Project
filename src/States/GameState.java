@@ -26,6 +26,7 @@ public class GameState implements State{
 	private Map map;
 	private Player player;
 	private Animation youWin;
+	private Animation congratulation;
 
 	public GameState() {
 		map = Handler.getMap();
@@ -33,7 +34,9 @@ public class GameState implements State{
 		player = new Player("Player" , new Point(160,100));
 		Handler.getSoundManager().addAudio("background");
 		youWin = new Animation(Images.youWin, (Handler.getWidth()/2)-500, 50, 900, 900, 0.5);
+		congratulation = new Animation(Images.youWin, (Handler.getWidth()/2)-500, 50, 900, 900, 1);
 	}
+	
 	/**
 	 * @author Michael J. Alvarado
 	 * Objective - This method will make the game commands
@@ -73,6 +76,7 @@ public class GameState implements State{
 			g.fillRect(0, 0, Handler.getWidth(), Handler.getHeight());
 			youWin.render(g);
 		}
+		congratulation.render(g);
 	}
 	
 	public Player getPlayer() {
@@ -92,4 +96,9 @@ public class GameState implements State{
 		}
 		return count;
 	}
+
+	public Animation getCongratulation() {
+		return congratulation;
+	}
+
 }

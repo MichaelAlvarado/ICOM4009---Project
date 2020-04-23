@@ -31,7 +31,7 @@ public class QuestionState implements State{
 	private int correctlyAnsweredQuestions = 0;
 	private int incorrectlyAnsweredQuestions = 0;
 	private Animation correct, incorrect, playAgain;
-	
+		
 	public QuestionState() {
 		building = new Building("Question Building"); //its a dummy building 
 		currentQuestion = new Question();
@@ -48,7 +48,6 @@ public class QuestionState implements State{
 				answering = true;
 				questionRandomizer(); // this randomizes the questions each time the player wants to answer a set of questions
 				getNextQuestion();
-				
 			}
 			
 		};
@@ -63,8 +62,7 @@ public class QuestionState implements State{
 		opt1 = new Button("Option1", 15, (Handler.getWidth()/2)-200, (Handler.getHeight()/2)-80, 300, 30, Color.YELLOW) {
 			@Override
 			public void action() {
-				displayNextQuestion(opt1, correctAnswer);
-				
+				displayNextQuestion(opt1, correctAnswer);	
 			}
 		};
 		opt2 = new Button("Option2", 15, (Handler.getWidth()/2)-200, (Handler.getHeight()/2)-40, 300, 30, Color.YELLOW) {
@@ -141,7 +139,6 @@ public class QuestionState implements State{
 			correct.render(g);
 			incorrect.render(g);
 			playAgain.render(g);
-			
 		}
 		
 
@@ -179,6 +176,7 @@ public class QuestionState implements State{
 		if (correctlyAnsweredQuestions == 3) {
 			building.setFound(true);
 			resetQuestionState();
+			Handler.getGameState().getCongratulation().startAnimation();
 			Handler.setCurrentState(Handler.getGameState());
 		}
 	}
