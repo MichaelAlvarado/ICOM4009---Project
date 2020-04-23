@@ -35,7 +35,7 @@ public class GameState implements State{
 		goBackToGame = false;
 		map = Handler.getMap();
 		map.scaleComponentTo(Handler.getWidth(), Handler.getHeight());
-		player = new Player("Player" , new Point(160,100));
+		player = new Player("Player" , new Point(160,Handler.getHeight()-100));
 		Handler.getSoundManager().addAudio("background");
 		youWin = new Animation(Images.youWin, (Handler.getWidth()/2)-500, 50, 900, 900, 1.2);
 		congratulation = new Animation(Images.yay, (Handler.getWidth()/2)-(Handler.getWidth()/8), (Handler.getHeight()/2)-(Handler.getHeight()/4), 400, 400, 1.2);
