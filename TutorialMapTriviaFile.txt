@@ -45,4 +45,33 @@ Right: Blue Whale
 Wrong: Elephant
 Wrong: Kodiak Bear
 Wrong: Hippopotamus
-
+Question: 2+2
+Right: 4
+Wrong: 3
+Wrong: 5
+Wrong: 6
+Wrong: 7
+Question: 7+7
+Right: 14
+Wrong: 23
+Wrong: 15
+Wrong: 46
+Wrong: 7
+Question: Cómo se llama el profesor?
+Right: Navarro
+Wrong: Pedrito
+Wrong: Manuel
+Wrong: Juan
+Wrong: Pedro
+Question: 3+3
+Right: 6
+Wrong: 9
+Wrong: 1
+Wrong: 2
+Wrong: 8
+Question: En qué año estamos?
+Right: 2020
+Wrong: 2021
+Wrong: 2010
+Wrong: 2015
+Wrong: 3000
