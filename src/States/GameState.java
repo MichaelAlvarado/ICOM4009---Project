@@ -10,7 +10,8 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
+import Resources.Animation;
+import Resources.Images;
 import Components.Building;
 import Components.Map;
 import Components.Player;
@@ -24,12 +25,14 @@ public class GameState implements State{
 
 	private Map map;
 	private Player player;
+	private Animation youWin;
 
 	public GameState() {
 		map = Handler.getMap();
 		map.scaleComponentTo(Handler.getWidth(), Handler.getHeight());
 		player = new Player("Player" , new Point(160,100));
 		Handler.getSoundManager().addAudio("background");
+		youWin = new Animation(Images.youWin, (Handler.getWidth()/2)-500, 50, 900, 900, 0.5);
 	}
 	/**
 	 * @author Michael J. Alvarado
@@ -44,6 +47,9 @@ public class GameState implements State{
 		}
 		map.tick(player);
 		player.tick();
+		if (undiscoveredBuildings() == 0) {
+			youWin.startAnimation();
+		}
 	}
 
 	/**
@@ -61,6 +67,11 @@ public class GameState implements State{
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.PLAIN, 15));
 		g.drawString(undiscoveredBuildings() + " Building left to discover", Handler.getWidth()-180, 20);
+		if (undiscoveredBuildings() == 0) {
+			g.setColor(Color.WHITE);
+			g.fillRect(0, 0, Handler.getWidth(), Handler.getHeight());
+			youWin.render(g);
+		}
 	}
 	
 	public Player getPlayer() {

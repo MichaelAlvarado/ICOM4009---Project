@@ -35,11 +35,13 @@ public class QuestionState implements State{
 	public QuestionState() {
 		building = new Building("Question Building"); //its a dummy building 
 		currentQuestion = new Question();
+		Handler.getSoundManager().addAudio("correct");
+		Handler.getSoundManager().addAudio("wrong");
 		correct = new Animation(Images.correct,Handler.getWidth()/2,150,100,100,0.5);
 		incorrect = new Animation(Images.incorrect, (Handler.getWidth()/2)-60, 150, 200, 100, 0.5);
 		playAgain = new Animation(Images.playAgain, (Handler.getWidth()/2)-60, 150, 200, 100, 0.5);
 		
-		yes = new Button("Yes", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2), 100, 30, Color.CYAN) {
+		yes = new Button("Yes", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2), 100, 30, Color.YELLOW) {
 
 			@Override
 			public void action() {
@@ -50,7 +52,7 @@ public class QuestionState implements State{
 			}
 			
 		};
-		no = new Button("No", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)+40, 100, 30, Color.CYAN) {
+		no = new Button("No", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)+40, 100, 30, Color.YELLOW) {
 
 			@Override
 			public void action() {
@@ -58,25 +60,26 @@ public class QuestionState implements State{
 			}
 			
 		};
-		opt1 = new Button("Option1", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)-80, 100, 30, Color.CYAN) {
+		opt1 = new Button("Option1", 15, (Handler.getWidth()/2)-200, (Handler.getHeight()/2)-80, 300, 30, Color.YELLOW) {
 			@Override
 			public void action() {
 				displayNextQuestion(opt1, correctAnswer);
+				
 			}
 		};
-		opt2 = new Button("Option2", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)-40, 100, 30, Color.CYAN) {
+		opt2 = new Button("Option2", 15, (Handler.getWidth()/2)-200, (Handler.getHeight()/2)-40, 300, 30, Color.YELLOW) {
 			@Override
 			public void action() {
 				displayNextQuestion(opt2, correctAnswer);
 			}
 		};
-		opt3 = new Button("Option3", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2), 100, 30, Color.CYAN) {
+		opt3 = new Button("Option3", 15, (Handler.getWidth()/2)-200, (Handler.getHeight()/2), 300, 30, Color.YELLOW) {
 			@Override
 			public void action() {
 				displayNextQuestion(opt3, correctAnswer);
 			}
 		};
-		opt4 = new Button("Option4", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)+40, 100, 30, Color.CYAN) {
+		opt4 = new Button("Option4", 15, (Handler.getWidth()/2)-200, (Handler.getHeight()/2)+40, 300, 30, Color.YELLOW) {
 			@Override
 			public void action() {
 				displayNextQuestion(opt4, correctAnswer);
@@ -117,7 +120,7 @@ public class QuestionState implements State{
 			g.fillRoundRect((Handler.getWidth()/2)-(width/2), (Handler.getHeight()/2)-(height/2), width, height, 20, 20);
 			g.setColor(Color.BLACK);
 			g.setFont(new Font("Arial", Font.PLAIN, 25));
-			g.drawString("Do you want to answer the questions of:", (Handler.getWidth()/2)-(width/2), (Handler.getHeight()/2)-(height/2)+25);
+			g.drawString("Do you want to answer the questions of: ", (Handler.getWidth()/2)-(width/2), (Handler.getHeight()/2)-(height/2)+25);
 			g.drawString(building.getName()+"?", (Handler.getWidth()/2)-(width/2), (Handler.getHeight()/2)-(height/2)+50);
 			//prints yes or no buttons
 			yes.render(g);
@@ -125,9 +128,11 @@ public class QuestionState implements State{
 			
 		}
 		else {
+			g.setColor(Color.RED);
+			g.draw3DRect(500, 300, width*2-50, height*2, true);
 			g.setColor(Color.BLACK);
 			g.setFont(new Font("Arial", Font.PLAIN, 25));
-			g.drawString(currentQuestion.getQuestion(), (Handler.getWidth()/2)-200, (Handler.getHeight()/2)-(height/2)+25);
+			g.drawString(currentQuestion.getQuestion(), (Handler.getWidth()/2)-200, (Handler.getHeight()/2)-(height/2)); 
 			opt1.render(g);
 			opt2.render(g);
 			opt3.render(g);
@@ -136,7 +141,9 @@ public class QuestionState implements State{
 			correct.render(g);
 			incorrect.render(g);
 			playAgain.render(g);
+			
 		}
+		
 
 	}
 
@@ -169,9 +176,9 @@ public class QuestionState implements State{
 			resetQuestionState();
 		}
 		if (correctlyAnsweredQuestions == 3) {
-			Handler.setCurrentState(Handler.getGameState());
 			building.setFound(true);
 			resetQuestionState();
+			Handler.setCurrentState(Handler.getGameState());
 		}
 	}
 	
@@ -185,10 +192,12 @@ public class QuestionState implements State{
 	public void displayNextQuestion(Button b, String str) {
 		if (b.getMessage().equals(str)) {
 			correctlyAnsweredQuestions++;
+			Handler.getSoundManager().resumeAudio("correct");
 			correct.startAnimation();
 		}
 		else {
 			incorrectlyAnsweredQuestions++;
+			Handler.getSoundManager().resumeAudio("wrong");
 			incorrect.startAnimation();
 		}
 		getNextQuestion();
