@@ -5,24 +5,24 @@ Image: res/maps/map4.jpg
 Building Name: House
 Building Image: res/buildings/house3.png, Height: 20
 ID: House_w3, Height: 10, First Point: (677, 95), Second Point: (483, 96)
-Wall Image: null
+Wall Image: res/wallTexture/wall.png
 ID: House_w2, Height: 10, First Point: (674, 201), Second Point: (677, 95)
-Wall Image: null
+Wall Image: res/wallTexture/wall.png
 ID: House_w1, Height: 10, First Point: (483, 198), Second Point: (674, 201)
-Wall Image: null
+Wall Image: res/wallTexture/wall.png
 ID: House_w0, Height: 10, First Point: (483, 96), Second Point: (483, 198)
-Wall Image: null
+Wall Image: res/wallTexture/wall.png
 
 Building Name: Mansion
 Building Image: res/buildings/house4.png, Height: 20
 ID: Mansion_w3, Height: 30, First Point: (846, 251), Second Point: (586, 248)
-Wall Image: null
+Wall Image: res/wallTexture/wall2.jpg
 ID: Mansion_w2, Height: 30, First Point: (864, 360), Second Point: (846, 251)
-Wall Image: null
+Wall Image: res/wallTexture/wall2.jpg
 ID: Mansion_w1, Height: 30, First Point: (590, 345), Second Point: (864, 360)
-Wall Image: null
+Wall Image: res/wallTexture/wall2.jpg
 ID: Mansion_w0, Height: 30, First Point: (586, 248), Second Point: (590, 345)
-Wall Image: null
+Wall Image: res/wallTexture/wall2.jpg
 
 Trees:
 ID: TutorialMap_t0, Species: 2, Position: (670, 426)

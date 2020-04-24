@@ -1,0 +1,20 @@
+Map: Testing
+Size: (1920, 932) 
+Image: C:\Users\Michael\git\ICOM4009---Project\res\maps\map2.png
+
+Building Name: asd
+Building Image: C:\Users\Michael\git\ICOM4009---Project\res\buildings\house2.png, Building Height: 1
+ID: asd_w3, Height: 1, First Point: (911, 161), Second Point: (809, 183)
+Wall Image: null
+ID: asd_w2, Height: 1, First Point: (896, 388), Second Point: (911, 161)
+Wall Image: null
+ID: asd_w1, Height: 1, First Point: (806, 374), Second Point: (896, 388)
+Wall Image: null
+ID: asd_w0, Height: 1, First Point: (809, 183), Second Point: (806, 374)
+Wall Image: null
+
+Trees:
+ID: Map_t0, Species: 2, Position: (1651, 211)
+ID: Map_t1, Species: 1, Position: (1196, 494)
+
+QuestionsFile: TestingTriviaFile.txt

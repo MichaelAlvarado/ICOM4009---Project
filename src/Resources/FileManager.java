@@ -327,6 +327,26 @@ public class FileManager {
 	public static void generateVRML(Map map) {
 		WriteFile wrl = new WriteFile("MapVRML.wrl", false);
 		String data = "#VRML V2.0 utf8\n\n"; //VRML version
+		/*
+		 * Avatar Setting
+		 */
+		data += "NavigationInfo {\n"
+				+ "\theadlight TRUE\n"
+				+ "\tavatarSize [ 1 1.8 1 ]\n"
+				+ "}\n\n"
+				+ "Viewpoint { position " + (map.getBuildingList().get(0).perimeter().x - 10) +" "+ 3 +" "+ (map.getBuildingList().get(0).perimeter().y-10) +" }\r\n\n";
+		/*
+		 * Lights
+		 */
+		data += "PointLight {\n"
+				+ "on TRUE\n"
+				+ "intensity 0.75\n"
+				+ "ambientIntensity .5\n"
+				+ "color 1 1 1\n"
+				+ "}\n\n";
+		/*
+		 * Map 3D
+		 */
 		data += VRMLFloor(map);
 		for(Building building: map.getBuildingList()) {
 			data += VRMLBuilding(building);
@@ -372,14 +392,18 @@ public class FileManager {
 	}
 
 	private static String VRMLBuilding(Building building) {
-		String data = VRMLBox(building.getName()+"Roof", (building.perimeter().x+(building.perimeter().width/2)), (building.perimeter().y+(building.perimeter().height/2)), building.getWalls().get(0).getHeight(),
+		String data = "DEF "+ building.getName() +" Transform {\n"
+				+ "children [\n";
+		data += VRMLBox(building.getName()+"Roof", (building.perimeter().x+(building.perimeter().width/2)), (building.perimeter().y+(building.perimeter().height/2)), building.getWalls().get(0).getHeight(),
 				building.perimeter().width, 1, building.perimeter().height, " ");	
 		for(Wall wall: building.getWalls()) {
 			data += VRMLWall(wall);
 		}
+		data += "]\n"
+				+ "}\n";
 		return data;
 	}
-	
+
 	private static String VRMLBox(String name, int x, int y, int z, int width, int heigth, int depth, String textureUrl) {
 		String data = "DEF "+name+" Transform {\n"
 				+ "\ttranslation "+x+ " " + z +" " + y +"\n"
@@ -427,11 +451,11 @@ public class FileManager {
 		/*
 		 * Conver the data of Wall to VRML
 		 */
-		String data = VRMLBox(wall.getID(), x, y, wall.getHeight()/2, width, wall.getHeight(), 1.00, 0, 0, 1, rotation, wall.getTextureURL());
+		String data = VRMLBox(wall.getID(), x, y, wall.getHeight()/2, width+1, wall.getHeight(), 1.00, 0, 0, 1, rotation, wall.getTextureURL());
 		return data;
 	}
-	
-	
+
+
 	private static String VRMLBox(String name, double x, double y, double z, double width, double heigth, double depth, int rotateX, int rotateY, int rotateZ, double rotationAngle, String textureUrl) {
 		String data = "DEF "+name+" Transform {\n"
 				+ "\ttranslation "+ x + " " + z +" " + y +"\n"
@@ -474,8 +498,8 @@ public class FileManager {
 				+ "\t\tDEF Box Shape {\n"
 				+ "\t\t\tappearance Appearance {\n"
 				+ "\t\t\t\tmaterial DEF White Material {\n"
-				+ "\t\t\t\t\tambientIntensity 0.200\n"
-				+ "\t\t\t\t\tshininess 0.200\n"
+				+ "\t\t\t\t\tambientIntensity 1\n"
+				+ "\t\t\t\t\tshininess 1\n"
 				+ "\t\t\t\t\tdiffuseColor 1 1 1\n" 
 				+ "\t\t\t\t}\n"
 				+ "\t\t\ttexture ImageTexture {\n"
