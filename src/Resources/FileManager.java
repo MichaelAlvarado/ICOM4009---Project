@@ -350,9 +350,9 @@ public class FileManager {
 		data += VRMLFloor(map);
 		for(Building building: map.getBuildingList()) {
 			data += VRMLBuilding(building);
-			for(Wall wall: building.getWalls()) {
-				data += VRMLWall(wall);
-			}
+		}
+		for(Tree tree: map.getTrees()) {
+			data += VRMLTree(tree);
 		}
 		try {
 			wrl.writeToFile(data);
@@ -391,8 +391,27 @@ public class FileManager {
 		return data;
 	}
 
+	/**
+	 * Description - Make the floors the the map to place the components on top
+	 * @author - Michael J. Alvarado
+	 * @date Apr 17, 2020
+	 * @param map - the map so it can make the floor with
+	 * @return A string with the VRML code a the floor with map dimension and image
+	 */
+	private static String VRMLFloor(Map map) {
+		return VRMLBox("Floor", map.getWidth()/2, map.getHeight()/2, 0, map.getWidth(), 1, map.getHeight(), map.getImageURL());
+	}
+
+	/**
+	 * Description - Make a VRML code of a building
+	 * @author - Michael J. Alvarado
+	 * @date Apr 24, 2020
+	 * @param building - building to convert to VRML with all its walls
+	 * @return A string with the VRML code of the wall
+	 */
 	private static String VRMLBuilding(Building building) {
-		String data = "DEF "+ building.getName() +" Transform {\n"
+		String data = "# Building: " + building.getName()+"\n"
+				+"DEF "+ building.getName() +" Transform {\n"
 				+ "children [\n";
 		data += VRMLBox(building.getName()+"Roof", (building.perimeter().x+(building.perimeter().width/2)), (building.perimeter().y+(building.perimeter().height/2)), building.getWalls().get(0).getHeight(),
 				building.perimeter().width, 1, building.perimeter().height, " ");	
@@ -400,33 +419,7 @@ public class FileManager {
 			data += VRMLWall(wall);
 		}
 		data += "]\n"
-				+ "}\n";
-		return data;
-	}
-
-	private static String VRMLBox(String name, int x, int y, int z, int width, int heigth, int depth, String textureUrl) {
-		String data = "DEF "+name+" Transform {\n"
-				+ "\ttranslation "+x+ " " + z +" " + y +"\n"
-				+ "\tscale "+ width +" "+ heigth +" "+ depth +"\n"
-				+ "\tchildren [\n"
-				+ "\t\tDEF Box Shape {\n"
-				+ "\t\t\tappearance Appearance {\n"
-				+ "\t\t\t\tmaterial DEF White Material {\n"
-				+ "\t\t\t\t\tambientIntensity 0.200\n"
-				+ "\t\t\t\t\tshininess 0.200\n"
-				+ "\t\t\t\t\tdiffuseColor 1 1 1\n" 
-				+ "\t\t\t\t}\n"
-				+ "\t\t\ttexture ImageTexture {\n"
-				+ "\t\t\t\t\turl "+'"'+textureUrl+'"'+"\n"
-				+ "\t\t\t\t}\n"
-				+ "\t\t\t}\n"
-				+ "\t\t\tgeometry DEF geoBox1 Box {\n"
-				+ "\t\t\t\tsize 1 1 1\n"
-				+ "\t\t\t}\n"
-				+ "\t\t}\n"
-				+ "\t]\n"
-				+ "}"
-				+ "\n\n";
+				+ "}\n\n";
 		return data;
 	}
 
@@ -446,18 +439,76 @@ public class FileManager {
 		 */
 		double a = width/2;
 		double c = wall.getP2().y > wall.getP1().y? wall.getP1().distance(x+a, y): wall.getP2().distance(x+a, y);
-		double cosine = 1-((c*c)/(2.00*a*a)); 
-		double rotation = Math.acos(cosine);
+		double rotation = Math.acos(1-((c*c)/(2.00*a*a)));
 		/*
-		 * Conver the data of Wall to VRML
+		 * Convert the data of Wall to VRML
 		 */
-		String data = VRMLBox(wall.getID(), x, y, wall.getHeight()/2, width+1, wall.getHeight(), 1.00, 0, 0, 1, rotation, wall.getTextureURL());
-		return data;
+		return VRMLBox(wall.getID(), x, y, wall.getHeight()/2, width+1, wall.getHeight(), 1.00, 0, 0, 1, rotation, wall.getTextureURL());
 	}
 
+	private static String VRMLTree(Tree tree) {
+		double height = 10;
+		return VRMLBillboard(tree.getID(), tree.getP1().getX()+(tree.getWidth()/2), tree.getP1().getY()+(tree.getHeight()/2), (height/2), tree.getWidth(), height, tree.getHeight(), tree.getPictureURL());
+	}
 
+	/**
+	 * Description - generates a VRML code of a Box with given parameter
+	 * @author - Michael J. Alvarado
+	 * @date Apr 24, 2020
+	 * @param name - name of Box
+	 * @param x - Center position X horizontal axis
+	 * @param y - Center position Y depth axis
+	 * @param z - Center position Z vertical axis
+	 * @param width - from X Axis
+	 * @param height - from Z Axis
+	 * @param depth - from Y Axis
+	 * @param textureUrl - URL of the images to place on the box
+	 * @return A String of the VRML Box 
+	 */
+	private static String VRMLBox(String name, double x, double y, double z, double width, double heigth, double depth, String textureUrl) {
+		return "DEF "+name+" Transform {\n"
+				+ "\ttranslation "+x+ " " + z +" " + y +"\n"
+				+ "\tscale "+ width +" "+ heigth +" "+ depth +"\n"
+				+ "\tchildren [\n"
+				+ "\t\tDEF Box Shape {\n"
+				+ "\t\t\tappearance Appearance {\n"
+				+ "\t\t\t\tmaterial DEF White Material {\n"
+				+ "\t\t\t\t\tambientIntensity 0.7\n"
+				+ "\t\t\t\t\tshininess 0.2\n"
+				+ "\t\t\t\t\tdiffuseColor 1 1 1\n" 
+				+ "\t\t\t\t}\n"
+				+ "\t\t\ttexture ImageTexture {\n"
+				+ "\t\t\t\t\turl "+'"'+textureUrl+'"'+"\n"
+				+ "\t\t\t\t}\n"
+				+ "\t\t\t}\n"
+				+ "\t\t\tgeometry DEF geoBox1 Box {\n"
+				+ "\t\t\t\tsize 1 1 1\n"
+				+ "\t\t\t}\n"
+				+ "\t\t}\n"
+				+ "\t]\n"
+				+ "}\n";
+	}
+
+	/**
+	 * Description - generates a VRML code of a Box with given parameter
+	 * @author - Michael J. Alvarado
+	 * @date Apr 24, 2020
+	 * @param name - name of Box
+	 * @param x - Center position X horizontal axis
+	 * @param y - Center position Y depth axis
+	 * @param z - Center position Z vertical axis
+	 * @param width - from X Axis
+	 * @param height - from Z Axis
+	 * @param depth - from Y Axis
+	 * @param rotateX - if 1 rotate along X Axis, if 0 i does not rotate
+	 * @param rotateY - if 1 rotate along Y Axis, if 0 i does not rotate
+	 * @param rotateZ -if 1 rotate along Z Axis, if 0 i does not rotate
+	 * @param rotationAngle - Angle in radians to rotate the box along the given Axis in rotateX, rotateY and rotateZ parameters
+	 * @param textureUrl - URL of the images to place on the box
+	 * @return A String of the VRML Box 
+	 */
 	private static String VRMLBox(String name, double x, double y, double z, double width, double heigth, double depth, int rotateX, int rotateY, int rotateZ, double rotationAngle, String textureUrl) {
-		String data = "DEF "+name+" Transform {\n"
+		return "DEF "+name+" Transform {\n"
 				+ "\ttranslation "+ x + " " + z +" " + y +"\n"
 				+ "\tscale "+ width +" "+ heigth +" "+ depth +"\n"
 				+ "\trotation " + rotateX +" "+ rotateZ +" "+ rotateY +" "+ rotationAngle +"\n"
@@ -465,8 +516,8 @@ public class FileManager {
 				+ "\t\tDEF Box Shape {\n"
 				+ "\t\t\tappearance Appearance {\n"
 				+ "\t\t\t\tmaterial DEF White Material {\n"
-				+ "\t\t\t\t\tambientIntensity 0.200\n"
-				+ "\t\t\t\t\tshininess 0.200\n"
+				+ "\t\t\t\t\tambientIntensity 0.7\n"
+				+ "\t\t\t\t\tshininess 0.2\n"
 				+ "\t\t\t\t\tdiffuseColor 1 1 1\n" 
 				+ "\t\t\t\t}\n"
 				+ "\t\t\ttexture ImageTexture {\n"
@@ -479,41 +530,43 @@ public class FileManager {
 				+ "\t\t}\n"
 				+ "\t]\n"
 				+ "}"
-				+ "\n\n";
-		return data;
+				+ "\n";
 	}
 
 	/**
-	 * Description - Make the floors the the map to place the components on top
+	 * Description - generates a VRML code of a Billboard with given parameter. A Billboard will always be facing the avatar so the image will look 3D
 	 * @author - Michael J. Alvarado
-	 * @date Apr 17, 2020
-	 * @param map - the map so it can make the floor with
-	 * @return A string with the VRML code a the floor with map dimension and image
+	 * @date Apr 24, 2020
+	 * @param name - name of Box
+	 * @param x - Center position X horizontal axis
+	 * @param y - Center position Y depth axis
+	 * @param z - Center position Z vertical axis
+	 * @param width - from X Axis
+	 * @param height - from Z Axis
+	 * @param depth - from Y Axis
+	 * @param textureUrl - URL of the images to place on the box
+	 * @return A String of the VRML Billboard
 	 */
-	private static String VRMLFloor(Map map) {
-		String data = "DEF Floor Transform {\n"
-				+ "\ttranslation " +map.getWidth()/2+" "+0+" "+map.getHeight()/2+"\n"
-				+ "\tscale "+map.getWidth()+" "+1+" "+map.getHeight()+"\n"
+	private static String VRMLBillboard(String name, double x, double y, double z, double width, double heigth, double depth, String textureUrl) {
+		return "DEF "+name+" Transform {\n"
+				+ "\ttranslation "+ x +" "+ z +" "+ y +"\n"
 				+ "\tchildren [\n"
-				+ "\t\tDEF Box Shape {\n"
-				+ "\t\t\tappearance Appearance {\n"
-				+ "\t\t\t\tmaterial DEF White Material {\n"
-				+ "\t\t\t\t\tambientIntensity 1\n"
-				+ "\t\t\t\t\tshininess 1\n"
-				+ "\t\t\t\t\tdiffuseColor 1 1 1\n" 
+				+ "\t\tBillboard {\n"
+				+ "\t\t\tchildren [\n"
+				+ "\t\t\t\tShape {\n"
+				+ "\t\t\t\t\tappearance Appearance {\n"
+				+ "\t\t\t\t\t\ttexture ImageTexture {\n"
+				+ "\t\t\t\t\t\t\turl "+'"'+textureUrl+'"'+"\n"
+				+ "\t\t\t\t\t\t}\n"
+				+ "\t\t\t\t\t}\n"
+				+ "\t\t\t\t\tgeometry Box {\n"
+				+ "\t\t\t\t\t\tsize " + width + " " + heigth + " " + 0.0001 + "\n"
+				+ "\t\t\t\t\t}\n"
 				+ "\t\t\t\t}\n"
-				+ "\t\t\ttexture ImageTexture {\n"
-				+ "\t\t\t\t\turl "+'"'+map.getImageURL()+'"'+"\n"
-				+ "\t\t\t\t}\n"
-				+ "\t\t\t}\n"
-				+ "\t\t\tgeometry DEF geoBox1 Box {\n"
-				+ "\t\t\t\tsize 1 1 1\n"
-				+ "\t\t\t}\n"
+				+ "\t\t\t]\n"
 				+ "\t\t}\n"
 				+ "\t]\n"
-				+ "}"
-				+ "\n\n";
-		return data;
+				+ "}\n";
 	}
 
 	/**
@@ -528,6 +581,5 @@ public class FileManager {
 		if(OS.equals("win")) 
 			separator = '\\';
 		return URL.replace(separator, File.separatorChar);
-
 	}
 }
