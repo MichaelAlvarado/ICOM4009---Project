@@ -27,7 +27,7 @@ import States.GameState;
 public class GameEngine implements Runnable {
 	//Running Game
 	private Display display;
-	private boolean running = false;
+	private static boolean running = false;
 	private Thread thread;
 	//Paint Game
 	public static boolean threadB;
@@ -37,6 +37,11 @@ public class GameEngine implements Runnable {
 	private static final int FPS = 60;
 	private Map map;
 
+	/**
+	 * Description - Initialize Canvas, listeners, Game, VRMLFile, and Game thread.
+	 * @author - Michael J. Alvarado
+	 * @date Apr 23, 2020
+	 */
 	public GameEngine(Display display, Map map) {
 		this.display = display;
 		this.map = map;
@@ -48,11 +53,11 @@ public class GameEngine implements Runnable {
 		display.getContentPane().add(canvas);
 		new Handler(display, canvas, map);
 	}
-	
+
 	public static int getFPS() {
 		return FPS;
 	}
-	
+
 	/**
 	 * @author Michael J. Alvarado
 	 * Date - 12/March/2020
@@ -80,7 +85,6 @@ public class GameEngine implements Runnable {
 		long lastTime = System.nanoTime();
 		long timer = 0;
 		int ticks = 0;
-
 		while(running){
 			//makes sure the games runs smoothly at 60 FPS
 			now = System.nanoTime();
@@ -90,8 +94,8 @@ public class GameEngine implements Runnable {
 
 			if(delta >= 1){
 				//re-renders and ticks the game around 60 times per second
-				tick();
 				render();
+				tick();
 				ticks++;
 				delta--;
 			}
@@ -101,14 +105,12 @@ public class GameEngine implements Runnable {
 			}
 		}
 		stop();
-
 	}
 
-
 	/**
+	 * Description - This method is will run the game code 
 	 * @author Michael J. Alvarado
 	 * Date - 12/March/2020
-	 * This method is will run the game code 
 	 */
 	private void tick(){
 		Handler.tick();
@@ -118,9 +120,9 @@ public class GameEngine implements Runnable {
 	}
 
 	/**
+	 * Description = This method will draw the game to the canvas	and make a bufferStrategy (preLoad draws)
 	 * @author Michael J. Alvarado
 	 * Date - 12/March/2020
-	 * This method will draw the game to the canvas	and make a bufferStrategy (preLoad draws)
 	 */
 	private void render(){
 		bs = canvas.getBufferStrategy();
@@ -139,18 +141,19 @@ public class GameEngine implements Runnable {
 			Handler.getCurrentState().render(g);
 		}
 		canvas.setBounds(0, 0, display.getContentPane().getWidth(), display.getContentPane().getHeight()); //Resize Canvas
-		
+
 		//End Drawing!
 		bs.show();
 		g.dispose();
+
 	}
 
 	/**
+	 * Description - This methods stops the game loop
 	 * @author Michael J. Alvarado
 	 * Date - 12/March/2020
-	 * This methods stops the game loop (it could be use to exit the game)
 	 */
-	public synchronized void stop(){
+	private synchronized void stop(){
 		if(!running)
 			return;
 		running = false;
@@ -159,6 +162,10 @@ public class GameEngine implements Runnable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void stopLoop() {
+		running = false;
 	}
 
 }

@@ -114,9 +114,10 @@ public class Handler {
 	}
 	
 	public static void returnMenuState() {
+		GameEngine.stopLoop();
 		display.getContentPane().removeAll();	
 		display.setLoadingScreen();
-		MenuState menu = new MenuState(display);
+		new MenuState(display);
 	}
 
 }

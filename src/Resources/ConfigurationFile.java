@@ -27,9 +27,7 @@ public class ConfigurationFile {
 	 * @return - N/A 
 	 */
 	public static void generateTextFile(Map map) {
-
 		WriteFile data = new WriteFile(map.getMapName() +"ConfigurationFile.txt", false);
-
 		//Write the map information first, no iteration needed for map.
 		String file = "Map: " + map.getMapName() + "\n"
 				+ "Size: (" + map.getWidth() + ", " + map.getHeight() + ") " + "\n"
@@ -128,7 +126,7 @@ public class ConfigurationFile {
 				String bHeight = "";
 				bImage = bLine.substring(bLine.indexOf("Building Image: ") + 16, index);
 				bHeight = bLine.substring(index + 10);
-				System.out.println(bHeight);
+				//System.out.println(bHeight);
 				try {
 					building.setPictureURL(bImage);
 					building.setBuildingHeight(Integer.valueOf(bHeight));
@@ -179,7 +177,6 @@ public class ConfigurationFile {
 						breakLine = sc.nextLine();
 
 				}
-
 				//Add Building
 				map.addBuilding(building);
 				//System.out.println("Load Done");
@@ -320,7 +317,7 @@ public class ConfigurationFile {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Description - This method generate a .wrl file of the map (VRML)
 	 * @author - Michael J. Alvarado
@@ -329,7 +326,6 @@ public class ConfigurationFile {
 	 */
 	public static void generateVRML(Map map) {
 		WriteFile wrl = new WriteFile("MapVRML.wrl", false);
-
 		String data = "#VRML V2.0 utf8\n\n"; //VRML version
 		data += VRMLFloor(map);
 		for(Building building: map.getBuildingList()) {
@@ -337,27 +333,6 @@ public class ConfigurationFile {
 			for(Wall wall: building.getWalls()) {
 				data += VRMLWall(wall);
 			}
-		}
-		try {
-			wrl.writeToFile(data);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}		
-	}
-
-	public static void testVRML() {
-		Map map = null;
-		try {
-			map = ConfigurationFile.generateMap(new File("TutorialMapConfigurationFile.txt"));
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
-		WriteFile wrl = new WriteFile("MapVRML.wrl", false);
-
-		String data = "#VRML V2.0 utf8\n"; //VRML version
-		data += VRMLFloor(map);
-		for(Building building: map.getBuildingList()) {
-			VRMLBuilding(building);
 		}
 		try {
 			wrl.writeToFile(data);
@@ -395,7 +370,7 @@ public class ConfigurationFile {
 				+ "\n";
 		return data;
 	}
-	
+
 	private static String VRMLBuilding(Building building) {
 		String data = "DEF "+ building.getName()+"Roof"+" Transform {\n"
 				+ "\ttranslation "+(building.perimeter().x+(building.perimeter().width/2))+ " " +building.getWalls().get(0).getHeight()+" " +(building.perimeter().y+(building.perimeter().height/2))+"\n"
@@ -504,7 +479,7 @@ public class ConfigurationFile {
 				+ "\n\n";
 		return data;
 	}
-	
+
 	/**
 	 * 
 	 * Description - This method returns the URL path with Operating System separator
