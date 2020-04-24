@@ -8,9 +8,10 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import Resources.Animation;
+import Resources.Button;
+import Resources.ConfigurationFile;
 import Resources.Images;
 import Components.Building;
 import Components.Map;
@@ -27,14 +28,34 @@ public class GameState implements State{
 	private Player player;
 	private Animation youWin;
 	private Animation congratulation;
+	private Button yes, no;
+	private boolean goBackToGame;
 
 	public GameState() {
+		goBackToGame = false;
 		map = Handler.getMap();
 		map.scaleComponentTo(Handler.getWidth(), Handler.getHeight());
-		player = new Player("Player" , new Point(160,100));
+		player = new Player("Player" , new Point(160,Handler.getHeight()-100));
 		Handler.getSoundManager().addAudio("background");
-		youWin = new Animation(Images.youWin, (Handler.getWidth()/2)-500, 50, 900, 900, 0.5);
-		congratulation = new Animation(Images.yay, (Handler.getWidth()/2)-500, 50, 900, 900, 1.2);
+		youWin = new Animation(Images.youWin, (Handler.getWidth()/2)-500, 50, 900, 900, 1.2);
+		congratulation = new Animation(Images.yay, (Handler.getWidth()/2)-(Handler.getWidth()/8), (Handler.getHeight()/2)-(Handler.getHeight()/4), 400, 400, 1.2);
+		
+		yes = new Button("Yes", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2), 100, 30, Color.YELLOW) {
+			@Override
+			public void action() {
+				ConfigurationFile.openFile(new File("MapVRML.wrl"));
+				System.out.println("yes");
+			}
+			
+		};
+		
+		no = new Button("No", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2)+40, 100, 30, Color.YELLOW) {
+			@Override
+			public void action() {
+				goBackToGame = true;
+			}
+			
+		};
 	}
 	
 	/**
@@ -51,8 +72,9 @@ public class GameState implements State{
 		map.tick(player);
 		player.tick();
 		if (undiscoveredBuildings() == 0) {
-			youWin.startAnimation();
-			Handler.setCurrentState(Handler.getPauseState());
+			//youWin.startAnimation();
+			yes.tick();
+			no.tick();
 		}
 	}
 
@@ -64,6 +86,8 @@ public class GameState implements State{
 	 * @param g - from the Canvas in Game Engine
 	 */
 	public void render(Graphics g) {
+		int width = 500;
+		int height = 250;
 		map.render(g);
 		player.render(g); 
 		g.setColor(new Color(100,100,100,210));
@@ -75,8 +99,27 @@ public class GameState implements State{
 			g.setColor(Color.WHITE);
 			g.fillRect(0, 0, Handler.getWidth(), Handler.getHeight());
 			youWin.render(g);
+			g.fillRoundRect((Handler.getWidth()/2)-(width/2), (Handler.getHeight()/2)-(height/2), width, height, 20, 20);
+			g.setColor(Color.BLACK);
+			g.setFont(new Font("Arial", Font.PLAIN, 40));
+			g.drawString("Do you want to see the 3D map?", (Handler.getWidth()/2)-(width/2), (Handler.getHeight()/2)-(height/2)+25);
+			yes.render(g);
+			no.render(g);
+			if (goBackToGame) {
+				goToDiscoveredMap(g);
+			}
 		}
 		congratulation.render(g);
+	}
+	
+	private void goToDiscoveredMap(Graphics g) {
+		map.render(g);
+		player.render(g); 
+		g.setColor(new Color(100,100,100,210));
+		g.fillRect(Handler.getWidth()-180, 0, 180, 25);
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Arial", Font.PLAIN, 15));
+		g.drawString(undiscoveredBuildings() + " Building left to discover", Handler.getWidth()-180, 20);
 	}
 	
 	public Player getPlayer() {

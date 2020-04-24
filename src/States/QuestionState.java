@@ -199,8 +199,7 @@ public class QuestionState implements State{
 			incorrect.startAnimation();
 			Handler.getSoundManager().resumeAudio("wrong");
 		}
-		if (!correct.isAnimating() || !incorrect.isAnimating())
-			getNextQuestion();
+		getNextQuestion();
 	}
 	
 	/**
