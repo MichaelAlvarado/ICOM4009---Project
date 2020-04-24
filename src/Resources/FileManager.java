@@ -372,9 +372,18 @@ public class FileManager {
 	}
 
 	private static String VRMLBuilding(Building building) {
-		String data = "DEF "+ building.getName()+"Roof"+" Transform {\n"
-				+ "\ttranslation "+(building.perimeter().x+(building.perimeter().width/2))+ " " +building.getWalls().get(0).getHeight()+" " +(building.perimeter().y+(building.perimeter().height/2))+"\n"
-				+ "\tscale "+building.perimeter().width+" "+1+" "+building.perimeter().height+"\n"
+		String data = VRMLBox(building.getName()+"Roof", (building.perimeter().x+(building.perimeter().width/2)), (building.perimeter().y+(building.perimeter().height/2)), building.getWalls().get(0).getHeight(),
+				building.perimeter().width, 1, building.perimeter().height, " ");	
+		for(Wall wall: building.getWalls()) {
+			data += VRMLWall(wall);
+		}
+		return data;
+	}
+	
+	private static String VRMLBox(String name, int x, int y, int z, int width, int heigth, int depth, String textureUrl) {
+		String data = "DEF "+name+" Transform {\n"
+				+ "\ttranslation "+x+ " " + z +" " + y +"\n"
+				+ "\tscale "+ width +" "+ heigth +" "+ depth +"\n"
 				+ "\tchildren [\n"
 				+ "\t\tDEF Box Shape {\n"
 				+ "\t\t\tappearance Appearance {\n"
@@ -383,8 +392,8 @@ public class FileManager {
 				+ "\t\t\t\t\tshininess 0.200\n"
 				+ "\t\t\t\t\tdiffuseColor 1 1 1\n" 
 				+ "\t\t\t\t}\n"
-				+ "\t\t\t\ttexture ImageTexture {\n"
-				+ "\t\t\t\t\turl "+'"'+""+'"'+"\n"
+				+ "\t\t\ttexture ImageTexture {\n"
+				+ "\t\t\t\t\turl "+'"'+textureUrl+'"'+"\n"
 				+ "\t\t\t\t}\n"
 				+ "\t\t\t}\n"
 				+ "\t\t\tgeometry DEF geoBox1 Box {\n"
@@ -394,9 +403,6 @@ public class FileManager {
 				+ "\t]\n"
 				+ "}"
 				+ "\n\n";
-		for(Wall wall: building.getWalls()) {
-			data += VRMLWall(wall);
-		}
 		return data;
 	}
 
@@ -421,10 +427,16 @@ public class FileManager {
 		/*
 		 * Conver the data of Wall to VRML
 		 */
-		String data = "DEF "+wall.getID()+" Transform {\n"
-				+ "\ttranslation "+x+ " " +wall.getHeight()/2+" " +y+"\n"
-				+ "\tscale "+width+" "+wall.getHeight()+" "+1+"\n"
-				+ "\trotation 0 1 0 "+rotation+"\n"
+		String data = VRMLBox(wall.getID(), x, y, wall.getHeight()/2, width, wall.getHeight(), 1.00, 0, 0, 1, rotation, wall.getTextureURL());
+		return data;
+	}
+	
+	
+	private static String VRMLBox(String name, double x, double y, double z, double width, double heigth, double depth, int rotateX, int rotateY, int rotateZ, double rotationAngle, String textureUrl) {
+		String data = "DEF "+name+" Transform {\n"
+				+ "\ttranslation "+ x + " " + z +" " + y +"\n"
+				+ "\tscale "+ width +" "+ heigth +" "+ depth +"\n"
+				+ "\trotation " + rotateX +" "+ rotateZ +" "+ rotateY +" "+ rotationAngle +"\n"
 				+ "\tchildren [\n"
 				+ "\t\tDEF Box Shape {\n"
 				+ "\t\t\tappearance Appearance {\n"
@@ -433,8 +445,8 @@ public class FileManager {
 				+ "\t\t\t\t\tshininess 0.200\n"
 				+ "\t\t\t\t\tdiffuseColor 1 1 1\n" 
 				+ "\t\t\t\t}\n"
-				+ "\t\t\t\ttexture ImageTexture {\n"
-				+ "\t\t\t\t\turl "+'"'+wall.getTextureURL()+'"'+"\n"
+				+ "\t\t\ttexture ImageTexture {\n"
+				+ "\t\t\t\t\turl "+'"'+textureUrl+'"'+"\n"
 				+ "\t\t\t\t}\n"
 				+ "\t\t\t}\n"
 				+ "\t\t\tgeometry DEF geoBox1 Box {\n"
@@ -466,7 +478,7 @@ public class FileManager {
 				+ "\t\t\t\t\tshininess 0.200\n"
 				+ "\t\t\t\t\tdiffuseColor 1 1 1\n" 
 				+ "\t\t\t\t}\n"
-				+ "texture ImageTexture {\n"
+				+ "\t\t\ttexture ImageTexture {\n"
 				+ "\t\t\t\t\turl "+'"'+map.getImageURL()+'"'+"\n"
 				+ "\t\t\t\t}\n"
 				+ "\t\t\t}\n"

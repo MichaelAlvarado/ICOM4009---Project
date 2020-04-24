@@ -4,18 +4,9 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.sound.sampled.Clip;
-
-import GameSetUp.GameEngine;
 import GameSetUp.Handler;
 import Resources.Animation;
 import Resources.Images;
-import States.MenuState;
-import States.MenuState.charSelect;
 
 /**
  * @author Fabiola Badillo Ramos
@@ -64,8 +55,6 @@ public class Player {
 	public Rectangle getBound() {
 		return bound;
 	}
-
-
 
 	/**
 	 * Description - This method has player movement on each direction (UP, DOWN, LEFT, RIGHT).
