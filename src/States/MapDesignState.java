@@ -1,60 +1,17 @@
 package States;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.Graphics;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import javax.swing.border.EmptyBorder;
-import javax.swing.JSplitPane;
 import java.awt.Color;
-import javax.swing.JInternalFrame;
 import javax.swing.JButton;
-import javax.swing.JToggleButton;
-import javax.swing.SwingConstants;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
-import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.File;
-import java.io.IOException;
 import java.text.ParseException;
-import java.util.LinkedList;
-import java.awt.Color;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.imageio.ImageIO;
-import javax.swing.Box;
 import javax.swing.border.LineBorder;
 import javax.swing.UIManager;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import java.awt.Choice;
-import java.awt.Canvas;
-import javax.swing.JFormattedTextField;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Image;
-
-import javax.swing.border.TitledBorder;
-import javax.swing.colorchooser.ColorSelectionModel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.text.DefaultEditorKit;
-import javax.swing.text.MaskFormatter;
-
 import Components.Building;
 import Components.Question;
 import Components.Tree;
@@ -68,19 +25,9 @@ import MapDesingComponents.AddWallBox;
 import MapDesingComponents.Plane;
 import Resources.FileManager;
 
-import javax.swing.JDesktopPane;
-import javax.swing.JLayeredPane;
-import javax.swing.JEditorPane;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
-import java.awt.Label;
 import java.awt.MenuItem;
-import java.awt.Point;
 import java.awt.PopupMenu;
-
-import javax.swing.JSlider;
-import java.awt.Button;
 
 /**
  * This was made using Window Builder version 1.9.3 plug-in in Eclipse IDE
@@ -102,6 +49,7 @@ public class MapDesignState{
 	 * Date - 28/Feb/2020
 	 * @throws ParseException 
 	 */
+	@SuppressWarnings("serial")
 	public MapDesignState(Display display) throws ParseException {
 		this.display = display;
 		this.width = display.getContentPane().getWidth();
@@ -308,7 +256,6 @@ public class MapDesignState{
 				else if(x == 1) {
 					loadingScreen();
 				}
-
 			}
 		});
 
@@ -369,7 +316,7 @@ public class MapDesignState{
 	public void loadingScreen() {
 		display.setLoadingScreen();
 		display.getContentPane().removeAll();	
-		MenuState menu = new MenuState(display);
+		new MenuState(display);
 	}
 
 	/**
