@@ -66,7 +66,7 @@ import MapDesingComponents.AddQuestionsBox;
 import MapDesingComponents.AddTreeBox;
 import MapDesingComponents.AddWallBox;
 import MapDesingComponents.Plane;
-import Resources.ConfigurationFile;
+import Resources.FileManager;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JLayeredPane;
@@ -297,8 +297,8 @@ public class MapDesignState{
 					if(!(plane.getMap().getPicture() == null)) {
 						if(plane.getCurrentBuilding().getWalls().size() < 1 || plane.getCurrentBuilding().getQuestionPool().size() < 4)
 							plane.getMap().removeBuilding(plane.getCurrentBuilding());
-						ConfigurationFile.generateTextFile(plane.getMap());
-						ConfigurationFile.generateQuestionFile(plane.getMap());
+						FileManager.generateTextFile(plane.getMap());
+						FileManager.generateQuestionFile(plane.getMap());
 						System.out.println("Map Saved");
 						loadingScreen();
 					}

@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 
 import Components.Building;
 import Components.Question;
-import Resources.ConfigurationFile;
+import Resources.FileManager;
 import States.QuestionState;
 
 
@@ -19,8 +19,8 @@ public class writeToFileTest {
 		/*
 		 * Open File with predetermine app
 		 */
-			ConfigurationFile.generateVRLM(new File("TutorialMapConfigurationFile.txt"));
-			ConfigurationFile.openFile(new File("MapVRML.wrl"));
+			FileManager.generateVRLM(new File("TutorialMapConfigurationFile.txt"));
+			FileManager.openFile(new File("MapVRML.wrl"));
 	}
 	//     
 	//		 WriteFile data = new WriteFile("ConfigurationFile.txt", true);

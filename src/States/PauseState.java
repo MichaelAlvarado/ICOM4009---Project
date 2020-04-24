@@ -27,7 +27,7 @@ import GUI.Display;
 import GameSetUp.GameEngine;
 import GameSetUp.Handler;
 import Resources.Button;
-import Resources.ConfigurationFile;
+import Resources.FileManager;
 import Resources.Images;
 import States.MenuState.MapSelect;
 import States.MenuState.charSelect;
@@ -66,7 +66,7 @@ public class PauseState implements State {
 
 			@Override
 			public void action() {
-				ConfigurationFile.openFile(new File("MapVRML.wrl"));
+				FileManager.openFile(new File("MapVRML.wrl"));
 			}	
 		};
 

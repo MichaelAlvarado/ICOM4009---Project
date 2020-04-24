@@ -26,7 +26,7 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
 import Components.Map;
-import Resources.ConfigurationFile;
+import Resources.FileManager;
 
 /**
  * 
@@ -136,7 +136,7 @@ public class AddMapBox extends JPanel{
 				//This should create a Map from the chosen txt file and place it on Place
 				try {
 					System.out.println("Loading Map");
-					map = ConfigurationFile.generateMap(browserMap.getSelectedFile());
+					map = FileManager.generateMap(browserMap.getSelectedFile());
 					System.out.println("Map loaded");
 					plane.setMap(map);
 					autofill();

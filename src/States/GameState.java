@@ -11,7 +11,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import Resources.Animation;
 import Resources.Button;
-import Resources.ConfigurationFile;
+import Resources.FileManager;
 import Resources.Images;
 import Components.Building;
 import Components.Map;
@@ -43,7 +43,7 @@ public class GameState implements State{
 		yes = new Button("Yes", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2), 100, 30, Color.YELLOW) {
 			@Override
 			public void action() {
-				ConfigurationFile.openFile(new File("MapVRML.wrl"));
+				FileManager.openFile(new File("MapVRML.wrl"));
 				System.out.println("yes");
 			}
 			

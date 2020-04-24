@@ -38,7 +38,7 @@ import GUI.Display;
 import GameSetUp.GameEngine;
 import MapDesingComponents.AddWallBox;
 import MapDesingComponents.Plane;
-import Resources.ConfigurationFile;
+import Resources.FileManager;
 import Resources.Images;
 
 /**
@@ -299,7 +299,7 @@ public class MenuState{
 				System.out.println("Loading GameEngine...");
 				long start = System.nanoTime();
 				new Images(charSelection.getSelectedIndex());
-				map = ConfigurationFile.generateMap(new File(mapURL.getText()));
+				map = FileManager.generateMap(new File(mapURL.getText()));
 				GameEngine gameEngine = new GameEngine(display, map);
 				gameEngine.start();
 				System.out.println("GameEngine Loaded in: " + ((System.nanoTime()-start)/1000000000.0) + " seconds");

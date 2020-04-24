@@ -14,7 +14,7 @@ import Components.Tree;
 import Components.Wall;
 import testers.WriteFile;
 
-public class ConfigurationFile {
+public class FileManager {
 	/**
 	 * @author jorgecalderon
 	 * Objective - Generate the text file needed for easier configuration in VRML
@@ -222,7 +222,7 @@ public class ConfigurationFile {
 			if(file.getParentFile() != null) {
 				filepath = file.getParentFile().toString() + "/";
 			}
-			filepath = ConfigurationFile.OSCompability(filepath + map.getMapName() + "TriviaFile.txt");
+			filepath = FileManager.OSCompability(filepath + map.getMapName() + "TriviaFile.txt");
 			// System.out.println("aqui");
 
 			//System.out.println(filepath);
@@ -311,7 +311,7 @@ public class ConfigurationFile {
 	 */
 	public static void generateVRLM(File file) {
 		try {
-			Map map = ConfigurationFile.generateMap(file);
+			Map map = FileManager.generateMap(file);
 			generateVRML(map);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
