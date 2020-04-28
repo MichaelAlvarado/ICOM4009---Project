@@ -71,7 +71,7 @@ public class GameState implements State{
 		}
 		map.tick(player);
 		player.tick();
-		if (undiscoveredBuildings() == 0) {
+		if (Handler.undiscoveredBuildings() == 0) {
 			//youWin.startAnimation();
 			yes.tick();
 			no.tick();
@@ -94,8 +94,8 @@ public class GameState implements State{
 		g.fillRect(Handler.getWidth()-180, 0, 180, 25);
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.PLAIN, 15));
-		g.drawString(undiscoveredBuildings() + " Building left to discover", Handler.getWidth()-180, 20);
-		if (undiscoveredBuildings() == 0) {
+		g.drawString(Handler.undiscoveredBuildings() + " Building left to discover", Handler.getWidth()-180, 20);
+		if (Handler.undiscoveredBuildings() == 0) {
 			g.setColor(Color.WHITE);
 			g.fillRect(0, 0, Handler.getWidth(), Handler.getHeight());
 			youWin.render(g);
@@ -119,7 +119,7 @@ public class GameState implements State{
 		g.fillRect(Handler.getWidth()-180, 0, 180, 25);
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.PLAIN, 15));
-		g.drawString(undiscoveredBuildings() + " Building left to discover", Handler.getWidth()-180, 20);
+		g.drawString(Handler.undiscoveredBuildings() + " Building left to discover", Handler.getWidth()-180, 20);
 	}
 	
 	public Player getPlayer() {
@@ -130,15 +130,7 @@ public class GameState implements State{
 		this.player = player;
 	}
 	
-	private int undiscoveredBuildings() {
-		int count = map.getBuildingList().size();
-		for(Building building:map.getBuildingList()) {
-			if(building.getFound()) {
-				count--;
-			}
-		}
-		return count;
-	}
+	
 
 	public Animation getCongratulation() {
 		return congratulation;

@@ -66,6 +66,16 @@ public class Handler {
 	public static Map getMap() {
 		return map;
 	}
+	
+	public static int undiscoveredBuildings() {
+		int count = map.getBuildingList().size();
+		for(Building building:Handler.getMap().getBuildingList()) {
+			if(building.getFound()) {
+				count--;
+			}
+		}
+		return count;
+	}
 
 	public static void tick() {
 		keyManager.tick();

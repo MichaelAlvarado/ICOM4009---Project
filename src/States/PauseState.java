@@ -22,6 +22,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
+import Components.Building;
 import Components.Map;
 import GUI.Display;
 import GameSetUp.GameEngine;
@@ -66,7 +67,11 @@ public class PauseState implements State {
 
 			@Override
 			public void action() {
-				FileManager.openFile(new File("MapVRML.wrl"));
+				if (Handler.undiscoveredBuildings() == 0)
+					FileManager.openFile(new File("MapVRML.wrl"));
+				else {
+					Handler.setCurrentState(Handler.getGameState());
+				}
 			}	
 		};
 
@@ -108,8 +113,7 @@ public class PauseState implements State {
 	}
 
 
-
-
+	
 	@Override
 	public void tick() {
 		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
