@@ -44,7 +44,7 @@ public class GameState implements State{
 			@Override
 			public void action() {
 				FileManager.openFile(new File("MapVRML.wrl"));
-				System.out.println("yes");
+				goBackToGame = true;
 			}
 			
 		};
