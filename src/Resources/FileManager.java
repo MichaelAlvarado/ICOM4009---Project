@@ -433,17 +433,17 @@ public class FileManager {
 	private static String VRMLWall(Wall wall) {
 		double x = (wall.getP1().getX() + wall.getP2().getX())/2; //center X position of wall
 		double y = (wall.getP1().getY() + wall.getP2().getY())/2; //center Y position of wall
-		double width = wall.getP1().distance(wall.getP2()); //width of the wall
+		double length = wall.getP1().distance(wall.getP2()); //width of the wall
 		/*
 		 * Rotation calculation using Cosine Law in a isosceles
 		 */
-		double a = width/2;
-		double c = wall.getP2().y > wall.getP1().y? wall.getP1().distance(x+a, y): wall.getP2().distance(x+a, y);
-		double rotation = Math.acos(1-((c*c)/(2.00*a*a)));
+		double a = length/2;
+		double c = wall.getP2().y > wall.getP1().y? wall.getP1().distance(x+a, y): wall.getP2().distance(x+a, y); //takes the bottom most point so the rotation will be clockwise
+		double rotation = Math.acos(1-((c*c)/(2.00*a*a))); 
 		/*
 		 * Convert the data of Wall to VRML
 		 */
-		return VRMLBox(wall.getID(), x, y, wall.getHeight()/2, width+1, wall.getHeight(), 1.00, 0, 0, 1, rotation, wall.getTextureURL());
+		return VRMLBox(wall.getID(), x, y, wall.getHeight()/2, length+1, wall.getHeight(), 1.00, 0, 0, 1, rotation, wall.getTextureURL());
 	}
 
 	private static String VRMLTree(Tree tree) {
