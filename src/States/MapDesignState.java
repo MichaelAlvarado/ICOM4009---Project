@@ -243,7 +243,8 @@ public class MapDesignState{
 						null, options, options[0]);
 				if (x == 0) {
 					if(!(plane.getMap().getPicture() == null)) {
-						if(plane.getCurrentBuilding().getWalls().size() < 1 || plane.getCurrentBuilding().getQuestionPool().size() < 4)
+						if(plane.getCurrentBuilding() != null &&
+								(plane.getCurrentBuilding().getWalls().size() < 1 || plane.getCurrentBuilding().getQuestionPool().size() < 4))
 							plane.getMap().removeBuilding(plane.getCurrentBuilding());
 						FileManager.generateTextFile(plane.getMap());
 						FileManager.generateQuestionFile(plane.getMap());
