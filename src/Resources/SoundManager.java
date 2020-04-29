@@ -14,6 +14,7 @@ public class SoundManager {
 	private AudioFormat format;
 	private DataLine.Info info;
 	private HashMap<String,Clip> audioChannels;
+	private boolean soundOn = true;
 
 	public SoundManager(){
 		audioChannels = new HashMap<String,Clip>();
@@ -72,11 +73,13 @@ public class SoundManager {
 	 * @param str - name of the .wav file in res/music/. (Has to be added by using addAudio)
 	 */
 	public void resumeAudio(String clip) {
+		if(soundOn == true) {
 		Clip audioClip = audioChannels.get(clip);
 		if(audioClip.getMicrosecondPosition() == audioClip.getMicrosecondLength()) {
 			startAudio(clip);
 		}
 		audioClip.start();
+		}
 	}
 
 	/**
@@ -87,9 +90,11 @@ public class SoundManager {
 	 * @param str - name of the .wav file in res/music/. (Has to be added by using addAudio)
 	 */
 	public void startAudio(String clip) {
+		if(soundOn == true) {
 		Clip audioClip = audioChannels.get(clip);
 		audioClip.setMicrosecondPosition(0);
 		audioClip.start();
+		}
 	}
 
 	/**
@@ -125,6 +130,14 @@ public class SoundManager {
 	public void setVolumen(Clip clip, float volumen) {
 		FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 		gainControl.setValue(volumen-40);
+	}
+	
+	
+	public boolean soundToggle() {
+		if(soundOn == true) {
+			return soundOn = false;
+		} else
+		return soundOn = true;
 	}
 
 }

@@ -149,8 +149,16 @@ public class MenuState{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String help = "Create Map buttons allows you to create your own map to play.\n"+
+						"In there you'll be able to construct buildings, place trees, and more.\n"+
+						"You'll see detailed information of the Map Desing in the help button.\n"+
+
 						"Play Game buttons can get you playing with map already made.\n"+
-						"Have fun XD"+
+						"Simply browse for a created map or play a default map instead.\n"+
+						"Remember to choose your favorite Avatar first!\n"+
+						"You can see more information of the Game State by going\n"+
+						"to the pause menu and selecting Help.\n\n"+
+
+						"Have fun! XD"+
 						"\n\n" +
 						"This app was made by: \n"+
 						"	Michael Alvarado\r\n" + 

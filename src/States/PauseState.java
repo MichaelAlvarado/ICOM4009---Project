@@ -37,7 +37,6 @@ public class PauseState implements State {
 
 	Button continueGame, saveMap, open3D, settings, help, help_exit, exitGame;
 	Label helpLabel;
-	GameState gameS;
 	boolean is_help = false;
 
 
@@ -54,16 +53,7 @@ public class PauseState implements State {
 		};
 
 
-		saveMap = new Button("Save Map", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2) - 80, 110, 30, Color.CYAN) {
-
-			@Override
-			public void action() {
-				Handler.setCurrentState(Handler.getGameState());				
-			}	
-		};
-
-
-		open3D = new Button("Open 3D World", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2) - 40, 110, 30, Color.CYAN) {
+		open3D = new Button("Open 3D World", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2) - 80, 110, 30, Color.CYAN) {
 
 			@Override
 			public void action() {
@@ -75,18 +65,16 @@ public class PauseState implements State {
 			}	
 		};
 
-		settings = new Button("Settings", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2), 110, 30, Color.CYAN) {
+		settings = new Button("Mute / Unmute", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2) - 40, 110, 30, Color.CYAN) {
 
 			@Override
-			public void action() {
-				Handler.setCurrentState(Handler.getGameState());
-				Handler.getSoundManager().stopAudio("background");
-
-
+			public void action() {				
+				Handler.setCurrentState(Handler.getGameState());	
+				Handler.getSoundManager().soundToggle();
 			}
 		};
 
-		help = new Button("Help", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2) + 40, 110, 30, Color.CYAN) {
+		help = new Button("Help", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2), 110, 30, Color.CYAN) {
 
 			@Override
 			public void action() {
@@ -94,7 +82,7 @@ public class PauseState implements State {
 			}	
 		};
 
-		help_exit = new Button("Exit", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2) + 40, 110, 30, Color.CYAN) {
+		help_exit = new Button("Exit", 15, (Handler.getWidth()/2), (Handler.getHeight()/2) + 135, 110, 30, Color.CYAN) {
 
 			@Override
 			public void action() {
@@ -102,7 +90,7 @@ public class PauseState implements State {
 			}	
 		};
 
-		exitGame = new Button("Exit Game", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2) + 80, 110, 30, Color.CYAN) {
+		exitGame = new Button("Exit Game", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2) + 40, 110, 30, Color.CYAN) {
 
 			@Override
 			public void action() {
@@ -123,7 +111,6 @@ public class PauseState implements State {
 			help_exit.tick();
 		} else {
 			continueGame.tick();
-			saveMap.tick();
 			open3D.tick();
 			settings.tick();
 			help.tick();
@@ -137,16 +124,27 @@ public class PauseState implements State {
 		int height = 250;
 		if(is_help == true) {
 
-			g.fillRoundRect((Handler.getWidth()/2)-(width/2), (Handler.getHeight()/2)-(height/2), width, height, 20, 20);
+			g.fillRoundRect((Handler.getWidth()/2)-(width/2)- 100, (Handler.getHeight()/2)-(height/2), width + 300, height + 70, 20, 20);
 			g.setColor(Color.BLACK);
-			g.setFont(new Font("Arial", Font.PLAIN, 20));
-			g.drawString("Insert Help Info Here:", (Handler.getWidth()/2)-(width/2) + 10, (Handler.getHeight()/2)-(height/2)+25);
+			g.setFont(new Font("Arial", Font.BOLD, 15));
+			g.drawString("Help the character find all the buildings! Use arrow keys or 'WASD' to move the character around.", (Handler.getWidth()/2)-(width/2) - 50, (Handler.getHeight()/2)-(height/2)+30);
+			g.drawString("The remaining number of buildings to find are shown in the upper right screen ", (Handler.getWidth()/2)-(width/2) -50, (Handler.getHeight()/2)-(height/2)+50);
+			g.drawString("The closer you get your chacter to the building the more visible the building will become.", (Handler.getWidth()/2)-(width/2) -50, (Handler.getHeight()/2)-(height/2)+70);
+			g.drawString("To interact with it press the F to discover the building!", (Handler.getWidth()/2)-(width/2) -50, (Handler.getHeight()/2)-(height/2)+90);
+			g.drawString("You must answer correctly 3 out of the 4 possible questions to discover the building.", (Handler.getWidth()/2)-(width/2) -50, (Handler.getHeight()/2)-(height/2)+110);
+			g.drawString("If you fail to answer correctly, you can try again as many times as you want!", (Handler.getWidth()/2)-(width/2) -50, (Handler.getHeight()/2)-(height/2)+130);
+			g.drawString("Once all building are discovered you can view the Map in 3D!", (Handler.getWidth()/2)-(width/2) -50, (Handler.getHeight()/2)-(height/2)+150);
+			g.drawString("In the Pause Menu, press continue to resume playing", (Handler.getWidth()/2)-(width/2) -50, (Handler.getHeight()/2)-(height/2)+170);
+			g.drawString("If the conditions are met, you can view the 3D Map by pressing Open 3D World", (Handler.getWidth()/2)-(width/2) -50, (Handler.getHeight()/2)-(height/2)+190);	
+			g.drawString("The mute/ unmute button will toggle sound on and off", (Handler.getWidth()/2)-(width/2) -50, (Handler.getHeight()/2)-(height/2)+210);
+			g.drawString("Exit Game button will take you to the Main Menu Screen", (Handler.getWidth()/2)-(width/2) -50, (Handler.getHeight()/2)-(height/2)+230);
+			
+
 			help_exit.render(g);
 		} else {
 			g.setColor(Color.DARK_GRAY);
 			g.fillRect(0, 0, Handler.getWidth(), Handler.getHeight());
 			continueGame.render(g);
-			saveMap.render(g);
 			open3D.render(g);
 			settings.render(g);
 			exitGame.render(g);

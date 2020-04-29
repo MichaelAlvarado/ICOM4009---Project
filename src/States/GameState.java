@@ -29,7 +29,7 @@ public class GameState implements State{
 	private Animation youWin;
 	private Animation congratulation;
 	private Button yes, no;
-	private boolean goBackToGame;
+	private boolean goBackToGame; 
 
 	public GameState() {
 		goBackToGame = false;
@@ -57,6 +57,7 @@ public class GameState implements State{
 			
 		};
 	}
+	
 	
 	/**
 	 * @author Michael J. Alvarado
@@ -95,6 +96,13 @@ public class GameState implements State{
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.PLAIN, 15));
 		g.drawString(Handler.undiscoveredBuildings() + " Building left to discover", Handler.getWidth()-180, 20);
+		
+		g.setColor(new Color(100,100,100,210));
+		g.fillRect(0, 0, 200, 25);
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Arial", Font.PLAIN, 15));
+		g.drawString("  Press ESC for Pause Menu", 0, 20);
+		
 		if (Handler.undiscoveredBuildings() == 0) {
 			g.setColor(Color.WHITE);
 			g.fillRect(0, 0, Handler.getWidth(), Handler.getHeight());

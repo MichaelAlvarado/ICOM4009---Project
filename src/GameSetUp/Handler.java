@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 
 import Components.Building;
 import Components.Map;
+import Components.Player;
 import GUI.Display;
 import Resources.KeyManager;
 import Resources.MouseManager;
@@ -44,6 +45,7 @@ public class Handler {
 	private static KeyManager keyManager;
 	private static MouseManager mouseManager; 
 	private static SoundManager soundManager;
+	
 
 	public Handler(Display display, Canvas canvas, Map map) {
 		Handler.map = map;
@@ -122,6 +124,7 @@ public class Handler {
 	public static PauseState getPauseState() {
 		return pauseState;
 	}
+	
 	
 	public static void returnMenuState() {
 		GameEngine.stopLoop();

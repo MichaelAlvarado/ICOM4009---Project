@@ -197,7 +197,7 @@ public class QuestionState implements State{
 		else {
 			incorrectlyAnsweredQuestions++;
 			incorrect.startAnimation();
-			Handler.getSoundManager().resumeAudio("wrong");
+			Handler.getSoundManager().resumeAudio("wrong");		
 		}
 		getNextQuestion();
 	}
@@ -216,6 +216,7 @@ public class QuestionState implements State{
 		answering = false;
 	}
 	
+
 
 /**
  * 
