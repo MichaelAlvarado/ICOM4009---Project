@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import Components.Building;
 import Components.Map;
+import Components.Player;
 import Components.Question;
 import Components.Tree;
 import Components.Wall;
@@ -309,10 +310,10 @@ public class FileManager {
 	 * @date Apr 14, 2020
 	 * @param file - ConfigurationFile of the map to convert to 3D 
 	 */
-	public static void generateVRLM(File file) {
+	public static void generateVRLM(File file, int x, int y) {
 		try {
 			Map map = FileManager.generateMap(file);
-			generateVRML(map);
+			generateVRML(map, x, y);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -324,7 +325,7 @@ public class FileManager {
 	 * @date Apr 17, 2020
 	 * @param map - map to be converted
 	 */
-	public static void generateVRML(Map map) {
+	public static void generateVRML(Map map, int x, int y) {
 		WriteFile wrl = new WriteFile("MapVRML.wrl", false);
 		String data = "#VRML V2.0 utf8\n\n"; //VRML version
 		/*
@@ -334,7 +335,7 @@ public class FileManager {
 				+ "\theadlight TRUE\n"
 				+ "\tavatarSize [ 1 1.8 1 ]\n"
 				+ "}\n\n"
-				+ "Viewpoint { position " + (map.getBuildingList().get(0).perimeter().x - 10) +" "+ 3 +" "+ (map.getBuildingList().get(0).perimeter().y-10) +" }\r\n\n";
+				+ "Viewpoint { position " + x +" "+ 3 +" "+ y +" }\r\n\n";
 		/*
 		 * Lights
 		 */

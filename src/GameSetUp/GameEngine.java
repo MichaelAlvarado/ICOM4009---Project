@@ -45,7 +45,6 @@ public class GameEngine implements Runnable {
 	public GameEngine(Display display, Map map) {
 		this.display = display;
 		this.map = map;
-		FileManager.generateVRML(map);
 		threadB = false;
 		canvas = new Canvas();
 		canvas.setBounds(0, 0, display.getContentPane().getWidth(), display.getContentPane().getHeight());

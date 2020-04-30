@@ -43,6 +43,7 @@ public class GameState implements State{
 		yes = new Button("Yes", 15, (Handler.getWidth()/2)-50, (Handler.getHeight()/2), 100, 30, Color.YELLOW) {
 			@Override
 			public void action() {
+				FileManager.generateVRML(map, player.getPosition().x, player.getPosition().y);
 				FileManager.openFile(new File("MapVRML.wrl"));
 				goBackToGame = true;
 			}

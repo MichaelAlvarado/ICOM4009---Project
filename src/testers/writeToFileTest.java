@@ -19,7 +19,7 @@ public class writeToFileTest {
 		/*
 		 * Open File with predetermine app
 		 */
-			FileManager.generateVRLM(new File("TutorialMapConfigurationFile.txt"));
+			FileManager.generateVRLM(new File("TutorialMapConfigurationFile.txt"), 10, 10);
 			FileManager.openFile(new File("MapVRML.wrl"));
 	}
 	//     

@@ -57,8 +57,10 @@ public class PauseState implements State {
 
 			@Override
 			public void action() {
-				if (Handler.undiscoveredBuildings() == 0)
+				if (Handler.undiscoveredBuildings() == 0) {
+					FileManager.generateVRML(Handler.getMap(), Handler.getGameState().getPlayer().getPosition().x, Handler.getGameState().getPlayer().getPosition().y);
 					FileManager.openFile(new File("MapVRML.wrl"));
+				}
 				else {
 					Handler.setCurrentState(Handler.getGameState());
 				}
@@ -101,7 +103,7 @@ public class PauseState implements State {
 	}
 
 
-	
+
 	@Override
 	public void tick() {
 		if(Handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
@@ -138,7 +140,7 @@ public class PauseState implements State {
 			g.drawString("If the conditions are met, you can view the 3D Map by pressing Open 3D World", (Handler.getWidth()/2)-(width/2) -50, (Handler.getHeight()/2)-(height/2)+190);	
 			g.drawString("The mute/ unmute button will toggle sound on and off", (Handler.getWidth()/2)-(width/2) -50, (Handler.getHeight()/2)-(height/2)+210);
 			g.drawString("Exit Game button will take you to the Main Menu Screen", (Handler.getWidth()/2)-(width/2) -50, (Handler.getHeight()/2)-(height/2)+230);
-			
+
 
 			help_exit.render(g);
 		} else {
