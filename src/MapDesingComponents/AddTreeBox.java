@@ -81,7 +81,7 @@ public class AddTreeBox extends JPanel{
 
 		MaskFormatter formatP1Y = new MaskFormatter();
 		try {
-			formatP1Y.setMask(" ###)");
+			formatP1Y.setMask("####)");
 		} catch (ParseException e1) {
 			System.err.println("number should be an integer");
 			System.exit(-1);
@@ -100,14 +100,22 @@ public class AddTreeBox extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				tree.setTreeSpecies(Integer.valueOf(treeSpeciesField.getSelectedIndex()));
 				System.out.println("especie escogida "+treeSpeciesField.getSelectedIndex());
-				if(newTree) {
-					plane.addTree(tree); 
+				if(newTree) { 
+					int index = 0;
+					String delim = "";
 					// tree.setTreeSpecies(treeSpeciesField.getAnchorSelectionIndex()+1);
+					delim = formattedTextP1X.getValue().toString();
+					index = delim.indexOf(',');
 					tree.setTreeSpecies(Integer.valueOf(treeSpeciesField.getSelectedIndex()));
-					int x = Integer.parseInt(formattedTextP1X.getValue().toString().substring(1,5));
-					int y = Integer.parseInt(formattedTextP1Y.getValue().toString().substring(1,4));
+					int x = Integer.parseInt(formattedTextP1X.getValue().toString().substring(1, index));
+					System.out.println("Coordenada de árbol en x:"  + x);
+					delim = formattedTextP1Y.getValue().toString();
+					index = delim.indexOf(')');
+					int y = Integer.parseInt(formattedTextP1Y.getValue().toString().substring(1,index));
+					System.out.println("Coordenada de árbol en y:" + y);
 					y = plane.getHeight() - y;
 					tree.setP1(new Point(x,y));
+					plane.addTree(tree);
 				}
 				
 				exit();
@@ -176,7 +184,7 @@ public class AddTreeBox extends JPanel{
 	private void exit() {
 		tree = null;
 		this.formattedTextP1X.setText("0000");
-		this.formattedTextP1Y.setText("000");
+		this.formattedTextP1Y.setText("0000");
 		treeSpeciesField.clearSelection();
 		setVisible(false);
 		plane.enable();
