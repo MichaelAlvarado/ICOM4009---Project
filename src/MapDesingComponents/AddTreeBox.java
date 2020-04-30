@@ -69,7 +69,7 @@ public class AddTreeBox extends JPanel{
 		p1Label.setBounds(10, treeSpecies.getY()+70, 100, 25);
 		MaskFormatter formatP1X = new MaskFormatter();
 		try {
-			formatP1X.setMask("(###,");
+			formatP1X.setMask("(####,");
 		} catch (ParseException e1) {
 			System.err.println("number should be an integer");
 			System.exit(-1);
@@ -103,7 +103,7 @@ public class AddTreeBox extends JPanel{
 				if(newTree) {
 					plane.addTree(tree); 
 					tree.setTreeSpecies(treeSpeciesField.getAnchorSelectionIndex()+1);
-					int x = Integer.parseInt(formattedTextP1X.getValue().toString().substring(1,4));
+					int x = Integer.parseInt(formattedTextP1X.getValue().toString().substring(1,5));
 					int y = Integer.parseInt(formattedTextP1Y.getValue().toString().substring(1,4));
 					y = plane.getHeight() - y;
 					tree.setP1(new Point(x,y));
@@ -165,14 +165,16 @@ public class AddTreeBox extends JPanel{
 
 	public void addTree() {
 		tree = new Tree(plane.map, 1, new Point()); // TODO: implement
-		edit(tree);
+		setVisible(true);
+		newTree = false;
+		plane.disable();
 		newTree = true;
 	}
 
 	//Empty the textFields
 	private void exit() {
 		tree = null;
-		this.formattedTextP1X.setText("000");
+		this.formattedTextP1X.setText("0000");
 		this.formattedTextP1Y.setText("000");
 		treeSpeciesField.clearSelection();
 		setVisible(false);
