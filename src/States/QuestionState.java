@@ -191,12 +191,14 @@ public class QuestionState implements State{
 	public void displayNextQuestion(Button b, String str) {
 		if (b.getMessage().equals(str)) {
 			correctlyAnsweredQuestions++;
-			correct.startAnimation();
+			if (correctlyAnsweredQuestions<3)
+				correct.startAnimation();
 			Handler.getSoundManager().resumeAudio("correct");
 		}
 		else {
 			incorrectlyAnsweredQuestions++;
-			incorrect.startAnimation();
+			if (incorrectlyAnsweredQuestions<2)
+				incorrect.startAnimation();
 			Handler.getSoundManager().resumeAudio("wrong");		
 		}
 		getNextQuestion();
