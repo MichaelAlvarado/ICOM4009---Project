@@ -608,7 +608,14 @@ public class MapDesignState{
 	}
 
 	private void helpScreen() {
-		String Instructions = "Help";
+		String Instructions = "MD help:\n" + 
+				"Welcome to Map Design!\n" + 
+				"Here you can draw your maps so you can play later.\n" + 
+				"* Map: The map is where all your components are placed. You can name you map and set a size. All map created must contain a images that will be the background. You can use some sample map image from project file res/maps/ \n" + 
+				"* Building: To start drawing wall you must first create a building. Every Building must have at least 4 questions, and 1 wall. Once your done with the building click the Finish Building button. You can edit any building going to the building list and selecting the building you want to edit.\n" + 
+				"* Walls: to create a wall you can click and drag in the plane or use add wall button to insert exact coordinates. The wall will belong to the currently making building.\n" + 
+				"* Trees: There are two ways of creating trees. One is to click add Tree button and entering the information required or click the '+' simbol in the plane to drag and drop the trees. \n" + 
+				"* Settings: There are several options in setting such as displaying the Building Image or chaging the traces and point colors.";
 		JOptionPane.showMessageDialog(display, Instructions);
 	}
 
