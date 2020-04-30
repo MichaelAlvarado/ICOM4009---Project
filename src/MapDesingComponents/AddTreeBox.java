@@ -99,10 +99,11 @@ public class AddTreeBox extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				tree.setTreeSpecies(Integer.valueOf(treeSpeciesField.getSelectedIndex()));
-
+				System.out.println("especie escogida "+treeSpeciesField.getSelectedIndex());
 				if(newTree) {
 					plane.addTree(tree); 
-					tree.setTreeSpecies(treeSpeciesField.getAnchorSelectionIndex()+1);
+					// tree.setTreeSpecies(treeSpeciesField.getAnchorSelectionIndex()+1);
+					tree.setTreeSpecies(Integer.valueOf(treeSpeciesField.getSelectedIndex()));
 					int x = Integer.parseInt(formattedTextP1X.getValue().toString().substring(1,5));
 					int y = Integer.parseInt(formattedTextP1Y.getValue().toString().substring(1,4));
 					y = plane.getHeight() - y;
