@@ -125,7 +125,7 @@ public class PauseState implements State {
 		if(is_help == true) {
 
 			g.fillRoundRect((Handler.getWidth()/2)-(width/2)- 100, (Handler.getHeight()/2)-(height/2), width + 300, height + 70, 20, 20);
-			g.setColor(Color.BLACK);
+			g.setColor(Color.WHITE);
 			g.setFont(new Font("Arial", Font.BOLD, 15));
 			g.drawString("Help the character find all the buildings! Use arrow keys or 'WASD' to move the character around.", (Handler.getWidth()/2)-(width/2) - 50, (Handler.getHeight()/2)-(height/2)+30);
 			g.drawString("The remaining number of buildings to find are shown in the upper right screen ", (Handler.getWidth()/2)-(width/2) -50, (Handler.getHeight()/2)-(height/2)+50);
