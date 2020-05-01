@@ -467,7 +467,7 @@ public class FileManager {
 	 * @return A String of the VRML Box 
 	 */
 	private static String VRMLBox(String name, double x, double y, double z, double width, double heigth, double depth, String textureUrl) {
-		return "DEF "+name+" Transform {\n"
+		return "DEF "+name.replaceAll(" ", "")+" Transform {\n"
 				+ "\ttranslation "+x+ " " + z +" " + y +"\n"
 				+ "\tscale "+ width +" "+ heigth +" "+ depth +"\n"
 				+ "\tchildren [\n"
@@ -509,7 +509,7 @@ public class FileManager {
 	 * @return A String of the VRML Box 
 	 */
 	private static String VRMLBox(String name, double x, double y, double z, double width, double heigth, double depth, int rotateX, int rotateY, int rotateZ, double rotationAngle, String textureUrl) {
-		return "DEF "+name+" Transform {\n"
+		return "DEF "+name.replaceAll(" ", "")+" Transform {\n"
 				+ "\ttranslation "+ x + " " + z +" " + y +"\n"
 				+ "\tscale "+ width +" "+ heigth +" "+ depth +"\n"
 				+ "\trotation " + rotateX +" "+ rotateZ +" "+ rotateY +" "+ rotationAngle +"\n"
@@ -549,7 +549,7 @@ public class FileManager {
 	 * @return A String of the VRML Billboard
 	 */
 	private static String VRMLBillboard(String name, double x, double y, double z, double width, double heigth, double depth, String textureUrl) {
-		return "DEF "+name+" Transform {\n"
+		return "DEF "+name.replaceAll(" ", "")+" Transform {\n"
 				+ "\ttranslation "+ x +" "+ z +" "+ y +"\n"
 				+ "\tchildren [\n"
 				+ "\t\tBillboard {\n"
