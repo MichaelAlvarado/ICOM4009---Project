@@ -153,20 +153,26 @@ public class AddWallBox extends JPanel{
 		enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(newWall && isValidTextField() && isValidCoordinates()) {
-					int x1 = getX1Coordinate();
-					System.out.println(x1);
-					int y1 = plane.getHeight() - getY1Coordinate();
-					System.out.println(y1);
-					int x2 = getX2Coordinate();
-					System.out.println(x2);
-					int y2 = plane.getHeight() - getY2Coordinate();
-					System.out.println(y2);
+				if(isValidTextField() && isValidCoordinates()) {
+					if(newWall) {
+						int x1 = getX1Coordinate();
+						System.out.println(x1);
+						int y1 = plane.getHeight() - getY1Coordinate();
+						System.out.println(y1);
+						int x2 = getX2Coordinate();
+						System.out.println(x2);
+						int y2 = plane.getHeight() - getY2Coordinate();
+						System.out.println(y2);
 
-					wall.setTexture(texture); 
-					wall.getP1().setLocation(x1,y1);
-					wall.getP2().setLocation(x2,y2);
-					plane.addWall(wall);
+						wall.setTexture(texture); 
+						wall.getP1().setLocation(x1,y1);
+						wall.getP2().setLocation(x2,y2);
+						plane.addWall(wall);
+					}
+					else {
+						edit(wall);
+						exit();
+					}
 				}
 				else {
 					JOptionPane.showMessageDialog(plane, "Coordinates exceed the size of the map."
@@ -294,7 +300,7 @@ public class AddWallBox extends JPanel{
 		String delim = "";
 		delim = formattedTextP1X.getText().toString();
 		index = delim.indexOf(',');
-		x = Integer.parseInt(formattedTextP1X.getText().toString().substring(1, index));
+		x = Integer.parseInt(delim.substring(1, index));
 		return x;
 	}
 
@@ -304,7 +310,7 @@ public class AddWallBox extends JPanel{
 		String delim = "";
 		delim = formattedTextP1Y.getText().toString();
 		index = delim.indexOf(')');
-		y = Integer.parseInt(formattedTextP1Y.getText().toString().substring(1,index));
+		y = Integer.parseInt(delim.substring(1,index));
 
 		return y;
 	}
@@ -314,7 +320,7 @@ public class AddWallBox extends JPanel{
 		String delim = "";
 		delim = formattedTextP1X.getText().toString();
 		index = delim.indexOf(',');
-		x = Integer.parseInt(formattedTextP2X.getText().toString().substring(1, index));
+		x = Integer.parseInt(delim.substring(1, index));
 		return x;
 	}
 
@@ -324,7 +330,7 @@ public class AddWallBox extends JPanel{
 		String delim = "";
 		delim = formattedTextP1Y.getText().toString();
 		index = delim.indexOf(')');
-		y = Integer.parseInt(formattedTextP2Y.getText().toString().substring(1,index));
+		y = Integer.parseInt(delim.substring(1,index));
 
 		return y;
 	}
