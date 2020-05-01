@@ -99,7 +99,7 @@ public class AddWallBox extends JPanel{
 		p1Label.setBounds(10, 130, 100, 25);
 		MaskFormatter formatP1X = new MaskFormatter();
 		try {
-			formatP1X.setMask("(###,");
+			formatP1X.setMask("(####,");
 		} catch (ParseException e1) {
 			System.err.println("number should be an integer");
 			System.exit(-1);
@@ -111,7 +111,7 @@ public class AddWallBox extends JPanel{
 
 		MaskFormatter formatP1Y = new MaskFormatter();
 		try {
-			formatP1Y.setMask(" ###)");
+			formatP1Y.setMask("####)");
 		} catch (ParseException e1) {
 			System.err.println("number should be an integer");
 			System.exit(-1);
@@ -125,7 +125,7 @@ public class AddWallBox extends JPanel{
 		p2Label.setBounds(10,  160,  100,  25);
 		MaskFormatter formatP2X = new MaskFormatter();
 		try {
-			formatP2X.setMask("(###,");
+			formatP2X.setMask("(####,");
 		} catch (ParseException e1) {
 			System.err.println("number should be an integer");
 			System.exit(-1);
@@ -136,7 +136,7 @@ public class AddWallBox extends JPanel{
 		formattedTextP2X.setBounds(wallHeightLabel.getX()+wallHeightLabel.getWidth(), 160, 40, 25);
 		MaskFormatter formatP2Y = new MaskFormatter();
 		try {
-			formatP2Y.setMask(" ###)");
+			formatP2Y.setMask("####)");
 		} catch (ParseException e1) {
 			System.err.println("number should be an integer");
 			System.exit(-1);
@@ -153,18 +153,24 @@ public class AddWallBox extends JPanel{
 		enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(isValidTextField()) {
-					int x1 = Integer.parseInt(formattedTextP1X.getText().toString().substring(1,4));
-					int y1 = plane.getHeight() - Integer.parseInt(formattedTextP1Y.getText().toString().substring(1,4));
-					int x2 = Integer.parseInt(formattedTextP2X.getText().toString().substring(1,4));
-					int y2 = plane.getHeight() - Integer.parseInt(formattedTextP2Y.getText().toString().substring(1,4));
+				if(newWall && isValidTextField() && isValidCoordinates()) {
+					int x1 = getX1Coordinate();
+					System.out.println(x1);
+					int y1 = plane.getHeight() - getY1Coordinate();
+					System.out.println(y1);
+					int x2 = getX2Coordinate();
+					System.out.println(x2);
+					int y2 = plane.getHeight() - getY2Coordinate();
+					System.out.println(y2);
+
 
 					wall.setTexture(texture); 
 					wall.getP1().setLocation(x1,y1);
 					wall.getP2().setLocation(x2,y2);
 				}
 				else {
-					JOptionPane.showMessageDialog(plane, "Invalid Coordinates\nCoordinates must be a 3 digits number");
+					JOptionPane.showMessageDialog(plane, "Coordinates exceed the size of the map."
+							+ "Please enter valid coordinates.");
 				}
 				if(newWall) {
 					plane.addWall(wall);
@@ -270,5 +276,58 @@ public class AddWallBox extends JPanel{
 				formattedTextP2Y.isValid();
 	}
 
+	private boolean isValidCoordinates() {
+		int x1Value, y1Value, x2Value, y2Value;
+		x1Value = getX1Coordinate();
+		y1Value = getY1Coordinate();
+		x2Value = getX2Coordinate();
+		y2Value = getY2Coordinate();
+		if(x1Value <= plane.getMap().getWidth() && y1Value <= plane.getMap().getHeight()
+				&& x2Value <= plane.getMap().getWidth() && y2Value <= plane.getMap().getHeight())
+			return true;
+		else
+			return false;
+	}
+	
+	private int getX1Coordinate() {
+		int index;
+		int x;
+		String delim = "";
+		delim = formattedTextP1X.getValue().toString();
+		index = delim.indexOf(',');
+		x = Integer.parseInt(formattedTextP1X.getValue().toString().substring(1, index));
+		return x;
+	}
+
+	private int getY1Coordinate() {
+		int index;
+		int y;
+		String delim = "";
+		delim = formattedTextP1Y.getValue().toString();
+		index = delim.indexOf(')');
+		y = Integer.parseInt(formattedTextP1Y.getValue().toString().substring(1,index));
+
+		return y;
+	}
+	private int getX2Coordinate() {
+		int index;
+		int x;
+		String delim = "";
+		delim = formattedTextP1X.getValue().toString();
+		index = delim.indexOf(',');
+		x = Integer.parseInt(formattedTextP2X.getValue().toString().substring(1, index));
+		return x;
+	}
+
+	private int getY2Coordinate() {
+		int index;
+		int y;
+		String delim = "";
+		delim = formattedTextP1Y.getValue().toString();
+		index = delim.indexOf(')');
+		y = Integer.parseInt(formattedTextP2Y.getValue().toString().substring(1,index));
+
+		return y;
+	}
 }
 
