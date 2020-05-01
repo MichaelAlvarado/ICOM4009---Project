@@ -74,7 +74,7 @@ public class AddTreeBox extends JPanel{
 			System.err.println("number should be an integer");
 			System.exit(-1);
 		}
-		formatP1X.setPlaceholderCharacter('_');
+		formatP1X.setPlaceholderCharacter('0');
 		formattedTextP1X = new JFormattedTextField(formatP1X);
 		formattedTextP1X.setHorizontalAlignment(SwingConstants.CENTER);
 		formattedTextP1X.setBounds(treeSpecies.getX()+treeSpecies.getWidth(), treeSpecies.getY()+70, 40, 25);
@@ -86,7 +86,7 @@ public class AddTreeBox extends JPanel{
 			System.err.println("number should be an integer");
 			System.exit(-1);
 		}
-		formatP1Y.setPlaceholderCharacter('_');
+		formatP1Y.setPlaceholderCharacter('0');
 		formattedTextP1Y = new JFormattedTextField(formatP1Y);
 		formattedTextP1Y.setHorizontalAlignment(SwingConstants.CENTER);
 		formattedTextP1Y.setBounds(treeSpecies.getX()+treeSpecies.getWidth()+40, treeSpecies.getY()+70, 40, 25);
@@ -98,19 +98,18 @@ public class AddTreeBox extends JPanel{
 		enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				tree.setTreeSpecies(Integer.valueOf(treeSpeciesField.getSelectedIndex()));
-				System.out.println("especie escogida "+treeSpeciesField.getSelectedIndex());
-				if(newTree && isValidCoordinates() && isValidTextField()) { 
-					// tree.setTreeSpecies(treeSpeciesField.getAnchorSelectionIndex()+1);
+				//tree.setTreeSpecies(Integer.valueOf(treeSpeciesField.getSelectedIndex()));
+				//System.out.println("especie escogida "+treeSpeciesField.getSelectedIndex());
+				if(isValidCoordinates() && isValidTextField()) { 
+					tree.setTreeSpecies(treeSpeciesField.getSelectedIndex());
 					int x = getXCoordinate();
-					System.out.println("Coordenada de árbol en x:"  + x);
 					int y = getYCoordinate();
-					System.out.println("Coordenada de árbol en y:" + y);
-					y = plane.getHeight() - y;
+					y = plane.getMap().getHeight() - y;
 					tree.setP1(new Point(x,y));
-					plane.addTree(tree);
+					if(newTree) {
+						plane.addTree(tree);
+					}
 					exit();
-
 				}
 				else {
 					JOptionPane.showMessageDialog(plane, "Coordinates exceed the size of the map. "
@@ -218,8 +217,8 @@ public class AddTreeBox extends JPanel{
 			else {
 				this.formattedTextP1Y.setText(String.valueOf(plane.getHeight() - tree.getP1().y));
 			}
-//			System.out.println(formattedTextP1X.getText());
-//			System.out.println(formattedTextP1Y.getText());
+			//			System.out.println(formattedTextP1X.getText());
+			//			System.out.println(formattedTextP1Y.getText());
 		}
 	}
 
@@ -241,18 +240,18 @@ public class AddTreeBox extends JPanel{
 		int index;
 		int x;
 		String delim = "";
-		delim = formattedTextP1X.getValue().toString();
+		delim = formattedTextP1X.getText();
 		index = delim.indexOf(',');
-		x = Integer.parseInt(formattedTextP1X.getValue().toString().substring(1, index));
+		x = Integer.parseInt(delim.substring(1, index));
 		return x;
 	}
 	private int getYCoordinate() {
 		int index;
 		int y;
 		String delim = "";
-		delim = formattedTextP1Y.getValue().toString();
+		delim = formattedTextP1Y.getText().toString();
 		index = delim.indexOf(')');
-		y = Integer.parseInt(formattedTextP1Y.getValue().toString().substring(1,index));
+		y = Integer.parseInt(delim.substring(1,index));
 
 		return y;
 	}

@@ -155,13 +155,9 @@ public class AddWallBox extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				if(isValidTextField() && isValidCoordinates()) {
 					int x1 = getX1Coordinate();
-					System.out.println(x1);
-					int y1 = plane.getHeight() - getY1Coordinate();
-					System.out.println(y1);
+					int y1 = plane.getMap().getHeight() - getY1Coordinate();
 					int x2 = getX2Coordinate();
-					System.out.println(x2);
-					int y2 = plane.getHeight() - getY2Coordinate();
-					System.out.println(y2);
+					int y2 = plane.getMap().getHeight() - getY2Coordinate();
 
 					wall.setTexture(texture); 
 					wall.getP1().setLocation(x1,y1);
@@ -297,6 +293,7 @@ public class AddWallBox extends JPanel{
 		delim = formattedTextP1X.getText().toString();
 		index = delim.indexOf(',');
 		x = Integer.parseInt(formattedTextP1X.getText().toString().substring(1, index));
+		System.out.println(x);
 		return x;
 	}
 
@@ -307,6 +304,7 @@ public class AddWallBox extends JPanel{
 		delim = formattedTextP1Y.getText().toString();
 		index = delim.indexOf(')');
 		y = Integer.parseInt(formattedTextP1Y.getText().toString().substring(1,index));
+		System.out.println(y);
 		return y;
 	}
 	private int getX2Coordinate() {
@@ -316,6 +314,7 @@ public class AddWallBox extends JPanel{
 		delim = formattedTextP1X.getText().toString();
 		index = delim.indexOf(',');
 		x = Integer.parseInt(formattedTextP2X.getText().toString().substring(1, index));
+		System.out.println(x);
 		return x;
 	}
 
@@ -326,6 +325,7 @@ public class AddWallBox extends JPanel{
 		delim = formattedTextP1Y.getText().toString();
 		index = delim.indexOf(')');
 		y = Integer.parseInt(formattedTextP2Y.getText().toString().substring(1,index));
+		System.out.println(y);
 		return y;
 	}
 }
