@@ -244,29 +244,31 @@ public class AddWallBox extends JPanel{
 	}
 
 	private void autofill() {
-		this.nameLabel.setText("Wall name: " + wall.getID());
-		wallHeight.setText(String.valueOf(wall.getHeight()));
-		String x1 = String.valueOf(wall.getP1().x);
-		String y1 = String.valueOf(plane.getHeight() - wall.getP1().y);
-		String x2 = String.valueOf(wall.getP2().x);
-		String y2 = String.valueOf(plane.getHeight() - wall.getP2().y);
-		while(x1.length()<3) {
-			formattedTextP1X.setText(x1 = "0"+x1);
+		if(!newWall) {
+			this.nameLabel.setText("Wall name: " + wall.getID());
+			wallHeight.setText(String.valueOf(wall.getHeight()));
+			String x1 = String.valueOf(wall.getP1().x);
+			String y1 = String.valueOf(plane.getHeight() - wall.getP1().y);
+			String x2 = String.valueOf(wall.getP2().x);
+			String y2 = String.valueOf(plane.getHeight() - wall.getP2().y);
+			while(x1.length()<3) {
+				formattedTextP1X.setText(x1 = "0"+x1);
+			}
+			while(y1.length()<3) {
+				formattedTextP1X.setText(y1 = "0"+y1);
+			}
+			while(x2.length()<3) {
+				formattedTextP1X.setText(x2 = "0"+x2);
+			}
+			while(y2.length()<3) {
+				formattedTextP1X.setText(y2 = "0"+y2);
+			}
+			formattedTextP1X.setText(x1);
+			formattedTextP1Y.setText(y1);
+			formattedTextP2X.setText(x2);
+			formattedTextP2Y.setText(y2);
+			imageURL.setText(wall.getTextureURL());
 		}
-		while(y1.length()<3) {
-			formattedTextP1X.setText(y1 = "0"+y1);
-		}
-		while(x2.length()<3) {
-			formattedTextP1X.setText(x2 = "0"+x2);
-		}
-		while(y2.length()<3) {
-			formattedTextP1X.setText(y2 = "0"+y2);
-		}
-		formattedTextP1X.setText(x1);
-		formattedTextP1Y.setText(y1);
-		formattedTextP2X.setText(x2);
-		formattedTextP2Y.setText(y2);
-		imageURL.setText(wall.getTextureURL());
 	}
 
 	private boolean isValidTextField() {
@@ -288,7 +290,7 @@ public class AddWallBox extends JPanel{
 		else
 			return false;
 	}
-	
+
 	private int getX1Coordinate() {
 		int index;
 		int x;
