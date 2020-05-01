@@ -100,16 +100,22 @@ public class AddTreeBox extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				tree.setTreeSpecies(Integer.valueOf(treeSpeciesField.getSelectedIndex()));
 				System.out.println("especie escogida "+treeSpeciesField.getSelectedIndex());
-				if(newTree && isValidCoordinates() && isValidTextField()) { 
-					// tree.setTreeSpecies(treeSpeciesField.getAnchorSelectionIndex()+1);
-					int x = getXCoordinate();
-					System.out.println("Coordenada de árbol en x:"  + x);
-					int y = getYCoordinate();
-					System.out.println("Coordenada de árbol en y:" + y);
-					y = plane.getHeight() - y;
-					tree.setP1(new Point(x,y));
-					plane.addTree(tree);
-					exit();
+				if(isValidCoordinates() && isValidTextField()) { 
+					if(newTree) {
+						// tree.setTreeSpecies(treeSpeciesField.getAnchorSelectionIndex()+1);
+						int x = getXCoordinate();
+						System.out.println("Coordenada de árbol en x:"  + x);
+						int y = getYCoordinate();
+						System.out.println("Coordenada de árbol en y:" + y);
+						y = plane.getHeight() - y;
+						tree.setP1(new Point(x,y));
+						plane.addTree(tree);
+						exit();
+					}
+					else {
+						edit(tree);
+						exit();
+					}
 
 				}
 				else {
@@ -218,8 +224,8 @@ public class AddTreeBox extends JPanel{
 			else {
 				this.formattedTextP1Y.setText(String.valueOf(plane.getHeight() - tree.getP1().y));
 			}
-//			System.out.println(formattedTextP1X.getText());
-//			System.out.println(formattedTextP1Y.getText());
+			//			System.out.println(formattedTextP1X.getText());
+			//			System.out.println(formattedTextP1Y.getText());
 		}
 	}
 
@@ -241,18 +247,18 @@ public class AddTreeBox extends JPanel{
 		int index;
 		int x;
 		String delim = "";
-		delim = formattedTextP1X.getValue().toString();
+		delim = formattedTextP1X.getText();
 		index = delim.indexOf(',');
-		x = Integer.parseInt(formattedTextP1X.getValue().toString().substring(1, index));
+		x = Integer.parseInt(delim.substring(1, index));
 		return x;
 	}
 	private int getYCoordinate() {
 		int index;
 		int y;
 		String delim = "";
-		delim = formattedTextP1Y.getValue().toString();
+		delim = formattedTextP1Y.getText().toString();
 		index = delim.indexOf(')');
-		y = Integer.parseInt(formattedTextP1Y.getValue().toString().substring(1,index));
+		y = Integer.parseInt(delim.substring(1,index));
 
 		return y;
 	}
