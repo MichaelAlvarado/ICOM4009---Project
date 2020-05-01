@@ -251,16 +251,16 @@ public class AddWallBox extends JPanel{
 			String y1 = String.valueOf(plane.getHeight() - wall.getP1().y);
 			String x2 = String.valueOf(wall.getP2().x);
 			String y2 = String.valueOf(plane.getHeight() - wall.getP2().y);
-			while(x1.length()<3) {
+			while(x1.length()<4) {
 				formattedTextP1X.setText(x1 = "0"+x1);
 			}
-			while(y1.length()<3) {
+			while(y1.length()<4) {
 				formattedTextP1X.setText(y1 = "0"+y1);
 			}
-			while(x2.length()<3) {
+			while(x2.length()<4) {
 				formattedTextP1X.setText(x2 = "0"+x2);
 			}
-			while(y2.length()<3) {
+			while(y2.length()<4) {
 				formattedTextP1X.setText(y2 = "0"+y2);
 			}
 			formattedTextP1X.setText(x1);
