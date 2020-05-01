@@ -215,10 +215,19 @@ public class MapDesignState{
 		addWall.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				addWallBox.addNewWall();
-				addMapBox.setVisible(false);
-				addBuildingBox.setVisible(false);
-				addQuestionBox.setVisible(false);
+				if(plane.getCurrentBuilding() != null) {
+					JOptionPane.showMessageDialog(plane, "Note: For 4 digits coordinates, enter ####.(Ex:1111)"
+							+ "\nTo enter 3 digit coordinates, enter 0### (Ex: 0222)."
+							+ "\nFor 2 digit coordinates, enter 00## (Ex:0033). \nFor 1 digit coordinates, enter 000#. (Ex:0004)"
+							+ "\nPress okay to add Wall.");
+					addWallBox.addNewWall();
+					addMapBox.setVisible(false);
+					addBuildingBox.setVisible(false);
+					addQuestionBox.setVisible(false);
+				}
+				else {
+					JOptionPane.showMessageDialog(plane, "You must first select or create a building to add walls.");
+				}
 			}
 		});
 
@@ -273,6 +282,10 @@ public class MapDesignState{
 		addTree.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(plane, "Note: For 4 digits coordinates, enter ####.(Ex:1111)"
+						+ "\nTo enter 3 digit coordinates, enter 0### (Ex: 0222)."
+						+ "\nFor 2 digit coordinates, enter 00## (Ex:0033). \nFor 1 digit coordinates, enter 000#. (Ex:0004)"
+						+ "\nPress okay to add Tree.");
 				addTreeBox.addTree();
 				addQuestionBox.setVisible(false);
 				addWallBox.setVisible(false);
