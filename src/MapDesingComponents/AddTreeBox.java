@@ -116,7 +116,7 @@ public class AddTreeBox extends JPanel{
 					JOptionPane.showMessageDialog(plane, "Coordinates exceed the size of the map. "
 							+ "Please enter valid coordinates");
 				}
-				
+
 			}
 
 		});
@@ -133,7 +133,7 @@ public class AddTreeBox extends JPanel{
 				exit();
 			}
 		});
-		
+
 		remove = new JButton("Remove Tree");
 		remove.setBounds(width/2 + 50, height-60, 130, 50);
 		remove.addActionListener(new ActionListener() {
@@ -190,16 +190,44 @@ public class AddTreeBox extends JPanel{
 	}
 
 	private void autofill(Tree tree) {
-		treeSpeciesField.setSelectedIndex(tree.getTreeSpecies());
-		this.formattedTextP1X.setText(String.valueOf(tree.getP1().x));
-		this.formattedTextP1Y.setText(String.valueOf(plane.getHeight() - tree.getP1().y));
+		if(!newTree) {
+			treeSpeciesField.setSelectedIndex(tree.getTreeSpecies());
+			String x1 = String.valueOf(tree.getP1().x);
+			//System.out.println(x1);
+			String y1 = String.valueOf(plane.getHeight() - tree.getP1().y);
+			//System.out.println(y1);
+			if(x1.length()<4) {
+				if(x1.length() == 3)
+					formattedTextP1X.setText(x1 = "0"+x1);
+				else if(x1.length() == 2)
+					formattedTextP1X.setText(x1 = "00"+x1);
+				else
+					formattedTextP1X.setText(x1 = "0000"+x1);
+			}
+			else {
+				this.formattedTextP1X.setText(String.valueOf(tree.getP1().x));
+			}
+			if(y1.length()<4) {
+				if(y1.length() == 3)
+					formattedTextP1Y.setText(y1 = "0"+y1);
+				else if(y1.length() == 2)
+					formattedTextP1Y.setText(y1 = "00"+y1);
+				else
+					formattedTextP1Y.setText(y1 = "0000"+y1);			
+			}
+			else {
+				this.formattedTextP1Y.setText(String.valueOf(plane.getHeight() - tree.getP1().y));
+			}
+//			System.out.println(formattedTextP1X.getText());
+//			System.out.println(formattedTextP1Y.getText());
+		}
 	}
-	
+
 	private boolean isValidTextField() {
 		return 	formattedTextP1X.isValid() && 
 				formattedTextP1Y.isValid();
 	}
-	
+
 	private boolean isValidCoordinates() {
 		int xValue, yValue;
 		xValue = getXCoordinate();

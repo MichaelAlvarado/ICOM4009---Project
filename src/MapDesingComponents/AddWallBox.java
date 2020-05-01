@@ -252,16 +252,36 @@ public class AddWallBox extends JPanel{
 			String x2 = String.valueOf(wall.getP2().x);
 			String y2 = String.valueOf(plane.getHeight() - wall.getP2().y);
 			while(x1.length()<4) {
-				formattedTextP1X.setText(x1 = "0"+x1);
+				if(x1.length() == 3)
+					formattedTextP1X.setText(x1 = "0"+x1);
+				else if(x1.length() == 2)
+					formattedTextP1X.setText(x1 = "00"+x1);
+				else
+					formattedTextP1X.setText(x1 = "0000"+x1);
 			}
 			while(y1.length()<4) {
-				formattedTextP1X.setText(y1 = "0"+y1);
+				if(y1.length() == 3)
+					formattedTextP1Y.setText(y1 = "0"+y1);
+				else if(y1.length() == 2)
+					formattedTextP1Y.setText(y1 = "00"+y1);
+				else
+					formattedTextP1Y.setText(y1 = "0000"+y1);			
 			}
 			while(x2.length()<4) {
-				formattedTextP1X.setText(x2 = "0"+x2);
+				if(x2.length() == 3)
+					formattedTextP2X.setText(x2 = "0"+x2);
+				else if(x2.length() == 2)
+					formattedTextP2X.setText(x2 = "00"+x2);
+				else
+					formattedTextP2X.setText(x2 = "0000"+x2);			
 			}
 			while(y2.length()<4) {
-				formattedTextP1X.setText(y2 = "0"+y2);
+				if(y2.length() == 3)
+					formattedTextP2Y.setText(y2 = "0"+y2);
+				else if(y2.length() == 2)
+					formattedTextP2Y.setText(y2 = "00"+y2);
+				else
+					formattedTextP2Y.setText(y2 = "0000"+y2);			
 			}
 			formattedTextP1X.setText(x1);
 			formattedTextP1Y.setText(y1);
@@ -305,7 +325,9 @@ public class AddWallBox extends JPanel{
 		int index;
 		int y;
 		String delim = "";
+		System.out.println("lll" + formattedTextP1Y.getValue().toString());
 		delim = formattedTextP1Y.getValue().toString();
+		System.out.println(delim);
 		index = delim.indexOf(')');
 		y = Integer.parseInt(formattedTextP1Y.getValue().toString().substring(1,index));
 
