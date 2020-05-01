@@ -100,25 +100,23 @@ public class AddTreeBox extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				tree.setTreeSpecies(Integer.valueOf(treeSpeciesField.getSelectedIndex()));
 				System.out.println("especie escogida "+treeSpeciesField.getSelectedIndex());
-				if(newTree) { 
-					int index = 0;
-					String delim = "";
+				if(newTree && isValidCoordinates() && isValidTextField()) { 
 					// tree.setTreeSpecies(treeSpeciesField.getAnchorSelectionIndex()+1);
-					delim = formattedTextP1X.getValue().toString();
-					index = delim.indexOf(',');
-					tree.setTreeSpecies(Integer.valueOf(treeSpeciesField.getSelectedIndex()));
-					int x = Integer.parseInt(formattedTextP1X.getValue().toString().substring(1, index));
+					int x = getXCoordinate();
 					System.out.println("Coordenada de árbol en x:"  + x);
-					delim = formattedTextP1Y.getValue().toString();
-					index = delim.indexOf(')');
-					int y = Integer.parseInt(formattedTextP1Y.getValue().toString().substring(1,index));
+					int y = getYCoordinate();
 					System.out.println("Coordenada de árbol en y:" + y);
 					y = plane.getHeight() - y;
 					tree.setP1(new Point(x,y));
 					plane.addTree(tree);
+					exit();
+
+				}
+				else {
+					JOptionPane.showMessageDialog(plane, "Coordinates exceed the size of the map. "
+							+ "Please enter valid coordinates");
 				}
 				
-				exit();
 			}
 
 		});
@@ -195,6 +193,40 @@ public class AddTreeBox extends JPanel{
 		treeSpeciesField.setSelectedIndex(tree.getTreeSpecies());
 		this.formattedTextP1X.setText(String.valueOf(tree.getP1().x));
 		this.formattedTextP1Y.setText(String.valueOf(plane.getHeight() - tree.getP1().y));
+	}
+	
+	private boolean isValidTextField() {
+		return 	formattedTextP1X.isValid() && 
+				formattedTextP1Y.isValid();
+	}
+	
+	private boolean isValidCoordinates() {
+		int xValue, yValue;
+		xValue = getXCoordinate();
+		yValue = getYCoordinate();
+		if(xValue <= plane.getMap().getWidth() && yValue <= plane.getMap().getHeight())
+			return true;
+		else
+			return false;
+	}
+	private int getXCoordinate() {
+		int index;
+		int x;
+		String delim = "";
+		delim = formattedTextP1X.getValue().toString();
+		index = delim.indexOf(',');
+		x = Integer.parseInt(formattedTextP1X.getValue().toString().substring(1, index));
+		return x;
+	}
+	private int getYCoordinate() {
+		int index;
+		int y;
+		String delim = "";
+		delim = formattedTextP1Y.getValue().toString();
+		index = delim.indexOf(')');
+		y = Integer.parseInt(formattedTextP1Y.getValue().toString().substring(1,index));
+
+		return y;
 	}
 }
 
