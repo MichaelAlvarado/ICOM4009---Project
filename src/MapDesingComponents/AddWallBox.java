@@ -104,7 +104,7 @@ public class AddWallBox extends JPanel{
 			System.err.println("number should be an integer");
 			System.exit(-1);
 		}
-		formatP1X.setPlaceholderCharacter('_');
+		formatP1X.setPlaceholderCharacter('0');
 		formattedTextP1X = new JFormattedTextField(formatP1X);
 		formattedTextP1X.setHorizontalAlignment(SwingConstants.CENTER);
 		formattedTextP1X.setBounds(wallHeightLabel.getX()+wallHeightLabel.getWidth(), 130, 40, 25);
@@ -116,7 +116,7 @@ public class AddWallBox extends JPanel{
 			System.err.println("number should be an integer");
 			System.exit(-1);
 		}
-		formatP1Y.setPlaceholderCharacter('_');
+		formatP1Y.setPlaceholderCharacter('0');
 		formattedTextP1Y = new JFormattedTextField(formatP1Y);
 		formattedTextP1Y.setHorizontalAlignment(SwingConstants.CENTER);
 		formattedTextP1Y.setBounds(wallHeightLabel.getX()+wallHeightLabel.getWidth()+40, 130, 40, 25);
@@ -130,7 +130,7 @@ public class AddWallBox extends JPanel{
 			System.err.println("number should be an integer");
 			System.exit(-1);
 		}
-		formatP2X.setPlaceholderCharacter('_');
+		formatP2X.setPlaceholderCharacter('0');
 		formattedTextP2X = new JFormattedTextField(formatP2X);
 		formattedTextP2X.setHorizontalAlignment(SwingConstants.CENTER);
 		formattedTextP2X.setBounds(wallHeightLabel.getX()+wallHeightLabel.getWidth(), 160, 40, 25);
@@ -141,7 +141,7 @@ public class AddWallBox extends JPanel{
 			System.err.println("number should be an integer");
 			System.exit(-1);
 		}
-		formatP2Y.setPlaceholderCharacter('_');
+		formatP2Y.setPlaceholderCharacter('0');
 		formattedTextP2Y = new JFormattedTextField(formatP2Y);
 		formattedTextP2Y.setHorizontalAlignment(SwingConstants.CENTER);
 		formattedTextP2Y.setBounds(wallHeightLabel.getX()+wallHeightLabel.getWidth()+40, 160, 40, 25);
@@ -163,17 +163,14 @@ public class AddWallBox extends JPanel{
 					int y2 = plane.getHeight() - getY2Coordinate();
 					System.out.println(y2);
 
-
 					wall.setTexture(texture); 
 					wall.getP1().setLocation(x1,y1);
 					wall.getP2().setLocation(x2,y2);
+					plane.addWall(wall);
 				}
 				else {
 					JOptionPane.showMessageDialog(plane, "Coordinates exceed the size of the map."
 							+ "Please enter valid coordinates.");
-				}
-				if(newWall) {
-					plane.addWall(wall);
 				}
 				exit();
 			}
@@ -252,36 +249,16 @@ public class AddWallBox extends JPanel{
 			String x2 = String.valueOf(wall.getP2().x);
 			String y2 = String.valueOf(plane.getHeight() - wall.getP2().y);
 			while(x1.length()<4) {
-				if(x1.length() == 3)
-					formattedTextP1X.setText(x1 = "0"+x1);
-				else if(x1.length() == 2)
-					formattedTextP1X.setText(x1 = "00"+x1);
-				else
-					formattedTextP1X.setText(x1 = "0000"+x1);
+				formattedTextP1X.setText(x1 = "0"+x1);
 			}
 			while(y1.length()<4) {
-				if(y1.length() == 3)
-					formattedTextP1Y.setText(y1 = "0"+y1);
-				else if(y1.length() == 2)
-					formattedTextP1Y.setText(y1 = "00"+y1);
-				else
-					formattedTextP1Y.setText(y1 = "0000"+y1);			
+				formattedTextP1X.setText(y1 = "0"+y1);
 			}
 			while(x2.length()<4) {
-				if(x2.length() == 3)
-					formattedTextP2X.setText(x2 = "0"+x2);
-				else if(x2.length() == 2)
-					formattedTextP2X.setText(x2 = "00"+x2);
-				else
-					formattedTextP2X.setText(x2 = "0000"+x2);			
+				formattedTextP1X.setText(x2 = "0"+x2);
 			}
 			while(y2.length()<4) {
-				if(y2.length() == 3)
-					formattedTextP2Y.setText(y2 = "0"+y2);
-				else if(y2.length() == 2)
-					formattedTextP2Y.setText(y2 = "00"+y2);
-				else
-					formattedTextP2Y.setText(y2 = "0000"+y2);			
+				formattedTextP1X.setText(y2 = "0"+y2);
 			}
 			formattedTextP1X.setText(x1);
 			formattedTextP1Y.setText(y1);
@@ -315,9 +292,9 @@ public class AddWallBox extends JPanel{
 		int index;
 		int x;
 		String delim = "";
-		delim = formattedTextP1X.getValue().toString();
+		delim = formattedTextP1X.getText().toString();
 		index = delim.indexOf(',');
-		x = Integer.parseInt(formattedTextP1X.getValue().toString().substring(1, index));
+		x = Integer.parseInt(formattedTextP1X.getText().toString().substring(1, index));
 		return x;
 	}
 
@@ -325,11 +302,9 @@ public class AddWallBox extends JPanel{
 		int index;
 		int y;
 		String delim = "";
-		System.out.println("lll" + formattedTextP1Y.getValue().toString());
-		delim = formattedTextP1Y.getValue().toString();
-		System.out.println(delim);
+		delim = formattedTextP1Y.getText().toString();
 		index = delim.indexOf(')');
-		y = Integer.parseInt(formattedTextP1Y.getValue().toString().substring(1,index));
+		y = Integer.parseInt(formattedTextP1Y.getText().toString().substring(1,index));
 
 		return y;
 	}
@@ -337,9 +312,9 @@ public class AddWallBox extends JPanel{
 		int index;
 		int x;
 		String delim = "";
-		delim = formattedTextP1X.getValue().toString();
+		delim = formattedTextP1X.getText().toString();
 		index = delim.indexOf(',');
-		x = Integer.parseInt(formattedTextP2X.getValue().toString().substring(1, index));
+		x = Integer.parseInt(formattedTextP2X.getText().toString().substring(1, index));
 		return x;
 	}
 
@@ -347,9 +322,9 @@ public class AddWallBox extends JPanel{
 		int index;
 		int y;
 		String delim = "";
-		delim = formattedTextP1Y.getValue().toString();
+		delim = formattedTextP1Y.getText().toString();
 		index = delim.indexOf(')');
-		y = Integer.parseInt(formattedTextP2Y.getValue().toString().substring(1,index));
+		y = Integer.parseInt(formattedTextP2Y.getText().toString().substring(1,index));
 
 		return y;
 	}
