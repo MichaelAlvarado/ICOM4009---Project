@@ -153,7 +153,7 @@ public class AddWallBox extends JPanel{
 		enter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(newWall && isValidTextField() && isValidCoordinates()) {
+				if(isValidTextField() && isValidCoordinates()) {
 					int x1 = getX1Coordinate();
 					System.out.println(x1);
 					int y1 = plane.getHeight() - getY1Coordinate();
@@ -166,10 +166,12 @@ public class AddWallBox extends JPanel{
 					wall.setTexture(texture); 
 					wall.getP1().setLocation(x1,y1);
 					wall.getP2().setLocation(x2,y2);
-					plane.addWall(wall);
+					if(newWall) {
+						plane.addWall(wall);
+					}
 				}
 				else {
-					JOptionPane.showMessageDialog(plane, "Coordinates exceed the size of the map."
+					JOptionPane.showMessageDialog(plane, "Coordinates exceed the size of the map. "
 							+ "Please enter valid coordinates.");
 				}
 				exit();
@@ -305,7 +307,6 @@ public class AddWallBox extends JPanel{
 		delim = formattedTextP1Y.getText().toString();
 		index = delim.indexOf(')');
 		y = Integer.parseInt(formattedTextP1Y.getText().toString().substring(1,index));
-
 		return y;
 	}
 	private int getX2Coordinate() {
@@ -325,7 +326,6 @@ public class AddWallBox extends JPanel{
 		delim = formattedTextP1Y.getText().toString();
 		index = delim.indexOf(')');
 		y = Integer.parseInt(formattedTextP2Y.getText().toString().substring(1,index));
-
 		return y;
 	}
 }
