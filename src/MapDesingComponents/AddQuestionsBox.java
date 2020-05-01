@@ -143,7 +143,7 @@ public class AddQuestionsBox extends JPanel{
 			plane.disable();
 		}
 		else {
-			JOptionPane.showMessageDialog(plane, "Must create a building to add Questions to");
+			JOptionPane.showMessageDialog(plane, "Must create a building to add Questions.");
 		}
 		newQuestion = true;
 	}
