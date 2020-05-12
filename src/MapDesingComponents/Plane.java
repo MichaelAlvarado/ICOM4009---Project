@@ -106,6 +106,38 @@ public class Plane extends JPanel{
 			g.drawImage(map.getPicture(), 0, 0, getWidth(), getHeight(), null);
 		}
 
+		drawGrid(g, gridLineQuantity);
+
+		//Draw buildings lines
+		for(Building building: map.getBuildingList()) {
+			drawBuilding(g, building, pL, pP);
+		}
+
+		//Draw Current Building Walls
+		if(currentBuilding != null) {
+			drawBuilding(g, currentBuilding, cL, pP);
+		}
+
+		drawTracing(g, cL, cP);
+
+		drawCoordinates(g);
+
+
+		//Draw Tree Image
+		for(Tree tree: map.getTrees()) {
+			drawTree(g, tree);
+		}
+
+		//Draw CurrentTree
+		if(currentTree != null)
+			drawTree(g, currentTree);
+
+		//Draw tool panel
+		tool.paint(g);
+		super.paintComponents(g);
+	} //Paint end
+
+	private void drawGrid(Graphics g, int gridLineQuantity) {
 		//draw Grid Lines
 		if(gridIsOn) {
 			g.setColor(Color.LIGHT_GRAY);
@@ -123,29 +155,32 @@ public class Plane extends JPanel{
 				g.drawString(String.valueOf(Math.round(s*yGap*scaleY))+" m", xOrigin, (yOrigin - s*yGap)); //draw positive Y coordinate 
 			}
 		}
+	}
 
-		//Draw lines from point to point
-		for(Building building: map.getBuildingList()) {
-			for(Wall line: building.getWalls()) {
-				//				g.setColor(pP);//Color of Points
-				//				g.fillOval((int)(line.getP1().getX()-(pointWidth/2)), (int)(line.getP1().getY()-(pointWidth/2)), pointWidth, pointWidth);
-				//				g.fillOval((int)(line.getP2().getX()-(pointWidth/2)), (int)(line.getP2().getY()-(pointWidth/2)), pointWidth, pointWidth);
-				g.setColor(pL);//Color of Lines
-				g.drawLine((int)(line.getP1().getX()/scaleX), (int)(line.getP1().getY()/scaleY), (int)(line.getP2().getX()/scaleX), (int)(line.getP2().getY()/scaleY));
+	private void drawBuilding(Graphics g, Building building, Color line, Color point) {
+		//Draw Building Image
+		if(buildingImagesIsOn) {
+			if (building.getPicture()!=null) {
+				Rectangle r = building.perimeter();
+				g.drawImage(building.getPicture(), r.x, r.y, r.width, r.height, null);
+			}
+
+		}
+		//Draw Building wall Lines
+		else {
+			for(Wall wall: building.getWalls()) {
+				g.setColor(line);//Color of Lines
+				g.drawLine((int)(wall.getP1().getX()/scaleX), (int)(wall.getP1().getY()/scaleY), (int)(wall.getP2().getX()/scaleX), (int)(wall.getP2().getY()/scaleY));
+				if(building.equals(currentBuilding)) {
+					g.setColor(point);//Color of Points
+					g.fillOval((int)Math.round((wall.getP1().getX()/scaleX-(pointWidth/2))), (int)Math.round((wall.getP1().getY()/scaleY-(pointWidth/2))), pointWidth, pointWidth);
+					g.fillOval((int)Math.round((wall.getP2().getX()/scaleX-(pointWidth/2))), (int)Math.round((wall.getP2().getY()/scaleY-(pointWidth/2))), pointWidth, pointWidth);
+				}
 			}
 		}
+	}
 
-		//Draw Current Building Walls
-		if(currentBuilding != null) {
-			for(Wall line: currentBuilding.getWalls()) {
-				g.setColor(cP);//Color of Points
-				g.fillOval((int)Math.round((line.getP1().getX()/scaleX-(pointWidth/2))), (int)Math.round((line.getP1().getY()/scaleY-(pointWidth/2))), pointWidth, pointWidth);
-				g.fillOval((int)Math.round((line.getP2().getX()/scaleX-(pointWidth/2))), (int)Math.round((line.getP2().getY()/scaleY-(pointWidth/2))), pointWidth, pointWidth);
-				g.setColor(cL);//Color of Lines
-				g.drawLine((int)(line.getP1().getX()/scaleX), (int)(line.getP1().getY()/scaleY), (int)(line.getP2().getX()/scaleX), (int)(line.getP2().getY()/scaleY));
-			}
-		}
-
+	private void drawTracing(Graphics g, Color line, Color point) {
 		//Draw current Points
 		g.setColor(cP);
 		if(currentPointPair[0] != null) {
@@ -160,7 +195,9 @@ public class Plane extends JPanel{
 		if(currentPointPair[0] != null && currentPointPair[1] != null) {
 			g.drawLine((int)currentPointPair[0].getX(), (int)currentPointPair[0].getY(), (int)currentPointPair[1].getX(), (int)currentPointPair[1].getY());
 		}
+	}
 
+	private void drawCoordinates(Graphics g) {
 		//Draw Current Pair Coordinates
 		if(currentPointPair[0] != null && currentPointPair[1] != null) {
 			int x = getWidth()-300;
@@ -188,30 +225,11 @@ public class Plane extends JPanel{
 			g.setColor(cP);
 			g.drawString("( " + Math.round(mouseMotion.getX()*scaleX) + " , " + Math.round((getHeight() - mouseMotion.getY())*scaleY) + " )", x+10, 20);
 		}
+	}
 
-		//Draw Building Image
-		if(buildingImagesIsOn) {
-			for(Building building: map.getBuildingList()) {
-				if (building.getPicture()!=null) {
-					Rectangle r = building.perimeter();
-					g.drawImage(building.getPicture(), r.x, r.y, r.width, r.height, null);
-				}
-			}
-		}
-
-		//Draw Tree Image
-		for(Tree tree: map.getTrees()) {
-			g.drawImage(tree.getTreeImage(), (int)(tree.getP1().x/scaleX), (int)(tree.getP1().y/scaleY), (int)(tree.getWidth()/scaleX), (int)(tree.getHeight()/scaleY), null);
-		}
-
-		//Draw CurrentTree
-		if(currentTree != null)
-			g.drawImage(currentTree.getTreeImage(), (int)(currentTree.getP1().x/scaleX), (int)(currentTree.getP1().y/scaleY), (int)(currentTree.getWidth()/scaleX), (int)(currentTree.getHeight()/scaleY), null);
-
-		//Draw tool panel
-		tool.paint(g);
-		super.paintComponents(g);
-	} //Paint end
+	private void drawTree(Graphics g, Tree tree) {
+		g.drawImage(tree.getTreeImage(), (int)(tree.getP1().x/scaleX), (int)(tree.getP1().y/scaleY), (int)(tree.getWidth()/scaleX), (int)(tree.getHeight()/scaleY), null);
+	}
 
 	/**
 	 * @author Michael Alvarado

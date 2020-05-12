@@ -158,7 +158,7 @@ public class AddWallBox extends JPanel{
 					int y1 = plane.getMap().getHeight() - getY1Coordinate();
 					int x2 = getX2Coordinate();
 					int y2 = plane.getMap().getHeight() - getY2Coordinate();
-
+					wall.setHeight(Integer.valueOf(wallHeight.getText()));
 					wall.setTexture(texture); 
 					wall.getP1().setLocation(x1,y1);
 					wall.getP2().setLocation(x2,y2);
