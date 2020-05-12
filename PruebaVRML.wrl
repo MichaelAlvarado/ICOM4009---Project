@@ -1,0 +1,422 @@
+#VRML V2.0 utf8
+
+NavigationInfo {
+	headlight TRUE
+	avatarSize [ 1 1.8 1 ]
+}
+
+Viewpoint { position 872 3 296 }
+
+PointLight {
+on TRUE
+intensity 0.75
+ambientIntensity .5
+color 1 1 1
+}
+
+DEF Floor Transform {
+	translation 960.0 0.0 508.0
+	scale 1920.0 1.0 1017.0
+	children [
+		DEF Box Shape {
+			appearance Appearance {
+				material DEF White Material {
+					ambientIntensity 0.7
+					diffuseColor 0 0 0
+				}
+			texture ImageTexture {
+					url "res\texture\mapasSpecs2.png"
+				}
+			}
+			geometry DEF geoBox1 Box {
+				size 1 1 1
+			}
+		}
+	]
+}
+# Building: BuildingA
+DEF BuildingA Transform {
+children [
+DEF BuildingARoof Transform {
+	translation 339.0 10.0 931.0
+	scale 73.0 1.0 76.0
+	children [
+		DEF Box Shape {
+			appearance Appearance {
+				material DEF White Material {
+					ambientIntensity 0.7
+					diffuseColor 0 0 0
+				}
+			texture ImageTexture {
+					url " "
+				}
+			}
+			geometry DEF geoBox1 Box {
+				size 1 1 1
+			}
+		}
+	]
+}
+DEF BuildingA_w1 Transform {
+	translation 323.0 5.0 914.5
+	scale 59.728187440104094 10.0 1.0
+	rotation 0 1 0 2.3200656396795685
+	children [
+		DEF Box Shape {
+			appearance Appearance {
+				material DEF White Material {
+					ambientIntensity 0.7
+					diffuseColor 0 0 0
+				}
+			texture ImageTexture {
+					url "res\texture\MAbricks.png"
+				}
+			}
+			geometry DEF geoBox1 Box {
+				size 1 1 1
+			}
+		}
+	]
+}
+DEF BuildingA_w0 Transform {
+	translation 345.0 7.0 935.0
+	scale 93.02173656261873 15.0 1.0
+	rotation 0 1 0 0.8315192794119595
+	children [
+		DEF Box Shape {
+			appearance Appearance {
+				material DEF White Material {
+					ambientIntensity 0.7
+					diffuseColor 0 0 0
+				}
+			texture ImageTexture {
+					url "res\texture\MBwhiteBricks.png"
+				}
+			}
+			geometry DEF geoBox1 Box {
+				size 1 1 1
+			}
+		}
+	]
+}
+]
+}
+
+# Building: BuildingB
+DEF BuildingB Transform {
+children [
+DEF BuildingBRoof Transform {
+	translation 902.0 5.0 281.0
+	scale 93.0 1.0 64.0
+	children [
+		DEF Box Shape {
+			appearance Appearance {
+				material DEF White Material {
+					ambientIntensity 0.7
+					diffuseColor 0 0 0
+				}
+			texture ImageTexture {
+					url " "
+				}
+			}
+			geometry DEF geoBox1 Box {
+				size 1 1 1
+			}
+		}
+	]
+}
+DEF BuildingB_w3 Transform {
+	translation 925.0 2.0 280.5
+	scale 80.20227269466452 5.0 1.0
+	rotation 0 1 0 2.2218730482393774
+	children [
+		DEF Box Shape {
+			appearance Appearance {
+				material DEF White Material {
+					ambientIntensity 0.7
+					diffuseColor 0 0 0
+				}
+			texture ImageTexture {
+					url "res\texture\MCmotherBoard.png"
+				}
+			}
+			geometry DEF geoBox1 Box {
+				size 1 1 1
+			}
+		}
+	]
+}
+DEF BuildingB_w2 Transform {
+	translation 929.5 2.0 312.5
+	scale 40.01281840626232 5.0 1.0
+	rotation 0 1 0 0.02563540852167964
+	children [
+		DEF Box Shape {
+			appearance Appearance {
+				material DEF White Material {
+					ambientIntensity 0.7
+					diffuseColor 0 0 0
+				}
+			texture ImageTexture {
+					url "res\texture\MCmotherBoard.png"
+				}
+			}
+			geometry DEF geoBox1 Box {
+				size 1 1 1
+			}
+		}
+	]
+}
+DEF BuildingB_w1 Transform {
+	translation 874.5 2.0 313.0
+	scale 38.0 5.0 1.0
+	rotation 0 1 0 0.0
+	children [
+		DEF Box Shape {
+			appearance Appearance {
+				material DEF White Material {
+					ambientIntensity 0.7
+					diffuseColor 0 0 0
+				}
+			texture ImageTexture {
+					url "res\texture\MCmotherBoard.png"
+				}
+			}
+			geometry DEF geoBox1 Box {
+				size 1 1 1
+			}
+		}
+	]
+}
+DEF BuildingB_w0 Transform {
+	translation 878.5 2.0 281.0
+	scale 79.2368199762746 5.0 1.0
+	rotation 0 1 0 0.9579761246296548
+	children [
+		DEF Box Shape {
+			appearance Appearance {
+				material DEF White Material {
+					ambientIntensity 0.7
+					diffuseColor 0 0 0
+				}
+			texture ImageTexture {
+					url "res\texture\MCmotherBoard.png"
+				}
+			}
+			geometry DEF geoBox1 Box {
+				size 1 1 1
+			}
+		}
+	]
+}
+]
+}
+
+# Building: BuildingC
+DEF BuildingC Transform {
+children [
+DEF BuildingCRoof Transform {
+	translation 900.0 7.0 534.0
+	scale 257.0 1.0 204.0
+	children [
+		DEF Box Shape {
+			appearance Appearance {
+				material DEF White Material {
+					ambientIntensity 0.7
+					diffuseColor 0 0 0
+				}
+			texture ImageTexture {
+					url " "
+				}
+			}
+			geometry DEF geoBox1 Box {
+				size 1 1 1
+			}
+		}
+	]
+}
+DEF BuildingC_w4 Transform {
+	translation 968.0 3.0 437.0
+	scale 117.01724009818541 7.0 1.0
+	rotation 0 1 0 3.1243529823954055
+	children [
+		DEF Box Shape {
+			appearance Appearance {
+				material DEF White Material {
+					ambientIntensity 0.7
+					diffuseColor 0 0 0
+				}
+			texture ImageTexture {
+					url "res\texture\MDwood.png"
+				}
+			}
+			geometry DEF geoBox1 Box {
+				size 1 1 1
+			}
+		}
+	]
+}
+DEF BuildingC_w3 Transform {
+	translation 1027.5 5.0 534.5
+	scale 196.0230755577401 10.0 1.0
+	rotation 0 1 0 1.586179728575491
+	children [
+		DEF Box Shape {
+			appearance Appearance {
+				material DEF White Material {
+					ambientIntensity 0.7
+					diffuseColor 0 0 0
+				}
+			texture ImageTexture {
+					url "res\texture\MDwood.png"
+				}
+			}
+			geometry DEF geoBox1 Box {
+				size 1 1 1
+			}
+		}
+	]
+}
+DEF BuildingC_w2 Transform {
+	translation 900.5 2.0 633.5
+	scale 258.0486335306998 5.0 1.0
+	rotation 0 1 0 0.01945279882666364
+	children [
+		DEF Box Shape {
+			appearance Appearance {
+				material DEF White Material {
+					ambientIntensity 0.7
+					diffuseColor 0 0 0
+				}
+			texture ImageTexture {
+					url "res\texture\MDwood.png"
+				}
+			}
+			geometry DEF geoBox1 Box {
+				size 1 1 1
+			}
+		}
+	]
+}
+DEF BuildingC_w1 Transform {
+	translation 773.0 1.0 535.5
+	scale 202.00995000248122 3.0 1.0
+	rotation 0 1 0 1.5608464064020915
+	children [
+		DEF Box Shape {
+			appearance Appearance {
+				material DEF White Material {
+					ambientIntensity 0.7
+					diffuseColor 0 0 0
+				}
+			texture ImageTexture {
+					url "res\texture\MDtarzan.png"
+				}
+			}
+			geometry DEF geoBox1 Box {
+				size 1 1 1
+			}
+		}
+	]
+}
+DEF BuildingC_w0 Transform {
+	translation 833.5 0.0 433.5
+	scale 120.03780911962384 1.0 1.0
+	rotation 0 1 0 0.025204745326940284
+	children [
+		DEF Box Shape {
+			appearance Appearance {
+				material DEF White Material {
+					ambientIntensity 0.7
+					diffuseColor 0 0 0
+				}
+			texture ImageTexture {
+					url "res\texture\MDwood.png"
+				}
+			}
+			geometry DEF geoBox1 Box {
+				size 1 1 1
+			}
+		}
+	]
+}
+]
+}
+
+DEF Prueba_t0 Transform {
+	translation 899.0 5.0 84.0
+	children [
+		Billboard {
+			children [
+				Shape {
+					appearance Appearance {
+						texture ImageTexture {
+							url "res/treeImages/species1.png"
+						}
+					}
+					geometry Box {
+						size 25.0 10.0 1.0E-4
+					}
+				}
+			]
+		}
+	]
+}
+DEF Prueba_t2 Transform {
+	translation 1438.0 5.0 239.0
+	children [
+		Billboard {
+			children [
+				Shape {
+					appearance Appearance {
+						texture ImageTexture {
+							url "res/treeImages/species3.png"
+						}
+					}
+					geometry Box {
+						size 100.0 10.0 1.0E-4
+					}
+				}
+			]
+		}
+	]
+}
+DEF Prueba_t3 Transform {
+	translation 1205.0 5.0 509.0
+	children [
+		Billboard {
+			children [
+				Shape {
+					appearance Appearance {
+						texture ImageTexture {
+							url "res/treeImages/species2.png"
+						}
+					}
+					geometry Box {
+						size 50.0 10.0 1.0E-4
+					}
+				}
+			]
+		}
+	]
+}
+DEF Prueba_t4 Transform {
+	translation 824.0 5.0 859.0
+	children [
+		Billboard {
+			children [
+				Shape {
+					appearance Appearance {
+						texture ImageTexture {
+							url "res/treeImages/species1.png"
+						}
+					}
+					geometry Box {
+						size 25.0 10.0 1.0E-4
+					}
+				}
+			]
+		}
+	]
+}
+

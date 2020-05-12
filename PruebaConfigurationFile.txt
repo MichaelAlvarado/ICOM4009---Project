@@ -1,0 +1,42 @@
+Map: Prueba
+Size: (1920, 932) 
+Image: res\texture\mapasSpecs2.png
+
+Building Name: BuildingA
+Building Image: res\buildings\house.png, Height: 15
+ID: BuildingA_w1, Height: 10, First Point: (303, 818), Second Point: (343, 858)
+Wall Image: res\texture\MAbricks.png
+ID: BuildingA_w0, Height: 15, First Point: (314, 888), Second Point: (376, 826)
+Wall Image: res\texture\MBwhiteBricks.png
+
+Building Name: BuildingB
+Building Image: res\buildings\house4.png, Height: 10
+ID: BuildingB_w3, Height: 5, First Point: (901, 228), Second Point: (949, 286)
+Wall Image: res\texture\MCmotherBoard.png
+ID: BuildingB_w2, Height: 5, First Point: (910, 287), Second Point: (949, 286)
+Wall Image: res\texture\MCmotherBoard.png
+ID: BuildingB_w1, Height: 5, First Point: (856, 287), Second Point: (893, 287)
+Wall Image: res\texture\MCmotherBoard.png
+ID: BuildingB_w0, Height: 5, First Point: (901, 228), Second Point: (856, 287)
+Wall Image: res\texture\MCmotherBoard.png
+
+Building Name: BuildingC
+Building Image: res\buildings\house3.png, Height: 1
+ID: BuildingC_w4, Height: 7, First Point: (1026, 401), Second Point: (910, 400)
+Wall Image: res\texture\MDwood.png
+ID: BuildingC_w3, Height: 10, First Point: (1029, 579), Second Point: (1026, 401)
+Wall Image: res\texture\MDwood.png
+ID: BuildingC_w2, Height: 5, First Point: (772, 583), Second Point: (1029, 579)
+Wall Image: res\texture\MDwood.png
+ID: BuildingC_w1, Height: 3, First Point: (774, 399), Second Point: (772, 583)
+Wall Image: res\texture\MDtarzan.png
+ID: BuildingC_w0, Height: 1, First Point: (893, 396), Second Point: (774, 399)
+Wall Image: res\texture\MDwood.png
+
+Trees:
+ID: Prueba_t0, Species: 0, Position: (887, 66)
+ID: Prueba_t2, Species: 2, Position: (1388, 174)
+ID: Prueba_t3, Species: 1, Position: (1180, 444)
+ID: Prueba_t4, Species: 0, Position: (812, 777)
+
+QuestionsFile: PruebaTriviaFile.txt

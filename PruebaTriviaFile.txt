@@ -1,0 +1,74 @@
+Building: BuildingA
+Question: La respuesta es 1
+Right: 1
+Wrong: 2
+Wrong: 3
+Wrong: 4
+Question: La respuesta es 2
+Right: 2
+Wrong: 1
+Wrong: 3
+Wrong: 4
+Question: La respuesta es 3
+Right: 3
+Wrong: 2
+Wrong: 1
+Wrong: 4
+Question: La respuesta es 4
+Right: 4
+Wrong: 2
+Wrong: 3
+Wrong: 1
+Question: La respuesta es 5
+Right: 5
+Wrong: 2
+Wrong: 3
+Wrong: 4
+Question: La respuesta es 6
+Right: 6
+Wrong: 2
+Wrong: 3
+Wrong: 4
+Building: BuildingB
+Question: 
+Right: 
+Wrong: 
+Wrong: 
+Wrong: 
+Question: 
+Right: 
+Wrong: 
+Wrong: 
+Wrong: 
+Question: 
+Right: 
+Wrong: 
+Wrong: 
+Wrong: 
+Question: 
+Right: 
+Wrong: 
+Wrong: 
+Wrong: 
+Building: BuildingC
+Question: 
+Right: 
+Wrong: 
+Wrong: 
+Wrong: 
+Question: 
+Right: 
+Wrong: 
+Wrong: 
+Wrong: 
+Question: 
+Right: 
+Wrong: 
+Wrong: 
+Wrong: 
+Question: 
+Right: 
+Wrong: 
+Wrong: 
+Wrong: 
+
